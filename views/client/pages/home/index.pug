@@ -1,0 +1,12 @@
+extends ../../layouts/default.pug
+
+block main
+    .container.my-3
+        .row 
+            .col-12 
+                h1 Trang chủ
+            .col-12 
+
+    if(userInfo)
+        h1 #{userInfo.fullName}
+        h1 #{userInfo.id}

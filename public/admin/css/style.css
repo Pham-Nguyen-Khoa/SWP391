@@ -1,0 +1,254 @@
+.header{
+    background: #202020;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.header .inner-logo a{
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.body .sider{
+    width: 150px;
+    background: #323232;
+    color: #fff;
+    height: calc(100vh - 56px);
+    position: fixed;
+    top: 56px;
+    left: 0;
+}
+.body .main{
+    margin: 15px;
+    position: relative;
+    left: 150px;
+    width: calc(100% - 180px);
+}
+
+
+.sider .inner-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sider .inner-menu ul li a{
+    color: rgb(252, 252, 252);
+    border-bottom: 1px solid #515151;
+    display: block;
+    padding: 6px 10px;
+}
+
+
+
+/* Tạo nền nhẹ và viền cho bảng */
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+/* Màu nền xám cho các mục lớn */
+.table-group-header td {
+    background-color: #e9ecef;
+    font-weight: bold;
+    padding: 12px;
+    text-align: left;
+    border-top: 2px solid #dee2e6;
+}
+
+/* Tạo nền màu nhạt cho phần đầu bảng */
+.table thead {
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+/* Tạo màu nền nhạt cho phần tiêu đề mỗi nhóm */
+.table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+}
+.table tr td img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid black;
+    margin: 0 28%;
+}
+
+/* Canh giữa các ô checkbox */
+.form-check-input-permission {
+    margin: auto;
+}
+
+/* Tạo khoảng cách giữa các dòng và ô */
+.table td, .table th {
+    vertical-align: middle;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}
+
+/* Tạo màu đỏ cho chữ "Xóa" */
+.table td .text-danger {
+    color: #ff4d4f;
+    font-weight: bold;
+}
+
+/* Tạo hiệu ứng hover cho các hàng */
+.table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+
+
+/* ALERT */
+
+[show-alert]{
+    position: fixed;
+    top: 70px;
+    right: 15px;
+    z-index: 9999;
+}
+[show-alert].alert-hidden{
+    animation-name: alert-hidden;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+}
+
+@keyframes alert-hidden {
+    from{
+        right: 15px;
+    }
+    to{
+        right: -100%;
+        display: none;
+    }
+
+}
+
+[close-alert]{
+    background: #ffffffc4;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+/* Upload File image */
+.upload-preview{
+    width: 150px;
+    height: auto;
+    object-fit: cover;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+.upload-preview[src=""]{
+    display: none;
+}
+
+
+
+
+
+/* Modal */
+#modal_info {
+    display: none;
+    width: 550px;
+    height: 400px;
+    background-color: #D8D9E8;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 9999;
+    margin: 5% 28%;
+    padding: 20px;
+    left: 6%;
+    top: 14%;
+}
+
+.box-image {
+    height: 155px;
+    width: 168px;
+    margin: 34px 0 0 27px;
+    border-radius: 5px;
+}
+
+.box-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+.mainWrapper{
+    height: 100vh;
+    position: relative;
+}
+.blur{
+    filter: blur(2px);
+}
+.repair {
+    border-radius: 20px;
+    width: 153px;
+    background-color: #5D0B0B;
+    color: white;
+    margin: 24px 18px 18px 28px;
+    font-size: 16px;
+    height: 42px;
+    cursor: pointer;
+
+}
+
+.reset-password {
+    border-radius: 16px;
+    height: 44px;
+    width: 153px;
+    background-color: #0D0B5D;
+    color: white;
+    margin: 10px 0 0 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.save{
+    border-radius: 16px;
+    height: 44px;
+    width: 153px;
+    background-color: #0D0B5D;
+    color: white;
+    margin: -16px 0 0 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.information {
+    height: 100%;
+    width: 100%;
+    margin: 16px 0 0 -1px;
+    font-size: 18px;
+    
+}
+
+
+
+
+.avatar-user-mini-circle {
+    border-radius: 10px; 
+    width: 50px; 
+    height: 50px; 
+    cursor: pointer;
+    margin-right: 20px;
+    object-fit: cover; /
+}

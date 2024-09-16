@@ -1,0 +1,130 @@
+extends ../../layouts/default.pug
+include ../../mixins/filterStatus.pug
+include ../../mixins/alert.pug
+  
+block main
+  div(class="mainWrapper")
+
+    div#alert-container
+      +alert-success("2000")
+      +alert-error("2000")
+    h1.text-center Danh sách tài khoản
+    div(class="form-group")
+    .card.mb-3 
+      .card-header Bộ lọc 
+      .card-body 
+        .row 
+          .col-6
+            a(
+              href=`${prefixAdmin}/account`
+                class=`btn btn-sm ml-1 btn-outline-success `
+                button-filter
+                button-all
+              ) Tất cả
+            a(
+              href=`${prefixAdmin}/account?filter=user`
+                class=`btn btn-sm ml-1 btn-outline-success `
+                button-filter
+              ) User
+            a(
+              href=`${prefixAdmin}/account?filter=staff`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Staff
+            a(
+              href=`${prefixAdmin}/account?filter=doctor`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Doctor
+            a(
+              href=`${prefixAdmin}/account?filter=admin`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+
+              ) Admin
+          .col-6.text-right(style="padding-right: 150px;")
+            a(href=`${prefixAdmin}/account/create` button-create-account class="btn btn-outline btn-success") + Tạo tài khoản
+        table.table.table-striped.table-bordered.mt-5
+          thead
+            tr
+              th STT
+              th ID
+              th Avatar
+              th Tên
+              th Email
+              th Vai trò
+              th(column-status) Trạng thái
+              th(column-action) Khác
+          tbody
+            //- Example row
+            each item,index in listUser
+              tr
+                td #{index+1}
+                td #{item.id}
+                td
+                  img(src=item.avatar alt="Avatar" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover;")
+                td #{item.fullName} 
+                td #{item.email}
+                if(item.role_id == "2")
+                  td Bác sĩ
+                if(item.role_id == "3")
+                  td Staff
+                if(item.role_id == "4")
+                  td User
+                if(item.role_id == "1")
+                  td Admin
+
+                td(row-status)
+                  if(item.status == "active")
+                    a(href="javascript:;" 
+                    class="badge badge-success"
+                    data-status= item.status 
+                    id= item.id
+                    button-change-status
+                    ) Kích hoạt
+                  if(item.status == "inactive")
+                    a(
+                      href="javascript:;" 
+                      class="badge badge-danger"
+                      data-status= item.status 
+                      id= item.id
+                      button-change-status
+                    ) Vô hiệu hóa
+                td(row-action)
+                  a(class="btn btn-primary btn-sm ml-1" href="javascript:;" onclick=`showInfoModal('${item.id}')`) Chi tiết 
+                  a(class="btn btn-success btn-sm ml-1" href=`${prefixAdmin}/account/edit/${item.id}`) Sửa
+                  button( 
+                    class="btn btn-danger btn-sm ml-1"
+                    button-delete-account 
+                    id=item.id
+                    ) Xóa 
+  
+
+    form(action="",
+      method="POST",
+      id="form-change-status"
+      PATH=`${prefixAdmin}/account/change-status/`
+    ) 
+
+    form(action="",
+      method="POST",
+      id="form-delete-account"
+      PATH=`${prefixAdmin}/account/delete/`
+      )
+  #modal_info
+      .row
+        .col-5
+          .box-image
+            img(src='data:image/jpeg;base64,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', alt='')
+          button.repair  Ch&#x1EC9;nh s&#x1EED;a 
+          br
+          button.reset-password  &Dstrok;&#x1EB7;t l&#x1EA1;i m&#x1EAD;t kh&#x1EA9;u
+          br
+          button.save  Lưu
+        .col-7
+          .information
+
+  script.
+    var listUser = !{JSON.stringify(listUser)};
+  
+

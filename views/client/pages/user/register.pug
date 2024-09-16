@@ -1,0 +1,30 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main
+    +alert-error("5000")
+    .container.my-3
+        .row 
+            .col-12 
+                h1 Đăng Ký
+            .col-12
+                form(action="/auth/register" method="post")
+                    .form-group
+                        label(for="email") Email
+                        input#email.form-control(type="email" name="email" required)
+                    .form-group
+                        label(for="fullName") Họ & Tên
+                        input#name.form-control(type="text" name="fullName" required)
+                    .form-group
+                        label(for="phone") Số Điện Thoại
+                        input#phone.form-control(type="tel" name="phone" required)
+                    .form-group
+                        label(for="address") Địa Chỉ
+                        input#address.form-control(type="text" name="address" required)
+                    .form-group
+                        label(for="password") Mật khẩu
+                        input#password.form-control(type="password" name="password" required)
+                    .form-group
+                        label(for="confirm_password") Xác nhận Mật khẩu
+                        input#confirm_password.form-control(type="password" name="confirm_password" required)
+                    .form-group.text-center
+                        button( type="submit" class = "btn btn-success btn-outline") Đăng ký

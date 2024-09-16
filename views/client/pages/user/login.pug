@@ -1,0 +1,20 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-error("5000")
+    .container.my-3
+        .row 
+            .col-12 
+                h1 Login
+            .col-12
+                form(action="/auth/login" method="post")
+                    .form-group
+                        label(for="email") Email
+                        input#email.form-control(type="email" name="email" required)
+                    .form-group
+                        label(for="password") Password
+                        input#password.form-control(type="password" name="password" required)
+                    .form-group
+                        a(href="/forgot-password") Forgot Password?
+                    button.btn.btn-primary(type="submit") Login

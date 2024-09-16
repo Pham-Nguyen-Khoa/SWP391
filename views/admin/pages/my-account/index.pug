@@ -1,0 +1,66 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-error('Không tìm thấy thông tin người dùng.')
+   
+    .container.mt-5
+        .row.justify-content-center
+            .col-md-8
+                .card.shadow-lg
+                    .card-header.bg-primary.text-white.text-center
+                        h2.mb-0 Thông tin cá nhân
+                    .card-body
+                        .text-center
+                            if (user.avatar)
+                                img(src=user.avatar width="150px" class="mb-3 rounded-circle border border-primary")
+                            else
+                                img(src="https://via.placeholder.com/150", width="150px" class="mb-3 rounded-circle border border-secondary")
+                            
+
+                        .row.mb-3.align-items-center
+                            .col-4.text-right.font-weight-bold.text-primary
+                                p.mb-0 Họ tên:
+                            .col-8.text-left
+                                if (user.fullName)
+                                    p.mb-0 <b class="text-dark">#{user.fullName}</b>
+                                else
+                                    p.mb-0 <span class="text-muted">Chưa cập nhật</span>
+
+                        .row.mb-3.align-items-center
+                            .col-4.text-right.font-weight-bold.text-primary
+                                p.mb-0 Email:
+                            .col-8.text-left
+                                if (user.email)
+                                    p.mb-0 <b class="text-dark">#{user.email}</b>
+                                else
+                                    p.mb-0 <span class="text-muted">Chưa cập nhật</span>
+
+                        .row.mb-3.align-items-center
+                            .col-4.text-right.font-weight-bold.text-primary
+                                p.mb-0 Số điện thoại:
+                            .col-8.text-left
+                                if (user.phone)
+                                    p.mb-0 <b class="text-dark">#{user.phone}</b>
+                                else
+                                    p.mb-0 <span class="text-muted">Chưa cập nhật</span>
+
+                        .row.mb-3.align-items-center
+                            .col-4.text-right.font-weight-bold.text-primary
+                                p.mb-0 Địa chỉ:
+                            .col-8.text-left
+                                if (user.address)
+                                    p.mb-0 <b class="text-dark">#{user.address}</b>
+                                else
+                                    p.mb-0 <span class="text-muted">Chưa cập nhật</span>
+                        .row.mb-3.align-items-center
+                            .col-4.text-right.font-weight-bold.text-primary
+                                p.mb-0 Vai trò:
+                            .col-8.text-left
+                                if (role.name)
+                                    p.mb-0 <b class="text-dark">#{role.name}</b>
+                                else
+                                    p.mb-0 <span class="text-muted">Chưa cập nhật</span>
+
+                        .text-center.mt-4
+                            a(href=`${prefixAdmin}/my-account/edit` class="btn btn-primary btn-lg") Chỉnh sửa

@@ -1,0 +1,85 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main
+        +alert-success("5000")
+        +alert-error('5000')
+        h1 #{pageTitle}     
+        form(
+            action=`/doctor/my-account/edit?_method=PATCH`,
+            method="post"
+            enctype="multipart/form-data"
+        ) 
+            div(class="form-group")
+                label(for="fullName") Họ và Tên *
+                input(
+                    type="text" 
+                    id="fullName" 
+                    name="fullName"
+                    class="form-control custom-input"
+                    required
+                    value=user.fullName
+                    ) 
+            div(class="form-group")
+                label(for="email") Email *
+                input(
+                    type="text" 
+                    id="email" 
+                    name="email"
+                    class="form-control custom-input"
+                    value=user.email
+                    required
+                    )
+            div(class="form-group")
+                label(for="address") Địa chỉ
+                input(
+                    type="text" 
+                    id="address" 
+                    name="address"
+                    class="form-control custom-input"
+                    required
+                    value=user.address
+                    ) 
+            div(class="form-group")
+                label(for="password") Password *
+                input(
+                    type="password" 
+                    id="password" 
+                    name="password"
+                    class="form-control custom-input"
+                    placeholder="Nhập vào thay đổi mật khẩu mới"
+                    )
+            div(class="form-group")
+                label(for="phone") Số điện thoại
+                input(
+                    type="number" 
+                    id="phone" 
+                    name="phone"
+                    class="form-control custom-input"
+                    value=user.phone
+                    required
+                    )
+            
+            div(
+                class="form-group"
+                upload-image
+                )
+                label(for="avatar") Hình ảnh
+                input(
+                    type="file" 
+                    id="avatar" 
+                    name="avatar"
+                    class="form-control-file"
+                    require
+                    upload-image-input     
+                    )
+                img(
+                    src=user.avatar
+                    upload-image-preview
+                    class="upload-preview"
+                )        
+            div(class="form-group")
+                button(
+                    type="submit"
+                    class="btn btn-primary"
+                ) Cập nhật 
+        
