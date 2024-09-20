@@ -5,6 +5,13 @@ const md5 = require("md5");
 const Sequelize = require("../../config/database");
 const { query } = require("express");
 const db = require("../../config/database");
+
+const generateUserId = async (rolePrefix) => {
+  const query = `SELECT COUNT(*) AS count FROM account WHERE id LIKE '${rolePrefix}%'`;
+  const [results] = await db.query(query);
+  const count = results[0].count + 1;
+  return `${rolePrefix}${String(count).padStart(4, "0")}`; // e.g., KH0001, KH0002
+};
 // [GET] /admin/account
 module.exports.index = async (req, res) => {
   let find = {
@@ -55,9 +62,9 @@ module.exports.changeStatus = async (req, res) => {
         },
       }
     );
-    if(status =="inactive"){
+    if (status == "inactive") {
       req.flash("success", "Khóa tài khoản thành công");
-    }else{
+    } else {
       req.flash("success", "Mở tài khoản thành công");
     }
     res.redirect("back");
@@ -70,12 +77,15 @@ module.exports.changeStatus = async (req, res) => {
 
 // [GET] /admin/account/edit/:id
 module.exports.edit = async (req, res) => {
-  const id = req.params.id;
+  var id = req.params.id;
+  console.log("hello");
+  console.log(id);
   const user = await Account.findOne({
     where: {
       id: id,
     },
   });
+  console.log(user);
   const role = await Role.findAll({});
   res.render("admin/pages/account/edit", {
     pageTitle: "Trang chỉnh sửa tài khoản",
@@ -84,44 +94,46 @@ module.exports.edit = async (req, res) => {
   });
 };
 
-// [PATCH] /admin/account/edit  
-module.exports.editPatchJson = async (req, res) => {
-  const { id, fullName, phone, role_id, address, email } = req.body;
-  console.log(req.body);
-  console.log(id);
-  const emailExist = await Account.findOne({
-    where: {
-      email: email,
-      id: { [Op.ne]: id },
-    },
-  });
-  if (emailExist) {
-    req.flash("error", `Email ${req.body.email} đã tồn tại!`);
-    res.json({
-      success: false,
-      message: `Email ${req.body.email} đã tồn tại!`,
-    });
-    return;
-  }
-  let query = `UPDATE account SET fullName = '${req.body.fullName}', email = '${req.body.email}', role_id = '${req.body.role_id}', address = '${req.body.address}', phone = '${req.body.phone}' WHERE id = '${id}'`;
-  try {
-    await Sequelize.query(query);
-    res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
+// // [PATCH] /admin/account/edit
+// module.exports.editPatchJson = async (req, res) => {
+//   const { id, fullName, phone, role_id, address, email } = req.body;
+//   console.log(req.body);
+//   console.log(id);
+//   const emailExist = await Account.findOne({
+//     where: {
+//       email: email,
+//       id: { [Op.ne]: id },
+//     },
+//   });
+//   if (emailExist) {
+//     req.flash("error", `Email ${req.body.email} đã tồn tại!`);
+//     res.json({
+//       success: false,
+//       message: `Email ${req.body.email} đã tồn tại!`,
+//     });
+//     return;
+//   }
+//   let query = `UPDATE account SET fullName = '${req.body.fullName}', email = '${req.body.email}', role_id = '${req.body.role_id}', address = '${req.body.address}', phone = '${req.body.phone}' WHERE id = '${id}'`;
+//   try {
+//     await Sequelize.query(query);
+//     res.json({ success: true, message: "Cập nhật tài khoản thành công!" });
 
-    // if (req.xhr) {
-    //   res.json({ success: true, message: "Cập nhật tài khoản thành công" });
-    // } else {
-    //   res.redirect("/admin/account");
-    // }
-  } catch (error) {
-    res.json({ success: false, message: "Cập nhật tài khoản thất bại" });
-    req.flash("error", "Cập nhật tài khoản thất bại");
-    res.redirect("/admin/account");
-  }
-};
+//     // if (req.xhr) {
+//     //   res.json({ success: true, message: "Cập nhật tài khoản thành công" });
+//     // } else {
+//     //   res.redirect("/admin/account");
+//     // }
+//   } catch (error) {
+//     res.json({ success: false, message: "Cập nhật tài khoản thất bại" });
+//     req.flash("error", "Cập nhật tài khoản thất bại");
+//     res.redirect("/admin/account");
+//   }
+// };
 
 // [PATCH] /admin/account/edit/:id
 module.exports.editPatch = async (req, res) => {
+  console.log();
+  console.log();
   const id = req.params.id;
   const emailExist = await Account.findOne({
     where: {
@@ -144,6 +156,16 @@ module.exports.editPatch = async (req, res) => {
   if (req.body.avatar) {
     query += `,avatar = '${req.body.avatar}'`;
   }
+  let newId = id;
+  if (req.body.role_id != req.body.role_i_old) {
+    let prefix = "";
+    if (req.body.role_id == 1) prefix = "AD"; // Admin
+    else if (req.body.role_id == 2) prefix = "BS"; // Bác sĩ
+    else if (req.body.role_id == 3) prefix = "NV"; // Nhân viên;
+    else if (req.body.role_id == 4) prefix = "KH";
+    newId = await generateUserId(prefix);
+    query += `,id = '${newId}'`;
+  }
 
   query += ` WHERE id = '${id}'`;
   try {
@@ -153,7 +175,8 @@ module.exports.editPatch = async (req, res) => {
     console.error(error);
     req.flash("error", "Cập nhật tài khoản thất bại");
   }
-  res.redirect(`/admin/account/edit/${id}`);
+
+  res.redirect(`/admin/account/edit/${newId}`);
 };
 
 // [DELETE] /admin/account/delete/:id
@@ -176,12 +199,6 @@ module.exports.create = async (req, res) => {
   });
 };
 
-const generateUserId = async (rolePrefix) => {
-  const query = `SELECT COUNT(*) AS count FROM account WHERE id LIKE '${rolePrefix}%'`;
-  const [results] = await db.query(query);
-  const count = results[0].count + 1;
-  return `${rolePrefix}${String(count).padStart(4, "0")}`; // e.g., KH0001, KH0002
-};
 // [POST] /admin/account/create
 module.exports.createPost = async (req, res) => {
   const emailExisted = await Account.findOne({

@@ -1,0 +1,72 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    div.sortSchedule
+        form(action="/staff/schedules" method="get" class="form-inline my-3 form-choose-week")
+            .form-group
+                label(for="weekOffset" class="mr-2") Chọn tuần:
+                select(name="weekOffset" id="weekOffset" class="form-control form-control-sm" onchange="this.form.submit()" style="font-weight: bold;")
+                    each week in weeks
+                        option(value=week.value selected=week.value == weekOffset) #{week.label}
+
+        .table-container
+            table.table.table-bordered.table-hover.table-condensed.text-center.table-sm.mt-3
+                thead
+                    tr
+                        th(style="width:110px") Slot
+                        each day in days
+                            th.text-center #{day.name}
+                    tr
+                        th
+                        each day in days
+                            th.text-center #{day.date}
+                tbody
+                    each slot in slots
+                        tr
+                            td.text-center #{slot}
+                            each day in days
+                                td.text-center
+                                    .doctor-container.row
+                                        each schedule in schedules
+                                            each shift in schedule.shifts
+                                                if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
+                                                    .doctor-info.col
+                                                        img(src=`${schedule.account.avatar}` alt=`${schedule.account.fullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
+                                                        .doctor-details
+                                                            p.mb-0 #{schedule.account.fullName}
+                                                            p.text-muted.mb-0 #{schedule.account.Specialization}
+        .mt-4
+            form(action='/staff/schedules/add' method='POST' class='form-horizontal')
+                .form-group.row
+                    label(for='accountID' class='col-sm-2 col-form-label') Chọn bác sĩ:
+                    .col-sm-10
+                        select(name='accountID' required class='form-control ')
+                            each doctor in listDoctor
+                                option(value=doctor.AccountID) Bác Sĩ #{doctor.fullName}
+
+                .form-group.row
+                    label(for='date' class='col-sm-2 col-form-label') Ngày làm việc:
+                    .col-sm-10
+                        input(type='date' name='date' required class='form-control ')
+                .form-group.row
+                    label(class='col-sm-2 col-form-label') Chọn ca làm việc:
+                    .col-sm-4.select-shift
+                        .form-check
+                            .form-check-inline
+                                input(type='checkbox' name='shifts' id='shift-7-9' value='7h-9h' class='form-check-input')
+                                label(for='shift-7-9' class='form-check-label') 7h-9h
+                        .form-check
+                            .form-check-inline
+                                input(type='checkbox' name='shifts' id='shift-9-11' value='9h-11h' class='form-check-input')
+                                label(for='shift-9-11' class='form-check-label') 9h-11h
+                        .form-check
+                            .form-check-inline
+                                input(type='checkbox' name='shifts' id='shift-13-15' value='13h-15h' class='form-check-input')
+                                label(for='shift-13-15' class='form-check-label') 13h-15h
+                        .form-check
+                            .form-check-inline
+                                input(type='checkbox' name='shifts' id='shift-15-17' value='15h-17h' class='form-check-input')
+                                label(for='shift-15-17' class='form-check-label') 15h-17h
+                button(type='submit' class='button-add-shift') Thêm lịch

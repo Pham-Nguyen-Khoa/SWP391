@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 *{
     margin: 0;
@@ -14,7 +14,7 @@
 }
 
 /* ===== Colours ===== */
-.onTop{
+/* .onTop{
     width: 100%; 
     height: 30px;
     background-color: #393838;
@@ -136,7 +136,7 @@ nav .nav-bar .logo a{
 
 .nav-links li:hover a::before{
     opacity: 1;
-}
+}  */
 
 
 .footer{
@@ -146,7 +146,6 @@ nav .nav-bar .logo a{
     justify-content: center;
     align-items: center;
     padding: 10px;
-    position: fixed;
     bottom: 0;
     width: 100%;
     height: 80px;
@@ -194,3 +193,342 @@ nav .nav-bar .logo a{
     border-radius: 50%;
     cursor: pointer;
 }
+
+
+
+
+
+
+
+/* Appointment */
+.form_appointment {
+    display: flex;
+    justify-content: space-evenly;
+    height: 900px;
+    padding: 20px;
+    background-color: #f6ebeb45;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title_appointment {
+    width: 100%;
+    height: 65px;
+    background-color: #4a90e2;
+    text-align: center;
+    font-size: 31px;
+    border-radius: 0 0 25px 25px;
+    padding: 10px 0 0 10px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.title_box_appointment {
+    color: #a72020;
+    font-size: 30px;
+    font-style: italic;
+    margin: 30px 0 40px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.box_appointment {
+    margin: 0 100px;
+    color: #333;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-position: center;
+    background-size: cover;
+    object-fit: cover;
+    background-image: url("/images/koi.jpg");
+    background-size: 73% 106%;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+  
+}
+.img-appointment img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Make sure the image covers the whole area */
+    height: 100%;
+    z-index: -1; /* Moves the image behind other content */
+    background-position: center;
+    background-size: cover;
+    object-fit: cover; /* Ensures the image stays within the container and scales properly */
+  }
+
+.background_appointment {
+    background-color: #f0f0f0;
+   
+    z-index: 100;
+ 
+}
+
+.box_appointment input,
+.service_appointment,
+.select_date {
+    background-color: #fff;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select.service_appointment option,
+#location option,
+#select_doctor option {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.doctor-info {
+    margin-left: 80px;
+    border: 2px solid #ccc;
+    width: 500px;
+    min-height: 600px;
+    height: auto;
+    padding: 45px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.avatar_doctor {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    height: 170px;
+    width: 193px;
+    margin: 15px auto;
+    object-fit: cover;
+    display: block;
+}
+
+.doctor-info h3 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 600;
+    color: #333;
+}
+
+.doctor-info .rating {
+    font-size: 35px;
+    text-align: center;
+    color: gold;
+    margin-bottom: 15px;
+}
+
+.confirm-btn {
+    background: #60abd7;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    width: 200px;
+    padding: 10px;
+    margin: 50px auto;
+    transition: background 0.3s ease;
+}
+
+.confirm-btn:hover {
+    background: #4a90e2;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-slot {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.time-slot:hover {
+    background-color: #ddd;
+    border-color: #4a90e2;
+}
+
+.time-slot.disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    color: #888;
+}
+
+
+.box_appointment input {
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+.service_appointment {
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+select.service_appointment option {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#location {
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+#location option {
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+}
+
+#select_doctor {
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+#select_doctor option {
+    background-color: #ddd;
+    font-weight: 600;
+}
+.select_date {
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+.doctor-info {
+    visibility: hidden;
+    margin-left: 80px;
+    border: 2px solid black;
+    width: 500px;
+    min-height: 600px;
+    height: auto;
+    padding: 45px 0 0 20px;
+    background-color: #faf2f273;
+}
+
+.avatar_doctor {
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 170px;
+    width: 193px;
+    margin: 15px auto;
+    object-fit: cover;
+    display: block;
+}
+
+.doctor-info h3 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 600;
+}
+
+.doctor-info .rating {
+    font-size: 35px;
+    text-align: center;
+    color: gold;
+    margin-bottom: 15px;
+
+}
+
+.confirm-btn {
+    background: #60abd7;
+    border: 2px solid black;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffffe3;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    width: 200px;
+    padding: 10px;
+    text-align: center;
+    margin: 50px auto;
+}
+
+input[type="text"],
+input[type="tel"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+
+.time-slot {
+    display: inline-block;
+    width: 81px;
+    height: 60px;
+    margin: 10px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    line-height: 60px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border: 2px solid black;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.time-slot:hover {
+    background-color: #e0e0e0;
+    border-color: #888;
+}
+
+.time-slot.disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+    border-color: #aaa;
+    color: #888;
+}
+
+.time-slot.selected {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+.doctor-icon {
+    background-image: url('path/to/doctor-icon.png'); /* Đường dẫn tới icon bác sĩ */
+    width: 16px; /* Chiều rộng của icon */
+    height: 16px; /* Chiều cao của icon */
+    display: inline-block;
+    background-size: contain;
+    margin-right: 5px; /* Khoảng cách giữa icon và text */
+  }

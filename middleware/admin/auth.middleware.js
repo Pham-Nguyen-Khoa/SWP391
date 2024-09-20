@@ -16,15 +16,38 @@ module.exports.requireAuth = async (req, res, next) => {
     } else if (user.role_id == "4") {
       res.redirect("/koi");
       return;
-    } else {
-      const role = await Role.findOne({
-        where: {
-          id: user.role_id,
-        },
-      });
-      res.locals.role = role;
-      res.locals.user = user;
     }
+
+    const role = String(user.role_id); 
+    const route = (req.originalUrl || req.baseUrl || req.path).trim(); 
+
+    if (
+      role === "1" &&
+      (route.startsWith("/doctor") || route.startsWith("/staff"))
+    ) {
+      req.flash("error", "Không thể truy cập !");
+      return res.redirect("/admin/dashboard");
+    } else if (
+      role === "2" &&
+      (route.startsWith("/admin") || route.startsWith("/staff"))
+    ) {
+      req.flash("error", "Không thể truy cập !");
+      return res.redirect("/doctor/dashboard");
+    } else if (
+      role === "3" &&
+      (route.startsWith("/admin") || route.startsWith("/doctor"))
+    ) {
+      req.flash("error", "Không thể truy cập !");
+      return res.redirect("/staff/dashboard");
+    }
+    const roleInfo = await Role.findOne({
+      where: {
+        id: user.role_id,
+      },
+    });
+    res.locals.role = roleInfo;
+    res.locals.user = user;
+
     next();
   }
 };

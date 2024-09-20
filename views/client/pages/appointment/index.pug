@@ -1,0 +1,58 @@
+extends ../../layouts/default.pug
+
+block main
+    div(class="title_appointment") Đặt Lịch Hẹn
+    div.background_appointment
+        div(class="box_appointment")
+            form.form_appointment
+                // Left Section
+                div.left-section
+                    div.row 
+                        label(for="name") Họ và Tên
+                        input#name(type="text" placeholder="Nhập họ và tên")
+                        label(for="phone") Số Điện Thoại
+                        input#phone(type="tel" placeholder="Nhập số điện thoại")
+                    label(for="address") Địa chỉ
+                    input#address(type="text" placeholder="Nhập địa chỉ")
+                    label(for="service") Chọn dịch vụ
+                    div
+                        select#service(name="service" class="service_appointment")
+                            option(value selected disabled) Chọn Dịch Vụ
+                            each  service in listService
+                                option(value=service.Name) • #{service.Name}
+                    label(for="location") Chọn nơi khám
+                    select(id="location")
+                        option( selected) Chọn Nơi Khám
+                        option(value="nha") • Tại nhà
+                        option(value="center") • Tại trung tâm
+                    label(for="select_doctor") Chọn Bác Sĩ
+                    select(id="select_doctor")
+                        option(value selected, disabled) Chọn Bác Sĩ
+                        option(value ) • Tự chọn bác sĩ
+                        option(value) • Bác sĩ A
+                        option(value ) • Bác sĩ B
+                    
+                    label(for="select_date") Chọn Ngày 
+                    br
+                    input(type="date" name="select_date" id="select_date")
+                    div(id="timeSlotsContainer")
+                    input(type="hidden" name="shift" id="selectedTimeSlot" value="")
+                    div(id="notification") 
+                // Right Section
+                .right-section
+                    .doctor-info
+                        //- img(src="data:image/png;base64,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" alt="Doctor Photo" class="avatar_doctor")
+                        //- h3(name-doctor) Dr. Phạm Nguyên Khoa
+                        //- div.rating ★ ★ ★ ★ ☆
+                        //- p Giới tính: Nam
+                        //- p Ngày sinh: 15/08/1995
+                        //- p Địa chỉ: Tp. Hồ Chí Minh
+                        //- b Kinh nghiệm làm việc
+                        //- p • Có bằng cấp chuyên môn về các loại cá Koi
+            button.confirm-btn(type="submit") Xác Nhận
+
+    script.
+        var listService = !{JSON.stringify(listService)};
+        var doctorSchedules = !{JSON.stringify(doctorSchedules)};
+        var listAccount = !{JSON.stringify(listAccount)};
+        var listDoctor = !{JSON.stringify(listDoctor)};

@@ -43,7 +43,8 @@ module.exports.editPatch = async (req, res) => {
     if (req.body.avatar) {
       query += `,avatar = '${req.body.avatar}'`;
     }
-    query += ` WHERE id = ${res.locals.user.id}`;
+    console.log(res.locals.user.id)
+    query += ` WHERE id = '${res.locals.user.id}'`;
     await Sequelize.query(query);
     req.flash("success", "Cập nhật trang cá nhân thành công!");
     res.redirect("back");

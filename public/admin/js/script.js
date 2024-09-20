@@ -111,15 +111,15 @@ const mainWrapper = document.querySelector(".mainWrapper");
 const imageModal = document.querySelector(".box-image img");
 const btnRepair = document.querySelector(".repair");
 const information = document.querySelector(".information");
-const btnSave = document.querySelector(".save");
-const btnReset = document.querySelector(".reset-password");
+// const btnSave = document.querySelector(".save");
+// const btnReset = document.querySelector(".reset-password");
 let account = null;
 function showInfoModal(id) {
   modalInfo.style.height = "400px";
   modalInfo.style.weight = "550px";
   btnRepair.style.display = "block";
-  btnReset.style.display = "block";
-  btnSave.style.display = "none";
+  // btnReset.style.display = "block";
+  // btnSave.style.display = "none";
   account = listUser.find((user) => user.id === id);
   imageModal.src = account.avatar;
   information.innerHTML = `
@@ -145,7 +145,7 @@ function showInfoModal(id) {
   `;
   modalInfo.style.display = "block";
   mainWrapper.classList.add("blur");
-  btnSave.style.display = "none";
+  // btnSave.style.display = "none";
 }
 if (btnRepair) {
   btnRepair.addEventListener("click", () => {
@@ -227,94 +227,94 @@ if (btnRepair) {
   // </select>
   // </label>
   //   `;
-    btnRepair.style.display = "none";
-    btnReset.style.display = "none";
-    btnSave.style.display = "block";
+    // btnRepair.style.display = "none";
+    // btnReset.style.display = "none";
+    // btnSave.style.display = "block";
   });
 }
 
 // Alert API
-function showAlert1(message, type) {
-  const alertContainer = document.getElementById("alert-container");
-  if (!alertContainer) {
-    console.error("Alert container not found");
-    return;
-  }
-  const alertDiv = document.createElement("div");
-  alertDiv.className = `alert alert-${type}`;
-  alertDiv.setAttribute("show-alert", "");
-  alertDiv.setAttribute("data-time", "5000");
-  alertDiv.innerHTML = `${message} <span close-alert>x</span>`;
-  alertContainer.appendChild(alertDiv);
-  setTimeout(() => {
-    alertDiv.classList.add("alert-hidden");
-    setTimeout(() => alertDiv.remove(), 500);
-  }, 5000);
+// function showAlert1(message, type) {
+//   const alertContainer = document.getElementById("alert-container");
+//   if (!alertContainer) {
+//     console.error("Alert container not found");
+//     return;
+//   }
+//   const alertDiv = document.createElement("div");
+//   alertDiv.className = `alert alert-${type}`;
+//   alertDiv.setAttribute("show-alert", "");
+//   alertDiv.setAttribute("data-time", "5000");
+//   alertDiv.innerHTML = `${message} <span close-alert>x</span>`;
+//   alertContainer.appendChild(alertDiv);
+//   setTimeout(() => {
+//     alertDiv.classList.add("alert-hidden");
+//     setTimeout(() => alertDiv.remove(), 500);
+//   }, 5000);
 
-  // Close alert on click
-  alertDiv.querySelector("[close-alert]").addEventListener("click", () => {
-    alertDiv.classList.add("hidden"); // Add hidden class
-    setTimeout(() => alertDiv.remove(), 500); // Remove after transition
-  });
-}
-function showAlertFromStorage() {
-  const storedAlert = localStorage.getItem("alert");
-  if (storedAlert) {
-    const { message, type } = JSON.parse(storedAlert);
-    showAlert1(message, type);
-    localStorage.removeItem("alert");
-  }
-}
-showAlertFromStorage();
+//   // Close alert on click
+//   alertDiv.querySelector("[close-alert]").addEventListener("click", () => {
+//     alertDiv.classList.add("hidden"); // Add hidden class
+//     setTimeout(() => alertDiv.remove(), 500); // Remove after transition
+//   });
+// }
+// function showAlertFromStorage() {
+//   const storedAlert = localStorage.getItem("alert");
+//   if (storedAlert) {
+//     const { message, type } = JSON.parse(storedAlert);
+//     showAlert1(message, type);
+//     localStorage.removeItem("alert");
+//   }
+// }
+// showAlertFromStorage();
 
-// Alert API
-if (btnSave) {
-  btnSave.addEventListener("click", () => {
-    const id = information.querySelector("input[name='id']").value;
-    const fullName = information.querySelector("input[name='fullName']").value;
-    const phone = information.querySelector("input[name='phone']").value;
-    const address = information.querySelector("input[name='address']").value;
-    const email = information.querySelector("input[name='email']").value;
-    const role_id = information.querySelector("select[name='role_id']").value;
+// // Alert API
+// if (btnSave) {
+//   btnSave.addEventListener("click", () => {
+//     const id = information.querySelector("input[name='id']").value;
+//     const fullName = information.querySelector("input[name='fullName']").value;
+//     const phone = information.querySelector("input[name='phone']").value;
+//     const address = information.querySelector("input[name='address']").value;
+//     const email = information.querySelector("input[name='email']").value;
+//     const role_id = information.querySelector("select[name='role_id']").value;
 
-    const updateInfo = {
-      id: id,
-      fullName: fullName,
-      phone: phone,
-      role_id: role_id,
-      address: address,
-      email: email,
-    };
+//     const updateInfo = {
+//       id: id,
+//       fullName: fullName,
+//       phone: phone,
+//       role_id: role_id,
+//       address: address,
+//       email: email,
+//     };
 
-    fetch("/admin/account/edit", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updateInfo),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          localStorage.setItem(
-            "alert",
-            JSON.stringify({ message: data.message, type: "success" })
-          );
-        } else {
-          localStorage.setItem(
-            "alert",
-            JSON.stringify({ message: data.message, type: "danger" })
-          );
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    modalInfo.style.display = "none";
-    mainWrapper.classList.remove("blur");
-    window.location.reload();
-  });
-}
+//     fetch("/admin/account/edit", {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(updateInfo),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         if (data.success) {
+//           localStorage.setItem(
+//             "alert",
+//             JSON.stringify({ message: data.message, type: "success" })
+//           );
+//         } else {
+//           localStorage.setItem(
+//             "alert",
+//             JSON.stringify({ message: data.message, type: "danger" })
+//           );
+//         }
+//       })
+//       .catch((error) => {
+//         console.error("Error:", error);
+//       });
+//     modalInfo.style.display = "none";
+//     mainWrapper.classList.remove("blur");
+//     window.location.reload();
+//   });
+// }
 
 window.onclick = function (event) {
   console.log(event);
@@ -338,3 +338,4 @@ btnLogout.addEventListener("click", () => {
 });
 
 // End logout
+

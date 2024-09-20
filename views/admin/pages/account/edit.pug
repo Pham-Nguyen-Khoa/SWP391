@@ -84,6 +84,9 @@ block main
                             value=role.id
                             selected= (role.id == data.role_id) ? true: false
                         ) #{role.name}
+           
+            div(class="form-group ")
+                input(type="hidden" name="role_i_old" value=data.role_id)
                 
             div(class="form-group form-check form-check-inline")
                 input(type="radio"
@@ -93,6 +96,7 @@ block main
                     value="active"
                     checked=(data.status === "active") ? true: false
                     )  
+            
                 label(for="statusActive" class="form-check-label" ) Hoạt động 
             div(class="form-group form-check form-check-inline")
                 input(type="radio"

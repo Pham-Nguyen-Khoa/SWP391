@@ -13,8 +13,6 @@ if (showAlert) {
 }
 // End Show Alert
 
-
-
 // Upload Image
 const uploadImage = document.querySelector("[upload-image]");
 if (uploadImage) {
@@ -28,3 +26,19 @@ if (uploadImage) {
   });
 }
 // End Upload Image
+
+// Logout
+const btnLogout = document.querySelector("[button-logout]");
+if (btnLogout) {
+  btnLogout.addEventListener("click", () => {
+    let url = new URL(window.location.href);
+    const check = confirm("Bạn có chắc chắn muốn đăng xuất!");
+    if (check) {
+      window.location.href = "/auth/logout";
+    } else {
+      return;
+    }
+  });
+}
+
+// End logout

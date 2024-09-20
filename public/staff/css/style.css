@@ -43,7 +43,7 @@
 
 
 
-/* Tạo nền nhẹ và viền cho bảng */
+
 .table {
     border-collapse: separate;
     border-spacing: 0;
@@ -51,7 +51,7 @@
     margin-bottom: 1rem;
     background-color: transparent;
 }
-/* Màu nền xám cho các mục lớn */
+
 .table-group-header td {
     background-color: #e9ecef;
     font-weight: bold;
@@ -79,7 +79,6 @@
     object-fit: cover;
     border-radius: 10px;
     border: 2px solid black;
-    margin: 0 28%;
 }
 
 /* Canh giữa các ô checkbox */
@@ -162,5 +161,151 @@
 
 
 
+/* Check Box */
+.checkbox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .checkbox label {
+    margin-right: 10px;
+  }
+  
+  .checkbox input[type="checkbox"] {
+    margin-right: 5px;
+  }
 
-    
+
+/* Header Styling */
+.table-container table th {
+    background-color: #3E8E7E; 
+    color: #FFF; 
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Date Row Styling */
+.table-container table th.date-header {
+    background-color: #4FB0A9; 
+}
+
+/* Table Cell Styling */
+.table-container table td {
+    background-color: #F9F9F9; 
+    color: #333;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Doctor Card Styling */
+.table-container table td .doctor-card {
+    background-color: #E0F7FA; 
+    border: 1px solid #B2EBF2;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table td .doctor-card img {
+    border-radius: 8px;
+    border: 2px solid #00796B; 
+    margin-bottom: 8px;
+}
+
+.table-container table td .doctor-card .doctor-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #00796B; 
+}
+
+.table-container table td .doctor-card .specialization {
+    font-size: 12px;
+    color: #555;
+}
+.table-container table td:nth-child(1){
+    background-color: #3E8E7E; 
+    color: #FFF; 
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.table-container table td:hover {
+    background-color: #E0F2F1; 
+}
+
+
+.table-container table tr.selected-row {
+    background-color: #A7FFEB; 
+}
+
+
+.table-container table td.time-cell {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #80CBC4; 
+    color: #FFF;
+    border-radius: 6px;
+}
+
+
+.table-container {
+    border: 3px solid #00796B; 
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #FAFAFA; 
+}
+
+
+
+.form-horizontal {
+    background-color: #a8cec6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 5px -5px 10px rgb(20 19 19 / 42%);
+}
+
+.form-horizontal label {
+    font-weight: bold;
+}
+.form-check-inline .form-check-input{
+    margin-right: 16px;
+    height: 20px;
+}
+.select-shift{
+    font-size: 20px;
+    background-color: #86c7c3;
+    border-radius: 20px;
+    border: 1px dashed;
+    padding: 20px;
+    color: #26222adb;
+}
+.button-add-shift{
+    width: 183px;
+    height: 51px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #65c6d2;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 16%;
+    box-shadow: 3px 1px 10px #18191b;
+}
+
+.form-choose-week{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sortSchedule{
+    padding: 20px 10px 0 10px;
+}

@@ -2,6 +2,11 @@ const md5 = require("md5");
 const Account = require("../../models/account.model");
 const Sequelize = require("../../config/database");
 const db = require("../../config/database");
+
+const sendMail = require("../../helpers/nodemailer");
+const generate = require("../../helpers/generate");
+const verifyEmailHelper = require("../../helpers/checkMail");
+
 // [GET] localhost:/auth/login
 module.exports.login = async (req, res) => {
   res.render("client/pages/user/login.pug", {
@@ -18,6 +23,7 @@ module.exports.loginPost = async (req, res) => {
       email: email,
     },
   });
+  console.log("hello" , user)
   if (user.status == "inactive") {
     req.flash("error", "Tài khoản đã bị khóa!");
     res.redirect("back");
@@ -59,13 +65,21 @@ const generateUserId = async (rolePrefix) => {
   const query = `SELECT COUNT(*) AS count FROM account WHERE id LIKE '${rolePrefix}%'`;
   const [results] = await db.query(query);
   const count = results[0].count + 1;
-  return `${rolePrefix}${String(count).padStart(4, "0")}`; 
+  return `${rolePrefix}${String(count).padStart(4, "0")}`;
 };
 // [POST] localhost:/auth/register
 module.exports.registerPost = async (req, res) => {
+
   try {
     const password = md5(req.body.password);
     const { email, fullName, phone, address } = req.body;
+
+    const checkMail = await verifyEmailHelper.verifyEmail(email);
+    if (!checkMail) {
+      req.flash("error", "Email không tồn tại! ");
+      res.redirect("back");
+    }
+
     const emailExisted = await Account.findOne({
       where: {
         email: email,

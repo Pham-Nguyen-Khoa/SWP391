@@ -11,7 +11,7 @@ router.get("/", controller.index);
 router.patch("/change-status/:status/:id", controller.changeStatus);
 
 router.get("/edit/:id", controller.edit);
-router.patch('/edit', controller.editPatchJson);
+// router.patch('/edit', controller.editPatchJson);
 
 router.patch(
   "/edit/:id",
