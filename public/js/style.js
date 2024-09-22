@@ -29,6 +29,19 @@ const timeSlotsContainer = document.querySelector("#timeSlotsContainer");
 const selectDate = document.querySelector("#select_date");
 const notification = document.querySelector("#notification");
 
+if(doctorInfoElement){
+  doctorInfoElement.innerHTML += `
+<img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
+<h3>Chăm Sóc Cá Koi </h3>
+<div class="rating">★ ★ ★ ★ ☆</div>
+
+`;
+doctorInfoElement.style.visibility = "visible";
+}
+
+
+
+
 console.log(selectDoctor);
 function clearDoctorOptions() {
   selectDoctor.innerHTML = "<option disabled selected>Chọn bác sĩ</option>";
@@ -47,24 +60,32 @@ function addDefaultDoctorOption() {
   defaultOption.text = "Tự chọn bác sĩ";
   selectDoctor.appendChild(defaultOption);
 }
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split("-");
+  return `${day}-${month}-${year}`;
+}
 
 // Chọn dịch vụ
 
 if (selectService) {
   selectService.addEventListener("change", () => {
+    doctorInfoElement.innerHTML = `
+    <img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
+    <h3>Chăm Sóc Cá Koi </h3>
+    <div class="rating">★ ★ ★ ★ ☆</div>
+    
+    `;
+    doctorInfoElement.style.visibility = "visible";
     notification.innerHTML = "";
-    document.querySelector(".doctor-info").style.visibility = "hidden";
+    // document.querySelector(".doctor-info").style.visibility = "hidden";
     clearDoctorOptions();
     addDefaultDoctorOption();
-    doctorInfoElement.innerHTML = "";
+    // doctorInfoElement.innerHTML = "";
     timeSlotsContainer.innerHTML = "";
     selectDate.value = "";
     var service = selectService.value;
     listDoctor.forEach((doctor) => {
       if (doctor.Specialization == service) {
-        // const accountDoctor = listAccount.find(
-        //   (account) => account.AccountID == doctor.AccountID
-        // );
         addDoctorOption(`${doctor.VetID}`, `${doctor.FullName}`);
       }
     });
@@ -80,7 +101,13 @@ if (selectDoctor) {
     timeSlotsContainer.innerHTML = "";
     selectDate.value = "";
     if (selectDoctor.value === "Tự chọn") {
-      doctorInfoElement.style.visibility = "hidden";
+      doctorInfoElement.innerHTML = `
+      <img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
+      <h3>Chăm Sóc Cá Koi </h3>
+      <div class="rating">★ ★ ★ ★ ☆</div>
+      
+      `;
+      doctorInfoElement.style.visibility = "visible";
       return;
     }
     console.log(listAccount)
@@ -102,13 +129,15 @@ if (selectDoctor) {
     console.log(arrayDescription)
 
     if (accountDoctor) {
+      const originalDate =  accountDoctor.Birthday;
+      const formattedDate = formatDate(originalDate);
       doctorInfoElement.innerHTML += `
         <img src="${accountDoctor.Avatar}" alt="Avatar của bác sĩ" class="avatar_doctor">
         <h3>Dr. ${accountDoctor.FullName}</h3>
         <div class="rating">★ ★ ★ ★ ☆</div>
-        <p>Giới tính: Nam</p>
-        <p>Ngày Sinh: 15/08/2004</p>
-        <p>Địa chỉ: ${accountDoctor.Address}</p>
+        <p style="min-width: 50px"><b>Giới tính:   </b>      ${accountDoctor.Gender}</p>
+        <p><b>Ngày Sinh:   </b>     ${formattedDate}</p>
+        <p><b>Chuyên Ngành:   </b>   ${accountDoctor.Specialization}</p>
         <b>Kinh nghiệm làm việc: </b>
 
       `;
