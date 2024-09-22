@@ -19,12 +19,11 @@ module.exports.index = async (req, res) => {
   const query =
     "Select * From account1 JOIN  vet on vet.AccountID = account1.AccountID where account1.Deleted = 0";
   const [listDoctor] = await Sequelize.query(query);
-  console.log(listDoctor)
   const querySchedule = `SELECT * FROM schedule `;
   const [schedules] = await Sequelize.query(querySchedule);
-  console.log(schedules)
   const queryShiftDetails = `SELECT * FROM shiftdetail`;
   const [shiftDetails] = await Sequelize.query(queryShiftDetails);
+
 
   
   const weekOffset = parseInt(req.query.weekOffset) || 0;
@@ -59,6 +58,7 @@ module.exports.index = async (req, res) => {
     const account = listDoctor.find(
       (acc) => acc.VetID === schedule.VetID
     );
+
     const shifts = shiftDetails.filter(
       (shift) => shift.ScheduleID === schedule.ScheduleID
     );
@@ -69,9 +69,15 @@ module.exports.index = async (req, res) => {
       shifts,
     };
   });
-  console.log(combinedData)
+
+ 
 
   const slots = ["7h-9h", "9h-11h", "13h-15h", "15h-17h"]; 
+
+  const  listServices = await Service.findAll({
+    raw: true
+  })
+
 
   res.render("staff/pages/schedules/index", {
     pageTitle: "Trang Quản Lý Lịch Làm",
@@ -81,6 +87,7 @@ module.exports.index = async (req, res) => {
     days: days,
     weeks: weeks,
     weekOffset: weekOffset,
+    listServices: listServices
   });
 };
 
@@ -156,6 +163,7 @@ module.exports.addPost = async (req, res) => {
     console.log("----")
     console.log(req.body)
     console.log("----")
+    console.log(req.body)
     const { vetID, date, shifts } = req.body;
 
     // Kiểm tra giá trị accountID và date

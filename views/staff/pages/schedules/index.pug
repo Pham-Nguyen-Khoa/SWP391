@@ -33,18 +33,29 @@ block main
                                             each shift in schedule.shifts
                                                 if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
                                                     .doctor-info.col
-                                                        img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
+                                                        if shift.AppointmentID == null
+                                                            img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
+                                                        else 
+                                                            img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover ; border: 3px solid red " class="img-thumbnail doctor-avatar img-sm")
                                                         .doctor-details
                                                             p.mb-0 #{schedule.account.FullName}
                                                             p.text-muted.mb-0 #{schedule.account.Specialization}
         .mt-4
             form(action='/staff/schedules/add' method='POST' class='form-horizontal')
                 .form-group.row
+                    label(for='vetID' class='col-sm-2 col-form-label'  ) Chọn Chuyên Ngành:
+                    .col-sm-10
+                        select(name  required class='form-control ' Select-Specialization)
+                            option(value="" selected disabled ) --- Chọn Chuyên Ngành --- 
+                            each service in listServices
+                                option(value=service.Name) Chuyên ngành #{service.Name}
+                .form-group.row
                     label(for='vetID' class='col-sm-2 col-form-label') Chọn bác sĩ:
                     .col-sm-10
-                        select(name='vetID' required class='form-control ')
-                            each doctor in listDoctor
-                                option(value=doctor.VetID) Bác Sĩ #{doctor.FullName}
+                        select(name='vetID' required class='form-control ' Select-Doctor)
+                            option(value="" selected disabled) ---Chọn Bác Sĩ---- 
+                            //- each doctor in listDoctor
+                            //-     option(value=doctor.VetID) Bác Sĩ #{doctor.FullName}
 
                 .form-group.row
                     label(for='date' class='col-sm-2 col-form-label') Ngày làm việc:
@@ -70,3 +81,7 @@ block main
                                 input(type='checkbox' name='shifts' id='shift-15-17' value='15h-17h' class='form-check-input')
                                 label(for='shift-15-17' class='form-check-label') 15h-17h
                 button(type='submit' class='button-add-shift') Thêm lịch
+
+                    script.
+                        var listDoctor = !{JSON.stringify(listDoctor)};
+                        var listServices = !{JSON.stringify(listServices)};;

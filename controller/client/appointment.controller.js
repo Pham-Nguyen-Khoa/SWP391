@@ -30,7 +30,6 @@ module.exports.index = async (req, res) => {
       ORDER BY account1.AccountID ASC
   `;
   const [listAccount] = await Sequelize.query(queryFilter);
-  console.log(listAccount)
   // const listAccount = await Account.findAll({
   //   raw: true,
   //   where: {
@@ -56,11 +55,11 @@ module.exports.index = async (req, res) => {
       doctorSchedules[doctorID][workDay] = [];
     }
     doctorSchedules[doctorID][workDay].push(shift);
+
   });
   const listDoctor = await Vet.findAll({
     raw: true,
   });
-  console.log(listDoctor)
 
   res.render("client/pages/appointment/index.pug", {
     pageTitle: "Trang Đặt Lịch",

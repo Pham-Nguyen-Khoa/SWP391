@@ -188,10 +188,10 @@ if (selectDate) {
     var inputDateValue = selectDate.value;
     var selectedDate = new Date(inputDateValue);
     var currentDate = new Date();
-    if (selectedDate < currentDate.setHours(0, 0, 0, 0)) {
-      notification.innerHTML = `<h3>Vui lòng chọn lại ngày</h3>`;
-      return;
-    }
+    // if (selectedDate < currentDate.setHours(0, 0, 0, 0)) {
+    //   notification.innerHTML = `<h3>Vui lòng chọn lại ngày</h3>`;
+    //   return;
+    // }
     // if (
     //   selectedDate.getFullYear() === currentDate.getFullYear() &&
     //   selectedDate.getMonth() === currentDate.getMonth() &&
