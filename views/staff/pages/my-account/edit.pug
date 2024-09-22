@@ -3,83 +3,103 @@ include ../../mixins/alert.pug
 block main
         +alert-success("5000")
         +alert-error('5000')
-        h1 #{pageTitle}     
-        form(
-            action=`/staff/my-account/edit?_method=PATCH`,
-            method="post"
-            enctype="multipart/form-data"
-        ) 
-            div(class="form-group")
-                label(for="fullName") Họ và Tên *
-                input(
-                    type="text" 
-                    id="fullName" 
-                    name="fullName"
-                    class="form-control custom-input"
-                    required
-                    value=user.fullName
-                    ) 
-            div(class="form-group")
-                label(for="email") Email *
-                input(
-                    type="text" 
-                    id="email" 
-                    name="email"
-                    class="form-control custom-input"
-                    value=user.email
-                    required
+        h1.edit-title-my-account #{pageTitle}     
+        div.form-edit-my-account
+            form(
+                action=`/staff/my-account/edit?_method=PATCH`,
+                method="post"
+                enctype="multipart/form-data"
+            ) 
+                div(class="form-group")
+                    label(for="FullName") Họ và Tên *
+                    input(
+                        type="text" 
+                        id="FullName" 
+                        name="FullName"
+                        class="form-control custom-input"
+                        required
+                        value=user.FullName
+                        ) 
+                div(class="form-group")
+                    label(for="Email") Email *
+                    input(
+                        type="text" 
+                        id="Email" 
+                        name="Email"
+                        class="form-control custom-input"
+                        value=user.Email
+                        required
+                        disabled
+                        )
+                div(class="form-group")
+                    label(for="Address") Địa chỉ
+                    input(
+                        type="text" 
+                        id="Address" 
+                        name="Address"
+                        class="form-control custom-input"
+                        required
+                        value=user.Address
+                        ) 
+                div(class="form-group")
+                    label(for="Password") Password *
+                    input(
+                        type="password" 
+                        id="Password" 
+                        name="Password"
+                        class="form-control custom-input"
+                        placeholder="Nhập vào thay đổi mật khẩu mới"
+                        )
+                div(class="form-group")
+                    label(for="PhoneNumber") Số điện thoại
+                    input(
+                        type="number" 
+                        id="PhoneNumber" 
+                        name="PhoneNumber"
+                        class="form-control custom-input"
+                        value=user.PhoneNumber
+                        required
+                        )
+                div(class="form-group")
+                    label(for="Birthday") Ngày sinh
+                    input(
+                        type="date"
+                        id="Birthday" 
+                        name="Birthday"
+                        class="form-control custom-input"
+                        value=user.Birthday
+                        )
+                div(class="form-group")
+
+                label(for="Gender") Giới tính
+                select(name="Gender" id="Gender" class="form-control custom-input")
+                    option(disabled selected) --- Lựa chọn ---
+
+                    option(value="Nam" selected=(user.Gender === "Nam") ? true : false) Nam
+
+                    option(value="Nữ" selected=(user.Gender === "Nữ") ? true : false) Nữ
+                
+                div(
+                    class="form-group"
+                    upload-image
                     )
-            div(class="form-group")
-                label(for="address") Địa chỉ
-                input(
-                    type="text" 
-                    id="address" 
-                    name="address"
-                    class="form-control custom-input"
-                    required
-                    value=user.address
-                    ) 
-            div(class="form-group")
-                label(for="password") Password *
-                input(
-                    type="password" 
-                    id="password" 
-                    name="password"
-                    class="form-control custom-input"
-                    placeholder="Nhập vào thay đổi mật khẩu mới"
-                    )
-            div(class="form-group")
-                label(for="phone") Số điện thoại
-                input(
-                    type="number" 
-                    id="phone" 
-                    name="phone"
-                    class="form-control custom-input"
-                    value=user.phone
-                    required
-                    )
-            
-            div(
-                class="form-group"
-                upload-image
-                )
-                label(for="avatar") Hình ảnh
-                input(
-                    type="file" 
-                    id="avatar" 
-                    name="avatar"
-                    class="form-control-file"
-                    require
-                    upload-image-input     
-                    )
-                img(
-                    src=user.avatar
-                    upload-image-preview
-                    class="upload-preview"
-                )        
-            div(class="form-group")
-                button(
-                    type="submit"
-                    class="btn btn-primary"
-                ) Cập nhật 
+                    label(for="Avatar") Hình ảnh
+                    input(
+                        type="file" 
+                        id="Avatar" 
+                        name="Avatar"
+                        class="form-control-file"
+                        require
+                        upload-image-input     
+                        )
+                    img(
+                        src=user.Avatar
+                        upload-image-preview
+                        class="upload-preview"
+                    )        
+                div(class="form-group")
+                    button(
+                        type="submit"
+                        class="btn btn-primary button-edit-my-account"
+                    ) Cập nhật 
         

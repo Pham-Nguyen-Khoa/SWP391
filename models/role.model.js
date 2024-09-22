@@ -5,20 +5,20 @@ const sequelize = require("../config/database"); // Database
 const Role = sequelize.define(
   "Role",
   {
-    id: {
+    RoleID: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
     },
-    name: {
+    RoleName: {
       type: DataTypes.STRING(255),
       unique: true,
       allowNull: false,
     },
   },
   {
-    tableName: "roles",
+    tableName: "role",
     timestamps: false,
   }
 );

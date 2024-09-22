@@ -1,5 +1,8 @@
-const Account = require("../../models/account.model");
-const Role = require("../../models/roles.model");
+// const Account = require("../../models/account.model");
+const Account = require("../../models/account1.model");
+const Customer = require("../../models/customer.model");
+// const Role = require("../../models/role.model");
+// const Role = require("../../models/roles.model");
 module.exports.requireAuth = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
@@ -7,14 +10,27 @@ module.exports.requireAuth = async (req, res, next) => {
   } else {
     const user = await Account.findOne({
       where: {
-        token: token,
+        Token: token,
       },
     });
     if (!user) {
       res.redirect("/auth/login");
       return;
     } else {
-      res.locals.user = user;
+      const customer = await Customer.findOne({
+        where: {
+          AccountID: user.AccountID,
+        },
+      });
+
+      if (customer) {
+        res.locals.userInfo = {
+          ...user.dataValues,
+          ...customer.dataValues,
+        };
+      } else {
+        res.locals.userInfo = { ...user.dataValues };
+      }
     }
     next();
   }

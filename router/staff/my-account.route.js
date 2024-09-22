@@ -12,7 +12,7 @@ router.get("/edit", controller.edit);
 
 router.patch(
   "/edit",
-  upload.single("avatar"),
+  upload.single("Avatar"),
   uploadMiddleware.upload,
   validate.edit,
   controller.editPatch

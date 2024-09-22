@@ -7,7 +7,7 @@ const Schedule = sequelize.define('Schedule', {
     allowNull: false,
     primaryKey: true
   },
-  AccountID: {
+  VetID: {
     type: DataTypes.STRING(10),
     allowNull: false
   },

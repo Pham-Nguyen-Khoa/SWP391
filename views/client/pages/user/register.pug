@@ -9,20 +9,28 @@ block main
             .col-12
                 form(action="/auth/register" method="post")
                     .form-group
-                        label(for="email") Email
-                        input#email.form-control(type="email" name="email" required)
+                        label(for="Email") Email
+                        input#email.form-control(type="Email" name="Email" required)
                     .form-group
-                        label(for="fullName") Họ & Tên
-                        input#name.form-control(type="text" name="fullName" required)
+                        label(for="FullName") Họ & Tên
+                        input#name.form-control(type="text" name="FullName" required)
                     .form-group
-                        label(for="phone") Số Điện Thoại
-                        input#phone.form-control(type="tel" name="phone" required)
+                        label(for="PhoneNumber") Số Điện Thoại
+                        input#phone.form-control(type="tel" name="PhoneNumber" required)
                     .form-group
-                        label(for="address") Địa Chỉ
-                        input#address.form-control(type="text" name="address" required)
+                        label(for="Address") Địa Chỉ
+                        input#address.form-control(type="text" name="Address" required)
                     .form-group
-                        label(for="password") Mật khẩu
-                        input#password.form-control(type="password" name="password" required)
+                        label(for="Gender") Giới Tính
+                        select#gender.form-control(name="Gender" required)
+                            option(value="Nam") Nam
+                            option(value="Nữ") Nữ
+                    .form-group
+                        label(for="Birthday") Ngày Sinh
+                        input#dob.form-control(type="date" name="Birthday" required)
+                    .form-group
+                        label(for="Password") Mật khẩu
+                        input#password.form-control(type="password" name="Password" required)
                     .form-group
                         label(for="confirm_password") Xác nhận Mật khẩu
                         input#confirm_password.form-control(type="password" name="confirm_password" required)

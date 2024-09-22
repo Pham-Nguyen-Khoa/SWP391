@@ -5,11 +5,14 @@ if (buttonsChangeStatus.length > 0) {
   buttonsChangeStatus.forEach((button) => {
     button.addEventListener("click", () => {
       const statusCurrent = button.getAttribute("data-status");
-      const statusChange = statusCurrent == "active" ? "inactive" : "active";
+      const statusChange = statusCurrent == "Kích hoạt" ? "inactive" : "active";
+      console.log(statusChange)
+      console.log(statusCurrent)
       const id = button.getAttribute("id");
       const path = formChangeStatus.getAttribute("path");
       const action = path + `${statusChange}/${id}?_method=PATCH`;
       formChangeStatus.action = action;
+      console.log(formChangeStatus.action)
       formChangeStatus.submit();
     });
   });
@@ -97,6 +100,7 @@ if (formDelete) {
         const id = button.getAttribute("id");
         PATH += id + "?_method=DELETE";
         formDelete.action = PATH;
+        console.log(formDelete.action)
         formDelete.submit();
       } else {
         return;
@@ -115,32 +119,41 @@ const information = document.querySelector(".information");
 // const btnReset = document.querySelector(".reset-password");
 let account = null;
 function showInfoModal(id) {
-  modalInfo.style.height = "400px";
-  modalInfo.style.weight = "550px";
+  // console.log(listUser)
+  // modalInfo.style.height = "400px";
+  // modalInfo.style.weight = "550px";
   btnRepair.style.display = "block";
   // btnReset.style.display = "block";
   // btnSave.style.display = "none";
-  account = listUser.find((user) => user.id === id);
-  imageModal.src = account.avatar;
+  account = listUser.find((user) => user.AccountID === id);
+  imageModal.src = account.Avatar;
   information.innerHTML = `
-    <p><b>ID:</b> ${account.id}</p>
-    <p><b>Họ và Tên:</b> ${account.fullName}</p>
+    <p><b>ID:</b> ${account.AccountID}</p>
+    <p><b>Họ và Tên:</b> ${account.FullName}</p>
+    <p><b>Gender:</b> ${account.Gender}</p>
      <p><b>Vai trò:</b> ${
-       account.role_id == 1
+       account.RoleID == "RL0001"
          ? "Admin"
-         : account.role_id == 2
-         ? "Doctor"
-         : account.role_id == 3
-         ? "Nhân viên"
-         : account.role_id == 4
-         ? "Khách hàng"
-         : account.role_id
+         : account.RoleID == "RL0002"
+         ? "Vet"
+         : account.RoleID == "RL0003"
+         ? "Staff"
+         : account.RoleID == "RL0004"
+         ? "Customer"
+         : account.RoleID
      }</p>
-    <p><b>Số điện thoại:</b> ${account.phone}</p>
-    <p><b>Địa chỉ:</b> ${account.address}</p>
-    <p><b>Email:</b> ${account.email}</p>
+    ${
+      account.RoleID == "RL0002" ? `
+        <p><b>Chuyên ngành:</b> ${account.Specialization}</p>
+        <p><b>Thành tựu:</b> ${account.Description}</p>
+        <p><b>Link Google Meet:</b> ${account.GoogleMeet}</p>
+      ` :""
+    }
+    <p><b>Số điện thoại:</b> ${account.PhoneNumber}</p>
+    <p><b>Địa chỉ:</b> ${account.Address}</p>
+    <p><b>Birthday:</b> ${account.Birthday}</p>
     <p><b>Trạng thái:</b> ${
-      account.status == "active" ? "Kích hoạt" : "Bị khóa"
+      account.Status == "Kích hoạt" ? "Kích hoạt" : "Bị khóa"
     }</p>
   `;
   modalInfo.style.display = "block";
@@ -149,84 +162,84 @@ function showInfoModal(id) {
 }
 if (btnRepair) {
   btnRepair.addEventListener("click", () => {
-    window.location.href =`/admin/account/edit/${account.id}`     
-    
-  //   modalInfo.style.height = "600px";
-  //   modalInfo.style.weight = "650px";
-  //   information.innerHTML = ``;
-  //   information.innerHTML = `
-  //     <title>Your Page Title</title>
-  //     <!-- Other head elements -->
-  // </head>
-  // <body>
-  //     <div class="form-group">
-  //     <label for="id"><b>Id</b></label>
-  //     <input
-  //         class="form-control custom-input"
-  //         type="text"
-  //         id="id"
-  //         name="id"
-  //         value="${account.id}"
-  //         readonly
-  //     />
-  // </div>
-  // <div class="form-group">
-  //     <label for="fullName"><b>Họ Tên</b></label>
-  //     <input
-  //         class="form-control custom-input"
-  //         type="text"
-  //         id="fullName"
-  //         name="fullName"
-  //         value="${account.fullName}"
-  //     />
-  // </div>
-  // <div class="form-group">
-  //     <label for="phone"><b>Số điện thoại</b></label>
-  //     <input
-  //         class="form-control custom-input"
-  //         type="text"
-  //         id="phone"
-  //         name="phone"
-  //         value="${account.phone}"
-  //     />
-  // </div>
-  // <div class="form-group">
-  //     <label for="address"><b>Địa chỉ</b> </label>
-  //     <input
-  //         class="form-control custom-input"
-  //         type="text"
-  //         id="address"
-  //         name="address"
-  //         value="${account.address}"
-  //     />
-  // </div>
-  // <div class="form-group">
-  //     <label for="email"><b>Email</b></label>
-  //     <input
-  //         class="form-control custom-input"
-  //         type="text"
-  //         id="email"
-  //         name="email"
-  //         value="${account.email}"
-  //     />
-  // </div>
-  // <label for="role_id">
-  //     Phân Quyền
-  //     <select class="form-control custom-input" name="role_id" id="role">
-  //   <option value="">--- Lựa chọn ---</option>
-    
-  //   <option value="1" ${account.role_id == 1 ? "selected" : ""}>Admin</option>
-  //   <option value="2" ${account.role_id == 2 ? "selected" : ""}>Bác sĩ</option>
-  //   <option value="3" ${
-  //     account.role_id == 3 ? "selected" : ""
-  //   }>Nhân viên</option>
-  //   <option value="4" ${
-  //     account.role_id == 4 ? "selected" : ""
-  //   }>Khách hàng</option>
-    
-  // </select>
-  // </label>
-  //   `;
+    window.location.href = `/admin/account/edit/${account.AccountID}`;
+
+    //   modalInfo.style.height = "600px";
+    //   modalInfo.style.weight = "650px";
+    //   information.innerHTML = ``;
+    //   information.innerHTML = `
+    //     <title>Your Page Title</title>
+    //     <!-- Other head elements -->
+    // </head>
+    // <body>
+    //     <div class="form-group">
+    //     <label for="id"><b>Id</b></label>
+    //     <input
+    //         class="form-control custom-input"
+    //         type="text"
+    //         id="id"
+    //         name="id"
+    //         value="${account.id}"
+    //         readonly
+    //     />
+    // </div>
+    // <div class="form-group">
+    //     <label for="fullName"><b>Họ Tên</b></label>
+    //     <input
+    //         class="form-control custom-input"
+    //         type="text"
+    //         id="fullName"
+    //         name="fullName"
+    //         value="${account.fullName}"
+    //     />
+    // </div>
+    // <div class="form-group">
+    //     <label for="phone"><b>Số điện thoại</b></label>
+    //     <input
+    //         class="form-control custom-input"
+    //         type="text"
+    //         id="phone"
+    //         name="phone"
+    //         value="${account.phone}"
+    //     />
+    // </div>
+    // <div class="form-group">
+    //     <label for="address"><b>Địa chỉ</b> </label>
+    //     <input
+    //         class="form-control custom-input"
+    //         type="text"
+    //         id="address"
+    //         name="address"
+    //         value="${account.address}"
+    //     />
+    // </div>
+    // <div class="form-group">
+    //     <label for="email"><b>Email</b></label>
+    //     <input
+    //         class="form-control custom-input"
+    //         type="text"
+    //         id="email"
+    //         name="email"
+    //         value="${account.email}"
+    //     />
+    // </div>
+    // <label for="role_id">
+    //     Phân Quyền
+    //     <select class="form-control custom-input" name="role_id" id="role">
+    //   <option value="">--- Lựa chọn ---</option>
+
+    //   <option value="1" ${account.role_id == 1 ? "selected" : ""}>Admin</option>
+    //   <option value="2" ${account.role_id == 2 ? "selected" : ""}>Bác sĩ</option>
+    //   <option value="3" ${
+    //     account.role_id == 3 ? "selected" : ""
+    //   }>Nhân viên</option>
+    //   <option value="4" ${
+    //     account.role_id == 4 ? "selected" : ""
+    //   }>Khách hàng</option>
+
+    // </select>
+    // </label>
+    //   `;
     // btnRepair.style.display = "none";
     // btnReset.style.display = "none";
     // btnSave.style.display = "block";
@@ -339,3 +352,13 @@ btnLogout.addEventListener("click", () => {
 
 // End logout
 
+//   Edit Doctor
+function toggleDoctorFields() {
+  var roleSelect = document.getElementById("RoleID");
+  var doctorFields = document.getElementById("doctorFields");
+  if (roleSelect.value === "RL0002") {
+    doctorFields.style.display = "";
+  } else {
+    doctorFields.style.display = "none";
+  }
+}

@@ -1,14 +1,31 @@
-const Account = require("../../models/account.model");
+// const Account = require("../../models/account.model");
+const Account = require("../../models/account1.model");
+const Customer = require("../../models/customer.model");
 module.exports.userInfo = async (req, res, next) => {
   const token = req.cookies.token;
   // const user = await User.findOne({tokenUser: tokenUser});
   if(token){
     const user = await Account.findOne({
         where: {
-          token: token,
+          Token: token,
         },
       });
-      res.locals.userInfo = user;
-  }
+      if (user) {
+        const customer = await Customer.findOne({
+          where: {
+            AccountID: user.AccountID,
+          },
+        });
+  
+        if (customer) {
+          res.locals.userInfo = {
+            ...user.dataValues,
+            ...customer.dataValues,
+          };
+        } else {
+          res.locals.userInfo = { ...user.dataValues };
+        }
+      }
+    }
   next();
 };

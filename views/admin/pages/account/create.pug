@@ -1,105 +1,156 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
-        +alert-success("5000")
-        +alert-error('5000')
-        h1 #{pageTitle}     
-        form(
-            action=`${prefixAdmin}/account/create`,
-            method="POST"
-            enctype="multipart/form-data"
-        ) 
-            div(class="form-group")
-                label(for="fullName") Họ và Tên *
-                input(
-                    type="text" 
-                    id="fullName" 
-                    name="fullName"
-                    class="form-control custom-input"
-                    required
-                    ) 
-            div(class="form-group")
-                label(for="email") Email *
-                input(
-                    type="text" 
-                    id="email" 
-                    name="email"
-                    class="form-control custom-input"
-                    required
-                    )
-            div(class="form-group")
-                label(for="address") Địa chỉ *
-                input(
-                    type="text" 
-                    id="address" 
-                    name="address"
-                    class="form-control custom-input"
-                    
-                    )
-            div(class="form-group")
-                label(for="password") Password *
-                input(
-                    type="password" 
-                    id="password" 
-                    name="password"
-                    class="form-control custom-input"
-                    )
-            div(class="form-group")
-                label(for="phone") Số điện thoại
-                input(
-                    type="number" 
-                    id="phone" 
-                    name="phone"
-                    class="form-control custom-input"
-                    
-                    )
-            
-            div(
-                class="form-group"
-                upload-image
+    +alert-success("5000")
+    +alert-error('5000')
+    h1 #{pageTitle}     
+    form(
+        action=`${prefixAdmin}/account/create`,
+        method="POST"
+        enctype="multipart/form-data"
+    ) 
+        div(class="form-group")
+            label(for="FullName") Họ và Tên *
+            input(
+                type="text" 
+                id="FullName" 
+                name="FullName"
+                class="form-control custom-input"
+                required
+                ) 
+        div(class="form-group")
+            label(for="Email") Email *
+            input(
+                type="text" 
+                id="Email" 
+                name="Email"
+                class="form-control custom-input"
+                required
                 )
-                label(for="avatar") Hình ảnh
-                input(
-                    type="file" 
-                    id="avatar" 
-                    name="avatar"
-                    class="form-control-file"
-                    require
-                    upload-image-input     
-                    )
-                img(
-                    src
-                    upload-image-preview
-                    class="upload-preview"
+        div(class="form-group")
+            label(for="Address") Địa chỉ *
+            input(
+                type="text" 
+                id="Address" 
+                name="Address"
+                class="form-control custom-input"
+
                 )
-                
+        div(class="form-group")
+            label(for="Gender") Giới tính *
+            select(name="Gender" id="Gender" class="form-control custom-input" required)
+                option(disabled selected) --- Lựa chọn ---
+                option(value="Nam") Nam
+                option(value="Nữ") Nữ
+
+
+        div(class="form-group")
+            label(for="Birthday") Ngày sinh *
+            input(
+                type="date" 
+                id="Birthday" 
+                name="Birthday"
+                class="form-control custom-input"
+                required
+            )
+        div(class="form-group")
+            label(for="Password") Password *
+            input(
+                type="password" 
+                id="Password" 
+                name="Password"
+                class="form-control custom-input"
+                )
+        div(class="form-group")
+            label(for="PhoneNumber") Số điện thoại
+            input(
+                type="number" 
+                id="PhoneNumber" 
+                name="PhoneNumber"
+                class="form-control custom-input"
+
+                )
+
+        div(
+            class="form-group"
+            upload-image
+            )
+            label(for="Avatar") Hình ảnh
+            input(
+                type="file" 
+                id="Avatar" 
+                name="Avatar"
+                class="form-control-file"
+                require
+                upload-image-input     
+                )
+            img(
+                src
+                upload-image-preview
+                class="upload-preview"
+            )
+
+        div(class="form-group")
+            label(for="RoleID") Phân quyền 
+            select(name="RoleID" id = "RoleID" class="form-control custom-input" onchange="handleRoleChange()")
+                option(disabled selected) --- Lựa chọn ---
+                each role in roles
+                    option(value=role.RoleID) #{role.RoleName}
+
+        div(id="doctorFields" class="form-group" style="display: none;")
             div(class="form-group")
-                label(for="role_id") Phân quyền 
-                select(name="role_id" id = "role_id" class="form-control custom-input")
-                    option(disabled selected) --- Lựa chọn ---
-                    each role in roles
-                        option(value=role.id) #{role.name}
-                
-            div(class="form-group form-check form-check-inline")
-                input(type="radio"
-                    class="form-check-input"
-                    id="statusActive"
-                    name="status"
-                    value="active"
-                    checked
-                    )  
-                label(for="statusActive" class="form-check-label" ) Hoạt động 
-            div(class="form-group form-check form-check-inline")
-                input(type="radio"
-                    class="form-check-input"
-                    id="statusInactive"
-                    name="status"
-                    value="inactive")  
-                label(for="statusInactive" class="form-check-label" ) Dừng hoạt động 
-                    
+                label(for="Specialization") Chuyên ngành
+                select(name="Specialization" id="Specialization" class="form-control custom-input")
+                    option(value="Khám Nội / Ngoại") Khám Nội / Ngoại
+                    option(value="Phẫu Thuật") Phẫu Thuật
+                    option(value="Tư Vấn Môi Trường") Tư Vấn Môi Trường
+                    option(value="Tư Vấn Online") Tư Vấn Online
             div(class="form-group")
-                button(
-                    type="submit"
-                    class="btn btn-primary"
-                ) Cập nhật 
-        
+                label(for="Description") Thành tựu
+                input(
+                    type="text"
+                    id="Description"
+                    name="Description"
+                    class="form-control custom-input"
+                )
+            div(class="form-group")
+                label(for="GoogleMeetLink") Link Google Meet
+                input(
+                    type="url"
+                    id="GoogleMeetLink"
+                    name="GoogleMeetLink"
+                    class="form-control custom-input"
+                )
+        div(class="form-group form-check form-check-inline")
+            input(type="radio"
+                class="form-check-input"
+                id="statusActive"
+                name="Status"
+                value="Kích hoạt"
+                checked
+                )  
+            label(for="statusActive" class="form-check-label" ) Hoạt động 
+        div(class="form-group form-check form-check-inline")
+            input(type="radio"
+                class="form-check-input"
+                id="statusInactive"
+                name="Status"
+                value="Bị Block")  
+            label(for="statusInactive" class="form-check-label" ) Dừng hoạt động 
+
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cập nhật 
+
+    script.
+        function handleRoleChange() {
+            var roleSelect = document.getElementById('RoleID');
+            var doctorFields = document.getElementById('doctorFields');
+            if (roleSelect.value === 'RL0002') {
+                doctorFields.style.display = 'block';
+            } else {
+                doctorFields.style.display = 'none';
+            }
+        }

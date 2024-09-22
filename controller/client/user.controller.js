@@ -1,5 +1,6 @@
 const md5 = require("md5");
-const Account = require("../../models/account.model");
+const Account1 = require("../../models/account1.model");
+const Customer = require("../../models/customer.model");
 const Sequelize = require("../../config/database");
 const db = require("../../config/database");
 
@@ -16,15 +17,14 @@ module.exports.login = async (req, res) => {
 
 // [POST] localhost:/auth/login
 module.exports.loginPost = async (req, res) => {
-  const password = md5(req.body.password);
-  const email = req.body.email;
-  const user = await Account.findOne({
+  const password = md5(req.body.Password);
+  const email = req.body.Email;
+  const user = await Account1.findOne({
     where: {
-      email: email,
+      Email: email,
     },
   });
-  console.log("hello" , user)
-  if (user.status == "inactive") {
+  if (user.Status == "Bị Block") {
     req.flash("error", "Tài khoản đã bị khóa!");
     res.redirect("back");
     return;
@@ -35,21 +35,21 @@ module.exports.loginPost = async (req, res) => {
     res.redirect("back");
     return;
   }
-  if (user.password !== password) {
+  if (user.Password !== password) {
     req.flash("error", "Mật khẩu không đúng");
     res.redirect("back");
     return;
   }
-  console.log(user);
-  res.cookie("token", user.token);
 
-  if (user.role_id == "4") {
+  res.cookie("token", user.Token);
+
+  if (user.RoleID == "RL0004") {
     res.redirect("/koi");
-  } else if (user.role_id == "1") {
+  } else if (user.RoleID == "RL0001") {
     res.redirect("/admin/dashboard");
-  } else if (user.role_id == "2") {
+  } else if (user.RoleID == "RL0002") {
     res.redirect("/doctor/dashboard");
-  } else if (user.role_id == "3") {
+  } else if (user.RoleID == "RL0003") {
     res.redirect("/staff/dashboard");
   }
 };
@@ -61,57 +61,56 @@ module.exports.register = async (req, res) => {
   });
 };
 
-const generateUserId = async (rolePrefix) => {
-  const query = `SELECT COUNT(*) AS count FROM account WHERE id LIKE '${rolePrefix}%'`;
+const generateUserId = async (rolePrefix, table, id) => {
+  const query = `SELECT COUNT(*) AS count FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
   const [results] = await db.query(query);
   const count = results[0].count + 1;
   return `${rolePrefix}${String(count).padStart(4, "0")}`;
 };
 // [POST] localhost:/auth/register
 module.exports.registerPost = async (req, res) => {
-
   try {
-    const password = md5(req.body.password);
-    const { email, fullName, phone, address } = req.body;
+    const password = md5(req.body.Password);
 
-    const checkMail = await verifyEmailHelper.verifyEmail(email);
+    const checkMail = await verifyEmailHelper.verifyEmail(req.body.Email);
     if (!checkMail) {
       req.flash("error", "Email không tồn tại! ");
       res.redirect("back");
+      return;
     }
-
-    const emailExisted = await Account.findOne({
+    const emailExisted = await Account1.findOne({
       where: {
-        email: email,
+        Email: req.body.Email,
       },
     });
     if (emailExisted) {
-      req.flash("error", `Email ${req.body.email} đã tồn tại!`);
+      req.flash("error", `Email ${req.body.Email} đã tồn tại!`);
       res.redirect("back");
+      return;
     } else {
-      // await Account.create({
-      //   fullName: fullName,
-      //   email: email,
-      //   password: password,
-      //   phone: phone,
-      //   address: address,
-      //   role_id: "4",
-      // });
-      const userId = await generateUserId("KH");
-      await Account.create({
-        id: userId, // Use the generated user ID
-        fullName: fullName,
-        email: email,
-        password: password,
-        phone: phone,
-        address: address,
-        role_id: "4",
+      const accountId = await generateUserId("AC", "account1", "AccountID");
+      await Account1.create({
+        AccountID: accountId, 
+        Password: password,
+        Email: req.body.Email,
+        RoleID: "RL0004",
+      });
+      const customerId = await generateUserId("KH", "customer", "CustomerID");
+      await Customer.create({
+        CustomerID: customerId,
+        FullName: req.body.FullName,
+        PhoneNumber: req.body.PhoneNumber,
+        Address: req.body.Address,
+        Gender: req.body.Gender,
+        Birthday: req.body.Birthday,
+        AccountID: accountId,
       });
       req.flash("success", "Đăng ký thành công!");
       res.redirect("/auth/login");
     }
   } catch (error) {
     req.flash("error", "Tạo tài khoản thất tại");
+    res.redirect("/auth/register");
   }
 };
 

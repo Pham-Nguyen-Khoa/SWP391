@@ -5,7 +5,7 @@ const authValidate = require("../../validates/client/auth.validate");
 
 
 router.get("/login", controller.login);
-router.post("/login", controller.loginPost);
+router.post("/login", authValidate.loginPost , controller.loginPost);
 
 
 

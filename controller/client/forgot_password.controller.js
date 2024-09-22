@@ -1,4 +1,5 @@
-const Account = require("../../models/account.model");
+// const Account = require("../../models/account.model");
+const Account1 = require("../../models/account1.model");
 const sendMail = require("../../helpers/nodemailer");
 const generate = require("../../helpers/generate");
 const Sequelize = require("../../config/database");
@@ -16,9 +17,9 @@ module.exports.forgot = async (req, res) => {
 // [POST] localhost:/auth/password/forgot
 module.exports.forgotPost = async (req, res) => {
   const email = req.body.email;
-  const user = await Account.findOne({
+  const user = await Account1.findOne({
     where: {
-      email: email,
+      Email: email,
     },
   });
   if (!user) {
@@ -63,12 +64,17 @@ module.exports.otpPost = async (req, res) => {
     res.redirect("back");
     return;
   }
-  const user = await Account.findOne({
+  // const user = await Account.findOne({
+  //   where: {
+  //     email: email,
+  //   },
+  // });
+  const user = await Account1.findOne({
     where: {
-      email: email,
+      Email: email,
     },
   });
-  res.cookie("tokenUserForgot", user.token);
+  res.cookie("tokenUserForgot", user.Token);
   res.redirect("/auth/password/reset-password");
 };
 
@@ -83,18 +89,28 @@ module.exports.reset = async (req, res) => {
 module.exports.resetPost = async (req, res) => {
   const password = md5(req.body.password);
   const tokenUserForgot = req.cookies.tokenUserForgot;
-  console.log(password)
-  console.log(tokenUserForgot)
-  await Account.update(
+  console.log(password);
+  console.log(tokenUserForgot);
+  // await Account.update(
+  //   {
+  //     password: password,
+  //   },
+  //   {
+  //     where: {
+  //       token: tokenUserForgot
+  //     }
+  //   }
+  // );
+  await Account1.update(
     {
-      password: password,
+      Password: password,
     },
     {
       where: {
-        token: tokenUserForgot
-      }
+        Token: tokenUserForgot,
+      },
     }
   );
-  req.flash("success","Cập nhật tài khoản thành công! ");
+  req.flash("success", "Cập nhật tài khoản thành công! ");
   res.redirect("/auth/login");
 };

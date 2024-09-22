@@ -1,18 +1,28 @@
 const Service = require("../../models/service.model");
 const Schedule = require("../../models/schedule.model");
 const ShiftDetail = require("../../models/shiftDetail.model");
-const Doctor = require("../../models/doctor.model");
-const Account = require("../../models/account.model");
 const Sequelize = require("../../config/database");
 const db = require("../../config/database");
 
 // [Get] /staff/schedules
 module.exports.index = async (req, res) => {
+  // const query =
+  //   "SELECT * FROM doctor JOIN account ON doctor.AccountID = account.id;";
+  // const [listDoctor] = await Sequelize.query(query);
+  // const querySchedule = `SELECT * FROM schedule `;
+  // const [schedules] = await Sequelize.query(querySchedule);
+  // const queryShiftDetails = `SELECT * FROM shiftdetail`;
+  // const [shiftDetails] = await Sequelize.query(queryShiftDetails);
+
+  
+  // const weekOffset = parseInt(req.query.weekOffset) || 0;
   const query =
-    "SELECT * FROM doctor JOIN account ON doctor.AccountID = account.id;";
+    "Select * From account1 JOIN  vet on vet.AccountID = account1.AccountID where account1.Deleted = 0";
   const [listDoctor] = await Sequelize.query(query);
+  console.log(listDoctor)
   const querySchedule = `SELECT * FROM schedule `;
   const [schedules] = await Sequelize.query(querySchedule);
+  console.log(schedules)
   const queryShiftDetails = `SELECT * FROM shiftdetail`;
   const [shiftDetails] = await Sequelize.query(queryShiftDetails);
 
@@ -47,7 +57,7 @@ module.exports.index = async (req, res) => {
 
   const combinedData = schedules.map((schedule) => {
     const account = listDoctor.find(
-      (acc) => acc.AccountID === schedule.AccountID
+      (acc) => acc.VetID === schedule.VetID
     );
     const shifts = shiftDetails.filter(
       (shift) => shift.ScheduleID === schedule.ScheduleID
@@ -59,6 +69,7 @@ module.exports.index = async (req, res) => {
       shifts,
     };
   });
+  console.log(combinedData)
 
   const slots = ["7h-9h", "9h-11h", "13h-15h", "15h-17h"]; 
 
@@ -142,17 +153,20 @@ const generateUserId = async (table, id, rolePrefix) => {
 // };
 module.exports.addPost = async (req, res) => {
   try {
-    const { accountID, date, shifts } = req.body;
+    console.log("----")
+    console.log(req.body)
+    console.log("----")
+    const { vetID, date, shifts } = req.body;
 
     // Kiểm tra giá trị accountID và date
-    if (!accountID || !date) {
+    if (!vetID || !date) {
       req.flash("error", "Thiếu thông tin accountID hoặc date!");
       res.redirect("back");
       return;
     }
 
     // Kiểm tra xem bác sĩ đã có lịch chưa
-    const query = `SELECT * FROM schedule WHERE AccountID = '${accountID}' AND Time = '${date}'`;
+    const query = `SELECT * FROM schedule WHERE VetID = '${vetID}' AND Time = '${date}'`;
     const [existingSchedule] = await Sequelize.query(query).catch((error) => {
       console.error("Error querying schedule:", error);
       req.flash("error", "Có lỗi xảy ra khi kiểm tra lịch!");
@@ -207,7 +221,7 @@ module.exports.addPost = async (req, res) => {
       console.log(scheduleId);
       const newSchedule = await Schedule.create({
         ScheduleID: scheduleId,
-        AccountID: accountID,
+        VetID: vetID,
         Time: date,
       }).catch((error) => {
         console.error("Error creating schedule:", error);

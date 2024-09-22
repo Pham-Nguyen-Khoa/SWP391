@@ -60,14 +60,12 @@ if (selectService) {
     timeSlotsContainer.innerHTML = "";
     selectDate.value = "";
     var service = selectService.value;
-    console.log(service);
     listDoctor.forEach((doctor) => {
       if (doctor.Specialization == service) {
-        console.log(doctor);
-        const accountDoctor = listAccount.find(
-          (account) => account.id == doctor.AccountID
-        );
-        addDoctorOption(`${accountDoctor.id}`, `${accountDoctor.fullName}`);
+        // const accountDoctor = listAccount.find(
+        //   (account) => account.AccountID == doctor.AccountID
+        // );
+        addDoctorOption(`${doctor.VetID}`, `${doctor.FullName}`);
       }
     });
   });
@@ -85,28 +83,32 @@ if (selectDoctor) {
       doctorInfoElement.style.visibility = "hidden";
       return;
     }
+    console.log(listAccount)
+    console.log(listDoctor)
+    const accountDoctor = listDoctor.find(
+      (doctor) => doctor.VetID == selectDoctor.value
+    );
 
-    const accountDoctor = listAccount.find(
-      (account) => account.id == selectDoctor.value
-    );
-    const doctorInfo = listDoctor.find(
-      (doctor) => doctor.AccountID == selectDoctor.value
-    );
+    console.log(accountDoctor)
+
+    // const doctorInfo = listDoctor.find(
+    //   (doctor) => doctor.VetID == selectDoctor.value
+    // );
+ 
     let arrayDescription = [];
-    if (doctorInfo) {
-      arrayDescription = doctorInfo.Description.split(", ");
+    if (accountDoctor) {
+      arrayDescription = accountDoctor.Description.split(", ");
     }
+    console.log(arrayDescription)
 
-    console.log(arrayDescription);
-    console.log(doctorInfo);
     if (accountDoctor) {
       doctorInfoElement.innerHTML += `
-        <img src="${accountDoctor.avatar}" alt="Avatar của bác sĩ" class="avatar_doctor">
-        <h3>Dr. ${accountDoctor.fullName}</h3>
+        <img src="${accountDoctor.Avatar}" alt="Avatar của bác sĩ" class="avatar_doctor">
+        <h3>Dr. ${accountDoctor.FullName}</h3>
         <div class="rating">★ ★ ★ ★ ☆</div>
         <p>Giới tính: Nam</p>
         <p>Ngày Sinh: 15/08/2004</p>
-        <p>Địa chỉ: ${accountDoctor.address}</p>
+        <p>Địa chỉ: ${accountDoctor.Address}</p>
         <b>Kinh nghiệm làm việc: </b>
 
       `;
@@ -137,6 +139,10 @@ function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
     availableSlots = [...new Set(availableSlots)];
   } else {
     // Lấy các khung giờ trống dựa trên bác sĩ và ngày
+    console.log(doctorSchedules)
+    console.log(selectedDoctor)
+    console.log(selectedDate)
+   console.log("2")
     availableSlots = doctorSchedules[selectedDoctor][selectedDate];
   }
   if (availableSlots && availableSlots.length > 0) {
@@ -197,6 +203,7 @@ if (selectDate) {
     // }
     console.log("alo");
     if (idDoctor != null && inputDateValue != null) {
+      console.log("1")
       updateAvailableTimeSlots(idDoctor, inputDateValue);
     }
   });

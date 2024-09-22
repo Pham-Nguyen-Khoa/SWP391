@@ -15,7 +15,7 @@ router.get("/edit/:id", controller.edit);
 
 router.patch(
   "/edit/:id",
-  upload.single("avatar"),
+  upload.single("Avatar"),
   uploadMiddleware.upload,
   controller.editPatch
 );
@@ -26,7 +26,7 @@ router.get("/create", controller.create);
 
 router.post(
   "/create",
-  upload.single("avatar"),
+  upload.single("Avatar"),
   uploadMiddleware.upload,
   validate.create,
   controller.createPost
