@@ -200,7 +200,7 @@ nav .nav-bar .logo a{
     background-color: #f7f7f7;
 }
 
-/* Nav links */
+/* Nav links */              
 .nav-link {
     color: #000; 
     text-transform: uppercase;
@@ -216,7 +216,7 @@ nav .nav-bar .logo a{
 }
 
 /* Button Styling */
-.btn-outline-success {
+.btn-appointment {
     background-color: #a21a1a; 
     color: #fff; 
     padding: 0.45rem 1.4rem; /* Slightly adjusted padding for smaller button size */
@@ -237,7 +237,6 @@ nav .nav-bar .logo a{
 .nav-item .nav-link:last-child {
     margin-left: 1rem;
     font-size: 0.8rem; /* Slightly smaller font for login/register */
-    font-style: italic;
 }
 
 /* Mobile Responsiveness */
