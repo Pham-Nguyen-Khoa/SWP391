@@ -3,7 +3,17 @@ const db = require("../../config/database");
 const Service = require("../../models/service.model");
 const Schedule = require("../../models/schedule.model");
 const ShiftDetail = require("../../models/shiftDetail.model");
-const  Vet = require("../../models/vet.model");
+const Vet = require("../../models/vet.model");
+const Appointment = require("../../models/appointment.model");
+const Customer = require("../../models/customer.model");
+
+const generateUserId = async (rolePrefix, table, id) => {
+  const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
+  const [results] = await db.query(query);
+  const maxId = results[0].maxId || 0;
+  const newId = maxId + 1;
+  return `${rolePrefix}${String(newId).padStart(4, "0")}`;
+};
 
 // [GET] localhost:/koi/appointment
 module.exports.index = async (req, res) => {
@@ -37,11 +47,14 @@ module.exports.index = async (req, res) => {
   //   },
   // });
   const queryScheduleDoctor = `
-    SELECT sc.VetID,sc.Time, sd.Shift FROM schedule sc JOIN shiftdetail sd ON sc.ScheduleID = sd.ScheduleID ORDER BY sc.VetID, sc.Time, sd.Shift;
-    `;
-
+  SELECT sc.VetID, sc.Time, sd.Shift 
+  FROM schedule sc 
+  JOIN shiftdetail sd ON sc.ScheduleID = sd.ScheduleID 
+  WHERE sd.appointmentID IS NULL
+  ORDER BY sc.VetID, sc.Time, sd.Shift;
+`;
   const [ScheduleDoctor] = await Sequelize.query(queryScheduleDoctor);
-  console.log(ScheduleDoctor)
+  console.log(ScheduleDoctor);
   var doctorSchedules = {};
   ScheduleDoctor.forEach((row) => {
     var doctorID = row.VetID;
@@ -55,7 +68,6 @@ module.exports.index = async (req, res) => {
       doctorSchedules[doctorID][workDay] = [];
     }
     doctorSchedules[doctorID][workDay].push(shift);
-
   });
   const listDoctor = await Vet.findAll({
     raw: true,
@@ -67,5 +79,96 @@ module.exports.index = async (req, res) => {
     doctorSchedules: doctorSchedules,
     listAccount: listAccount,
     listDoctor: listDoctor,
+  });
+};
+
+// [POST] localhost:/koi/appointment
+module.exports.indexPost = async (req, res) => {
+  console.log(req.body);
+  console.log(res.locals.userInfo);
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+  if (req.body.service == "Tư Vấn Online") {
+    const doctorID = req.body.doctor;
+    const doctorInfo = await Vet.findOne({
+      raw: true,
+      where: {
+        VetID: doctorID,
+      },
+    });
+
+    const customerID = await Customer.findOne({
+      raw: true,
+      attributes: ["CustomerID"],
+      where: {
+        AccountID: res.locals.userInfo.AccountID,
+      },
+    });
+    console.log(customerID);
+
+    const serviceID = await Service.findOne({
+      raw: true,
+      attributes: ["ServiceID"],
+      where: {
+        Name: req.body.service,
+      },
+    });
+    console.log(serviceID);
+   
+    await Appointment.create({
+      AppointmentID: AppointmentID,
+      CustomerID: customerID.CustomerID,
+      ServiceID: serviceID.ServiceID,
+      VetID: req.body.doctor,
+      Name: req.body.FullName,
+      PhoneNumber: req.body.PhoneNumber,
+      Date: req.body.select_date,
+      Shift: req.body.shift,
+      StatusPaid: "Đã thanh toán",
+    });
+
+    //Update lại lịch của ông bác sĩ
+    const queryUpdate = `
+UPDATE shiftdetail sd
+JOIN schedule sc ON sd.ScheduleID = sc.ScheduleID
+SET sd.AppointmentID = '${AppointmentID}'
+WHERE sc.VetID = '${req.body.doctor}'     
+  AND sd.Shift = '${req.body.shift}' 
+  AND sc.Time = '${req.body.select_date}';
+`;
+    await Sequelize.query(queryUpdate);
+  } else {
+  }
+
+ 
+
+  res.redirect(`/koi/appointment/thankyou/${AppointmentID}`);
+};
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`; 
+}
+function formatPrice(amount) {
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"; 
+}
+// [GET] localhost:/koi/appointment/thankyou/:AppointmentID
+module.exports.thankyou = async (req, res) => {
+  const appointmentID = req.params.AppointmentID;
+  const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , c.FullName AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
+  const appoinmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
+  appoinmentInfo.Date = formatDate(appoinmentInfo.Date);
+  appoinmentInfo.PriceFormat = formatPrice(appoinmentInfo.Price);
+  appoinmentInfo.PriceTotalFormat = formatPrice(
+    appoinmentInfo.Price + (appoinmentInfo.Price * 10) / 100
+  );
+  res.render("client/pages/appointment/thankyou", {
+    pageTitle: "Trang Cảm Ơn",
+    appoinmentInfo: appoinmentInfo
   });
 };

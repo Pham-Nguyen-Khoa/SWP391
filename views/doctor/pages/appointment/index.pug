@@ -1,0 +1,70 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    +title("Hồ sơ dịch vụ")
+    .card.mb-3(style="margin: 0 50px 50px;")
+      .card-header Bộ lọc 
+      .card-body 
+        .row 
+          .col-6
+            a(
+              href=`/doctor/appointment`
+                class=`btn btn-sm ml-1 btn-outline-success `
+                button-filter
+                button-all
+              ) Tất cả (#{listAppointmentOrigin.length})
+            a(
+              href=`/doctor/appointment?process=confirmed`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Đã duyệt (#{listAppointmentOrigin.filter(a => a.Process === 'Confirmed').length})
+            a(
+              href=`/doctor/appointment?process=accepted`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Tiếp nhận (#{listAppointmentOrigin.filter(a => a.Process === 'Accepted').length})
+            a(
+              href=`/doctor/appointment?process=successed`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Hoàn thành (#{listAppointmentOrigin.filter(a => a.Process === 'Successed').length})
+            a(
+              href=`/doctor/appointment?process=cancelled`
+                class=`btn btn-sm ml-1 btn-outline-success  `
+                button-filter
+              ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
+            
+           
+    table.table#table-appointment
+        thead
+            tr
+                th Mã đơn hàng
+                th Tên khách hàng
+                th Dịch vụ
+                th Trạng Thái
+                th Chi tiết lịch hẹn
+        tbody
+            each appointment in listAppointment
+                
+                tr 
+                    td #{appointment.AppointmentID}
+                    td #{appointment.NameCustomer}
+                    td #{appointment.Name}
+                    td  
+                        if(appointment.Process == "Confirmed")
+                            a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}` class="btn btn-success") Đã duyệt
+                        else if(appointment.Process == "Accepted")
+                            span(class="btn btn-success") Tiếp nhận 
+                        else if(appointment.Process == "Cancelled")
+                            span(class="btn btn-danger") Hủy bỏ 
+                        else if(appointment.Process == "Successed")
+                            span(class="btn btn-info") Thành công 
+                    td 
+                        a(href=`/doctor/appointment/detail/${appointment.AppointmentID}` class="btn btn-danger") Chi tiết
+
+    
+

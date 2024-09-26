@@ -24,14 +24,15 @@ module.exports.loginPost = async (req, res) => {
       Email: email,
     },
   });
-  if (user.Status == "Bị Block") {
-    req.flash("error", "Tài khoản đã bị khóa!");
-    res.redirect("back");
-    return;
-  }
+ 
 
   if (!user) {
     req.flash("error", "Email không tồn tại!");
+    res.redirect("back");
+    return;
+  }
+  if (user.Status == "Bị Block") {
+    req.flash("error", "Tài khoản đã bị khóa!");
     res.redirect("back");
     return;
   }

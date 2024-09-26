@@ -149,7 +149,13 @@ nav .nav-bar .logo a{
     bottom: 0;
     width: 100%;
     height: 80px;
+    width: 100%;
 }
+
+
+
+
+
 
 
 
@@ -543,18 +549,449 @@ select {
     margin-right: 5px; /* Khoảng cách giữa icon và text */
   }
   .textarea-description{
-    margin-left: 30px;
+    display: none;
     padding: 10px 0 0 0;
   }
 
 
+.confirm-appointment {
+    display: none;
+    width: 550px;
+    height: 450px;
+    padding: 40px;
+    border: 6px solid #a6aba6d6;
+    border-radius: 20px;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 999;
+    color: black;
+    font-size: 18px;
+    box-shadow: 0px 0px 11px 7px #716868;
+}
 
-  /* .koi-information-store {
-    margin-left: 80px;
-    border: 2px solid black;
-    width: 500px;
-    min-height: 600px;
-    height: auto;
-    padding: 45px 0 0 20px;
-    background-color: #faf2f273;
-} */
+.confirm-appointment h2 {
+    font-weight: bold;
+
+} 
+.confirm-appointment p  {
+        text-align: start;
+    }
+
+    #confirm-success-appointment{
+        margin: 20px 41px 0 22%;
+  
+        background-color: #1d70dedb;
+        height: 40px;
+        width: 127px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+
+    #confirm-cancle-appointment{
+        width: 127px;
+    border-radius: 20px;
+    background-color: #a7b7cca3;
+    height: 40px;
+    cursor: pointer;
+    }
+
+
+    .paid-appointment  {
+    display: none;
+        position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+        width: 450px;
+    height: 580px;
+    padding: 40px;
+    border-radius: 20px;
+    z-index: 999;
+    font-size: 18px;
+    background-color: #272A52;
+    box-shadow: 0px 1px 20px 5px #786f6f;
+    }
+    .content-paid-appointment img{
+        margin: 0 11%;
+        height: 205px;
+        object-fit: contain;
+        width: 300px;
+    }
+
+    .content-paid-appointment h1 {
+        font-size: 22px;
+        font-weight: bold;
+        padding: 20px 0 10px 0;
+        color: #ffc71b;
+        text-align: center;
+    }
+
+    .content-paid-appointment {
+        border-bottom: 2px solid #bbb1b1bf;
+        margin-bottom: 5px;
+    }
+    .content-paid-appointment p{
+        color: white;
+        font-size: 16px;
+        
+    }
+
+    .content-paid-appointment span{
+        color: #FFC728
+    }
+    .waiting-paid-appointment p{
+        display: inline-block;
+        margin-right: 160px;
+        color: white;
+        font-size: 16px;
+    }
+
+    #countdown {
+        color: white;
+    }
+
+
+    .progress-bar {
+        width: 100%;
+        background-color: #e0e0e0;
+        border-radius: 5px;
+        overflow: hidden;
+        height: 10px; /* Chiều cao của đường chạy */
+        margin-top: 10px; /* Khoảng cách với phần tử trên */
+    }
+    
+    .progress {
+        height: 100%;
+        width: 100%; /* Bắt đầu với chiều rộng 100% */
+        background-color: #4caf50; /* Màu sắc của đường chạy */
+        transition: width 1s; /* Hiệu ứng chuyển động */
+    }
+
+
+    /* css Phần modal  khi thanh toán thành công */
+    .modal-appointment {
+        display: none;   
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+        animation: fadeIn 0.5s; /* Hiệu ứng xuất hiện */
+    }
+    
+    .modal-appointment-content {
+        background-color: #414366bd;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #292d29;
+        width: 36%;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: -1px 0px 20px 19px rgba(0, 0, 0, 0.2);
+        animation: slideIn 0.5s;
+        transition: background-color 0.3s ease;
+        height: 40%;
+    }
+
+
+    .modal-appointment-content h2{
+        color: #d2dad1;
+        font-size: 40px;
+        font-weight: bold;
+        margin: 30px 0 70px 0;
+    }
+    .tick {
+        font-size: 50px;
+        color: green;
+        animation: bounce 1s infinite; /* Thêm hiệu ứng nhảy */
+    }
+    .tick .fas{
+        font-size: 100px;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-15px); /* Nhảy lên */
+        }
+        60% {
+            transform: translateY(-7px); /* Nhảy xuống */
+        }
+    }
+ 
+    #countdownText {
+        background-color: #ffffff36;
+        border-radius: 32px;
+        display: inline-block;
+        padding: 5px;
+        animation: fillProgress 5s linear forwards;
+        overflow: hidden;  /* Thay đổi thời gian thành 5s */
+    }   
+
+    
+    
+    .icon-container {
+        font-size: 50px;
+        color: #4CAF50; 
+        margin-bottom: 20px;
+    }
+    
+    .modal-appointment-title {
+        color: #4CAF50; 
+        font-weight: bold;
+    }
+    
+    .modal-appointment-text {
+        color: #333; 
+    }
+    
+    .modal-appointment-close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        transition: color 0.3s ease; 
+    }
+    
+    .modal-appointment-close:hover,
+    .modal-appointment-close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+
+
+    #confirmationModal {
+        /* display: flex; 
+        justify-content: center;
+        align-items: center;
+        position: fixed; 
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;   */
+        display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgb(36 34 34 / 40%); z-index: 1000;
+      }
+
+     
+      .confirmationModal{
+        padding: 20px;
+        width: 400px;
+        border-radius: 10px;
+        margin: 20% auto;
+        background: white;
+        box-shadow: 0 4px 8px 7px rgb(204 172 172 / 58%);
+        text-align: center;
+      }
+      /* #confirmationModal > div {
+        padding: 20px;
+        width: 364px;
+        border-radius: 10px;
+        margin: 20% auto;
+        background-color: white; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        text-align: center; 
+        animation: fadeIn 0.3s; 
+      } */
+      
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      button#closeModalMessage {
+        background-color: #4CAF50; 
+        color: white; 
+        border: none;
+        border-radius: 5px; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        transition: background-color 0.3s; 
+      }
+      
+      button#closeModalMessage:hover {
+        background-color: #45a049; 
+      }
+
+
+
+
+
+/* Thank You  */
+
+.title-thankyou{
+    text-align: center;
+    font-size: 44px;
+    background-color: rgb(46 47 52 / 87%);
+    border-radius: 50px;
+    padding: 20px 40px;
+    color: #d4b437;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 50px;
+}
+
+.title-thankyou::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgb(216 202 87 / 17%);
+    animation: shine 2s infinite cubic-bezier(0.82, -0.07, 0.28, 1.38); 
+}
+
+@keyframes shine {
+    0% {
+        left: -100%; /* Bắt đầu từ bên trái */
+    }
+    100% {
+        left: 100%; /* Kết thúc ở bên phải */
+    }
+}
+
+.order-details{
+    background-color: #b2d9e6ba;
+    padding: 30px 100px 100px 100px;
+    border: 5px solid #564f4f;
+    border-radius: 28px;
+    font-size: 20px;
+    margin: 146px 200px;
+    box-shadow: 0px 0px 20px 11px #525050;
+    
+}
+
+
+.table-appointment-detail{
+    margin-bottom: 50px;
+    border: 5px solid #b8aeaebf;
+    box-shadow: 0px 1px 7px 8px #b1a5a591;
+}
+
+.order-information{
+    background-color: #bcb2b240;
+    border: 2px solid #aba5a5bf;
+    border-radius: 36px;
+    padding: 20px 0 20px 30px;
+}
+.order-information  h2 {
+    font-size: 37px;
+    text-decoration: underline;
+    font-style: normal;
+    font-weight: bold;
+ }
+ .order-information b {
+    font-size: 24px;
+ }
+ .order-information span{
+    font-weight: 600;
+ }
+
+
+
+
+
+
+
+.AppointmentID-thankyou{
+    font-size: 25px;
+    background-color: #e9e1e1a1;
+    border-radius: 55px;
+    padding: 20px;
+}
+
+.table-appointment-detail th, 
+.table-appointment-detail td {
+    padding: 10px; /* Thêm khoảng cách bên trong ô */
+    text-align: left; /* Căn trái cho nội dung */
+    text-align: center;
+    border: 1px solid #6f7478d1; /* Viền màu đen */
+}
+
+.table-appointment-detail th {
+    background-color: #3E8E7E; /* Màu nền cho tiêu đề */
+    color: #FFF; /* Màu chữ cho tiêu đề */
+}
+
+.order-details img{
+    width: 218px;
+    height: 234px;
+    object-fit: cover;
+    border: 2px solid #00000094;
+    margin-top: 20px;
+}
+
+.btn-detail-back{
+    margin: 0 auto;
+    display: block;
+    width: 192px;
+    border-radius: 29px;
+    height: 53px;
+    font-size: 20px;
+    background-color: #159225;
+    color: white;
+}
+
+
+
+header {
+    background-color: #2b2727;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1; 
+  
+  }
+
+  header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  header nav li {
+    margin: 0 10px;
+  }
+  
+  header  nav a {
+    text-decoration: none;
+    color: white
+  
+  }

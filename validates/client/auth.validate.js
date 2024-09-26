@@ -39,8 +39,8 @@ module.exports.registerPost = (req, res, next) => {
     res.redirect("back");
     return;
   }
-  if (req.body.Password.length < 6 || req.body.Password.length > 8) {
-    req.flash("error", "Mật khẩu phải có độ dài từ 6 đến 8 ký tự!");
+  if (req.body.Password.length < 6 || req.body.Password.length > 15) {
+    req.flash("error", "Mật khẩu phải có độ dài từ 6 đến 15 ký tự!");
     res.redirect("back");
     return;
   }
