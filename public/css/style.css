@@ -151,7 +151,109 @@ nav .nav-bar .logo a{
     height: 80px;
 }
 
+.contener-fluid {
+    display: flex;
+    justify-content: center;
+}
 
+/* Container and Navbar Styling */
+.navbar {
+    background-color: #fdf6f2; /* Light background similar to the image */
+    padding: 1rem 2rem; /* Adds space around the content */
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem; /* Adjusted font size (smaller) */
+}
+
+.navbar-nav {
+    margin-left: auto; /* Push the items to the right */
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.1rem; /* Slightly smaller font for brand */
+    margin-right: 2rem; 
+}
+
+.nav-item {
+    margin-left: 1.5rem; /* Adds spacing between each navigation item */
+    white-space: nowrap; 
+}
+
+
+.nav-item:last-child {
+    margin-left: 0; /* Remove margin for the last nav-item */
+}
+
+/* Dropdown styling */
+.nav-item.dropdown .dropdown-toggle {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.dropdown-menu {
+    background-color: #fff; 
+    border: none; 
+}
+
+.dropdown-item:hover {
+    background-color: #f7f7f7;
+}
+
+/* Nav links */
+.nav-link {
+    color: #000; 
+    text-transform: uppercase;
+    font-weight: bold; 
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem; /* Adjusted font size for nav links */
+    white-space: nowrap; 
+}
+
+.nav-link:hover {
+    color: #a21a1a; /* Dark red on hover */
+    text-decoration: none;
+}
+
+/* Button Styling */
+.btn-outline-success {
+    background-color: #a21a1a; 
+    color: #fff; 
+    padding: 0.45rem 1.4rem; /* Slightly adjusted padding for smaller button size */
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none; 
+    margin-left: 2rem; 
+    font-size: 0.85rem; /* Smaller font size for the button */
+}
+
+.btn-outline-success:hover {
+    background-color: #d22424;
+    color: #fff;
+}
+
+/* Login/Register Links */
+.nav-item .nav-link:last-child {
+    margin-left: 1rem;
+    font-size: 0.8rem; /* Slightly smaller font for login/register */
+    font-style: italic;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-nav {
+        margin-left: 0;
+    }
+
+    .btn-outline-success {
+        margin-top: 1rem;
+    }
+}
 
 
 
