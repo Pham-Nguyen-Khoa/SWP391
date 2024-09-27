@@ -228,8 +228,8 @@ nav .nav-bar .logo a{
     font-size: 0.85rem; /* Smaller font size for the button */
 }
 
-.btn-outline-success:hover {
-    background-color: #d22424;
+.btn-appointment:hover {
+    background-color: #d75858;
     color: #fff;
 }
 
