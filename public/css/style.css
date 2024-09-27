@@ -239,6 +239,16 @@ nav .nav-bar .logo a{
     font-size: 0.8rem; /* Slightly smaller font for login/register */
 }
 
+ul.dropdown-menu a.dropdown-item-link {
+    text-decoration: none !important; /* Ensure no underline */
+    color: #000; /* Ensure proper text color */
+  }
+  
+  ul.dropdown-menu a.dropdown-item-link:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #a21a1a; /* Change color on hover if needed */
+  }
+
 /* Mobile Responsiveness */
 @media (max-width: 992px) {
     .navbar {
