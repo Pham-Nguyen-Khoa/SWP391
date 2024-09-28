@@ -246,7 +246,7 @@ ul.dropdown-menu a.dropdown-item-link{
   
 ul.dropdown-menu a.dropdown-item-link:hover{
     text-decoration: none !important; /* Ensure no underline on hover */
-    color: #a21a1a; /* Change color on hover if needed */
+    color: #d75858; /* Change color on hover if needed */
   }
   .services-list {
     list-style: none;
@@ -259,7 +259,7 @@ ul.dropdown-menu a.dropdown-item-link:hover{
 
 .services-item-link:hover {
     text-decoration: none !important; /* Ensure no underline on hover */
-    color: #a21a1a; 
+    color: #d75858; 
 }
 
 .about-us-list {
@@ -273,7 +273,7 @@ ul.dropdown-menu a.dropdown-item-link:hover{
 
 .about-us-item-link:hover {
     text-decoration: none !important; /* Ensure no underline on hover */
-    color: #a21a1a; 
+    color: #d75858; 
 }
 
 .info-list {
