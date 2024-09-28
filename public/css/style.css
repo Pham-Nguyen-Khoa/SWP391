@@ -239,15 +239,60 @@ nav .nav-bar .logo a{
     font-size: 0.8rem; /* Slightly smaller font for login/register */
 }
 
-ul.dropdown-menu a.dropdown-item-link {
+ul.dropdown-menu a.dropdown-item-link{
     text-decoration: none !important; /* Ensure no underline */
     color: #000; /* Ensure proper text color */
   }
   
-  ul.dropdown-menu a.dropdown-item-link:hover {
+ul.dropdown-menu a.dropdown-item-link:hover{
     text-decoration: none !important; /* Ensure no underline on hover */
     color: #a21a1a; /* Change color on hover if needed */
   }
+  .services-list {
+    list-style: none;
+  }
+
+.services-item-link {
+    text-decoration: none !important; /* Ensure no underline */
+    color: #fff; /* Ensure proper text color */
+  }
+
+.services-item-link:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #a21a1a; 
+}
+
+.about-us-list {
+    list-style: none;
+  }
+
+.about-us-item-link {
+    text-decoration: none !important; /* Ensure no underline */
+    color: #fff; /* Ensure proper text color */
+  }
+
+.about-us-item-link:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #a21a1a; 
+}
+
+.info-list {
+    list-style: none;
+  }
+
+  .copyright{
+    display: flex;
+    justify-content: center;
+  }
+  
+.footer {
+    position: fixed; /* Change to relative */
+    bottom: 0; /* Align to the bottom */
+    width: 100%; /* Full width */
+    padding: 5rem 0rem;
+    
+}
+
 
 /* Mobile Responsiveness */
 @media (max-width: 992px) {
