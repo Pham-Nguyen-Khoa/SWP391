@@ -17,4 +17,12 @@ router.get("/detail/:AppointmentID", controller.detail);
 router.get("/change-process/:AppointmentID", controller.changeProcess);
 
 
+
+// [GET] /staff/appointment/load-vets/:AppointmentID
+router.get("/load-vets/:AppointmentID", controller.loadVets);
+
+
+// [GET] /staff/appointment/assign/:AppointmentID/:VetID
+router.get("/assign/:AppointmentID/:VetID", controller.assignVet);
+
 module.exports = router

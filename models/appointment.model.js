@@ -49,7 +49,11 @@ const Appointment = sequelize.define('Appointment', {
     },
     VetID: {
         type: DataTypes.STRING(10),
-        allowNull: false,
+        allowNull: true,
+    },
+    BillID: {
+        type: DataTypes.STRING(10),
+        allowNull: true,
     }
 }, {
     tableName: 'appointment',

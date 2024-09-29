@@ -441,7 +441,7 @@ span {
     text-align: center;
     margin: 50px auto 30px;
     width: 70%;
-    background-color: #0e0ecbcf;
+    background-color: #5aaeba;
     border-radius: 32px;
     color: white;
     font-weight: bold;
@@ -460,6 +460,7 @@ span {
 #table-appointment thead tr th{
     text-align: center;
 }
+
 
 
 
@@ -486,7 +487,7 @@ span {
 }
 
 .table-appointment-detail th {
-    background-color: #3E8E7E; /* Màu nền cho tiêu đề */
+    background-color: #5aaeba; /* Màu nền cho tiêu đề */
     color: #FFF; /* Màu chữ cho tiêu đề */
 }
 
@@ -496,6 +497,7 @@ span {
     object-fit: cover;
     border: 2px solid #00000094;
     margin-top: 20px;
+    border-radius: 20px;
 }
 
 .btn-detail-back{
@@ -505,6 +507,13 @@ span {
     border-radius: 29px;
     height: 53px;
     font-size: 20px;
-    background-color: #159225;
+    background-color: #5aaeba;
     color: white;
+}
+
+
+.css-active {
+    background-color:#5aaeba !important; /* Màu vàng */
+    color: #000 !important; /* Màu chữ đen */
+    border-color: #5aaeba !important;
 }

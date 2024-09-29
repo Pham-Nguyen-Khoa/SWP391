@@ -220,9 +220,9 @@ if (selectDoctor) {
   });
 }
 // End Chọn bác sĩ
-console.log(doctorSchedules)
+// console.log(doctorSchedules)
 function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
-  timeSlotsContainer.innerHTML = ""; // Xóa các ô giờ hiện tại
+  timeSlotsContainer.innerHTML = ""; // Xóa các ô giờ hiện tại  
   notification.innerHTML = "";
 
   // Lấy các khung giờ trống dựa trên bác sĩ và ngày
@@ -241,8 +241,12 @@ function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
     // console.log(availableSlots)
   } else {
     // Lấy các khung giờ trống dựa trên bác sĩ và ngày
-    availableSlots = doctorSchedules[selectedDoctor][selectedDate];
+    // availableSlots = doctorSchedules[selectedDoctor][selectedDate];
+    availableSlots = doctorSchedules[selectedDoctor] && doctorSchedules[selectedDoctor][selectedDate] 
+    ? doctorSchedules[selectedDoctor][selectedDate] 
+    : [];
   }
+  console.log(availableSlots)
   if (availableSlots && availableSlots.length > 0) {
     // Danh sách khung giờ mặc định trong ngày
     var allSlots = ["7h-9h", "9h-11h", "13h-15h", "15h-17h"];
@@ -269,21 +273,6 @@ function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
           // Thêm class 'selected' vào ô giờ được chọn
           timeSlotDiv.classList.add("selected");
           document.getElementById("selectedTimeSlot").value = slot;
-
-
-          let selectedDoctorId = null;
-          listDoctor.forEach((doctor) => {
-            if (
-              doctorSchedules[doctor.VetID] &&
-              doctorSchedules[doctor.VetID][selectedDate] &&  doctor.Specialization == selectService.value &&
-              doctorSchedules[doctor.VetID][selectedDate].includes(slot)
-            ) {
-              selectedDoctorId = doctor.VetID; // Gán ID của bác sĩ có khung giờ đó
-            }
-          });
-          if(selectedDoctorId){
-            document.getElementById("select_doctor").value = selectedDoctorId; 
-          }
         }
       });
 
@@ -292,8 +281,207 @@ function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
     });
   } else {
     notification.innerHTML = `<h3>Hiện tại chưa có lịch</h3>`;
+      return;
   }
 }
+
+// function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
+//   timeSlotsContainer.innerHTML = ""; // Xóa các ô giờ hiện tại
+//   notification.innerHTML = "";
+
+//   // Lấy các khung giờ trống dựa trên bác sĩ và ngày
+//   let availableSlots = [];
+//   let doctorCount = {}; // Đếm số lượng bác sĩ cho từng khung giờ
+//   let bookedSlots = {}; // Lưu trữ các khung giờ đã đặt lịch cho khách hàng không chọn bác sĩ
+
+//   // Lấy các khung giờ trống của tất cả các bác sĩ
+//   listDoctor.forEach((doctor) => {
+//     if (doctorSchedules[doctor.VetID] && doctorSchedules[doctor.VetID][selectedDate]) {
+//       const doctorSlots = doctorSchedules[doctor.VetID][selectedDate];
+//       availableSlots = availableSlots.concat(doctorSlots);
+
+//       // Đếm số lượng bác sĩ cho từng khung giờ trong ngày
+//       doctorSlots.forEach(slot => {
+//         doctorCount[slot] = (doctorCount[slot] || 0) + 1;
+//       });
+
+//       // Lưu trữ các khung giờ đã đặt lịch cho bác sĩ
+//       bookedSlots[doctor.VetID] = bookedSlots[doctor.VetID] || [];
+//       bookedSlots[doctor.VetID] = bookedSlots[doctor.VetID].concat(doctorSlots);
+//     }
+//   });
+
+//   // Loại bỏ các khung giờ trùng lặp
+//   availableSlots = [...new Set(availableSlots)];
+
+//   // Nếu chọn "Tự chọn" và có ngày
+//   if (selectedDoctor === "Tự chọn" && selectedDate != null) {
+//     // Lọc các khung giờ mà ít nhất một bác sĩ còn trống
+//     availableSlots = availableSlots.filter(slot => doctorCount[slot] > 0);
+
+//     // Ẩn khung giờ nếu nó là ca cuối cùng của một khách hàng đã đặt lịch không chọn bác sĩ
+//     availableSlots = availableSlots.filter(slot => {
+//       return !Object.values(bookedSlots).some(slots => {
+//         return slots.includes(slot) && slots.length === 1; // Nếu ca đó là ca cuối cùng của khách hàng không chọn bác sĩ
+//       });
+//     });
+
+//     // Kiểm tra xem có bác sĩ nào còn lại cho khung giờ này không
+//     availableSlots = availableSlots.filter(slot => {
+//       return doctorCount[slot] > 1 || (doctorCount[slot] === 1 && bookedSlots[doctor.VetID].length > 1); // Chỉ giữ lại khung giờ nếu có hơn một bác sĩ
+//     });
+//   } else if (selectedDoctor) {
+//     // Nếu người dùng đã chọn bác sĩ, chỉ lấy khung giờ của bác sĩ đó
+//     availableSlots = doctorSchedules[selectedDoctor][selectedDate] || [];
+    
+//     // Kiểm tra xem khung giờ có phải là ca cuối cùng không
+//     availableSlots = availableSlots.filter(slot => {
+//       return !Object.values(bookedSlots).some(slots => {
+//         return slots.includes(slot) && slots.length === 1; // Nếu ca đó là ca cuối cùng
+//       });
+//     });
+//     availableSlots = availableSlots.filter(slot => {
+//       return doctorCount[slot] > 1 ;
+//     });
+//   }
+
+
+//   if (availableSlots && availableSlots.length > 0) {
+//     // Danh sách khung giờ mặc định trong ngày
+//     var allSlots = ["7h-9h", "9h-11h", "13h-15h", "15h-17h"];
+
+//     allSlots.forEach(function (slot) {
+//       var timeSlotDiv = document.createElement("div");
+//       timeSlotDiv.className = "time-slot"; // Ensure this matches your CSS class
+//       timeSlotDiv.innerText = slot;
+
+//       // Nếu slot không nằm trong các giờ trống, disable nó
+//       if (!availableSlots.includes(slot)) {
+//         timeSlotDiv.classList.add("disabled"); // Ensure this matches your CSS class
+//       }
+
+//       // Thêm sự kiện khi người dùng click vào slot
+//       timeSlotDiv.addEventListener("click", function () {
+//         if (!timeSlotDiv.classList.contains("disabled")) {
+//           // Xóa class 'selected' từ các ô giờ khác
+//           document
+//             .querySelectorAll(".time-slot.selected")
+//             .forEach(function (el) {
+//               el.classList.remove("selected");
+//             });
+//           // Thêm class 'selected' vào ô giờ được chọn
+//           timeSlotDiv.classList.add("selected");
+//           document.getElementById("selectedTimeSlot").value = slot;
+//         }
+//       });
+
+//       // Thêm ô giờ vào container
+//       timeSlotsContainer.appendChild(timeSlotDiv);
+//     });
+//   } else {
+//     notification.innerHTML = `<h3>Hiện tại chưa có lịch</h3>`;
+//   }
+// }
+
+
+// function updateAvailableTimeSlots(selectedDoctor, selectedDate) {
+//   timeSlotsContainer.innerHTML = ""; // Xóa các ô giờ hiện tại
+//   notification.innerHTML = "";
+
+//   // Lấy các khung giờ trống dựa trên bác sĩ và ngày
+//   let availableSlots = [];
+//   let doctorCount = {}; // Đếm số lượng bác sĩ cho từng khung giờ
+//   let bookedSlots = {}; // Lưu trữ các khung giờ đã đặt lịch cho bác sĩ
+
+//   // Lấy các khung giờ trống của tất cả các bác sĩ
+//   listDoctor.forEach((doctor) => {
+//     if (doctorSchedules[doctor.VetID] && doctorSchedules[doctor.VetID][selectedDate]) {
+//       const doctorSlots = doctorSchedules[doctor.VetID][selectedDate];
+//       availableSlots = availableSlots.concat(doctorSlots);
+
+//       // Đếm số lượng bác sĩ cho từng khung giờ trong ngày
+//       doctorSlots.forEach(slot => {
+//         doctorCount[slot] = (doctorCount[slot] || 0) + 2;
+//       });
+
+//       // Lưu trữ các khung giờ đã đặt lịch cho bác sĩ
+//       bookedSlots[doctor.VetID] = bookedSlots[doctor.VetID] || [];
+//       bookedSlots[doctor.VetID] = bookedSlots[doctor.VetID].concat(doctorSlots);
+//     }
+//   });
+
+//   // Loại bỏ các khung giờ trùng lặp
+//   availableSlots = [...new Set(availableSlots)];
+
+//   // Nếu chọn "Tự chọn" và có ngày
+//   if (selectedDoctor === "Tự chọn" && selectedDate != null) {
+//     // Lọc các khung giờ mà ít nhất một bác sĩ còn trống
+//     availableSlots = availableSlots.filter(slot => doctorCount[slot] > 0);
+
+//     // Ẩn khung giờ nếu nó là ca cuối cùng của một khách hàng đã đặt lịch không chọn bác sĩ
+//     availableSlots = availableSlots.filter(slot => {
+//       return !Object.values(bookedSlots).some(slots => {
+//         return slots.includes(slot) && slots.length === 1; // Nếu ca đó là ca cuối cùng của khách hàng không chọn bác sĩ
+//       });
+//     });
+//     availableSlots = availableSlots.filter(slot => {
+//       return doctorCount[slot] > 2 ;
+//     });
+//   } else if (selectedDoctor) {
+//     // Nếu người dùng đã chọn bác sĩ, chỉ lấy khung giờ của bác sĩ đó
+//     availableSlots = doctorSchedules[selectedDoctor][selectedDate] || [];
+
+//     // Kiểm tra xem khung giờ có phải là ca cuối cùng không
+//     availableSlots = availableSlots.filter(slot => {
+//       return !Object.values(bookedSlots).some(slots => {
+//         return slots.includes(slot) && slots.length === 1; // Nếu ca đó là ca cuối cùng
+//       });
+//     });
+
+//     // Ẩn khung giờ nếu bác sĩ đó là bác sĩ cuối cùng
+//     availableSlots = availableSlots.filter(slot => {
+//       return doctorCount[slot] > 2 ;
+//     });
+//   }
+
+//   if (availableSlots && availableSlots.length > 0) {
+//     // Danh sách khung giờ mặc định trong ngày
+//     var allSlots = ["7h-9h", "9h-11h", "13h-15h", "15h-17h"];
+
+//     allSlots.forEach(function (slot) {
+//       var timeSlotDiv = document.createElement("div");
+//       timeSlotDiv.className = "time-slot"; // Ensure this matches your CSS class
+//       timeSlotDiv.innerText = slot;
+
+//       // Nếu slot không nằm trong các giờ trống, disable nó
+//       if (!availableSlots.includes(slot)) {
+//         timeSlotDiv.classList.add("disabled"); // Ensure this matches your CSS class
+//       }
+
+//       // Thêm sự kiện khi người dùng click vào slot
+//       timeSlotDiv.addEventListener("click", function () {
+//         if (!timeSlotDiv.classList.contains("disabled")) {
+//           // Xóa class 'selected' từ các ô giờ khác
+//           document
+//             .querySelectorAll(".time-slot.selected")
+//             .forEach(function (el) {
+//               el.classList.remove("selected");
+//             });
+//           // Thêm class 'selected' vào ô giờ được chọn
+//           timeSlotDiv.classList.add("selected");
+//           document.getElementById("selectedTimeSlot").value = slot;
+//         }
+//       });
+
+//       // Thêm ô giờ vào container
+//       timeSlotsContainer.appendChild(timeSlotDiv);
+//     });
+//   } else {
+//     notification.innerHTML = `<h3>Hiện tại chưa có lịch</h3>`;
+//   }
+// }
+
+
 
 if (selectDate) {
   selectDate.addEventListener("change", () => {
@@ -447,13 +635,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // nếu thanh toán thành công
 
-        setTimeout(() => {
-          const intervalId = setInterval(() => {
-            checkPaid(priceService, generateRandomText, intervalId);
-          }, 1000);
-        }, 15000);
-        // const formAppointment = document.querySelector(".form_appointment");
-        // formAppointment.submit();
+        // setTimeout(() => {
+        //   const intervalId = setInterval(() => {
+        //     checkPaid(priceService, generateRandomText, intervalId);
+        //   }, 1000);    
+        // }, 15000);
+        const formAppointment = document.querySelector(".form_appointment");
+        formAppointment.submit();
       } else {
         const formAppointment = document.querySelector(".form_appointment");
         formAppointment.submit();

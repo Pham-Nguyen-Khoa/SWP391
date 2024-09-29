@@ -6,7 +6,7 @@ router.get("/", controller.index);
 
 
 
-router.get("/change-process/:AppointmentID", controller.changeProcess);
+router.get("/change-process/:AppointmentID/:Process", controller.changeProcess);
 
 router.get("/detail/:AppointmentID", controller.detail);
 
