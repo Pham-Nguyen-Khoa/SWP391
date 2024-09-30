@@ -141,14 +141,14 @@ nav .nav-bar .logo a{
 
 .footer{
     background-color: #333;
-    display: flex;
+    position: relative;
     color: #fff;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 10px 10px 10px 0;
     bottom: 0;
     width: 100%;
-    height: 80px;
+    
 }
 
 .contener-fluid {
@@ -284,17 +284,53 @@ ul.dropdown-menu a.dropdown-item-link:hover{
     display: flex;
     justify-content: center;
   }
-  
-.footer {
-    position: fixed; /* Change to relative */
-    bottom: 0; /* Align to the bottom */
-    width: 100%; /* Full width */
-    padding: 5rem 0rem;
+
+.col-7.left-column, .col-5.right-column {
+    padding: 0;
+}
+.login-img {
+    width: 100%;
+}
+
+.col-7.left-column{
+    /* clip-path: ellipse(95% 100% at 0% 50%); */
+    position: relative;
+    z-index: 0;
+}
+
+.col-5.right-column {
+    padding: 2rem 2rem 2rem 0;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1000;
+    max-width: 605px;
     
 }
 
+.form-container {
+    margin-top: 3rem;
+   
+}
 
-/* Mobile Responsiveness */
+.form-group.utilities {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-control.login-element{
+    max-width: 40rem;
+}
+
+.submit-login{
+    display: flex;
+    justify-content: center;
+}
+
+.btn.login-button{
+    color: #fff;
+    background-color: #d75858;
+}
+/* Mobile Responsiveness
 @media (max-width: 992px) {
     .navbar {
         padding: 0.5rem 1rem;
@@ -307,7 +343,7 @@ ul.dropdown-menu a.dropdown-item-link:hover{
     .btn-outline-success {
         margin-top: 1rem;
     }
-}
+} */
 
 
 
