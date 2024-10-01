@@ -2,37 +2,74 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
     +alert-error("5000")
-    .container.my-3
+    //- .container.my-3
+    //-     .row 
+    //-         .col-12 
+    //-             h1 Đăng Ký
+    //-         .col-12
+    //-             form(action="/auth/register" method="post")
+    //-                 .form-group
+    //-                     label(for="Email") Email
+    //-                     input#email.form-control(type="Email" name="Email" required)
+    //-                 .form-group
+    //-                     label(for="FullName") Họ & Tên
+    //-                     input#name.form-control(type="text" name="FullName" required)
+    //-                 .form-group
+    //-                     label(for="PhoneNumber") Số Điện Thoại
+    //-                     input#phone.form-control(type="tel" name="PhoneNumber" required)
+    //-                 .form-group
+    //-                     label(for="Address") Địa Chỉ
+    //-                     input#address.form-control(type="text" name="Address" required)
+    //-                 .form-group
+    //-                     label(for="Gender") Giới Tính
+    //-                     select#gender.form-control(name="Gender" required)
+    //-                         option(value="Nam") Nam
+    //-                         option(value="Nữ") Nữ
+    //-                 .form-group
+    //-                     label(for="Birthday") Ngày Sinh
+    //-                     input#dob.form-control(type="date" name="Birthday" required)
+    //-                 .form-group
+    //-                     label(for="Password") Mật khẩu
+    //-                     input#password.form-control(type="password" name="Password" required)
+    //-                 .form-group
+    //-                     label(for="confirm_password") Xác nhận Mật khẩu
+    //-                     input#confirm_password.form-control(type="password" name="confirm_password" required)
+    //-                 .form-group.text-center
+    //-                     button( type="submit" class = "btn btn-success btn-outline") Tiếp tục   
+    .container-fluid 
         .row 
-            .col-12 
-                h1 Đăng Ký
-            .col-12
-                form(action="/auth/register" method="post")
-                    .form-group
-                        label(for="Email") Email
-                        input#email.form-control(type="Email" name="Email" required)
-                    .form-group
-                        label(for="FullName") Họ & Tên
-                        input#name.form-control(type="text" name="FullName" required)
-                    .form-group
-                        label(for="PhoneNumber") Số Điện Thoại
-                        input#phone.form-control(type="tel" name="PhoneNumber" required)
-                    .form-group
-                        label(for="Address") Địa Chỉ
-                        input#address.form-control(type="text" name="Address" required)
-                    .form-group
-                        label(for="Gender") Giới Tính
-                        select#gender.form-control(name="Gender" required)
-                            option(value="Nam") Nam
-                            option(value="Nữ") Nữ
-                    .form-group
-                        label(for="Birthday") Ngày Sinh
-                        input#dob.form-control(type="date" name="Birthday" required)
-                    .form-group
-                        label(for="Password") Mật khẩu
-                        input#password.form-control(type="password" name="Password" required)
-                    .form-group
-                        label(for="confirm_password") Xác nhận Mật khẩu
-                        input#confirm_password.form-control(type="password" name="confirm_password" required)
-                    .form-group.text-center
-                        button( type="submit" class = "btn btn-success btn-outline") Tiếp tục
+            .col-7.left-column 
+                img.register-img(src="https://media.discordapp.net/attachments/1281613412111225011/1290118057888452711/Desktop_-_2.png?ex=66fb4b92&is=66f9fa12&hm=7d9c6f6184df09663476c9c08312e070559c55e1a1f0c6fd526359a0592aaa4d&=&format=webp&quality=lossless&width=768&height=625" alt="Login image")
+            .col-5.right-column
+                h2.title-register.text-center Đăng ký
+                .form-container
+                    form(action="/auth/register" method="post")
+                        .form-group
+                            label(for="Email") Email
+                            input#email.form-control.register-element(type="Email" name="Email" required)
+                        .form-group
+                            label(for="FullName") Họ & Tên
+                            input#name.form-control.register-element(type="text" name="FullName" required)
+                        .form-group
+                            label(for="PhoneNumber") Số Điện Thoại
+                            input#phone.form-control.register-element(type="tel" name="PhoneNumber" required)
+                        .form-group
+                            label(for="Address") Địa Chỉ
+                            input#address.form-control.register-element(type="text" name="Address" required)
+                        //- .form-group
+                        //-     label(for="Gender") Giới Tính
+                        //-     select#gender.form-control.register-element(name="Gender" required)
+                        //-         option(value="Nam") Nam
+                        //-         option(value="Nữ") Nữ
+                        //- .form-group
+                        //-     label(for="Birthday") Ngày Sinh
+                        //-     input#dob.form-control.register-element(type="date" name="Birthday" required)
+                        .form-group
+                            label(for="Password") Mật khẩu
+                            input#password.form-control.register-element(type="password" name="Password" required)
+                        .form-group
+                            label(for="confirm_password") Xác nhận Mật khẩu
+                            input#confirm_password.form-control.register-element(type="password" name="confirm_password" required)
+                        .form-group.text-center
+                        .submit-register
+                            button( type="submit" class = "btn register-button") Tiếp tục   
