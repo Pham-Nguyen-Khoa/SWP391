@@ -46,3 +46,22 @@ btnLogout.addEventListener("click", () => {
 });
 
 // End logout
+
+
+
+
+
+// Filter Sort Bác Sĩ ( Qía phê anh em ơi)
+
+document.addEventListener('DOMContentLoaded', function() {
+  const filterForm = document.getElementById('filterForm');
+  if(filterForm){
+    filterForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const date = document.getElementById('dateFilter').value;
+      const sort = document.getElementById('sortOrder').value;
+      const path = filterForm.getAttribute('action');
+      window.location.href = path + `?date=${date}&sort=${sort}`;
+    });
+  }
+});

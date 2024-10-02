@@ -1,0 +1,72 @@
+extends ../../layouts/default.pug
+
+
+block main
+            //- pre
+            //-    code #{JSON.stringify(appoinmentInfo,null,2)}
+            .order-details
+               h1.title-thankyou CẢM ƠN BẠN ĐÃ ĐẶT DỊCH VỤ CỦA CHÚNG TÔI
+               br
+               .order-information(style=`height: ${appoinmentInfo.VetID == null ? '700px' : '900px'};`)
+                  .row 
+                     .col-8
+                           h2 Thông tin đơn đặt lịch
+                           .row 
+                              .col-5 
+
+                                 b(style="margin-right: 4px") ◉ Mã Đơn Hàng: 
+                                 span #{appoinmentInfo.AppointmentID}
+                                 br
+                                 b(style="margin-right: 4px") ◉ Ngày: 
+                                 span #{appoinmentInfo.Date} 
+                                 br
+                                 b(style="margin-right: 4px") ◉ Thời gian hẹn: 
+                                 span #{appoinmentInfo.Shift}
+                              
+                              .col-7 
+
+                                 b(style="margin-right: 4px") ◉ Tên Khách Hàng: 
+                                 span #{appoinmentInfo.CustomerFullName}
+                                 br
+                                 b(style="margin-right: 4px") ◉ Số điện thoại: 
+                                 span #{appoinmentInfo.PhoneNumber}
+                                 if(appoinmentInfo.Name != "Tư Vấn Online")
+                                    br
+                                    b(style="margin-right: 4px") ◉ Địa chỉ: 
+                                    span #{appoinmentInfo.AddressAppointment} 
+                                    
+                     .col-4(style="    margin-top: 20px;")
+                           if(appoinmentInfo.Name == "Tư Vấn Online")
+                              span(style="background-color: #0a9c0a; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Đã thanh toán
+                           else 
+                              span(style="background-color: #e14d4d; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Chưa thanh toán
+                        
+                  table.table.table-striped.mt-5.table-appointment-detail(style=`margin-bottom: ${appoinmentInfo.VetID == null ? '120px' : '60px'};`)
+                     thead 
+                           tr(style="text-align: center")  
+                              th Tên dịch vụ
+                              th Giá
+                     tbody 
+                           tr 
+                              td #{appoinmentInfo.Name}
+                              td #{appoinmentInfo.PriceFormat}
+                  .information-doctor
+                     .row 
+                        .col-6 
+                           if(appoinmentInfo.VetID != null)
+                              h2 Bác sĩ thực hiện 
+                              b ◉ #{appoinmentInfo.VetFullName}
+                              br
+                              b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
+                              br
+                              img(src=appoinmentInfo.VetAvatar, alt="")
+                        .col-6 
+                           if(appoinmentInfo.Name == "Tư Vấn Online" && appoinmentInfo.VetID != null) 
+                              p(style="margin: 0; font-size: 23px;font-weight: 700;") ◉ Link Google Meet: 
+                              a(href=appoinmentInfo.GoogleMeet style=" text-decoration: underline;") #{appoinmentInfo.GoogleMeet}
+                           
+                           .thank-you-heart 
+                              p Koi Vet xin cảm ơn 
+                              .heart 
+
+

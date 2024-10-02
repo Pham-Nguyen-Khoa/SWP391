@@ -4,52 +4,89 @@ block main
     div(class="title_appointment") Đặt Lịch Hẹn
     div.background_appointment
         div(class="box_appointment")
-            form.form_appointment
+            form(action="/koi/appointment" method="post").form_appointment
                 // Left Section
                 div.left-section(style="width: 500px")
                      
                     label(for="name") Họ và Tên
-                    input#name(type="text" placeholder="Nhập họ và tên")
+                    input#name(type="text" name="FullName" placeholder="Nhập họ và tên")
                     label(for="phone") Số Điện Thoại
-                    input#phone(type="tel" placeholder="Nhập số điện thoại")
-                    label(for="address") Địa chỉ
-                    input#address(type="text" placeholder="Nhập địa chỉ")
+                    input#phone(type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" pattern="[0-9]*" inputmode="numeric" required)
+                    
                     label(for="service") Chọn dịch vụ
                     div
-                        select#service(name="service" class="service_appointment")
+                        select#service(name="service" class="service_appointment" required)
                             option(value selected disabled) Chọn Dịch Vụ
                             each  service in listService
                                 option(value=service.Name) • #{service.Name}
-                    label(for="location") Chọn nơi khám
-                    select(id="location")
-                        option( selected) Chọn Nơi Khám
+                    label(for="location" id="label-location") Chọn nơi khám
+                    select(id="location" name="location" required)
+                        option( selected disabled) Chọn Nơi Khám
                         option(value="nha") • Tại nhà
                         option(value="center") • Tại trung tâm
-                    label(for="select_doctor") Chọn Bác Sĩ
-                    select(id="select_doctor")
+                    label(for="address" id = "label-address" style="display: none") Địa chỉ
+                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required)
+                    label(for="select_doctor" ) Chọn Bác Sĩ
+                    select(id="select_doctor" name="doctor" required)
                         option(value selected, disabled) Chọn Bác Sĩ
-                        option(value ) • Tự chọn bác sĩ
-                        option(value) • Bác sĩ A
-                        option(value ) • Bác sĩ B
+                     
                     
                     label(for="select_date") Chọn Ngày 
                     br
-                    input(type="date" name="select_date" id="select_date")
+                    input(type="date" name="select_date" id="select_date" required)
+                    br
+                   
                     div(id="timeSlotsContainer")
-                    input(type="hidden" name="shift" id="selectedTimeSlot" value="")
+                    input(type="hidden" name="shift" id="selectedTimeSlot" value="" required)
                     div(id="notification") 
+                    div.textarea-description
+                        label(for="phone") Mô tả tình trạng cá
+                        textarea(name="Description" id="description-koi-health" style="width: 100%; height: 100px; border: 1px solid #ccc; border-radius: 20px; background-color: #cec1c14a;")
                 // Right Section
                 .right-section
                     .doctor-info
-                        //- img(src="data:image/png;base64,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" alt="Doctor Photo" class="avatar_doctor")
-                        //- h3(name-doctor) Dr. Phạm Nguyên Khoa
-                        //- div.rating ★ ★ ★ ★ ☆
-                        //- p Giới tính: Nam
-                        //- p Ngày sinh: 15/08/1995
-                        //- p Địa chỉ: Tp. Hồ Chí Minh
-                        //- b Kinh nghiệm làm việc
-                        //- p • Có bằng cấp chuyên môn về các loại cá Koi
-            button.confirm-btn(type="submit") Xác Nhận
+                    .priceService#priceService(style=" visibility:hidden;height: 120px; background-color: #35313145; border-radius: 20px; padding: 30px;  text-align: center; width: 400px; margin: 60px 0px 21px 138px;")
+                        //- h1(style="font-size: 24px; font-weight: bold; color: #333;") Số tiền ước tính: 
+                        //- span(style="font-size: 28px; font-weight: bold; color: #dd9917; margin-left: 10px;padding-bottom: 8px;") 500.000đ
+            button.confirm-btn(type="submit") Đặt lịch
+            .confirm-appointment 
+                h2.text-center.mb-4 Xác Nhận Đặt Lịch 
+                p Trước khi xác nhận lịch hẹn, vui lòng kiểm tra: 
+                p <i class="fa-solid fa-check" style="color: #0c83df;"></i>  Thời gian và ngày hẹn 
+                p <i class="fa-solid fa-check" style="color: #0c83df;"></i> Thông tin liên hệ của bạn
+                p <i class="fa-solid fa-check" style="color: #0c83df;"></i>  Địa chỉ khám (nếu có)
+                p <i class="fa-solid fa-check" style="color: #0c83df;"></i> Dịch vụ cần khám 
+                button(id="confirm-success-appointment"  ) Xác nhận 
+                button(id="confirm-cancle-appointment") Hủy
+            .paid-appointment 
+                div.content-paid-appointment 
+                    //- img(src="data:image/png;base64,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", alt="")
+                    //- h1 Mã QR thanh toán tự động 
+                    //- p Số tiền: 2.000.000đ 
+                    //- p Nội dung (bắt buộc): <span>TIME10017</span>
+                    //- p Người thụ hưởng: PHẠM NGUYÊN KHOA 
+                div.waiting-paid-appointment
+                    p Đang chờ thanh toán 
+                    <span id="countdown">10:00</span>
+                    .progress-bar   
+                        #progress.progress
+            #successModal.modal-appointment
+                .modal-appointment-content
+                    .icon-container
+                    .tick 
+                        i(class="fas fa-check-circle")  
+                    h2 Thanh Toán Thành Công!
+                     
+                    
+                    p(id="countdownText") Tiếp tục sau 5s              
+        div#confirmationModal
+            div.confirmationModal
+                h3 Thông báo
+                p#modalMessage
+                button#closeModalMessage(type="button") Đóng
+
+                    
+                    
 
     script.
         var listService = !{JSON.stringify(listService)};

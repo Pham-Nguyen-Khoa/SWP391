@@ -42,3 +42,35 @@ if (btnLogout) {
 }
 
 // End logout
+
+
+
+const selectSpecialization = document.querySelector("[Select-Specialization]");
+const  selectDoctor = document.querySelector("[Select-Doctor]");
+function addDoctorOption(value, text) {
+  var option = document.createElement("option"); 
+  option.value = value; 
+  option.text = text; 
+  option.innerHTML = `Bác sĩ ${text}`;
+  selectDoctor.appendChild(option); 
+}
+function addDefaultDoctorOption() {
+  var defaultOption = document.createElement("option");
+  defaultOption.value = "Tự chọn";
+  defaultOption.text = "Tự chọn bác sĩ";
+  selectDoctor.appendChild(defaultOption);
+}
+
+  if(selectSpecialization){
+    selectSpecialization.addEventListener("change",() => {
+      selectDoctor.innerHTML ='<option selected disable> ---Chọn Bác Sĩ---</option>'
+        const selectSpecializaValue =  selectSpecialization.value;
+        listDoctor.forEach((doctor) => {
+          if(doctor.Specialization == selectSpecializaValue){
+              addDoctorOption(doctor.VetID,doctor.FullName)
+          }
+        })
+        
+
+    })
+  }

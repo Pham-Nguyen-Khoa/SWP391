@@ -3,7 +3,6 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
-    h1 Hello Khoa ha
     h1 #{pageTitle}     
     form(
         action=`${prefixAdmin}/account/create`,
@@ -103,8 +102,7 @@ block main
                 label(for="Specialization") Chuyên ngành
                 select(name="Specialization" id="Specialization" class="form-control custom-input")
                     option(value="Khám Nội / Ngoại") Khám Nội / Ngoại
-                    option(value="Phẫu Thuật") Phẫu Thuật
-                    option(value="Tư Vấn Môi Trường") Tư Vấn Môi Trường
+                    option(value="Cải Thiện Môi Trường") Tư Vấn Môi Trường
                     option(value="Tư Vấn Online") Tư Vấn Online
             div(class="form-group")
                 label(for="Description") Thành tựu

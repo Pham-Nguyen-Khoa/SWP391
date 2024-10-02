@@ -231,7 +231,7 @@ table.table {
     border-radius: 10px;
     position: fixed;
     z-index: 9999;
-    margin: 5% 25%;
+    margin: 0 25%;
     padding: 40px;
     left: 6%;
     top: 14%;

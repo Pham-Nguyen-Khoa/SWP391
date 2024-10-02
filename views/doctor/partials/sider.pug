@@ -1,11 +1,9 @@
+
 prefixAdmin
     .sider 
         .inner-menu 
-            ul 
-                    li 
-                        a(href=`/doctor/dashboard`) Tổng quan 
-
-                    li 
-                        a(href=`/doctor/dashboard`) Danh mục bác sĩ
-                    li 
-                        a(href=`/doctor/dashboard`) Danh mục bác sĩ 
+            ul.nav.flex-column 
+                li.nav-item 
+                    a.nav-link(href=`/doctor/schedule`) Lịch làm việc 
+                li.nav-item 
+                    a.nav-link(href=`/doctor/appointment`) Hồ sơ lịch hẹn
