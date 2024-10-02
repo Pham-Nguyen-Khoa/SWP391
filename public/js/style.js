@@ -635,13 +635,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // nếu thanh toán thành công
 
-        // setTimeout(() => {
-        //   const intervalId = setInterval(() => {
-        //     checkPaid(priceService, generateRandomText, intervalId);
-        //   }, 1000);    
-        // }, 15000);
-        const formAppointment = document.querySelector(".form_appointment");
-        formAppointment.submit();
+        setTimeout(() => {
+          const intervalId = setInterval(() => {
+            checkPaid(priceService, generateRandomText, intervalId);
+          }, 1000);    
+        }, 15000);
+        // const formAppointment = document.querySelector(".form_appointment");
+        // formAppointment.submit();
       } else {
         const formAppointment = document.querySelector(".form_appointment");
         formAppointment.submit();

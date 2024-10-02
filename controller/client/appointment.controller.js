@@ -315,8 +315,8 @@ module.exports.thankyou = async (req, res) => {
   let appointmentInfo; // Khai báo biến chung
 
   if(doctor == "Tự chọn"){
-    const queryAppointmentNotDoctor = `SELECT a.*,s.*,c.* , a.Date As DateAppointment, a.Name AS CustomerFullName , a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID  WHERE a.AppointmentID = '${appointmentID}'`;
-    appointmentInfo = (await Sequelize.query(queryAppointmentNotDoctor))[0][0]; // Gán giá trị cho biến chung
+    const queryAppointmentNotDoctor = `SELECT a.*,s.*,c.* ,a.Address As AddressAppointment, a.Date As DateAppointment, a.Name AS CustomerFullName , a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID  WHERE a.AppointmentID = '${appointmentID}'`;
+    appointmentInfo = (await Sequelize.query(queryAppointmentNotDoctor))[0][0]; 
       console.log("hello")
     const date = appointmentInfo.DateAppointment;
     appointmentInfo.Date = formatDate(date);
@@ -326,7 +326,7 @@ module.exports.thankyou = async (req, res) => {
     );
   } else {
     const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* ,a.Address As AddressAppointment,a.HealthKoi As HealthKoiAppointment,a.Date As DateAppointment, a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
-    appointmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0]; // Gán giá trị cho biến chung
+    appointmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
     const date = appointmentInfo.DateAppointment;
     appointmentInfo.Date = formatDate(date);
     appointmentInfo.PriceFormat = formatPrice(appointmentInfo.Price);

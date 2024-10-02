@@ -54,7 +54,7 @@ const Appointment = sequelize.define('Appointment', {
     BillID: {
         type: DataTypes.STRING(10),
         allowNull: true,
-    }
+    },
 }, {
     tableName: 'appointment',
     timestamps: false

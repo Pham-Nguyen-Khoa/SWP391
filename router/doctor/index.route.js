@@ -2,6 +2,7 @@ const dashboardRoute = require("./dashboard.route");
 const myAccountRoute = require("./my-account.route");
 const scheduleRoute = require("./schedule.route");
 const AppointmentRoute = require("./appointment.route");
+const currentAppointmentRoute = require("./current-appointment.route");
 const authMiddleware = require("../../middleware/admin/auth.middleware")
 module.exports = (app) => {
   app.use(authMiddleware.requireAuth)
@@ -9,5 +10,6 @@ module.exports = (app) => {
   app.use("/doctor/my-account", myAccountRoute);
   app.use("/doctor/schedule", scheduleRoute);
   app.use("/doctor/appointment", AppointmentRoute);
+  app.use("/doctor/current-appointment", currentAppointmentRoute);
   
 };

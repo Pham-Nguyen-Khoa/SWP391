@@ -52,6 +52,7 @@ module.exports.index =  async (req, res) => {
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Process'`
     }
+   
     if(!req.query.process){
         // queryListAppointment = `SELECT * FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`
         queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
@@ -60,16 +61,39 @@ module.exports.index =  async (req, res) => {
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID`
     }
+    if(req.query.date){
+        queryListAppointment += ` where a.Date = '${req.query.date}'`;
+      }
+
+    if(req.query.sort){
+        queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+    }
+  
     const [listAppointment] = await Sequelize.query(queryListAppointment);
     const [listAppointmentOrigin] = await Sequelize.query(`SELECT a.*, s.*, c.*, a.Name As NameCustomer FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`);
-    console.log(listAppointment)
+    listAppointment.forEach(appointment => {
+        appointment.DateFormat = formatDate(appointment.Date);
+      });
     
-
-
+      let dateFormat = null;
+            if (req.query.date) {
+                dateFormat = formatDate(req.query.date);
+            }
+            let filterType = 'all';
+            if (req.query.date) {
+                filterType = 'date';
+            } else if (req.query.process) {
+                filterType = 'process';
+            }
     res.render("staff/pages/appointment/index",{
         pageTitle: "Trang Lịch Hẹn ",
         listAppointment: listAppointment,
-        listAppointmentOrigin: listAppointmentOrigin
+        listAppointmentOrigin: listAppointmentOrigin,
+        date: req.query.date,
+        dateFormat: dateFormat,
+        sort: req.query.sort,
+        filterType: filterType,
+        processFilter: req.query.process
     })
   }
     
@@ -114,7 +138,7 @@ module.exports.changeProcess =  async (req, res) => {
         if(process){
             if(process == "pending"){
                 await Appointment.update({
-                    Process: "Accepted"
+                    Process: "Ready"
                 },{
                     where:{
                         AppointmentID: appointmentID

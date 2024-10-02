@@ -24,7 +24,7 @@ body {
 } */
 
 
-body {
+/* body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
@@ -32,19 +32,9 @@ body {
 }
 
 /* Nội dung chính sẽ chiếm không gian còn lại giữa đầu trang và footer */
-.main {
-    flex: 1; /* Chiếm tất cả không gian còn lại khi chiều cao nội dung ít */
-}
+
 
 /* Thiết lập cho footer */
-.footer {
-    background-color: #333;
-    text-align: center;
-    color: #fff;
-    padding: 10px;
-    height: 80px;
-    width: 100%; /* Đảm bảo chiếm toàn bộ chiều rộng */
-}
 
 
 
@@ -107,17 +97,18 @@ background-color: #cac0c05c; */
     display: flex;
     justify-content: space-evenly;
     height: auto;
-    padding: 75px 0 0 0;
-    background-color: #bee8ee;
-    border-radius: 30px ;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid black;
+    background-color: #b2d9e6ba;
+    padding: 80px 100px 100px 100px;
+    border: 5px solid #6fa1b8;
+    border-radius: 80px;
+    font-size: 22px;
+    box-shadow: 0px 0px 20px 7px #8cb3cecf;
 }
 
 .title_appointment {
     width: 100%;
     height: 65px;
-    background-color: #4a90e2;
+    background-color: #21a0b3;
     text-align: center;
     font-size: 31px;
     border-radius: 0 0 25px 25px;
@@ -138,7 +129,15 @@ background-color: #cac0c05c; */
 }
 
 .box_appointment {
-    margin: 0 200px 100px 200px;
+    background-color: #b2d9e6ba;
+    padding: 80px 100px 50px 100px;
+    border: 5px solid #96b6c5;
+    border-radius: 80px;
+    font-size: 20px;
+    margin: 60px 200px;
+    box-shadow: 0px 0px 17px 12px #8cb3cecf;
+    font-weight: bold;
+    /* margin: 0 200px 100px 200px;
     color: #333;
     font-style: italic;
     font-family: 'Poppins', sans-serif;
@@ -152,10 +151,10 @@ background-color: #cac0c05c; */
     background-size: cover;
     object-fit: cover;
     /* background-image: url("/images/appointment-background.png"); */
-    background-size: 73% 106%;
+    /* background-size: 73% 106%;
     background-repeat: no-repeat;
     background-clip: content-box;
-    border: 2px solid black;
+    border: 2px solid black; */ 
 }
 .img-appointment img {
     position: absolute;
@@ -170,7 +169,7 @@ background-color: #cac0c05c; */
   }
 
 .background_appointment {
-    background-color: #f0f0f0;
+    background-color: #d6ecf1;
    
     z-index: 100;
  
@@ -179,9 +178,9 @@ background-color: #cac0c05c; */
 .box_appointment input,
 .service_appointment,
 .select_date {
-    background-color: #fff;
+    background-color: #1879971a;
     border-radius: 30px;
-    border: 1px solid #ccc;
+    border: 2px solid #0a3d5f75;
     padding: 10px;
     margin-bottom: 15px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -196,13 +195,13 @@ select.service_appointment option,
 
 .doctor-info {
     margin-left: 80px;
-    border: 2px solid #ccc;
+    border: 3px solid #1b93e375;
+    border-radius: 20px;
     width: 500px;
     min-height: 600px;
     height: auto;
     padding: 45px 20px;
     background-color: #fff;
-    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -255,18 +254,26 @@ input[type="tel"],
 textarea,
 select {
     width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 2px solid #0a3d5f75;
     border-radius: 5px;
     box-sizing: border-box;
     margin-top: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #7ac7d394  inset !important; /* Màu nền của input */
+    -webkit-text-fill-color: #000 !important; /* Màu chữ của input */
+}
+
 .time-slot {
     display: inline-block;
-    width: 60px;
+    width: 100px;
     height: 60px;
     margin: 10px;
     border: 2px solid #ccc;
@@ -290,15 +297,8 @@ select {
 }
 
 
-.box_appointment input {
-    background-color: #cec1c14a;
-    border-radius: 30px;
-}
 
-.service_appointment {
-    background-color: #cec1c14a;
-    border-radius: 30px;
-}
+
 
 select.service_appointment option {
     font-size: 16px;
@@ -306,7 +306,7 @@ select.service_appointment option {
 }
 
 #location {
-    background-color: #cec1c14a;
+    background-color: #1879971a;
     border-radius: 30px;
 }
 
@@ -317,16 +317,16 @@ select.service_appointment option {
 }
 
 #select_doctor {
-    background-color: #cec1c14a;
+    background-color: #1879971a;
     border-radius: 30px;
 }
 
 #select_doctor option {
-    background-color: #cec1c14a;
+    background-color: #1879971a;
     font-weight: 600;
 }
 .select_date {
-    background-color: #cec1c14a;
+    background-color: #1879971a;
     border-radius: 30px;
 }
 
@@ -334,7 +334,8 @@ select.service_appointment option {
     visibility: hidden;
     margin-left: 80px;
     margin-bottom: 30px;
-    border: 2px solid black;
+    border: 3px solid #1b93e375;
+    border-radius: 30px;
     width: 500px;
     min-height: 600px;
     height: auto;
@@ -389,17 +390,17 @@ select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
+    border: 2px solid #0a3d5f75;
     border-radius: 30px;
     box-sizing: border-box;
     margin-top: 10px;
-    background-color: #cec1c14a;
+    background-color: #1879971a;
 }
 
 
 .time-slot {
     display: inline-block;
-    width: 81px;
+    width: 100px;
     height: 60px;
     margin: 10px;
     border: 2px solid #ccc;
@@ -755,26 +756,27 @@ select {
 
 .order-details{
     background-color: #b2d9e6ba;
-    padding: 30px 100px 100px 100px;
-    border: 5px solid #564f4f;
+    padding: 80px 100px 100px 100px;
+    border: 5px solid #96b6c5;
     border-radius: 28px;
     font-size: 20px;
-    margin: 146px 200px;
-    box-shadow: 0px 0px 20px 11px #525050;
+    margin: 60px 200px;
+    box-shadow: 0px 0px 17px 12px #8cb3cecf;
     
 }
 
 
 .table-appointment-detail{
     border: 5px solid #b8aeaebf;
-    box-shadow: 0px 1px 7px 8px #b1a5a591;
+    box-shadow: 0px 1px 7px 8px #77a6ccb3;
+    margin-bottom: 50px;
 }
 
 .order-information{
     background-color: #bcb2b240;
     border: 2px solid #aba5a5bf;
     border-radius: 36px;
-    padding: 20px 0 20px 30px;
+    padding: 20px 20px 20px 30px;
 }
 .order-information  h2 {
     font-size: 37px;
@@ -804,15 +806,15 @@ select {
 
 .table-appointment-detail th, 
 .table-appointment-detail td {
-    padding: 10px; /* Thêm khoảng cách bên trong ô */
-    text-align: left; /* Căn trái cho nội dung */
+    padding: 10px; 
+    text-align: left; 
     text-align: center;
-    border: 1px solid #6f7478d1; /* Viền màu đen */
+    border: 1px solid #6f7478d1; 
 }
 
 .table-appointment-detail th {
-    background-color: #3E8E7E; /* Màu nền cho tiêu đề */
-    color: #FFF; /* Màu chữ cho tiêu đề */
+    background-color: #4f8da4; 
+    color: #FFF; 
 }
 
 .order-details img{
@@ -885,7 +887,7 @@ header {
     right: 10%;
     transform: translateY(-50%);
     text-align: center;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-right: 100px;
 }
 
@@ -902,10 +904,10 @@ header {
     width: 120px;
     height: 120px;
     position: relative;
-    background: linear-gradient(145deg, #ff6a95, #ff3366);
+    background: linear-gradient(145deg, #7dc4e0, #80acd7);
     transform: rotate(-45deg);
     animation: beat 1.5s infinite;
-    box-shadow: 0 4px 20px rgba(255, 99, 132, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 20px rgb(78 84 189 / 70%), inset 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
 .heart::before,
@@ -913,7 +915,7 @@ header {
     content: "";
     width: 120px;
     height: 120px;
-    background: linear-gradient(145deg, #ff6a95, #ff3366);
+    background: linear-gradient(145deg, #3df4f3, #83a4cf);
     border-radius: 50%;
     position: absolute;
 }
@@ -943,10 +945,10 @@ header {
 
 @keyframes glow {
     0%, 100% {
-        box-shadow: 0 4px 20px rgba(255, 99, 132, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 20px rgba(99, 161, 255, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.5);
     }
     50% {
-        box-shadow: 0 8px 40px rgba(255, 99, 132, 1), inset 0 0 25px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 8px 40px  rgba(99, 161, 255, 0.7), inset 0 0 25px rgba(255, 255, 255, 0.7);
     }
 }
 
@@ -964,7 +966,7 @@ header {
     font-weight: bold;
     height: 70px;
     padding: 10px;
-    font-family: Georgia, Times New Roman, serif;
+    /* font-family: Georgia, Times New Roman, serif; */
 }
 
 
@@ -1079,4 +1081,54 @@ header {
     .table-my-appointment tbody tr:last-of-type {
         margin-bottom: 0;
     }
+}
+
+
+/* body{
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #d6ecf1;
+}
+
+.footer {
+    flex-shrink: 0;
+    background-color: #333;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    height: 80px;
+    width: 100%;
+}
+
+main{
+    flex: 1 0 auto;
+}
+
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  } */
+
+
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #c2e1e6eb;
+}
+.page-container {
+    flex: 1 0 auto;
+}
+.footer {
+    background-color: #333;
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    height: 80px;
+    width: 100%; 
 }

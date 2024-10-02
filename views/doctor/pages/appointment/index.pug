@@ -6,47 +6,79 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     +title("Hồ sơ dịch vụ")
+    style.
+        #table-appointment thead tr th{
+          background-color: #86d0dbf5 !important
+        }
+        .btn-custom-outline {
+          color: #21a0b3;
+          background-color: transparent;
+          border-color: #21a0b3;
+        }
+        .btn-custom-outline.active,
+        .btn-custom-outline:active,
+        .btn-custom-outline:focus,
+        .btn-custom-outline:hover {
+          color: #ffffff !important;
+          background-color: #21a0b3 !important;
+          border-color: #21a0b3 !important;
+        }
     //- pre
     //-   code #{JSON.stringify(listAppointment,null,2)}
     .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header Bộ lọc 
+      .card-header(style="background-color: #86d0dbf5 ; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;")  Bộ lọc 
       .card-body 
         .row 
-          .col-6
+          .col-6#filter-buttons
             a(
               href=`/doctor/appointment`
-                class=`btn btn-sm ml-1 btn-outline-success `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
                 button-all
               ) Tất cả (#{listAppointmentOrigin.length})
             a(
               href=`/doctor/appointment?process=ready`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline   `
                 button-filter
               ) Sẵn sàng (#{listAppointmentOrigin.filter(a => a.Process === 'Ready').length})
             a(
               href=`/doctor/appointment?process=process`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Đang thực hiện (#{listAppointmentOrigin.filter(a => a.Process === 'Process').length})
             a(
               href=`/doctor/appointment?process=successed`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hoàn thành (#{listAppointmentOrigin.filter(a => a.Process === 'Successed').length})
           .col-6
             form#filterForm(action="/doctor/appointment" method="GET")
               .form-group
                 label(for="dateFilter") Lọc theo ngày:
-                input.form-control(type="date" id="dateFilter" name="date")
+                input.form-control(type="date" id="dateFilter" name="date" value=date)
               .form-group
                 label(for="sortOrder") Sắp xếp theo:
-                select.form-control(id="sortOrder" name="sort")
+                select.form-control(id="sortOrder" name="sort" value=sort)
                   option(value="asc") Tăng dần
                   option(value="desc") Giảm dần
               button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
-           
-    table.table#table-appointment
+    if listAppointment.length === 0
+      if filterType === 'date'
+        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
+      else if filterType === 'process'
+        case processFilter
+          when 'ready'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Sẵn sàng.
+          when 'process'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đang thực hiện.
+          when 'successed'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;")| Không có đơn hẹn nào trong trạng thái Hoàn thành.
+          when 'cancelled'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đã hủy.
+          default
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái này.
+    else      
+      table.table#table-appointment
         thead
             tr
                 th Mã đơn hàng
@@ -65,7 +97,7 @@ block main
                     td #{appointment.DateFormat}
                     td  
                         if(appointment.Process == "Ready" && appointment.ServiceID == "DV0003")
-                            a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/successed` class="btn btn-primary")  Sẵn sàng
+                            a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
                         if(appointment.Process == "Ready" && appointment.ServiceID != "DV0003")
                             a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
                         else if(appointment.Process == "Process")
@@ -78,7 +110,27 @@ block main
                         a(href=`/doctor/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
                           i(class="fa-solid fa-receipt")
                         
-                          
+    script.
+        document.addEventListener('DOMContentLoaded', function() {
+          const filterButtons = document.getElementById('filter-buttons');
+          const currentUrl = new URL(window.location.href);
+          const processParam = currentUrl.searchParams.get('process');
+          const buttons = filterButtons.querySelectorAll('.btn-custom-outline');
+          buttons.forEach(btn => {
+            const btnUrl = new URL(btn.href);
+            const btnProcess = btnUrl.searchParams.get('process');
+            if ((!processParam && btn.getAttribute('button-all') !== null) || 
+                (processParam && btnProcess === processParam)) {
+              btn.classList.add('active');
+            }
+          });
+          filterButtons.addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-custom-outline')) {
+              buttons.forEach(btn => btn.classList.remove('active'));
+              e.target.classList.add('active');
+            }
+          });
+        });                          
 
     
 

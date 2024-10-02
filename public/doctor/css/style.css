@@ -325,7 +325,7 @@ span {
 
 .table-appointment-detail{
     margin-bottom: 50px;
-    border: 2px solid #2e2b2b;
+    border: 2px solid #a29b9b;
 }
 
 .table-appointment-detail th, 
@@ -358,4 +358,96 @@ span {
     font-size: 20px;
     background-color: #5aaeba;
     color: white;
+}
+
+
+.current-appointment-form label{
+    font-weight: 600;
+    font-size: 20px;
+}
+
+
+
+
+.table-container table th {
+    background-color: #54abb8f5; 
+    color: #FFF; 
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Date Row Styling */
+.table-container table th.date-header {
+    background-color: #54abb8f5; 
+}
+
+/* Table Cell Styling */
+.table-container table td {
+    background-color: #F9F9F9; 
+    color: #333;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+/* Lịch làm việc của bác sĩ */
+.table-container table td .doctor-card {
+    background-color: #54abb8f5; 
+    border: 1px solid #B2EBF2;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-container table td .doctor-card img {
+    border-radius: 8px;
+    border: 2px solid #86d0dbf5; 
+    margin-bottom: 8px;
+}
+
+.table-container table td .doctor-card .doctor-name {
+    font-size: 14px;
+    font-weight: bold;
+    color: #86d0dbf5; 
+}
+
+.table-container table td .doctor-card .specialization {
+    font-size: 12px;
+    color: #555;
+}
+.table-container table td:nth-child(1){
+    background-color: #54abb8f5; 
+    color: #FFF; 
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.table-container table td:hover {
+    background-color: #E0F2F1; 
+}
+
+
+.table-container table tr.selected-row {
+    background-color: #A7FFEB; 
+}
+
+
+.table-container table td.time-cell {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #54abb8f5; 
+    color: #FFF;
+    border-radius: 6px;
+}
+
+
+.table-container {
+    border: 3px solid #54abb8f5; 
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #FAFAFA; 
 }
