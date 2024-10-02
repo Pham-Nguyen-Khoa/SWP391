@@ -12,6 +12,218 @@
     height: 80px;
 }
 
+.footer{
+    background-color: #333;
+    position: relative;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 10px 10px 0;
+    bottom: 0;
+    width: 100%;
+    
+}
+
+.contener-fluid {
+    display: flex;
+    justify-content: center;
+}
+
+/* Container and Navbar Styling */
+.navbar {
+    background-color: #fdf6f2; /* Light background similar to the image */
+    padding: 1rem 2rem; /* Adds space around the content */
+    font-family: 'Arial', sans-serif;
+    font-size: 0.9rem; /* Adjusted font size (smaller) */
+}
+
+.navbar-nav {
+    margin-left: auto; /* Push the items to the right */
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.1rem; /* Slightly smaller font for brand */
+    margin-right: 2rem; 
+}
+
+.nav-item {
+    margin-left: 1.5rem; /* Adds spacing between each navigation item */
+    white-space: nowrap; 
+}
+
+
+.nav-item:last-child {
+    margin-left: 0; /* Remove margin for the last nav-item */
+}
+
+/* Dropdown styling */
+.nav-item.dropdown .dropdown-toggle {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.dropdown-menu {
+    background-color: #fff; 
+    border: none; 
+}
+
+.dropdown-item:hover {
+    background-color: #f7f7f7;
+}
+
+/* Nav links */              
+.nav-link {
+    color: #000; 
+    text-transform: uppercase;
+    font-weight: bold; 
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem; /* Adjusted font size for nav links */
+    white-space: nowrap; 
+}
+
+.nav-link:hover {
+    color: #a21a1a; /* Dark red on hover */
+    text-decoration: none;
+}
+
+/* Button Styling */
+.btn-appointment {
+    background-color: #a21a1a; 
+    color: #fff; 
+    padding: 0.45rem 1.4rem; /* Slightly adjusted padding for smaller button size */
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none; 
+    margin-left: 2rem; 
+    font-size: 0.85rem; /* Smaller font size for the button */
+}
+
+.btn-appointment:hover {
+    background-color: #d75858;
+    color: #fff;
+}
+
+/* Login/Register Links */
+.nav-item .nav-link:last-child {
+    margin-left: 1rem;
+    font-size: 0.8rem; /* Slightly smaller font for login/register */
+}
+
+ul.dropdown-menu a.dropdown-item-link{
+    text-decoration: none !important; /* Ensure no underline */
+    color: #000; /* Ensure proper text color */
+  }
+  
+ul.dropdown-menu a.dropdown-item-link:hover{
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #d75858; /* Change color on hover if needed */
+  }
+  .services-list {
+    list-style: none;
+  }
+
+.services-item-link {
+    text-decoration: none !important; /* Ensure no underline */
+    color: #fff; /* Ensure proper text color */
+  }
+
+.services-item-link:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #d75858; 
+}
+
+.about-us-list {
+    list-style: none;
+  }
+
+.about-us-item-link {
+    text-decoration: none !important; /* Ensure no underline */
+    color: #fff; /* Ensure proper text color */
+  }
+
+.about-us-item-link:hover {
+    text-decoration: none !important; /* Ensure no underline on hover */
+    color: #d75858; 
+}
+
+.info-list {
+    list-style: none;
+  }
+
+  .copyright{
+    display: flex;
+    justify-content: center;
+  }
+
+.col-7.left-column, .col-5.right-column {
+    padding: 0;
+}
+.login-img {
+    width: 100%;
+}
+
+.col-7.left-column{
+    /* clip-path: ellipse(95% 100% at 0% 50%); */
+    position: relative;
+    z-index: 0;
+}
+
+.col-5.right-column {
+    padding: 0 2rem 2rem 0;
+}
+
+.right-container{
+    margin-top:  5rem;
+}
+
+.form-container.login-container {
+    margin-top: 3rem;
+   
+}
+
+.form-group.utilities {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-control.login-element{
+    max-width: 40rem;
+}
+
+.submit-login{
+    display: flex;
+    justify-content: center;
+}
+
+.btn.login-button{
+    color: #fff;
+    background-color: #d75858;
+}
+
+.form-control.register-element{
+    max-width: 40rem;
+    margin: 0;
+    padding: 6px 12px;
+}
+
+.register-img{
+    width: 100%;
+    height: 100%;
+}
+
+.submit-register{
+    display: flex;
+    justify-content: center;
+}
+
+.register-button{
+    color: #fff;
+    background-color: #d75858;
+}
+
 
 
 
