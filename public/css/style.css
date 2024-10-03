@@ -230,19 +230,20 @@ select.service_appointment option,
 }
 
 .confirm-btn {
-    background: #60abd7;
-    border: 2px solid #ccc;
+    background: #3aa9d5;
+    border: 2px solid #000000b5;
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 26px;
     font-weight: 600;
-    color: #fff;
+    color: #ffffffe3;
     cursor: pointer;
     text-align: center;
     display: block;
-    width: 200px;
+    width: 221px;
     padding: 10px;
-    margin: 50px auto;
-    transition: background 0.3s ease;
+    text-align: center;
+    margin: 50px 45%;
+    height: 58px;
 }
 
 .confirm-btn:hover {
@@ -367,21 +368,7 @@ select.service_appointment option {
 
 }
 
-.confirm-btn {
-    background: #535656;
-    border: 2px solid black;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffffe3;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    width: 200px;
-    padding: 10px;
-    text-align: center;
-    margin: 50px 45%;
-}
+
 
 input[type="text"],
 input[type="tel"],
