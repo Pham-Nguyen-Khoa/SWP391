@@ -1,63 +1,63 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
 block main
-    +title("Lịch Hẹn Của Bạn")
-    pre 
+    .block-footer(style="height: 78vh")
+        +title("Lịch Hẹn Của Bạn")
     
-    .container-table 
-        table.table.table-striped.table-bordered.table-my-appointment
-            thead 
-                tr 
-                    th Mã lịch hẹn
-                    th Ngày
-                    th Dịch vụ
-                    th Nơi Khám 
-                    th Loại Đơn
-                    th Trạng thái 
-                    th Khác
-            tbody 
-                if(listAppointment && listAppointment.length == 0)
-                    tr
-                        td(colspan="6").text-center.font-weight-bold Không có đơn hàng nào
+        .container-table 
+            table.table.table-striped.table-bordered.table-my-appointment
+                thead 
+                    tr 
+                        th Mã lịch hẹn
+                        th Ngày
+                        th Dịch vụ
+                        th Nơi Khám 
+                        th Loại Đơn
+                        th Trạng thái 
+                        th Khác
+                tbody 
+                    if(listAppointment && listAppointment.length == 0)
+                        tr
+                            td(colspan="6").text-center.font-weight-bold Không có đơn hàng nào
 
-                else
-                    each item in listAppointment
-                        tr 
-                            td #{item.AppointmentID} 
-                            td #{item.DateFormat}  
-                            if(item.ServiceID == "DV0001")
-                                td Khám Sức Khỏe
-                            if(item.ServiceID == "DV0002")
-                                td Cải Thiện Môi Trường
-                            if(item.ServiceID == "DV0003")
-                                td Tư Vấn Online
-                            if(item.ServiceID =="DV0003")
-                                td Online 
-                            if(item.Address == null && item.ServiceID !="DV0003")
-                                td Khám tại trung tâm 
-                            if(item.Address != null && item.ServiceID =="DV0002")
-                                td Tại nhà
-                            if(item.ServiceID =="DV0003")
-                                td Tư vấn 
-                            else 
-                                td Lịch hẹn
-                            if(item.Process =="Pending")
+                    else
+                        each item in listAppointment
+                            tr 
+                                td #{item.AppointmentID} 
+                                td #{item.DateFormat}  
+                                if(item.ServiceID == "DV0001")
+                                    td Khám Sức Khỏe
+                                if(item.ServiceID == "DV0002")
+                                    td Cải Thiện Môi Trường
+                                if(item.ServiceID == "DV0003")
+                                    td Tư Vấn Online
+                                if(item.ServiceID =="DV0003")
+                                    td Online 
+                                if(item.Address == null && item.ServiceID !="DV0003")
+                                    td Khám tại trung tâm 
+                                if(item.Address != null && item.ServiceID =="DV0002")
+                                    td Tại nhà
+                                if(item.ServiceID =="DV0003")
+                                    td Tư vấn 
+                                else 
+                                    td Lịch hẹn
+                                if(item.Process =="Pending")
+                                    td 
+                                        p.process Chờ duyệt
+                                if(item.Process =="Accepted")
+                                    td 
+                                        p.process Đã tiếp nhận
+                                if(item.Process =="Ready")
+                                    td 
+                                        p.process Sẵn sàng
+                                if(item.Process =="Progress")
+                                    td 
+                                        p.process Đang thực hiện
+                                if(item.Process =="Successed")
+                                    td
+                                        p.process Đã hoàn thành
+                                if(item.Process =="Cancle")
+                                    td 
+                                        p.process Bị Hủy 
                                 td 
-                                    p.process Chờ duyệt
-                            if(item.Process =="Accepted")
-                                td 
-                                    p.process Đã tiếp nhận
-                            if(item.Process =="Ready")
-                                td 
-                                    p.process Sẵn sàng
-                            if(item.Process =="Progress")
-                                td 
-                                    p.process Đang thực hiện
-                            if(item.Process =="Successed")
-                                td
-                                    p.process Đã hoàn thành
-                            if(item.Process =="Cancle")
-                                td 
-                                    p.process Bị Hủy 
-                            td 
-                                a(href=`/koi/my-appointment/detail/${item.AppointmentID}` class="btn btn-info") Chi tiết 
+                                    a(href=`/koi/my-appointment/detail/${item.AppointmentID}` class="btn btn-info") Chi tiết 

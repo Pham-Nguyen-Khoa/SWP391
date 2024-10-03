@@ -738,3 +738,19 @@ if (closeModalButton) {
 } else {
   console.error('Element with ID "closeModal" not found.');
 }
+
+
+
+
+// const marquee = document.querySelector('.marquee');
+// let index = 0;
+
+// function scrollText() {
+//   const lines = marquee.querySelectorAll('p');
+//   lines.forEach((line, i) => {
+//     line.style.display = i === index ? 'block' : 'none';
+//   });
+//   index = (index + 1) % lines.length;
+// }
+
+// setInterval(scrollText, 5000); 
