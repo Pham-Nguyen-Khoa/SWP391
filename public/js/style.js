@@ -29,9 +29,14 @@ const notification = document.querySelector("#notification");
 
 if (doctorInfoElement) {
   doctorInfoElement.innerHTML += `
-<img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
-<h3>Chăm Sóc Cá Koi </h3>
-<div class="rating">★ ★ ★ ★ ☆</div>
+    <div class="koi-care-box" style=" border-radius: 10px;  width: 100%;height: 533px; text-align: center;">
+      <img src="/images/koi.jpg" alt="Chăm Sóc Cá Koi" style="width: 177px; height: 182px; object-fit: cover; margin-bottom: 10px;    border: 2px solid black;">
+      <h3 style="color: #00796b; font-size: 24px; margin: 10px 0;">Trung Tâm Chăm Sóc Cá Koi</h3>
+      <div class="rating">★ ★ ★ ★ ★</div>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Chúng tôi tự hào là trung tâm chăm sóc cá Koi hàng đầu với hơn 20 năm kinh nghiệm. Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng mang đến dịch vụ tốt nhất cho những chú cá Koi yêu quý của bạn.</p>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Dịch vụ chăm sóc toàn diện, từ kiểm tra sức khỏe định kỳ đến cải thiện môi trường sống, đảm bảo cá Koi của bạn luôn khỏe mạnh và rực rỡ.</p>
+    </div>
+      
 
 `;
   doctorInfoElement.style.visibility = "visible";
@@ -106,9 +111,13 @@ if (selectService) {
       labelLocation.style.display = "block";
       selectLocation.style.display = "block";
       doctorInfoElement.innerHTML = `
-      <img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
-      <h3>Chăm Sóc Cá Koi </h3>
-      <div class="rating">★ ★ ★ ★ ☆</div>
+      <div class="koi-care-box" style=" border-radius: 10px;  width: 100%;height: 533px; text-align: center;">
+      <img src="/images/koi.jpg" alt="Chăm Sóc Cá Koi" style="width: 177px; height: 182px; object-fit: cover; margin-bottom: 10px;    border: 2px solid black;">
+      <h3 style="color: #00796b; font-size: 24px; margin: 10px 0;">Trung Tâm Chăm Sóc Cá Koi</h3>
+      <div class="rating">★ ★ ★ ★ ★</div>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Chúng tôi tự hào là trung tâm chăm sóc cá Koi hàng đầu với hơn 20 năm kinh nghiệm. Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng mang đến dịch vụ tốt nhất cho những chú cá Koi yêu quý của bạn.</p>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Dịch vụ chăm sóc toàn diện, từ kiểm tra sức khỏe định kỳ đến cải thiện môi trường sống, đảm bảo cá Koi của bạn luôn khỏe mạnh và rực rỡ.</p>
+    </div>
       
       `;
       doctorInfoElement.style.visibility = "visible";
@@ -135,8 +144,14 @@ if (selectService) {
       if(selectService.value =="Tư Vấn Online"){
         priceServiceElement.innerHTML=`
       <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
-      <span style="font-size: 28px; font-weight: bold; color: #dd9917; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
+      <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
       `
+      }else if(selectService.value =="Cải Thiện Môi Trường"){
+        priceServiceElement.innerHTML=`
+        <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
+        <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
+        <p style="font-size: 24px; font-weight: bold; color: #333;">(200K/Hồ)</p>
+        `
       }else{
         
         if(textareaDescription){
@@ -144,7 +159,7 @@ if (selectService) {
         }
         priceServiceElement.innerHTML=`
         <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
-        <span style="font-size: 28px; font-weight: bold; color: #dd9917; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
+        <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
         <p style="font-size: 24px; font-weight: bold; color: #333;">(200k/Cá)</p>
         `
       }
@@ -178,9 +193,14 @@ if (selectDoctor) {
     selectDate.value = "";
     if (selectDoctor.value === "Tự chọn") {
       doctorInfoElement.innerHTML = `
-      <img src="/images/koi.jpg" alt="Avatar của bác sĩ" class="avatar_doctor">
-      <h3>Chăm Sóc Cá Koi </h3>
-      <div class="rating">★ ★ ★ ★ ☆</div>
+    <div class="koi-care-box" style=" border-radius: 10px;  width: 100%;height: 533px; text-align: center;">
+      <img src="/images/koi.jpg" alt="Chăm Sóc Cá Koi" style="width: 177px; height: 182px; object-fit: cover; margin-bottom: 10px;    border: 2px solid black;">
+      <h3 style="color: #00796b; font-size: 24px; margin: 10px 0;">Trung Tâm Chăm Sóc Cá Koi</h3>
+      <div class="rating">★ ★ ★ ★ ★</div>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Chúng tôi tự hào là trung tâm chăm sóc cá Koi hàng đầu với hơn 20 năm kinh nghiệm. Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng mang đến dịch vụ tốt nhất cho những chú cá Koi yêu quý của bạn.</p>
+      <p style="color: #004d40; font-size: 17px; margin-bottom: 10px;">Dịch vụ chăm sóc toàn diện, từ kiểm tra sức khỏe định kỳ đến cải thiện môi trường sống, đảm bảo cá Koi của bạn luôn khỏe mạnh và rực rỡ.</p>
+    </div>
+      
       
       `;
       doctorInfoElement.style.visibility = "visible";
