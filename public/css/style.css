@@ -257,16 +257,14 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     padding: 0;
 }
 
-.intro {
+section.intro {
     padding: 3rem 7rem 3rem 7rem;
     font-family: 'Poppins', sans-serif;
     /* background-color: #FDF6F2; */
-    
     border-radius: 0.5rem;
 }
 
 .intro-title {
-    text-align: right;
     font-weight: bold;
     font-size: 2rem;
     opacity: 0.5;
@@ -277,11 +275,24 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 hr.seperate-line {
-    border: none; /* Bỏ đường viền mặc định */
-    border-top: 1px solid #ccc; /* Đường kẻ ngang */
-    margin: 20px 0; /* Khoảng cách trên và dưới */
+    border: none;   
+    border-top: 1px solid #ccc;
+    margin: 20px 0;
 }
 
+section.servive {
+    padding: 3rem 7rem 3rem 7rem;
+    font-family: 'Poppins', sans-serif;   
+    border-radius: 0.5rem;
+}
+
+.card-title {
+    height: 100px;
+}
+
+.service-card {
+    height: 432px;
+}
 
 
 
