@@ -249,12 +249,21 @@ module.exports.assignVet = async (req, res) => {
       },
     });
     const formatDateAppointment = formatDate(appointment.Date);
-    NodeMailer.sendMail(
-      `${email[0].Email}`,
+    if(appointment.ServiceID == "DV0002"){
+        NodeMailer.sendMail(
+            `${email[0].Email}`,
+            "Thông báo đặt lịch thành công",
+            "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+        );
+    }else{
+      NodeMailer.sendMail(
+        `${email[0].Email}`,
       "Thông báo đặt lịch thành công",
-      "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào ca " + appointment.Shift + ". " +
-      "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
-    );
+      "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+       "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Hãy chuẩn bị sẵn sàng nhé!" + appointment.Address
+      );
+    }
     
     req.flash("success", "Đã gán bác sĩ và cập nhật lịch thành công!");
     res.redirect(`/staff/appointment`);

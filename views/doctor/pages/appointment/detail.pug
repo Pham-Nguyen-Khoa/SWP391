@@ -7,18 +7,18 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     +title("Hồ sơ dịch vụ")
-    //- pre
-    //-     code= JSON.stringify(appoinmentInfo, null, 2)
+    pre
+        code= JSON.stringify(appoinmentInfo, null, 2)
     .order-details
         b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
         b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} 
         if(appoinmentInfo.Name == "Tư Vấn Online")
-                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 800px;") Đã thanh toán
+                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
         else 
             if(appoinmentInfo.StatusPaid == "Đã thanh toán")
-                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 800px;") Đã thanh toán
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
             else 
-                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 800px;") Chưa thanh toán
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Chưa thanh toán
         p ______________________________________________________________
         if(appoinmentInfo.Name == "Tư Vấn Online")
                 span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
