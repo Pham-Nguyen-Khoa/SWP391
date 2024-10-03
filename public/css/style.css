@@ -249,9 +249,17 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     background-color: #d75858;
 }
 
+.img-banner {
+    width: 1210px;
+}
 
+.container-fluid {
+    padding: 0;
+}
 
-
+.intro {
+    padding-top: 3rem;
+}
 
 
 

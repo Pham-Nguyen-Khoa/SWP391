@@ -1,13 +1,19 @@
 extends ../../layouts/default.pug
 
 block main
-    .container.my-3
-        .row 
-            .col-12 
-                h1 Trang chủ
-            .col-12 
+    //- .container.my-3
+    //-     .row 
+    //-         .col-12 
+    //-             h1 Trang chủ
+    //-         .col-12 
 
-    if(userInfo)
-        h1 #{userInfo.FullName}
-        h1 #{userInfo.AccountID}
-        h1 #{userInfo.Address}
+    //- if(userInfo)
+    //-     h1 #{userInfo.FullName}
+    //-     h1 #{userInfo.AccountID}
+    //-     h1 #{userInfo.Address}
+    .container-fluid 
+        img.img-banner(src="/images/dummyBanner.jpg" alt="Banner Image")
+        section.intro
+            h3.intro-title Chào mừng bạn đến với Trung Tâm Thú Y Cá Koi - HealthyKoi!
+            p.intro-content Chúng tôi tự hào cung cấp dịch vụ chăm sóc sức khỏe toàn diện cho cá Koi, từ đánh giá ao nuôi, khám chữa bệnh đến tư vấn trực tuyến. Với đội ngũ bác sĩ thú y giàu kinh nghiệm và sự tận tâm, chúng tôi cam kết mang đến môi trường sống lý tưởng và sự chăm sóc tốt nhất cho những chú cá Koi của bạn.
+
