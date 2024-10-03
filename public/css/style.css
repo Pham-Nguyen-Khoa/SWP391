@@ -258,8 +258,30 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .intro {
-    padding-top: 3rem;
+    padding: 3rem 7rem 3rem 7rem;
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #FDF6F2; */
+    
+    border-radius: 0.5rem;
 }
+
+.intro-title {
+    text-align: right;
+    font-weight: bold;
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+.intro-content {
+    font-size: 1.25rem;
+}
+
+hr.seperate-line {
+    border: none; /* Bỏ đường viền mặc định */
+    border-top: 1px solid #ccc; /* Đường kẻ ngang */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+}
+
 
 
 
