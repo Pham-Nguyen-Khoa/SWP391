@@ -249,19 +249,19 @@ module.exports.assignVet = async (req, res) => {
       },
     });
     const formatDateAppointment = formatDate(appointment.Date);
-    if(appointment.ServiceID == "DV0002"){
+    if(appointment.ServiceID == "DV0003"){
         NodeMailer.sendMail(
             `${email[0].Email}`,
             "Thông báo đặt lịch thành công",
             "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
             "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
         );
-    }else{
+    }else if(appointment.ServiceID == "DV0002"){
       NodeMailer.sendMail(
         `${email[0].Email}`,
       "Thông báo đặt lịch thành công",
       "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
-       "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Hãy chuẩn bị sẵn sàng nhé!" + appointment.Address
+       "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!" 
       );
     }
     

@@ -9,14 +9,21 @@
     width: 100%;
     height: 80px;
 } */
-
+body {
+    background-color: #d8ecf9bd; /* Light grey background color */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Default font family */
+    color: #333; /* Default text color */
+    height: 100%;
+}
 .footer {
-    background-color: #333;
+    background-color: #4c4a4a;
     position: relative;
     color: #fff;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px 10px 0;
+    padding: 40px 10px 10px 0;
     bottom: 0;
     margin: 0;
     width: 100%;
@@ -30,13 +37,15 @@
 
 /* Container and Navbar Styling */
 .navbar {
-    background-color: #fdf6f2;
+    background-color: #91c7da7d;
     /* Light background similar to the image */
     padding: 1rem 2rem;
     /* Adds space around the content */
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
     /* Adjusted font size (smaller) */
+    height: 120px;
+    border-bottom: solid black;
 }
 
 .navbar-nav {
@@ -81,6 +90,7 @@
 
 /* Nav links */
 .nav-link {
+    font-size: 20px;
     color: #000;
     text-transform: uppercase;
     font-weight: bold;
@@ -98,28 +108,33 @@
 
 /* Button Styling */
 .btn-appointment {
-    background-color: #a21a1a;
+    background-color: #bd2222;
     color: #fff;
     padding: 0.45rem 1.4rem;
-    /* Slightly adjusted padding for smaller button size */
     border-radius: 25px;
     font-weight: bold;
     text-transform: uppercase;
     border: none;
     margin-left: 2rem;
-    font-size: 0.85rem;
-    /* Smaller font size for the button */
+    font-size: 1rem;
+    width: 181px;
+    height: 49px;
 }
 
 .btn-appointment:hover {
     background-color: #d75858;
     color: #fff;
+    
 }
 
 /* Login/Register Links */
+.nav-item .nav-link {
+    font-size: 20px;
+}
 .nav-item .nav-link:last-child {
     margin-left: 1rem;
     font-size: 0.8rem;
+    font-size: 20px;
     /* Slightly smaller font for login/register */
 }
 
@@ -187,7 +202,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .login-img {
     max-width: 100%;
-    max-height: 100%;
+    height: 100%;
 }
 
 .col-7.left-column {
@@ -211,7 +226,6 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .form-group.utilities {
     display: flex;
-    justify-content: space-evenly;
 }
 
 .form-control.login-element {
@@ -219,13 +233,13 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .submit-login {
-    display: flex;
-    justify-content: center;
+    margin: 0 37%;
 }
 
 .btn.login-button {
-    color: #fff;
-    background-color: #d75858;
+    width: 100px;
+    background-color: #2da0cc;
+    color: white
 }
 
 .form-control.register-element {
@@ -250,7 +264,10 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .img-banner {
-    width: 1210px;
+    width: 100%;
+    height: 550px;
+    object-fit: unset;
+
 }
 
 .container-fluid {
@@ -266,8 +283,8 @@ section.intro {
 
 .intro-title {
     font-weight: bold;
-    font-size: 2rem;
-    opacity: 0.5;
+    font-size: 2.5rem;
+    opacity: 0.8;
 }
 
 .intro-content {
@@ -287,15 +304,28 @@ section.profession {
 }
 
 .card-title {
-    height: 100px;
+    padding: 30px;
+    margin: 35px;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #0065c2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
 }
 
 .profession-card {
-    height: 432px;
+    height: 500px;
+    border: 5px solid #145dda99;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 6px #88afcc;
 }
 
 section.service {
-    padding: 1rem 3rem 1rem 3rem;
+    padding: 1rem 3rem 3rem 3rem;
+    margin-bottom: 50px;
 }
 
 .service-title {
@@ -303,7 +333,7 @@ section.service {
 }
 
 .service-content {
-    height: 168px;
+    height: auto;
 }
 
 .btn-outline-danger{
@@ -384,8 +414,8 @@ background-color: #cac0c05c; */
     padding: 75px 0 0 0;
     background-color: #bee8ee;
     border-radius: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid black;
+    box-shadow: 0px 0px 12px 11px rgb(22 64 169 / 17%);
+    border: 2px solid #1346c8;
 }
 
 .title_appointment {
@@ -1297,7 +1327,7 @@ header {
 /* mixin-title */
 .mixin-title {
     text-align: center;
-    margin: 0 auto 30px;
+    margin: 40px auto 30px;
     width: 70%;
     background-color: #21a0b3;
     border-radius: 32px;
@@ -1422,3 +1452,51 @@ header {
         margin-bottom: 0;
     }
 }
+
+
+
+/* .marquee-container {
+    margin: 100px 0 20px 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #85c7d8c4;
+    border: 2px solid #fff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  } */
+  
+  .marquee-container {
+    border-top: 4px solid #797474;
+    border-bottom: 4px solid #797474;
+    margin: 100px 0 20px 0;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: #85c7d8c4;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .marquee {
+    position: absolute;
+    white-space: nowrap;
+    animation: marquee 7s linear infinite;
+  }
+  
+  .marquee p {
+    margin: 0;
+    font-size: 55px;
+    font-weight: bold;
+    color: #1a6ab9;
+    text-shadow: 2px 2px 4px rgb(99 96 96 / 70%);
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(180%); }
+    100% { transform: translateX(-180%); }
+  }
