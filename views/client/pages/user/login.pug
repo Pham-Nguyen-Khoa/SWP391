@@ -1,30 +1,44 @@
 
+extends ../../layouts/default.pug
 include ../../mixins/alert.pug
-doctype html 
-html 
-    head 
-        title #{pageTitle}
-        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css")
-        link(rel="stylesheet", href="/css/style.css")
-        link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css")
-       
-    body 
-            include ../../partials/header.pug
-            .spaceHeader(style="height: 100px")
-            +alert-success("5000")
-            +alert-error("5000")
-            .container.my-3
-                .row 
-                    .col-12 
-                        h1 Login
-                    .col-12
+block main
+    +alert-success("5000")
+    +alert-error("5000")
+    //- .container.my-3
+    //-     .row 
+    //-         .col-12 
+    //-             h1 Login
+    //-         .col-12
+    //-             form(action="/auth/login" method="post")
+    //-                 .form-group
+    //-                     label(for="Email") Email
+    //-                     input#email.form-control(type="email" name="Email" required)
+    //-                 .form-group
+    //-                     label(for="Password") Password
+    //-                     input#password.form-control(type="password" name="Password" required)
+    //-                 .form-group
+    //-                     a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
+    //-                 button.btn.btn-primary(type="submit") Login
+    .container-fluid 
+        .row 
+            .col-7.left-column 
+                img.login-img(src="/images/Login.webp" alt="Login image")
+            .col-5.right-column
+                .right-container 
+                    h2.title-login.text-center.m-4 Đăng nhập
+                    .form-container.login-container
                         form(action="/auth/login" method="post")
-                            .form-group
-                                label(for="Email") Email
-                                input#email.form-control(type="email" name="Email" required)
-                            .form-group
-                                label(for="Password") Password
-                                input#password.form-control(type="password" name="Password" required)
-                            .form-group
+                        .form-group
+                            label(for="Email") Email
+                            input#email.form-control.login-element(type="email" name="Email" required)
+                        .form-group
+                            label(for="Password") Password
+                            input#password.form-control.login-element(type="password" name="Password" required)
+                        .form-group.utilities
+                            .remember-utilities
+                                input(type="checkbox" name="RememberMe") 
+                                label(for="Remember") Nhớ tài khoản 
+                            .forgot-utilities
                                 a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
-                            button.btn.btn-primary(type="submit") Login
+                        .submit-login
+                            button.btn.login-button(type="submit") Login

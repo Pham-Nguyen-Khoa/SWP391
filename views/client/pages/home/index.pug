@@ -1,13 +1,61 @@
 extends ../../layouts/default.pug
 
 block main
-    .container.my-3
-        .row 
-            .col-12 
-                h1 Trang chủ
-            .col-12 
+    //- .container.my-3
+    //-     .row 
+    //-         .col-12 
+    //-             h1 Trang chủ
+    //-         .col-12 
 
-    if(userInfo)
-        h1 #{userInfo.FullName}
-        h1 #{userInfo.AccountID}
-        h1 #{userInfo.Address}
+    //- if(userInfo)
+    //-     h1 #{userInfo.FullName}
+    //-     h1 #{userInfo.AccountID}
+    //-     h1 #{userInfo.Address}
+    .container-fluid 
+        img.img-banner(src="/images/dummyBanner.jpg" alt="Banner Image")
+        section.intro
+            h3.intro-title.text-center Chào Mừng Bạn Đến Với HealthyKoi
+            p.intro-content Chúng tôi tự hào cung cấp dịch vụ chăm sóc sức khỏe toàn diện cho cá Koi, từ đánh giá ao nuôi, khám chữa bệnh đến tư vấn trực tuyến. Với đội ngũ bác sĩ thú y giàu kinh nghiệm và sự tận tâm, chúng tôi cam kết mang đến môi trường sống lý tưởng và sự chăm sóc tốt nhất cho những chú cá Koi của bạn.   
+        section.profession
+            h3.intro-title.text-center Sự Chăm Sóc Tốt Nhất Dành Cho Những Chú Cá Koi Của Bạn
+            .row
+                .col-md-4   
+                    .card.profession-card
+                        img(src="images/intro-1.jpg", alt="Dịch vụ 1")
+                        .card-body
+                            h3.text-center.card-title Những chuyên gia bạn có thể trông cậy
+                            p Giống như con người, sức khỏe của những chú Koi phụ thuộc vào việc bác sĩ điều trị có đúng.
+                .col-md-4   
+                    .card.profession-card
+                        img(src="images/intro-1.jpg", alt="Dịch vụ 1")
+                        .card-body
+                            h3.text-center.card-title Các bác sĩ được đào tạo và có bằng cấp chuyên môn
+                            p Những chú cá Koi của bạn xứng đáng được nhận những sự chăm sóc tốt nhất. Đó là những gì chúng tôi đã cam kết thực hiện.
+                .col-md-4   
+                    .card.profession-card
+                        img(src="images/intro-2.jpg", alt="Dịch vụ 1")
+                        .card-body
+                            h3.text-center.card-title Chăm sóc khách hàng
+                            p Khi chú Koi của bạn bị tổn thương, bạn thân bạn sẽ không vui. Chúng tôi sẽ chăm sóc bạn bằng cách làm cho bạn cảm thấy thoải mái nhất.
+        //- hr.seperate-line 
+        section.service 
+            h3.intro-title.text-center.mb-5 Các Dịch Vụ Của Chúng Tôi
+            .row 
+                .col-md-4 
+                    .service-title 
+                        h3.text-center Dịch Vụ Khám Bệnh Cho Cá Koi
+                    .service-content Chúng tôi cung cấp dịch vụ khám bệnh chuyên sâu dành cho cá Koi, giúp phát hiện sớm các vấn đề về sức khỏe và đảm bảo cá Koi của bạn luôn trong tình trạng tốt nhất. Đội ngũ bác sĩ giàu kinh nghiệm sẽ kiểm tra tổng quát, phát hiện bệnh lý và đề xuất các phương pháp điều trị hiệu quả nhất.  
+                    .service-detail.pt-4
+                        button.btn.btn-outline-danger Tìm hiểu thêm
+                .col-md-4 
+                    .service-title 
+                        h3.text-center Tư Vấn Cải Thiện Môi Trường Hồ Nuôi
+                    .service-content trường sống lý tưởng là yếu tố quan trọng đối với sức khỏe của cá Koi. Chúng tôi cung cấp dịch vụ tư vấn để đánh giá và cải thiện chất lượng nước, thiết kế hồ nuôi phù hợp và điều chỉnh các yếu tố môi trường để cá Koi của bạn phát triển khoẻ mạnh.         
+                    .service-detail.pt-4
+                        button.btn.btn-outline-danger Tìm hiểu thêm
+                .col-md-4 
+                    .service-title 
+                        h3.text-center Tư Vấn Trực Tuyến
+                    .service-content Dịch vụ tư vấn trực tuyến của chúng tôi mang đến sự tiện lợi cho bạn, giúp bạn nhận được sự hỗ trợ từ các bác sĩ thú y mọi lúc mọi nơi. Chỉ cần đặt lịch hẹn, bạn sẽ nhận được lời khuyên chuyên môn và các giải pháp nhanh chóng cho những vấn đề liên quan đến sức khỏe của cá Koi.
+                    .service-detail.pt-4
+                        button.btn.btn-outline-danger Tìm hiểu thêm
