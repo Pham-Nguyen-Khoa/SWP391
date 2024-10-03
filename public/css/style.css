@@ -280,7 +280,7 @@ hr.seperate-line {
     margin: 20px 0;
 }
 
-section.servive {
+section.profession {
     padding: 3rem 7rem 3rem 7rem;
     font-family: 'Poppins', sans-serif;   
     border-radius: 0.5rem;
@@ -290,11 +290,39 @@ section.servive {
     height: 100px;
 }
 
-.service-card {
+.profession-card {
     height: 432px;
 }
 
+section.service {
+    padding: 1rem 3rem 1rem 3rem;
+}
 
+.service-title {
+    height: 68px;
+}
+
+.service-content {
+    height: 168px;
+}
+
+.btn-outline-danger{
+    display: flex;
+    align-items: center;
+    border-color: #d75858;
+    color: #d75858;
+}
+
+.btn-outline-danger:hover {
+    background-color: #d75858; 
+    color: #fff; 
+    border-color: #d75858; 
+}
+
+.service-detail {
+    display: flex;
+    justify-content: center;
+}
 
 /* ALERT */
 
