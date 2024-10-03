@@ -109,7 +109,15 @@ if (selectService) {
       });
     } else {
       labelLocation.style.display = "block";
-      selectLocation.style.display = "block";
+      if(selectService.value != "Cải Thiện Môi Trường"){
+        selectLocation.style.display = "block";
+      }else{
+        labelLocation.style.display = "none";
+        selectLocation.style.display = "none";
+        textareaDescription.style.display ='none';
+        labelAddress.style.display = "block";
+        inputAddress.style.display = "block";
+      }
       doctorInfoElement.innerHTML = `
       <div class="koi-care-box" style=" border-radius: 10px;  width: 100%;height: 533px; text-align: center;">
       <img src="/images/koi.jpg" alt="Chăm Sóc Cá Koi" style="width: 177px; height: 182px; object-fit: cover; margin-bottom: 10px;    border: 2px solid black;">
@@ -558,7 +566,16 @@ if (buttonSubmitAppointment) {
       } else {
         confirmAppointment.style.display = "block";
       }
-    } else {
+    } else if(service == "Cải Thiện Môi Trường"){
+      if (!name || !phone || !service || !doctor || !date || !selectedTimeSlot) {
+        document.getElementById("modalMessage").innerText =
+          "Vui lòng điền đầy đủ thông tin trước khi xác nhận!";
+        document.getElementById("confirmationModal").style.display = "block";
+        return;
+      } else {
+        confirmAppointment.style.display = "block";
+      }
+    }else{
       // Check for all fields if the service is not "Tư Vấn Online"
       if (!name || !phone || !service || !location || !doctor || !date || !koiHealth || !selectedTimeSlot) {
         document.getElementById("modalMessage").innerText =

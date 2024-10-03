@@ -664,12 +664,14 @@ select {
      
       .confirmationModal{
         padding: 20px;
-        width: 400px;
+        width: 500px;
         border-radius: 10px;
         margin: 20% auto;
         background: white;
         box-shadow: 0 4px 8px 7px rgb(204 172 172 / 58%);
         text-align: center;
+        height: 200px;
+        font-size: 20px;
       }
 
       
