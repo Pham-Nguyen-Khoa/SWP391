@@ -1,0 +1,32 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +title("Tình Trạng Hồ")
+    each pondRecord, pIndex in pondRecords
+        .order-details.pt-5(style="height:auto; padding: 80px 100px 30px 100px !important;")
+            //- h1.text-center.mb-4 Đánh giá của bác sĩ
+            .card.shadow-sm.table-appointment-detail
+                .card-header.text-white.py-3(style="background-color: #5e9cb8;")
+                    h3.mb-0.text-center Nhận định và giải pháp hồ #{pIndex + 1}
+                .card-body
+                    .row.g-4
+                        .col-md-6
+                            .card.h-100.border-danger
+                                .card-header.bg-danger.text-white
+                                    h5.card-title.mb-0 Vấn đề
+                                .card-body
+                                    p.card-text #{pondRecord.Problem}
+                        .col-md-6
+                            .card.h-100.border-success
+                                .card-header.bg-success.text-white
+                                    h5.card-title.mb-0 Giải pháp
+                                .card-body
+                                    p.card-text #{pondRecord.Solution}
+                    .row.mt-4
+                        .col-12
+                            .card.border-info
+                                .card-header.bg-info.text-white
+                                    h5.card-title.mb-0 Mô tả chi tiết
+                                .card-body
+                                    p.card-text #{pondRecord.Description}

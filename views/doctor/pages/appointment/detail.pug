@@ -10,28 +10,41 @@ block main
     //- pre
     //-     code= JSON.stringify(appoinmentInfo, null, 2)
     .order-details
-       b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
-       b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} 
-       if(appoinmentInfo.Name == "Tư Vấn Online")
-            span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 900px;") Đã thanh toán
-       else 
-            span(style="background-color: #e14d4d; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 900px;") Chưa thanh toán
-       p ______________________________________________________________
-       if(appoinmentInfo.Name == "Tư Vấn Online")
-            span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
-            b Đã thanh toán
-       else
-            span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
-            b Chưa thanh toán
-       p(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin đơn hàng
-       b ◉[Anh/Chị] :
-       span(style="color: black; font-weight: 600; margin-left: 10px") #{appoinmentInfo.CustomerFullName}
-       br
-       if(appoinmentInfo.AddressAppointment)
-        b ◉ Địa chỉ: #{appoinmentInfo.Address}    |
-        b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
-       else   
-        b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
+        b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
+        b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} 
+        if(appoinmentInfo.Name == "Tư Vấn Online")
+                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
+        else 
+            if(appoinmentInfo.StatusPaid == "Đã thanh toán")
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
+            else 
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Chưa thanh toán
+        p ______________________________________________________________
+        if(appoinmentInfo.Name == "Tư Vấn Online")
+                span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
+                b Đã thanh toán
+        else
+            if(appoinmentInfo.StatusPaid == "Đã thanh toán")
+                span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
+                b Đã thanh toán
+            else 
+                span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
+                b Chưa thanh toán
+        p(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin đơn hàng
+        b ◉ [Anh/Chị] :
+        span(style="color: black; font-weight: 600; margin-left: 10px") #{appoinmentInfo.CustomerFullName}
+        br
+        b ◉ Thời gian hẹn:
+            span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
+        br
+        if(appoinmentInfo.AddressAppointment)
+            b ◉ Địa chỉ: #{appoinmentInfo.Address}    |
+            b    ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
+            //- p.lead
+            //-     b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
+            //-     p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px; display: inline-block;")   #{appoinmentInfo.HealthKoi}
+        else   
+            b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
         table.table.table-striped.mt-5.table-appointment-detail
             thead 
                 tr(style="text-align: center")  
@@ -45,19 +58,25 @@ block main
                     td #{appoinmentInfo.PriceFormat}
         .row 
             .col-3
+                .col-6
+                h2(style="font-size: 37px; text-decoration: underline; font-style: normal; font-weight: bold")  Thông tin bác sĩ
                 b ◉ Bác sĩ: 
                 span(style="color: black; font-weight: 500; margin-left: 10px") Dr: #{appoinmentInfo.VetFullName}
+                br
+                b ◉ Chuyên ngành: 
+                span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Specialization}
                 img(src=appoinmentInfo.VetAvatar)
-                if(appoinmentInfo.GoogleMeet)
+                if(appoinmentInfo.GoogleMeet && appoinmentInfo.Name == "Tư Vấn Online"  )
                     br
                     b(style="display: block; margin-top: 30px") ◉ Link Google Meet:
                     a(href=appoinmentInfo.GoogleMeet, target="_blank", style="color: #506fc4; font-weight: 600;  text-decoration: revert;") #{appoinmentInfo.GoogleMeet}     
             .col-2
-                b ◉ Thời gian hẹn:
-                span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
+                
                 
             .col-7 
-                //- if(appoinmentInfo.Name =="Tư Vấn Online")
-                h4(style="font-size: 25px; font-weight: bold; background-color: #b1a9a966; border-radius: 20px; text-align: center; height: 50px; padding: 10px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
-    
+                if(appoinmentInfo.Name =="Tư Vấn Online")
+                    h4(style="font-size: 25px; font-weight: bold;     background-color: #b0d0db; border-radius: 20px; text-align: center; height: 50px; padding: 10px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
+                else 
+                    h4(style="font-size: 25px; font-weight: bold;     background-color: #b0d0db; border-radius: 20px; text-align: center; height: 50px; padding: 10px; width: 800px;") Tổng tiền ước tính: #{appoinmentInfo.PriceFormat} 
+
         button(class="btn btn-detail-back" onclick=`window.history.back()`) Quay lại 

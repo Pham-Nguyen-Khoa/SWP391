@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +title("Chi Tiết Thông Số Hồ")
+    each pondProfile, pIndex in pondProfiles
+
+        .order-details.pt-5(style="height:auto ;padding: 80px 100px 30px 100px !important; ")
+            if(pondProfiles.length === 1)
+                h1.text-center.font-weight-600.mb-5.text-dark Thông số hồ
+            else if(pondProfiles.length > 1)
+                h1.text-center.font-weight-600.mb-5.text-dark Thông số hồ #{pIndex + 1}
+            .row.mb-4
+                .col-md-6
+                    .card
+                        .card-body(style="background-color: #aeaed4;")
+                            h5.card-title Thể tích
+                            h2.card-text.text-primary #{pondProfile.Volume} m³
+                .col-md-6
+                    .card
+                        .card-body(style="background-color: #e47979;")
+                            h5.card-title Nhiệt độ
+                            h2.card-text.text-danger #{pondProfile.Temperature} °C
+            
+            .row.mb-4
+                .col-md-4
+                    .card.bg-info.text-white
+                        .card-body
+                            h5.card-title pH
+                            h2.card-text #{pondProfile.pH}
+                .col-md-4
+                    .card.bg-success.text-white
+                        .card-body
+                            h5.card-title Oxy hòa tan
+                            h2.card-text #{pondProfile.Oxygen} mg/L
+                .col-md-4
+                    .card.bg-warning.text-dark
+                        .card-body
+                            h5.card-title Độ mặn
+                            h2.card-text #{pondProfile.Salt} ppt
+
+            h3.mb-3 Các thông số khác
+            table.table.table-striped.table-hover.table-appointment-detail
+                thead
+                    tr
+                        th Thông số
+                        th Giá trị
+                        th Đơn vị
+                tbody
+                    tr
+                        td CO₂
+                        td #{pondProfile.CO2}
+                        td ppm
+                    tr
+                        td Nitrite
+                        td #{pondProfile.Nitrite}
+                        td mg/L
+                    tr
+                        td Nitrate
+                        td #{pondProfile.Nitrate}
+                        td mg/L

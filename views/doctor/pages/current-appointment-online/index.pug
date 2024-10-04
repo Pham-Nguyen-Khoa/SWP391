@@ -1,0 +1,59 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block append main
+  style.
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Arial', sans-serif;
+    }
+    label{
+      font-weight: 600;
+    font-size: 20px;
+    }
+
+
+block main
+  +title("Đơn Hiện Tại")
+  if currentAppointment
+    .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;     margin: 60px 200px 80px ; background-color: #f7fbff")
+      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin cuộc hẹn
+      .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
+        .row 
+            .col-7
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Khách hàng
+                b :  #{currentAppointment.Name}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Dịch vụ
+                b :  Tư Vấn Online
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Ngày
+                b :  #{currentAppointment.DateFormat}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Lịch hẹn
+                b :  #{currentAppointment.Shift}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Số điện thoại
+                b :  #{currentAppointment.PhoneNumber}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Link Google Meet
+                a(href=`${user.GoogleMeet}` target="_blank") :  #{user.GoogleMeet}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
+                b :  Đang thực hiện
+                p.lead
+            .col-5  
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Bác sĩ
+                b  :  #{user.FullName}
+                br
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Chuyên ngành
+                b  :  #{user.Specialization}
+                br
+                img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;")   
+    .text-center.mt-4
+        button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black;  width: 259px;    border: 2px solid #0000008c;border-radius: 15px;font-weight: bold;  padding: 10px;" onclick=`window.location.href='/doctor/appointment/change-process/${currentAppointment.AppointmentID}/success'`) Hoàn thành 
+      
+  else
+    .alert.alert-info.text-center
+      h2 Hiện tại không có đơn đang xử lý.

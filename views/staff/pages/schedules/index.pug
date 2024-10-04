@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
+   
     +alert-success("5000")
     +alert-error('5000')
     div.sortSchedule
@@ -60,7 +61,7 @@ block main
                 .form-group.row
                     label(for='date' class='col-sm-2 col-form-label') Ngày làm việc:
                     .col-sm-10
-                        input(type='date' name='date' required class='form-control ')
+                        input(type='date' id='datePicker' name='date' required class='form-control' placeholder='dd/mm/yyyy')
                 .form-group.row
                     label(class='col-sm-2 col-form-label') Chọn ca làm việc:
                     .col-sm-4.select-shift
@@ -82,6 +83,8 @@ block main
                                 label(for='shift-15-17' class='form-check-label') 15h-17h
                 button(type='submit' class='button-add-shift') Thêm lịch
 
-                    script.
-                        var listDoctor = !{JSON.stringify(listDoctor)};
-                        var listServices = !{JSON.stringify(listServices)};;
+            script.
+                var listDoctor = !{JSON.stringify(listDoctor)};
+                var listServices = !{JSON.stringify(listServices)};;
+                
+                

@@ -1,3 +1,4 @@
+
 // Show Alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
@@ -74,3 +75,4 @@ function addDefaultDoctorOption() {
 
     })
   }
+  

@@ -1,3 +1,5 @@
+
+
 .header{
     background: #202020;
     padding: 10px;
@@ -182,7 +184,7 @@
 
 /* Header Styling */
 .table-container table th {
-    background-color: #3E8E7E; 
+    background-color: #54abb8f5; 
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -192,7 +194,7 @@
 
 /* Date Row Styling */
 .table-container table th.date-header {
-    background-color: #4FB0A9; 
+    background-color: #54abb8f5; 
 }
 
 /* Table Cell Styling */
@@ -205,7 +207,7 @@
 
 /* Doctor Card Styling */
 .table-container table td .doctor-card {
-    background-color: #E0F7FA; 
+    background-color: #54abb8f5; 
     border: 1px solid #B2EBF2;
     border-radius: 12px;
     padding: 10px;
@@ -215,14 +217,14 @@
 
 .table-container table td .doctor-card img {
     border-radius: 8px;
-    border: 2px solid #00796B; 
+    border: 2px solid #86d0dbf5; 
     margin-bottom: 8px;
 }
 
 .table-container table td .doctor-card .doctor-name {
     font-size: 14px;
     font-weight: bold;
-    color: #00796B; 
+    color: #86d0dbf5; 
 }
 
 .table-container table td .doctor-card .specialization {
@@ -230,7 +232,7 @@
     color: #555;
 }
 .table-container table td:nth-child(1){
-    background-color: #3E8E7E; 
+    background-color: #54abb8f5; 
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -251,14 +253,14 @@
 .table-container table td.time-cell {
     font-size: 14px;
     font-weight: bold;
-    background-color: #80CBC4; 
+    background-color: #54abb8f5; 
     color: #FFF;
     border-radius: 6px;
 }
 
 
 .table-container {
-    border: 3px solid #00796B; 
+    border: 3px solid #54abb8f5; 
     border-radius: 15px;
     padding: 20px;
     background-color: #FAFAFA; 
@@ -267,7 +269,7 @@
 
 
 .form-horizontal {
-    background-color: #a8cec6;
+    background-color: #a0d1d9f5;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 5px -5px 10px rgb(20 19 19 / 42%);
@@ -282,7 +284,7 @@
 }
 .select-shift{
     font-size: 20px;
-    background-color: #86c7c3;
+    background-color: #5bb3c1f5;
     border-radius: 20px;
     border: 1px dashed;
     padding: 20px;

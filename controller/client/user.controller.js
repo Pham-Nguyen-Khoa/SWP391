@@ -68,6 +68,7 @@ const generateUserId = async (rolePrefix, table, id) => {
   const count = results[0].count + 1;
   return `${rolePrefix}${String(count).padStart(4, "0")}`;
 };
+
 // [POST] localhost:/auth/register
 module.exports.registerPost = async (req, res) => {
   try {

@@ -13,9 +13,9 @@ block main
         b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
         b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} 
         if(appoinmentInfo.Name == "Tư Vấn Online")
-                span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 800px;") Đã thanh toán
+                span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
         else 
-                span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 800px;") Chưa thanh toán
+                span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Chưa thanh toán
         p ______________________________________________________________
         
         h2(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin đơn hàng
@@ -70,7 +70,9 @@ block main
                     span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
                 
             .col-7 
-                
-                h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600; background-color: #5aaeba; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
+                if(appoinmentInfo.Name == "Tư Vấn Online")
+                    h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;    background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
+                else
+                    h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền ước tính: #{appoinmentInfo.PriceFormat} 
     
         button(class="btn btn-detail-back" onclick=`window.location.href="/staff/appointment"`) Quay lại 

@@ -3,58 +3,108 @@ include ../../mixins/alert.pug
 include ../../mixins/mixin-title.pug
 
 block main
+   
     +alert-success("5000")
     +alert-error('5000')
     +title("Hồ sơ dịch vụ")
+    style.
+        #table-appointment thead tr th{
+          background-color: #86d0dbf5 !important
+        }
+        .btn-custom-outline {
+          color: #21a0b3;
+          background-color: transparent;
+          border-color: #21a0b3;
+        }
+        .btn-custom-outline.active,
+        .btn-custom-outline:active,
+        .btn-custom-outline:focus,
+        .btn-custom-outline:hover {
+          color: #ffffff !important;
+          background-color: #21a0b3 !important;
+          border-color: #21a0b3 !important;
+        }
     .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header Bộ lọc 
+      .card-header(style="background-color: #86d0dbf5 ;") Bộ lọc 
       .card-body 
         .row 
-          .col-6
+          .col-6#filter-buttons
             a(
               href=`/staff/appointment`
-                class=`btn btn-sm ml-1 btn-outline-success `
+                class=`btn btn-sm ml-1 btn-custom-outline `
                 button-filter
                 button-all
               ) Tất cả (#{listAppointmentOrigin.length})
             a(
               href=`/staff/appointment?process=pending`
-                class=`btn btn-sm ml-1 btn-outline-success `
+                class=`btn btn-sm ml-1 btn-custom-outline `
                 button-filter
               )  Chờ xác nhận  (#{listAppointmentOrigin.filter(a => a.Process === 'Pending').length})
-            a(
-              href=`/staff/appointment?process=ready`
-                class=`btn btn-sm ml-1 btn-outline-success `
-                button-filter
-              )  Sẵn sàng  (#{listAppointmentOrigin.filter(a => a.Process === 'Ready').length})
+            
             a(
               href=`/staff/appointment?process=accepted`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
-              ) Tiếp nhận (#{listAppointmentOrigin.filter(a => a.Process === 'Accepted').length}) 
+              ) Tiếp nhận (#{listAppointmentOrigin.filter(a => a.Process === 'Accepted').length})
+            a(
+              href=`/staff/appointment?process=ready`
+                class=`btn btn-sm ml-1 btn-custom-outline `
+                button-filter
+              )  Sẵn sàng  (#{listAppointmentOrigin.filter(a => a.Process === 'Ready').length}) 
             a(
               href=`/staff/appointment?process=process`
-                class=`btn btn-sm ml-1 btn-outline-success `
+                class=`btn btn-sm ml-1 btn-custom-outline `
                 button-filter
               )  Đang thực hiện  (#{listAppointmentOrigin.filter(a => a.Process === 'Process').length})
             a(
               href=`/staff/appointment?process=successed`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hoàn thành (#{listAppointmentOrigin.filter(a => a.Process === 'Successed').length})
             a(
               href=`/staff/appointment?process=cancelled`
-                class=`btn btn-sm ml-1 btn-outline-success  `
+                class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
-            
-           
-    table.table#table-appointment
-        thead
+          .col-6
+            form#filterForm(action="/staff/appointment" method="GET")
+              .form-group
+                label(for="dateFilter") Lọc theo ngày:
+                input.form-control(type="date" id="dateFilter" name="date" value=date)
+              .form-group
+                label(for="sortOrder") Sắp xếp theo:
+                select.form-control(id="sortOrder" name="sort" value=sort)
+                  option(value="asc") Tăng dần
+                  option(value="desc") Giảm dần
+              button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
+    if listAppointment.length === 0
+      if filterType === 'date'
+        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
+      else if filterType === 'process'
+        case processFilter
+          when 'pending'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Chờ xác nhận.
+          when 'accepted'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Tiếp nhận.
+          when 'ready'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Sẵn sàng.
+          when 'process'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đang thực hiện.
+          when 'successed'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;")| Không có đơn hẹn nào trong trạng thái Hoàn thành.
+          when 'cancelled'
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đã hủy.
+          default
+            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái này.
+    else     
+     
+      table.table#table-appointment
+        thead.custom-thead(style="background-color: #5AAEBA;")
             tr
                 th Mã đơn hàng
                 th Tên khách hàng
                 th Dịch vụ
+                th Ngày hẹn
                 th Trạng Thái
                 th Bác sĩ
                 th Chi tiết lịch hẹn
@@ -65,20 +115,21 @@ block main
                     td #{appointment.AppointmentID}
                     td #{appointment.NameCustomer}
                     td #{appointment.Name}
+                    td #{appointment.DateFormat}
                     td  
                         
                         if(appointment.Process == "Pending")  
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted" )
-                            span(class="btn btn-primary status-btn" style="min-width: 120px;" ) Tiếp nhận
+                            span(class="btn btn-primary status-btn" style="min-width: 140px;" ) Tiếp nhận
                         else if(appointment.Process == "Ready")
-                            span(class="btn btn-primary status-btn" style="min-width: 120px;") Sẵn sàng
+                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
                         else if(appointment.Process == "Progress")
-                            span(class="btn btn-dark status-btn" style="min-width: 120px;") Tiếp nhận
+                            span(class="btn btn-dark status-btn" style="min-width: 140px;") Tiếp nhận
                         else if(appointment.Process == "Cancelled")
-                            span(class="btn btn-danger status-btn" style="min-width: 120px;" ) Hủy bỏ 
+                            span(class="btn btn-danger status-btn" style="min-width: 140px;" ) Hủy bỏ 
                         else if(appointment.Process == "Successed")
-                            span(class="btn btn-success status-btn" style="min-width: 120px;") Thành công 
+                            span(class="btn btn-success status-btn" style="min-width: 140px;") Thành công 
                     td 
                         if(appointment.VetID == null)
                             form(action=`/staff/appointment/load-vets/${appointment.AppointmentID}` method="GET")
@@ -101,19 +152,20 @@ block main
                     td #{appointment.AppointmentID}
                     td #{appointment.NameCustomer}
                     td #{appointment.Name}
+                    td #{appointment.DateFormat}
                     td  
                         if(appointment.Process == "Pending")  
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
-                            span(class="btn btn-primary" style="min-width: 120px;") Tiếp nhận
+                            span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
                         else if(appointment.Process == "Ready")
-                            span(class="btn btn-primary" style="min-width: 120px;") Sẵn sàng
-                        else if(appointment.Process == "Progress")
-                            span(class="btn btn-dark" style="min-width: 120px;") Tiếp nhận
+                            span(class="btn btn-primary" style="min-width: 140px;") Sẵn sàng
+                        else if(appointment.Process == "Process")
+                            span(class="btn btn-dark" style="min-width: 140px;") Đang thực hiện
                         else if(appointment.Process == "Cancelled")
-                            span(class="btn btn-danger" style="min-width: 120px;" ) Hủy bỏ 
+                            span(class="btn btn-danger" style="min-width: 140px;" ) Hủy bỏ 
                         else if(appointment.Process == "Successed")
-                            span(class="btn btn-success" style="min-width: 120px;") Thành công 
+                            span(class="btn btn-success" style="min-width: 140px;") Thành công 
                     td 
                         span(style="background-color: #5AAEBA; color: black; min-width: 178px;" class="btn " ) #{appointment.NameVet}
                       
@@ -123,5 +175,26 @@ block main
                         a(href=`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2") 
                           i(class="fa fa-trash " aria-hidden="true") 
 
-    
+    script.
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.getElementById('filter-buttons');
+        const currentUrl = new URL(window.location.href);
+        const processParam = currentUrl.searchParams.get('process');
+        const buttons = filterButtons.querySelectorAll('.btn-custom-outline');
+        buttons.forEach(btn => {
+          const btnUrl = new URL(btn.href);
+          const btnProcess = btnUrl.searchParams.get('process');
+          if ((!processParam && btn.getAttribute('button-all') !== null) || 
+              (processParam && btnProcess === processParam)) {
+            btn.classList.add('active');
+          }
+        });
+        filterButtons.addEventListener('click', function(e) {
+          if (e.target.classList.contains('btn-custom-outline')) {
+            buttons.forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+          }
+        });
+      });
+        
 

@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +title("Chi Tiết Đơn Thuốc")     
+    .order-details(style="height:auto; padding: 30px 100px 20px 100px !important;")
+        each prescription, pIndex in prescriptions
+            if(prescriptions.length === 1)
+                h1.text-center.font-weight-600.mb-5.text-dark Danh sách thuốc của hồ
+            else if(prescriptions.length > 1)
+                h1.text-center.font-weight-600.mb-5.text-dark Danh sách thuốc của hồ #{pIndex + 1}
+            table.table.table-striped.mt-5.table-appointment-detail
+                thead 
+                    tr(style="text-align: center")  
+                        th STT
+                        th Hình ảnh
+                        th Tên thuốc
+                        th Cách dùng
+                tbody 
+                    each medicine, index in prescription.listMedicine
+                        tr 
+                            td.text-center.align-middle #{index + 1}
+                            td.text-center.align-middle 
+                                img(src=medicine.Image, alt="" style="width: 100px; height: 100px; object-fit: cover;")
+                            td.text-center.align-middle #{medicine.Name}
+                            td.text-center.align-middle #{medicine.toUse}
