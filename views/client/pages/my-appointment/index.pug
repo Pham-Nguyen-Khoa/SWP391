@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
 block main
-    .block-footer(style="height: 78vh")
+    .block-footer(style="height: 86vh")
         +title("Lịch Hẹn Của Bạn")
     
         .container-table 
@@ -50,7 +50,7 @@ block main
                                 if(item.Process =="Ready")
                                     td 
                                         p.process Sẵn sàng
-                                if(item.Process =="Progress")
+                                if(item.Process =="Process")
                                     td 
                                         p.process Đang thực hiện
                                 if(item.Process =="Successed")
@@ -60,4 +60,6 @@ block main
                                     td 
                                         p.process Bị Hủy 
                                 td 
-                                    a(href=`/koi/my-appointment/detail/${item.AppointmentID}` class="btn btn-info") Chi tiết 
+                                    a(href=`/koi/my-appointment/detail/${item.AppointmentID}` value=`/koi/my-appointment/detail/${item.AppointmentID}` button-delete class="btn btn-info") Chi tiết 
+
+    

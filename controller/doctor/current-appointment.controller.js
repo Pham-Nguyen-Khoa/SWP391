@@ -109,25 +109,15 @@ module.exports.index = async(req, res) => {
             Nitrate: pond.Nitrate,  
             PrescriptID: PrescriptionID
           });
-  
-        // console.log("Selected medications:", MedicineData.selectedMedications);
-        // const listMedicine = JSON.parse(MedicineData.selectedMedications);
-        // for (const medicineId of listMedicine) {
-        //   console.log(medicineId)
-        //   try {
-        //     await Prescription_Medicine.create({
-        //       PrescriptID: PrescriptionID,
-        //       MedicineID: medicineId,
-        //     });
-        //   } catch (error) {
-        //       console.log(error)
-        //   }
-        // }
         const pondMedications = MedicineData.find(med => med.pond === i + 1).medications;
         for (const medicineId of pondMedications) {
           await Prescription_Medicine.create({
             PrescriptID: PrescriptionID,
-            MedicineID: medicineId,
+            MedicineID: medicineId.medicineId,
+            Quantity: medicineId.quantity,
+            MorningUse: medicineId.morning,
+            AfternoonUse: medicineId.noon,
+            EveningUse: medicineId.evening,
           });
         }
       }
@@ -252,8 +242,8 @@ module.exports.index = async(req, res) => {
     else{
       const priceService = service.Price;
       const priceShip = 100000;
-    const totalFee = priceService + priceShip;
-    const objectPayment = {
+      const totalFee = priceService + priceShip;
+      const objectPayment = {
         priceService: formatCurrency(priceService),
         priceShip: formatCurrency(priceShip),
         totalFee: formatCurrency(totalFee)

@@ -552,6 +552,7 @@ if (buttonSubmitAppointment) {
     const phone = document.getElementById("phone").value;
     const service = document.getElementById("service").value;
     const location = document.getElementById("location").value;
+    const locationInput = document.getElementById("address").value;
     const doctor = document.getElementById("select_doctor").value;
     const date = document.getElementById("select_date").value;
     const koiHealth = document.getElementById("description-koi-health").value;
@@ -567,7 +568,8 @@ if (buttonSubmitAppointment) {
         confirmAppointment.style.display = "block";
       }
     } else if(service == "Cải Thiện Môi Trường"){
-      if (!name || !phone || !service || !doctor || !date || !selectedTimeSlot) {
+      console.log(locationInput.value)
+      if (!name || !phone || !service || !doctor || !date || !selectedTimeSlot || !locationInput)  {
         document.getElementById("modalMessage").innerText =
           "Vui lòng điền đầy đủ thông tin trước khi xác nhận!";
         document.getElementById("confirmationModal").style.display = "block";
@@ -576,7 +578,7 @@ if (buttonSubmitAppointment) {
         confirmAppointment.style.display = "block";
       }
     }else{
-      // Check for all fields if the service is not "Tư Vấn Online"
+
       if (!name || !phone || !service || !location || !doctor || !date || !koiHealth || !selectedTimeSlot) {
         document.getElementById("modalMessage").innerText =
           "Vui lòng điền đầy đủ thông tin trước khi xác nhận!";

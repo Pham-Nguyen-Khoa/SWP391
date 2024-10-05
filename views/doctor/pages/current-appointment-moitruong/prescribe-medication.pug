@@ -2,6 +2,13 @@ extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
 
 block main
+  style.
+    .form-control {
+      width: 100%;
+    }
+    table thead tr th{
+          background-color: #d2d4d4 !important;
+    }
   .container-fluid
     +title("Kê Đơn Thuốc")
     form#prescriptionForm(action="/doctor/current-appointment/payment" method="POST")
@@ -12,7 +19,7 @@ block main
       .medication-cards
 
       .text-center.mt-4
-        button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
+        button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
         a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
 
   script.
@@ -34,17 +41,20 @@ block main
               <option value="">-- Chọn thuốc --</option>
             </select>
           </div>
-          <table class="table prescription-table" id="prescriptionTable${i}">
+          <table class="table prescription-table text-center" id="prescriptionTable${i}">
             <thead>
               <tr>
-                <th>Hình ảnh</th>
-                <th>Tên thuốc</th>
-                <th>Hướng dẫn sử dụng</th>
-                <th>Thao tác</th>
+                <th class="text-center">Hình ảnh</th>
+                <th class="text-center">Tên thuốc</th>
+                <th class="text-center">Công dụng</th>
+                <th class="text-center">Số Lượng</th>
+                <th class="text-center">Sáng</th>
+                <th class="text-center">Trưa</th>
+                <th class="text-center">Chiều</th>
+                <th class="text-center">Thao tác</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Các hàng sẽ được thêm vào bằng JavaScript -->
             </tbody>
           </table>
         </div>
@@ -79,9 +89,13 @@ block main
         row.dataset.medicineId = medication.MedicineID; 
         row.innerHTML = `
           <td><img src="${medication.Image}" alt="${medication.Name}" style="width: 100px; height: 100px; object-fit: cover;"></td>
+          <td>${medication.NameEnglish}</td>
           <td>${medication.Name}</td>
-          <td>${medication.toUse}</td>
-          <td><button type="button" class="btn btn-danger btn-sm" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+          <td><input type="number" class="form-control" min="1" value="1"></td>
+          <td><input type="text" class="form-control" ></td>
+          <td><input type="text" class="form-control" ></td>
+          <td><input type="text" class="form-control" ></td>
+          <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
         `;
         saveFormData();
       }
@@ -97,14 +111,54 @@ block main
       const prescriptionData = [];
       for (let i = 1; i <= pondCount; i++) {
         const prescriptionTable = document.getElementById(`prescriptionTable${i}`).getElementsByTagName('tbody')[0];
-        const medicationIDs = Array.from(prescriptionTable.rows).map(row => row.dataset.medicineId); // Lấy MedicineID từ dataset của hàng
+        //- const medicationIDs = Array.from(prescriptionTable.rows).map(row => row.dataset.medicineId);
+        const medications = Array.from(prescriptionTable.rows).map(row => {
+          return {
+            medicineId: row.dataset.medicineId,
+            quantity: row.cells[3].querySelector('input').value,
+            morning: row.cells[4].querySelector('input').value,
+            noon: row.cells[5].querySelector('input').value,
+            evening: row.cells[6].querySelector('input').value
+          };
+        }); 
         prescriptionData.push({
           pond: i,
-          medications: medicationIDs
+          medications: medications
         });
       }
       localStorage.setItem('prescriptionData', JSON.stringify(prescriptionData));
     }
+
+
+    function addOrUpdateMedicationInTable(medication, prescriptionTable, tableId) {
+      const existingRow = Array.from(prescriptionTable.rows).find(row => row.cells[1].textContent === medication.Name);
+
+        if (!existingRow) {
+          const row = prescriptionTable.insertRow();
+          row.dataset.medicineId = medication.MedicineID; 
+          row.innerHTML = `
+            <td><img src="${medication.Image}" alt="${medication.Name}" style="width: 100px; height: 100px; object-fit: cover;"></td>
+            <td>${medication.NameEnglish}</td>
+            <td>${medication.Name}</td>
+            <td><input type="number" class="form-control" min="1" value="1" onchange="saveFormData()"></td>
+            <td><input type="text" class="form-control" onchange="saveFormData()"></td>
+            <td><input type="text" class="form-control" onchange="saveFormData()"></td>
+            <td><input type="text" class="form-control" onchange="saveFormData()"></td>
+            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+          `;
+              attachChangeEventListeners(row);
+              saveFormData();
+            }
+          } 
+
+      function attachChangeEventListeners(row) {
+        const inputs = row.querySelectorAll('input');
+        console.log(inputs)
+        inputs.forEach(input => {
+          input.addEventListener('change', saveFormData);
+        });
+      }
+
 
     function restoreFormData() {
       const savedData = localStorage.getItem('prescriptionData');
@@ -112,17 +166,22 @@ block main
         const data = JSON.parse(savedData);
         data.forEach(prescription => {
           const prescriptionTable = document.getElementById(`prescriptionTable${prescription.pond}`).getElementsByTagName('tbody')[0];
-          prescription.medications.forEach(medicationID => {
-            const medication = medications.find(med => med.MedicineID == medicationID);
-            if (medication) {
+          prescription.medications.forEach(medication => {
+            const med = medications.find(m => m.MedicineID == medication.medicineId);
+            if (med) {
               const row = prescriptionTable.insertRow();
-              row.dataset.medicineId = medication.MedicineID; // Lưu MedicineID vào dataset của hàng
-              row.innerHTML = `
-                <td><img src="${medication.Image}" alt="${medication.Name}" style="width: 100px; height: 100px; object-fit: cover;"></td>
-                <td>${medication.Name}</td>
-                <td>${medication.toUse}</td>
-                <td><button type="button" class="btn btn-danger btn-sm" onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${medication.MedicineID}')">Xóa</button></td>
+          row.dataset.medicineId = med.MedicineID;
+          row.innerHTML = `
+            <td><img src="${med.Image}" alt="${med.Name}" style="width: 100px; height: 100px; object-fit: cover;"></td>
+            <td>${med.NameEnglish}</td>
+            <td>${med.Name}</td>
+            <td><input type="number" class="form-control" min="1" value="${medication.quantity}"></td>
+            <td><input type="text" class="form-control" value="${medication.morning}"></td>
+            <td><input type="text" class="form-control" value="${medication.noon}"></td>
+            <td><input type="text" class="form-control" value="${medication.evening}"></td>
+            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')">Xóa</button></td>
               `;
+              attachChangeEventListeners(row);  
             }
           });
         });
