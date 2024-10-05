@@ -4,6 +4,106 @@ include ../../mixins/alert.pug
 block main
   +alert-error("5000")
   +alert-success("5000")
+
+
+
+
+  //-Reset password
+  //- .container-fluid
+  //-   .row(style="height: 100vh;")
+  //-     .col-7.left-column
+  //-       img.login-img(src="/images/Login.webp" alt="Hình nền đặt lại mật khẩu")
+  //-     .col-5.right-column.d-flex.align-items-center.justify-content-center.bg-white
+  //-       .reset-password-page.text-center(style="width: 80%;")
+  //-         .form-reset-password.px-4
+  //-           h2.reset-password-title.mb-4 Đặt lại mật khẩu
+  //-           p.reset-password-subtitle.mb-5 Vui lòng nhập mật khẩu mới cho tài khoản của bạn.
+  //-           form.reset-password-form(action='/auth/reset-password', method='POST')
+  //-             .form-group.mb-4
+  //-               label.form-label.mb-2.d-block.text-start(for="new-password" style="margin-right: 470px;") Mật khẩu mới
+  //-               input#new-password.form-control(type='password', name='newPassword', placeholder='Vui lòng nhập mật khẩu mới', required)
+  //-             .form-group.mb-5
+  //-               label.form-label.mb-2.d-block.text-start(for="confirm-password" style="margin-right: 430px;") Xác nhận mật khẩu
+  //-               input#confirm-password.form-control(type='password', name='confirmPassword', placeholder='Xác nhận mật khẩu', required)
+  //-             .form-buttons.d-flex.justify-content-center.mb-5
+  //-               button.btn.btn-primary.btn-pink.btn-lg(style="border-radius: 23px; padding: 10px 30px;" type='submit') Xác nhận
+  //-             p.form-login-link
+  //-               | Đã nhớ mật khẩu? 
+  //-               a.form-login-link.link(href='/auth/login') Đăng nhập
+  //-OTP
+  //- .container-fluid
+  //-   .row(style="height: 100vh;")
+  //-     .col-7.left-column
+  //-       img.login-img(src="/images/Login.webp" alt="Hình nền xác thực OTP")
+  //-     .col-5.right-column.d-flex.align-items-center.justify-content-center.bg-white
+  //-       .otp-verification-page.text-center
+  //-         .form-otp-verification
+  //-           h2.otp-verification-title Xác thực OTP
+  //-           p.otp-verification-subtitle Vui lòng nhập mã OTP đã được gửi đến email của bạn.
+  //-           form.otp-verification-form(action='/auth/otp-verify', method='POST')
+  //-             .form-group.mb-3
+  //-               input#otp.form-control(type='text', name='otp', placeholder='Nhập mã OTP', required)
+  //-             .form-buttons.d-flex.justify-content-center
+  //-               button.btn.btn-secondary.me-2(style = "margin-left: 10px; border-radius: 23px;"  type='button') Gửi lại mã
+  //-               button.btn.btn-primary.btn-pink(style = "margin-left: 20px; border-radius: 23px;" type='submit') Xác nhận
+  //-             p.form-resend-link.mt-3
+  //-               | Không nhận được mã? 
+  //-               a.form-resend-link.link(href='#') Gửi lại
+
+
+
+
+
+
+  //- forgot-password
+  .container-fluid
+  .row(style="height: 100vh;")
+      .col-7.left-column
+        img.login-img(src="/images/Login.webp" alt="Hình nền quên mật khẩu")
+      .col-5.right-column
+        .forgot-password-page
+          .form-forgot-password
+            h2.forgot-password-title Tìm tài khoản của bạn
+            p.forgot-password-subtitle Vui lòng nhập địa chỉ email để tìm kiếm tài khoản của bạn.
+            form.forgot-password-form(action='/auth/password/login', method='POST')
+              .form-group
+                input#email(type='email', name='email', placeholder='Địa chỉ email của bạn', required)
+              .form-buttons
+                button.btn.btn-secondary(type='button' style ="margin-left: 145px;") Quay lại
+                button.btn.btn-primary(type='submit' style ="margin-left: 20px;") Tìm kiếm
+              p.form-signup-link(style="text-align: center; margin-top: 20px; ")
+                | Chưa có tài khoản? 
+                a.form-signup-link.link(href='/auth/register') Đăng ký ngay
+
+
+  
+
+ 
+
+  //- .container.my-5
+  //-   .row.justify-content-center 
+  //-     .col-md-6
+  //-       .card.shadow-sm
+  //-         .card-body
+  //-           h2.card-title.text-center.mb-4 Lấy lại mật khẩu
+  //-           form(action="/auth/password/forgot" method="post")
+  //-             .mb-3
+  //-               label.form-label(for="email") Email
+  //-               input.form-control(
+  //-                 type="email"
+  //-                 id="email"
+  //-                 name="email"
+  //-                 required
+  //-                 placeholder="Nhập địa chỉ email của bạn"
+  //-               )
+  //-             .text-center
+  //-               button.btn.btn-primary.btn-lg(type="submit")
+  //-                 i.fas.fa-paper-plane.me-2
+  //-                 | Gửi email xác nhận
+
+  
+
+  
   //- .container.my-5
   //-   .row.justify-content-center
   //-     .col-md-6
@@ -24,4 +124,3 @@ block main
   //-               button.btn.btn-primary.btn-lg(type="submit")
   //-                 i.fas.fa-paper-plane.me-2
   //-                 | Gửi email xác nhận
-  
