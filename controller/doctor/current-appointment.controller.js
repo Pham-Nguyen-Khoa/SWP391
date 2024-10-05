@@ -60,6 +60,13 @@ module.exports.index = async(req, res) => {
         })
     }
 
+    if(res.locals.user.Specialization == 'Khám Sức Khỏe'){
+      res.render("doctor/pages/current-appointment-healthy/index",{
+          pageTitle: "Trang Lịch Hiện Tại",
+          currentAppointment: currentAppointment
+      })
+  }
+
 
     
   }

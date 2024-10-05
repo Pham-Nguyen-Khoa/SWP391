@@ -238,6 +238,7 @@ module.exports.indexPost = async (req, res) => {
         "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
       );
 }else if(req.body.service != "Tư Vấn Online" && req.body.doctor != "Tự chọn"){
+  console.log(req.body)
   const AppointmentID = await generateUserId(
     "AP",
     "appointment",

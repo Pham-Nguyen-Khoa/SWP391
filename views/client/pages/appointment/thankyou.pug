@@ -32,14 +32,15 @@ block main
                                  span #{appoinmentInfo.PhoneNumber}
                                  if(appoinmentInfo.Name != "Tư Vấn Online")
                                     br
-                                    b(style="margin-right: 4px") ◉ Địa chỉ: 
-                                    span #{appoinmentInfo.AddressAppointment} 
+                                    if(appoinmentInfo.address)
+                                       b(style="margin-right: 4px") ◉ Địa chỉ: 
+                                       span #{appoinmentInfo.AddressAppointment} 
                                     
                      .col-4(style="    margin-top: 20px;")
                            if(appoinmentInfo.Name == "Tư Vấn Online")
                               span(style="background-color: #0a9c0a; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Đã thanh toán
-                           else 
-                              span(style="background-color: #e14d4d; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Chưa thanh toán
+                           //- else 
+                           //-    span(style="background-color: #e14d4d; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Chưa thanh toán
                         
                   table.table.table-striped.mt-5.table-appointment-detail(style=`margin-bottom: ${appoinmentInfo.VetID == null ? '120px' : '60px'};`)
                      thead 
