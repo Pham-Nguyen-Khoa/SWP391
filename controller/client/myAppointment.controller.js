@@ -170,21 +170,35 @@ module.exports.detail = async (req, res) => {
     where: {
       PondRecordID: pondRecordIDs
     }
+  });     
+  const vetInfo = await Vet.findOne({
+    raw: true,
+    where: {
+      VetID: appoinmentInfo.VetID
+    }
   });
+  
+
 
   const prescriptions = await Promise.all(pondProfiles.map(async (pondProfile) => {
-    const queryMedicine = `SELECT * FROM prescription_medicine pm JOIN medicine m ON m.MedicineID = pm.MedicineID WHERE pm.PrescriptID = '${pondProfile.PrescriptID}'`;
+    const queryMedicine = `SELECT m.*, pm.MorningUse, pm.AfternoonUse, pm.EveningUse, pm.Quantity FROM prescription_medicine pm JOIN medicine m ON m.MedicineID = pm.MedicineID WHERE pm.PrescriptID = '${pondProfile.PrescriptID}'`;
     const listMedicine = (await Sequelize.query(queryMedicine))[0];
     return {
       pondProfile,
-      listMedicine
+      listMedicine: listMedicine.map(medicine => ({
+        ...medicine,
+        QuantityMorning: medicine.QuantityMorning,
+        QuantityNoon: medicine.QuantityNoon,
+        QuantityEvening: medicine.QuantityEvening
+      }))
     };
   }));
-  console.log(prescriptions);
+
   res.render("client/pages/my-appointment/detail-enviroment-prescription", {
     pageTitle: "Trang Chi Tiết Đơn Thuốc",
     appoinmentInfo: appoinmentInfo,
-    prescriptions: prescriptions
+    prescriptions: prescriptions,
+    vetInfo: vetInfo
   });
 
   };

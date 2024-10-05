@@ -42,7 +42,7 @@ block main
                 img.register-img(src="/images/Login.webp" alt="Login image")
             .col-5.right-column
                 h2.title-register.text-center Đăng ký
-                .form-container
+                .form-container(style="margin: 0 113px  ")
                     form(action="/auth/register" method="post")
                         .form-group
                             label(for="Email") Email
@@ -56,14 +56,14 @@ block main
                         .form-group
                             label(for="Address") Địa Chỉ
                             input#address.form-control.register-element(type="text" name="Address" required)
-                        //- .form-group
-                        //-     label(for="Gender") Giới Tính
-                        //-     select#gender.form-control.register-element(name="Gender" required)
-                        //-         option(value="Nam") Nam
-                        //-         option(value="Nữ") Nữ
-                        //- .form-group
-                        //-     label(for="Birthday") Ngày Sinh
-                        //-     input#dob.form-control.register-element(type="date" name="Birthday" required)
+                        .form-group
+                            label(for="Gender") Giới Tính
+                            select#gender.form-control.register-element(name="Gender" required)
+                                option(value="Nam") Nam
+                                option(value="Nữ") Nữ
+                        .form-group
+                            label(for="Birthday") Ngày Sinh
+                            input#dob.form-control.register-element(type="date" name="Birthday" required)
                         .form-group
                             label(for="Password") Mật khẩu
                             input#password.form-control.register-element(type="password" name="Password" required)
@@ -72,4 +72,5 @@ block main
                             input#confirm_password.form-control.register-element(type="password" name="confirm_password" required)
                         .form-group.text-center
                         .submit-register
-                            button( type="submit" class = "btn register-button") Tiếp tục   
+                            //- button( type="submit" class = "btn register-button") Tiếp tục  
+                            button.btn.login-button(type="submit" style="margin-top: 40px;") Register 

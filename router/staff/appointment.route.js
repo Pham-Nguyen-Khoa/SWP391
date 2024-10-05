@@ -25,4 +25,8 @@ router.get("/load-vets/:AppointmentID", controller.loadVets);
 // [GET] /staff/appointment/assign/:AppointmentID/:VetID
 router.get("/assign/:AppointmentID/:VetID", controller.assignVet);
 
+// [GET] /staff/appointment/delete/:AppointmentID
+router.get("/delete/:AppointmentID", controller.delete);
+
+
 module.exports = router
