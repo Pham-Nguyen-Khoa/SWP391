@@ -213,10 +213,13 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .col-5.right-column {
     padding: 0 2rem 2rem 0;
+    
 }
 
 .right-container {
     margin-top: 5rem;
+    
+    
 }
 
 .form-container.login-container {
@@ -272,6 +275,9 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .container-fluid {
     padding: 0;
+   
+    
+    
 }
 
 section.intro {
@@ -1502,12 +1508,12 @@ header {
   }
 
 /* table forgot-password */
-body.forgot-password-page {
+.forgot-password-page {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../images/koi.jpg');
+    background-color: white;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -1609,4 +1615,12 @@ body.forgot-password-page {
 
 .form-forgot-password .link:hover {
   text-decoration: underline;
+}
+.btn-pink {
+    background-color: pink;
+    border-color: pink;
+}
+.btn-pink:hover {
+    background-color: #ff69b4;
+    border-color: #ff69b4;
 }
