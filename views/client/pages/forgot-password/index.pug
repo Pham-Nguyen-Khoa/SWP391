@@ -4,8 +4,25 @@ include ../../mixins/alert.pug
 block main
   +alert-error("5000")
   +alert-success("5000")
+
+  
+  body.forgot-password-page
+    .form-forgot-password
+      .forgot-password-title Lấy lại mật khẩu
+      form.forgot-password-form(action='otp.pug', method='GET')
+        .form-group
+          label(for='email') Email
+          input#email(type='email', name='email', placeholder='Nhập email của bạn', required)
+        button.form-submit-btn(type='submit') Gửi mã OTP
+      p.form-signup-link
+        | Chưa có tài khoản? 
+        a.form-signup-link.link(href='/signup') Đăng ký ngay
+  
+
+ 
+
   //- .container.my-5
-  //-   .row.justify-content-center
+  //-   .row.justify-content-center 
   //-     .col-md-6
   //-       .card.shadow-sm
   //-         .card-body
@@ -24,4 +41,7 @@ block main
   //-               button.btn.btn-primary.btn-lg(type="submit")
   //-                 i.fas.fa-paper-plane.me-2
   //-                 | Gửi email xác nhận
+
+  
+
   
