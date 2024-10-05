@@ -19,7 +19,7 @@ block main
       .medication-cards
 
       .text-center.mt-4
-        button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
+        button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
         a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
 
   script.
@@ -51,12 +51,10 @@ block main
                 <th class="text-center">Sáng</th>
                 <th class="text-center">Trưa</th>
                 <th class="text-center">Chiều</th>
-                <th class="text-center">Hướng dẫn sử dụng</th>
                 <th class="text-center">Thao tác</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Các hàng sẽ được thêm vào bằng JavaScript -->
             </tbody>
           </table>
         </div>
@@ -97,9 +95,7 @@ block main
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
-          
-          <td style="width: 250px;">${medication.toUse}</td>
-          <td><button type="button" class="btn btn-danger btn-sm" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+          <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
         `;
         saveFormData();
       }
@@ -148,8 +144,7 @@ block main
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
-            <td style="width: 250px;">${medication.toUse}</td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
           `;
               attachChangeEventListeners(row);
               saveFormData();
@@ -184,8 +179,7 @@ block main
             <td><input type="text" class="form-control" value="${medication.morning}"></td>
             <td><input type="text" class="form-control" value="${medication.noon}"></td>
             <td><input type="text" class="form-control" value="${medication.evening}"></td>
-            <td style="width: 250px;">${med.toUse}</td>
-            <td><button type="button" class="btn btn-danger btn-sm" onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')">Xóa</button></td>
               `;
               attachChangeEventListeners(row);  
             }
