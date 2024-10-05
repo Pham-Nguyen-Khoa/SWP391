@@ -273,3 +273,37 @@ module.exports.assignVet = async (req, res) => {
     
    }
 }
+
+
+
+
+// [Get] /staff/appointment/delete/:AppointmentID
+module.exports.delete =  async (req, res) => {
+   try {
+    const appointmentID = req.params.AppointmentID  ;
+   console.log(appointmentID)
+   
+   await ShiftDetail.update({
+    AppointmentID: null
+},{
+    where:{
+        AppointmentID: appointmentID
+    }
+})
+
+
+    await Appointment.destroy({
+        
+        where:{
+            AppointmentID: appointmentID
+        }
+    })
+   
+    req.flash("success", "Đã xóa lịch hẹn thành công!");
+    res.redirect("back");
+   } catch (error) {
+    req.flash("error", "Có lỗi xảy ra khi xóa lịch hẹn. Vui lòng thử lại.");
+    res.redirect("back");
+   }
+  }
+
