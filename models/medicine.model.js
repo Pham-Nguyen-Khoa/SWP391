@@ -11,6 +11,10 @@ const Medicine = sequelize.define('Medicine', {
         type: DataTypes.STRING(50),
         allowNull: false
       },
+      NameEnglish: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+      },
       toUse: {
         type: DataTypes.STRING(500),
         allowNull: false
@@ -23,6 +27,7 @@ const Medicine = sequelize.define('Medicine', {
         type: DataTypes.TEXT('long'),
         allowNull: false
       }
+     
 
 }, {
     tableName: 'medicine',

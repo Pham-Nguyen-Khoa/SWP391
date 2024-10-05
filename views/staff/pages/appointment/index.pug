@@ -172,8 +172,16 @@ block main
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
                           i(class="fa-solid fa-receipt")
-                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2") 
+                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 button-delete") 
                           i(class="fa fa-trash " aria-hidden="true") 
+
+    div#deleteModal.modal(style="top: 50%;    position: fixed;margin: 0 auto;width: 350px;    display: none;")
+      div.modal-content
+        span.close-button &times;
+        h1 hello
+        p Bạn có muốn hủy lịch hẹn này không?
+        button.btn.btn-danger#confirmDelete Xác nhận
+        button.btn.btn-secondary#cancelDelete Hủy
 
     script.
       document.addEventListener('DOMContentLoaded', function() {
@@ -197,4 +205,25 @@ block main
         });
       });
         
+
+    
+        const buttonDelete = document.querySelectorAll(".button-delete")
+        const deleteModal = document.getElementById("deleteModal")
+        const confirmDelete = document.getElementById("confirmDelete")
+        const cancelDelete = document.getElementById("cancelDelete")
+        console.log(buttonDelete  )
+        buttonDelete.forEach(item => {
+            item.addEventListener("click", function(e){
+                e.preventDefault()
+                const url = new URL(window.location.href)
+                console.log(url.pathname);
+                const buttonDeleteValue = item.getAttribute("button-delete");
+                console.log(buttonDeleteValue)
+                deleteModal.style.display = 'block'
+                const check = confirm("Bạn có muốn hủy lịch hẹn này không?")
+                if(check){
+                    window.location.href = buttonDeleteValue
+                }   
+            })
+        })
 
