@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+
+block main
+    .block-footer(style="height: 200vh")
+        .header-bar(style="background-color: #2c2a6c; padding: 18px; text-align: center; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;")
+            h3(style="color: white; font-weight: bold; font-style: italic;") Các dịch vụ tại KOIVET
+        .container-fluid
+            p(style="padding: 40px; font-size: 21px") Dịch vụ chăm sóc cá Koi ở KOI DOCTORS sẽ cung cấp một loạt các dịch vụ dành cho những chú cá Koi của bạn. Tất cả các dịch vụ của chúng tôi đều được thực hiện trực tiếp tại bể hoặc ao nuôi. Chúng tôi thu một khoản phí di chuyển nhỏ đối với các khách hàng ngoài khu vực Tp. Hồ Chí Minh. Bảng báo giá có sẵn theo yêu cầu.
+            .row(style="padding: 30px;")    
+                .col-md-6(style="height: 638px;")
+                    .card.contact-card
+                        .card-body-contact
+                            img(src="/images/contact1.jpg", alt="Contact 1" style="height: 200px; object-fit: inherit; width: 100%; border-radius: 20px; padding: 10px;")
+                            h5.text-center.card-contact-title Tư vấn về sức khỏe của cá Koi
+                            p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn cho các khách hàng đang tìm kiếm hướng dẫn và hỗ trợ trong các trường hợp liên quan đến cá Koi. Chung tôi sẵn sàng giúp đỡ thông qua các buổi hướng dẫn trực tuyến về kỹ thuật chuẩn đoán đén từ các bác sĩ của trung tâm
+                            h5.text-center.card-contact-price Giá : 500.000 VNĐ
+                            button(class="btn-contact-price" onclick="window.location.href='koi/appointment'" ) Đặt lịch hẹn
+                .col-md-6(style="height: 638px;")
+                    .card.contact-card
+                        .card-body-contact
+                            img(src="/images/contact2.jpg", alt="Contact 1" style="height: 200px; object-fit: inherit; width: 100%; border-radius: 15px; padding: 10px;")
+                            h5.text-center.card-contact-title Cải thiện môi trường hồ cá
+                            p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn trực tiếp về cải thiện môi trường sống cho tất cả các chủ nuôi cá cảnh. Xin lưu ý, chúng tôi không thể đưa ra kế hoạch xử lý cụ thể trừ khi bạn đã có buổi kiểm tra trực tiếp với đội ngũ chuyên gia của chúng tôi trong vòng một năm qua. Trong buổi tư vấn này, chúng tôi sẽ hướng dẫn quý khách cách cải thiện chất lượng nước, nhiệt độ, ánh sáng, và hệ sinh thái trong hồ cá của bạn.
+                            h5.text-center.card-contact-price Giá : 200.000 VNĐ / Hồ + 1.000.000 VNĐ phí dịch vụ
+                            button(class="btn-contact-price" onclick="window.location.href='koi/appointment'" ) Đặt lịch hẹn
+                .col-md-6(style="margin-left: 300px; margin-top: 30px;height: 638px;")
+                    .card.contact-card
+                        .card-body-contact
+                            img(src="/images/contact3.jpg", alt="Contact 1" style="height: 200px; object-fit: inherit; width: 100%; border-radius: 15px; padding: 10px;")
+                            h5.text-center.card-contact-title Khám sức khỏe cho cá Koi
+                            p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn. Trong buổi kiểm tra, các bác sĩ sẽ quan sát kỹ lưỡng các dấu hiệu bên ngoài như màu sắc da, vây và hành vi của cá.
+                            h5.text-center.card-contact-price Giá : 200.000 VNĐ / Cá + 1.500.000 VNĐ phí dịch vụ
+                            button(class="btn-contact-price" onclick="window.location.href='koi/appointment'" ) Đặt lịch hẹn

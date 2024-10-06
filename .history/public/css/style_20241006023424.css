@@ -1531,15 +1531,6 @@ header {
     padding: 10px;
   }
 
-  .card-contact-content {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #1f1e1e9d;
-    font-family: 'Arial', sans-serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
-    padding: 10px;
-  }
-
 .card-contact-price {
     font-weight: bold;
     font-size: 20px;
@@ -1561,7 +1552,7 @@ header {
     text-transform: uppercase;
 }
 
-.btn-contact-price:hover {
+.btn-contact-price.heart:hover {
     background-color: #d75858;
     color: #fff; 
 }
