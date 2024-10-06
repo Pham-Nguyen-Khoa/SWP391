@@ -1,30 +1,30 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
 
-block append main
-  style.
-    body {
-      background-color: #f0f4f8;
-      font-family: 'Arial', sans-serif;
-    }
-    label {
-      font-weight: 600;
-      font-size: 20px;
-    }
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .delete-button:hover {
-      background-color: #c82333;
-    }
+     
 
 block main
+  style.
+        body {
+          background-color: #f0f4f8;
+          font-family: 'Arial', sans-serif;
+        }
+        label {
+          font-weight: 700;
+          font-size: 21px;
+        }
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .delete-button:hover {
+          background-color: #c82333;
+        }
   +title("Đơn Hiện Tại")
   if currentAppointment
     .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
-      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin cuộc hẹn
+      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
       .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
         .row 
             .col-7(style="padding-right: 100px;")
@@ -57,9 +57,9 @@ block main
                 p.lead
                 b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
                 b :  Đang thực hiện
-                //- p.lead
-                //- b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
-                //- p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
+                p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
                 
                 p.lead
             .col-5  
@@ -70,11 +70,91 @@ block main
                 b  :  #{user.Specialization}
                 br
                 img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
-  
+    form(action="/doctor/update-pond-record" method="POST" id="appointmentForm")
+        input(type="hidden" name="appointmentId" value=currentAppointment.AppointmentID)  
+        .pond-records
+          .pond-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 30px; background-color: #f7fbff;")
+            .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
+              span(style=" font-weight: bold;  color: black  ; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá 
+            .card-body
+              .form-group
+                label(for="problem") Vấn đề
+                textarea.form-control(name="Problem" id="problem" rows="3")
+              .form-group
+                label(for="solution") Giải pháp
+                textarea.form-control(name="Solution" id="solution" rows="3")
+              .form-group
+                label(for="description") Mô tả chi tiết
+                textarea.form-control(name="Description" id="description" rows="3")
+            .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;") Thông Tin Cá Koi
+            .card-body
+                .row
+                  .col-md-4
+                    .form-group
+                      label(for="type") Loại Cá
+                      input.form-control(type="text" name="Type" id="type" required)
+                  .col-md-4
+                    .form-group
+                      label(for="weight") Trọng lượng (kg)
+                      input.form-control(type="number" name="Weight" id="weight" step="0.01" required)
+                  .col-md-4
+                    .form-group
+                      label(for="height") Chiều dài (cm)
+                      input.form-control(type="number" name="Height" id="height" step="0.01" required)
+                .row
+                  .col-md-4
+                    .form-group
+                      label(for="gender") Giới tính
+                      select.form-control(name="Gender" id="gender" required)
+                        option(placeholder="Chọn giới tính" disabled selected) Chọn giới tính
+                        option(value="male") Đực
+                        option(value="female") Cái
+                  .col-md-4
+                    .form-group
+                       label(for="healthStatus") Tình trạng sức khỏe
+                       select.form-control(name="HealthStatus" id="healthStatus" required)
+                          option(placeholder="Chọn tình trạng sức khỏe" disabled selected) Chọn tình trạng sức khỏe
+                          option(value="good") Tốt
+                          option(value="average") Trung bình
+                          option(value="poor") Kém
+          .text-center.mt-4
+            a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-capsules"></i> Kê đơn thuốc
+            button.btn.btn-lg#submitBtn(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-check"></i> Ghi nhận
+    
+    
+
 
   else
     .alert.alert-info.text-center
       h2 Hiện tại không có đơn đang xử lý.
 
   script.
-   
+    document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+    let isValid = true;
+    const fields = ['problem', 'solution', 'description', 'type', 'weight', 'height', 'gender', 'healthStatus'];
+    fields.forEach(field => {
+      const input = document.getElementById(field);
+      if (!input.value) {
+        isValid = false;
+        input.style.borderColor = 'red';
+      } else {
+        input.style.borderColor = '';
+      }
+    });
+    if (!isValid) {
+      event.preventDefault();
+      alert('Vui lòng điền đầy đủ thông tin');
+      }
+    });
+
+
+    function SaveData() {
+        const form = document.getElementById('appointmentForm');
+        console.log(form);
+        const formData = new FormData(form);
+        console.log(formData);
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+      }
+
+    SaveData();

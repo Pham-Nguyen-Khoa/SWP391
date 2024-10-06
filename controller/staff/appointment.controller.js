@@ -138,6 +138,14 @@ module.exports.changeProcess =  async (req, res) => {
         if(process){
             if(process == "pending"){
                 await Appointment.update({
+                    Process: "Accepted"
+                },{
+                    where:{
+                        AppointmentID: appointmentID
+                    }
+                })
+            }else if(process == "accepted"){
+                await Appointment.update({
                     Process: "Ready"
                 },{
                     where:{

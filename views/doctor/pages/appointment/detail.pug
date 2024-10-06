@@ -11,14 +11,15 @@ block main
     //-     code= JSON.stringify(appoinmentInfo, null, 2)
     .order-details
         b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
-        b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} 
+        b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} |
+        b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift}
         if(appoinmentInfo.Name == "Tư Vấn Online")
-                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
+                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
         else 
             if(appoinmentInfo.StatusPaid == "Đã thanh toán")
-                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Đã thanh toán
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
             else 
-                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1100px;") Chưa thanh toán
+                span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left:700px;") Chưa thanh toán
         p ______________________________________________________________
         if(appoinmentInfo.Name == "Tư Vấn Online")
                 span(style="color: black; font-weight: 700") ◉ Thanh Toán: 
@@ -33,9 +34,6 @@ block main
         p(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin đơn hàng
         b ◉ [Anh/Chị] :
         span(style="color: black; font-weight: 600; margin-left: 10px") #{appoinmentInfo.CustomerFullName}
-        br
-        b ◉ Thời gian hẹn:
-            span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
         br
         if(appoinmentInfo.AddressAppointment)
             b ◉ Địa chỉ: #{appoinmentInfo.Address}    |
