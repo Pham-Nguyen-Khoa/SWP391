@@ -37,7 +37,6 @@ block main
           .form-find-account.px-4
             h2.find-account-title.mb-2.text-start Tìm tài khoản của bạn
             p.find-account-subtitle.mb-4.text-start Vui lòng nhập email để tìm tài khoản của bạn.
-            form.find-account-form(action='/auth/password/find-account', method='POST')
               .form-group.mb-3
                 input#email.form-control(type='email', name='email', placeholder='Nhập địa chỉ email của bạn', required)
               .form-buttons.d-flex.justify-content-between.mb-4
@@ -48,5 +47,4 @@ block main
                 a.form-login-link.link(href='/auth/login') Đăng nhập
 
 
->>>>>>> Stashed changes
   
