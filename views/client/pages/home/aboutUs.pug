@@ -1,3 +1,140 @@
 extends ../../layouts/default.pug
 
 block main
+
+    //-.block-footer(style="height: 86vh") nếu để như này thì sẽ không hiện đủ giao diện
+        //- h1 Trang về chúng tôi
+        //- // Code tiếp từ h1 xuống 
+        
+    .block-footer(style="min-height: 100vh; overflow-x: hidden;")
+        main.container-about-us
+            section.about-section(style="display: flex; align-items: center; gap: 30px; margin-bottom: 50px;")
+                .about-image(style="flex: 1;")
+                    img(src="/images/KOI/about-1.jpg", alt="Đội ngũ chăm sóc cá Koi" style="width: 100%; height: auto; object-fit: cover; border-radius: 10px;")
+                .about-content(style="flex: 1;")
+                    span.section-title(style="color: #8b0000; font-weight: bold; font-size: 1.2em;") Về Chúng Tôi
+                    h2(style="color: #333; font-size: 1.8em;") Tại Sao Bạn Nên Tin Tưởng Chúng Tôi? Hãy Tìm Hiểu Về Đội Ngũ Chăm Sóc Cá Koi Của Chúng Tôi!
+                    p(style="color: #555;") Chúng tôi là đội ngũ chuyên gia đam mê và tận tâm trong việc chăm sóc cá Koi. Với kinh nghiệm nhiều năm và kiến thức chuyên sâu, chúng tôi cam kết mang đến dịch vụ chăm sóc cá Koi tốt nhất tại trung tâm của chúng tôi.
+                    p(style="color: #555;") Đội ngũ của chúng tôi không ngừng cập nhật kiến thức và kỹ thuật mới nhất trong lĩnh vực nuôi trồng và chăm sóc cá Koi. Chúng tôi hiểu rằng mỗi con cá Koi đều là một tác phẩm nghệ thuật sống động, và chúng tôi đối xử với chúng bằng sự tôn trọng và chăm sóc tận tình.
+                    ul.feature-list(style="color: #555; list-style-type: none; padding-left: 0;")
+                        li(style="margin-bottom: 10px;")  Chăm sóc cá Koi chuyên nghiệp
+                        li(style="margin-bottom: 10px;")  Đội ngũ chuyên gia giàu kinh nghiệm
+                        li(style="margin-bottom: 10px;")  Áp dụng công nghệ tiên tiến trong chăm sóc cá Koi
+                    a.btn-learn-more(href="#" role="button" style="margin-bottom: 50px;") Tìm Hiểu Thêm
+
+            // Thêm phần mới cho hiệu ứng chữ nổi
+            .parallax-section(style="height: 400px; background-image: url('/images/koi.jpg'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; display: flex; align-items: center; justify-content: center;")
+                .overlay(style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5);")
+                .content(style="position: relative; z-index: 1; text-align: center; color: white;")
+                    h2(style="font-size: 3em; margin-bottom: 20px;") Chăm Sóc Cá Koi Chuyên Nghiệp
+                    p(style="font-size: 1.5em;") Đam mê và kinh nghiệm tạo nên sự khác biệt
+
+            section.why-choose-us(style="margin: 60px 0;")
+                h2(style="color: #8b0000; text-align: center; margin-bottom: 40px;") Tại Sao Chọn Chúng Tôi
+                .content-wrapper(style="display: flex; justify-content: space-between;")
+                    .text-content(style="flex: 1; padding-right: 30px;")
+                        span.feature-tag(style="background-color: #007bff; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9em;") Tính Năng
+                        p(style="margin: 20px 0;") Chúng tôi cung cấp dịch vụ chăm sóc cá Koi chuyên nghiệp với đội ngũ chuyên gia giàu kinh nghiệm. Cam kết mang đến sự hài lòng cho khách hàng với chất lượng dịch vụ tốt nhất.
+                        .features(style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;")
+                            each feature in [['Chuyên Gia', 'Giàu Kinh Nghiệm'], ['Dịch Vụ', 'Chất Lượng Cao'], ['Tư Vấn', 'Tận Tâm'], ['Hỗ Trợ', '24/7']]
+                                .feature-item(style="display: flex; align-items: center;")
+                                    .icon(style="background-color: #007bff; color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 10px;")
+                                        i(class=`fas fa-${feature[0] === 'Chuyên Gia' ? 'user-md' : feature[0] === 'Dịch Vụ' ? 'check' : feature[0] === 'Tư Vấn' ? 'comments' : 'headset'}`)
+                                    .text
+                                        strong= feature[0]
+                                        br
+                                        span= feature[1]
+                    .doctor-grid(style="flex: 1; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 20px;")
+                        each doctor in [1, 2, 3, 4]
+                            .doctor-card.animate-on-scroll(style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; flex-basis: calc(50% - 10px); text-align: center;")
+                                img(src=`/images/intro-${doctor}.jpg`, alt=`Chuyên gia ${doctor}` style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 10px; object-fit: cover;")
+                                h3(style="color: #333; margin-bottom: 5px;") Tên Chuyên Gia
+                                p(style="color: #555; font-size: 0.9em;") Chuyên môn
+
+            // Thêm phần mới cho hiệu ứng số liệu tăng dần
+            section.stats-section(style="background-color: #f5f5f5; padding: 60px 0; text-align: center;")
+                h2(style="color: #8b0000; margin-bottom: 40px; font-size: 2.5em; font-weight: bold;") Thành Tựu Của Chúng Tôi
+                .stats-container(style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;")
+                    each stat, index in ['Khách Hàng Hài Lòng', 'Dự Án Hoàn Thành', 'Giải Thưởng', 'Năm Kinh Nghiệm']
+                        .stat-item(style="flex-basis: calc(25% - 30px); background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease;")
+                            .stat-number(data-target=Math.floor(Math.random() * 1000) + 500, style="font-size: 3.5em; font-weight: bold; color: #8b0000; margin-bottom: 10px;") 0
+                            .stat-label(style="font-size: 1.2em; color: #333; font-weight: 500;")= stat
+
+            // Thay đổi phần horizontal-scroll
+            section.horizontal-scroll(style="padding: 40px 0; overflow: hidden;")
+                h2(style="color: #8b0000; text-align: center; margin-bottom: 30px;") Bộ Sưu Tập Cá Koi
+                .scroll-container(style="display: flex; gap: 20px; overflow-x: scroll; scrollbar-width: none; -ms-overflow-style: none;")
+                    each img in [1, 2, 3, 4, 5, 6, 7, 8]
+                        img(src=`/images/KOI/koi-${img}.jpg`, alt=`Cá Koi ${img}`, style="width: 300px; height: 200px; object-fit: cover; border-radius: 10px; flex-shrink: 0;")
+
+    script.
+        // Hiệu ứng xuất hiện khi cuộn
+        function animateOnScroll() {
+            var elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(function(element) {
+                if (element.getBoundingClientRect().top < window.innerHeight) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Hiệu ứng số liệu tăng dần
+        function animateNumbers() {
+            var statItems = document.querySelectorAll('.stat-number');
+            statItems.forEach(function(item) {
+                var target = parseInt(item.getAttribute('data-target'));
+                var current = 0;
+                var increment = target / 100;
+                var timer = setInterval(function() {
+                    current += increment;
+                    item.textContent = Math.floor(current);
+                    if (current >= target) {
+                        clearInterval(timer);
+                        item.textContent = target;
+                    }
+                }, 20);
+            });
+        }
+
+        const scrollContainer = document.querySelector('.horizontal-scroll .scroll-container');
+        
+        // Thêm event listener cho wheel event
+        scrollContainer.addEventListener('wheel', (evt) => {
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY;
+        });
+
+        // Giữ lại hiệu ứng snap nếu muốn
+        scrollContainer.addEventListener('scroll', () => {
+            clearTimeout(scrollContainer.scrollEndTimer);
+            scrollContainer.scrollEndTimer = setTimeout(() => {
+                const itemWidth = 320; // Chiều rộng của mỗi item (300px + 20px gap)
+                const snapPosition = Math.round(scrollContainer.scrollLeft / itemWidth) * itemWidth;
+                scrollContainer.scrollTo({
+                    left: snapPosition,
+                    behavior: 'smooth'
+                });
+            }, 150);
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', function() {
+            animateOnScroll();
+            animateNumbers();
+        });
+
+    style.
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
