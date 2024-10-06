@@ -4,28 +4,6 @@ include ../../mixins/alert.pug
 block main
   +alert-error("5000")
   +alert-success("5000")
-<<<<<<< Updated upstream
-  .container.my-5
-    .row.justify-content-center
-      .col-md-6
-        .card.shadow-sm
-          .card-body
-            h2.card-title.text-center.mb-4 Lấy lại mật khẩu
-            form(action="/auth/password/forgot" method="post")
-              .mb-3
-                label.form-label(for="email") Email
-                input.form-control(
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="Nhập địa chỉ email của bạn"
-                )
-              .text-center
-                button.btn.btn-primary.btn-lg(type="submit")
-                  i.fas.fa-paper-plane.me-2
-                  | Gửi email xác nhận
-=======
 
   //- forgot password
   .container-fluid
@@ -37,6 +15,7 @@ block main
           .form-find-account.px-4
             h2.find-account-title.mb-2.text-start Tìm tài khoản của bạn
             p.find-account-subtitle.mb-4.text-start Vui lòng nhập email để tìm tài khoản của bạn.
+            form.find-account-form(action='/auth/password/forgot', method='POST')
               .form-group.mb-3
                 input#email.form-control(type='email', name='email', placeholder='Nhập địa chỉ email của bạn', required)
               .form-buttons.d-flex.justify-content-between.mb-4
