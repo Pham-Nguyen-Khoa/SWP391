@@ -1521,14 +1521,17 @@ header {
 
   .card.contact-card{
     border-radius: 15px;
-    background-color: #aaced694;
+    background-color: #c2dfe594;
+    height: 850px;
+    border: 3px solid #6ea6ca;
+    border-radius: 30px;
   }
 
   .card-contact-title {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     color: #333;
-    padding: 10px;
+    margin: 20px;
   }
 
   .card-contact-content {
@@ -1538,6 +1541,7 @@ header {
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
     padding: 10px;
+    
   }
 
 .card-contact-price {
@@ -1548,10 +1552,10 @@ header {
 }
 
 .btn-contact-price {
-    width: 50%;
+    width: 27%;
     margin: 0 auto;
-    border-radius: 15px;
-    background-color: #602222;
+    border-radius: 26px;
+    background-color: #a51a1a;
     color: #fff;
     font-weight: bold;
     font-size: 15px;
@@ -1559,6 +1563,8 @@ header {
     border: none;
     cursor: pointer;
     text-transform: uppercase;
+    margin-top: 6px;
+    height: 56px;
 }
 
 .btn-contact-price:hover {
