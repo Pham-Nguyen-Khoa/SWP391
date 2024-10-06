@@ -31,7 +31,8 @@ module.exports.requireAuth = async (req, res, next) => {
       } else {
         res.locals.userInfo = { ...user.dataValues };
       }
+      next();
     }
-    next();
+    
   }
 };

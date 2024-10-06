@@ -12,8 +12,9 @@ block main
     .order-details
         b(style="    font-size: 25px;") ◉ Mã Đơn Hàng: #{appoinmentInfo.AppointmentID}  |  
         b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} |  
-        if(VetID != null)
-                    b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift}
+        b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift} 
+        //- if(VetID != null)
+        //-             b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift}
         if(appoinmentInfo.Name == "Tư Vấn Online")
                 span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
         else 
@@ -35,16 +36,21 @@ block main
             b ◉ Địa chỉ: #{appoinmentInfo.AddressAppointment}
             br
             b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}   
+            br
+            if(appoinmentInfo.Name == "Khám Sức Khỏe")
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng: 
+                p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px; width: 500px;")   #{appoinmentInfo.HealthKoi}
+
         else   
             if(appoinmentInfo.Name == "Khám Sức Khỏe")
+                b ◉ Nơi khám: Tại trung tâm
+                br
                 b ◉ Nơi khám: Tại trung tâm
                 br
             else
             b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
             br
-        if(VetID == null)
-            b ◉ Thời gian hẹn:
-            span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
         table.table.table-striped.mt-5.table-appointment-detail
             thead 
                 tr(style="text-align: center")  
@@ -71,9 +77,9 @@ block main
                     b(style="display: block; margin-top: 30px") Link Google Meet:
                     a(href=appoinmentInfo.GoogleMeet style="color: #5e7cce; font-weight: 600 ;text-decoration: revert; ") #{appoinmentInfo.GoogleMeet}   
             .col-2
-                if(VetID != null)
-                    b ◉ Thời gian hẹn:
-                    span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
+                //- if(VetID != null)
+                //-     b ◉ Thời gian hẹn:
+                //-     span(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Shift}
                 
             .col-7 
                 if(appoinmentInfo.Name == "Tư Vấn Online")

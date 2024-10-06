@@ -1638,3 +1638,63 @@ header {
     border-radius: 20px;
     box-shadow: 0px 0px 9px 4px #4296b6;
   }
+
+  /* Css Contact */
+
+  .card.contact-card{
+    border-radius: 15px;
+    background-color: #c2dfe594;
+    height: 850px;
+    border: 3px solid #6ea6ca;
+    border-radius: 30px;
+  }
+
+  .card-contact-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px;
+  }
+
+  .card-contact-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #1f1e1e9d;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
+    padding: 10px;
+    
+  }
+
+.card-contact-price {
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    padding: 10px;
+}
+
+.btn-contact-price {
+    width: 27%;
+    margin: 0 auto;
+    border-radius: 26px;
+    background-color: #a51a1a;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 6px;
+    height: 56px;
+}
+
+.btn-contact-price:hover {
+    background-color: #d75858;
+    color: #fff; 
+}
+
+.card-body-contact {
+    text-align: center;
+    padding: 30px;
+}
