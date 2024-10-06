@@ -140,13 +140,7 @@ block main
       const appointmentId = form.elements['appointmentId'].value;
       let pondData = JSON.parse(localStorage.getItem(`appointmentData`)) || [];
       pondData[pondCount - 1] = data; 
-      //-  document.querySelectorAll('.pond-record').forEach((pondRecord, index) => {
-      //-   const pondIndex = pondRecord.querySelector('input[name="pondIndex"]').value;
-      //-   pondData[pondIndex] = {};
-      //-   pondRecord.querySelectorAll('input, textarea').forEach(input => {
-      //-     pondData[pondIndex][input.name] = input.value;
-      //-   });
-      //- });
+
 
       localStorage.setItem(`appointmentData`, JSON.stringify(pondData));
     }

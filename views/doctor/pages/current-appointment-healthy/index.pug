@@ -70,13 +70,16 @@ block main
                 b  :  #{user.Specialization}
                 br
                 img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
-    form(action="/doctor/update-pond-record" method="POST" id="appointmentForm")
-        input(type="hidden" name="appointmentId" value=currentAppointment.AppointmentID)  
-        .pond-records
-          .pond-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 30px; background-color: #f7fbff;")
+    form(action="/doctor/update-pond-record" method="POST" id="appointmentForm" enctype="multipart/form-data")
+        //- input(type="hidden" name="appointmentId" value=currentAppointment.AppointmentID)  
+        .fish-records
+          .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 30px; background-color: #f7fbff;")
             .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
               span(style=" font-weight: bold;  color: black  ; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá 
             .card-body
+              .form-group
+                label(for="problem") Hình ảnh
+                textarea.form-control(name="Problem" id="problem" rows="3")
               .form-group
                 label(for="problem") Vấn đề
                 textarea.form-control(name="Problem" id="problem" rows="3")
@@ -117,10 +120,10 @@ block main
                           option(value="good") Tốt
                           option(value="average") Trung bình
                           option(value="poor") Kém
-          .text-center.mt-4
-            a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-capsules"></i> Kê đơn thuốc
-            button.btn.btn-lg#submitBtn(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-check"></i> Ghi nhận
-    
+        .text-center.mt-4
+          a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-capsules"></i> Kê đơn thuốc
+          button.btn.btn-lg#submitBtn(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-check"></i> Ghi nhận
+        button.btn.btn-lg(type="button" id="addFishBtn" style="background-color: #2dde29c7; color: black; padding: 10px;") <i class="fa-solid fa-plus"></i> Thêm  cá
     
 
 
@@ -147,14 +150,88 @@ block main
       }
     });
 
+    let fishCount = 1;
 
-    function SaveData() {
-        const form = document.getElementById('appointmentForm');
-        console.log(form);
-        const formData = new FormData(form);
-        console.log(formData);
-        const data = Object.fromEntries(formData.entries());
-        console.log(data);
+    function saveFormData() {
+      const form = document.getElementById('appointmentForm');
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+      let fishData = JSON.parse(localStorage.getItem(`appointmentHealthyData`)) || [];
+      fishData[fishCount - 1] = data; 
+
+
+      localStorage.setItem(`appointmentHealthyData`, JSON.stringify(fishData));
+    }
+
+    function restoreFormData() {
+      const form = document.getElementById('appointmentForm');
+      //- const appointmentId = form.elements['appointmentId'].value;
+      const savedData = localStorage.getItem(`appointmentHealthyData`);
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        data.forEach((fish, index) => {
+          if (index > 0) addFishRecord();
+          const fishRecord = document.querySelectorAll('.fish-record')[index];
+          Object.keys(fish).forEach(key => {
+            const input = fishRecord.querySelector(`[name="${key}"]`);
+            if (input) {
+              input.value = fish[key];
+            }
+          });
+        });
+      } else {
+        form.reset();
       }
+    }
 
-    SaveData();
+    function addFishRecord() {
+      const fishRecords = document.querySelector('.fish-records');
+      const newFishRecord = fishRecords.firstElementChild.cloneNode(true);
+      newFishRecord.querySelectorAll('input, textarea').forEach(input => input.value = '');
+      fishCount++;
+      newFishRecord.querySelectorAll('.card-header span')[0].innerText = `Ghi nhận tình trạng cá ${fishCount}`;
+      newFishRecord.querySelectorAll('.card-header')[1].innerText = `Chỉ số cá ${fishCount}`;
+      const deleteButton = document.createElement('button');
+      deleteButton.type = 'button';
+      deleteButton.innerText = 'Xóa cá';
+      deleteButton.className = 'delete-button';
+      deleteButton.style.position = 'absolute';
+      deleteButton.style.right = '3%';
+      deleteButton.style.borderRadius = '5px';
+      deleteButton.style.width = '100px';
+      deleteButton.style.backgroundColor = '#eb7b7b';
+      deleteButton.style.border = '2px solid #9fbfc5';
+      deleteButton.style.cursor = 'pointer';
+      deleteButton.onclick = function() {
+        newPondRecord.remove();
+        fishCount--;
+        updateFishHeaders();
+        saveFormData(); 
+      };
+      newFishRecord.querySelector('.card-header').appendChild(deleteButton);
+      fishRecords.appendChild(newFishRecord);
+    }
+
+      function updateFishHeaders() {
+      const fishRecords = document.querySelectorAll('.fish-record');
+        fishRecords.forEach((fishRecord, index) => {
+        fishRecord.querySelectorAll('.card-header span')[0].innerText = `Ghi nhận tình trạng cá ${index + 1}`;
+        fishRecord.querySelectorAll('.card-header')[1].innerText = `Chỉ số cá ${index + 1}`;
+      });
+    }
+
+    document.getElementById('appointmentForm').addEventListener('change', saveFormData);
+    document.querySelectorAll('textarea').forEach(textarea => {
+      textarea.addEventListener('input', saveFormData);
+    });
+    window.addEventListener('load', restoreFormData);
+    document.getElementById('prescribeMedicationBtn').addEventListener('click', function(e) {
+      saveFormData(); 
+      localStorage.setItem('fishCount', fishCount); 
+    });
+
+    document.getElementById('addFishBtn').addEventListener('click', addFishRecord);
+
+
+
+   
