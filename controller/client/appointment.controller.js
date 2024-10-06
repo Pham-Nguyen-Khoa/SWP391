@@ -238,6 +238,7 @@ module.exports.indexPost = async (req, res) => {
         "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
       );
 }else if(req.body.service != "Tư Vấn Online" && req.body.doctor != "Tự chọn"){
+  console.log(req.body)
   const AppointmentID = await generateUserId(
     "AP",
     "appointment",
@@ -293,6 +294,50 @@ module.exports.indexPost = async (req, res) => {
   `;
       await Sequelize.query(queryUpdate);
 
+}else if(req.body.service != "Tư Vấn Online" && req.body.doctor == "Tự chọn"){
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+
+  const customerID = await Customer.findOne({
+    raw: true,
+    attributes: ["CustomerID"],
+    where: {
+      AccountID: res.locals.userInfo.AccountID,
+    },
+  });
+
+  const serviceID = await Service.findOne({
+    raw: true,
+    attributes: ["ServiceID"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+
+  const priceService = await Service.findOne({
+    raw: true,
+    attributes: ["Price"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+  await Appointment.create({
+    AppointmentID: AppointmentID,
+    CustomerID: customerID.CustomerID,
+    ServiceID: serviceID.ServiceID,
+    VetID: null,
+    Name: req.body.FullName,
+    PhoneNumber: req.body.PhoneNumber,
+    Date: req.body.select_date,
+    Address: req.body.address,
+    Process: "Pending",
+    Shift: req.body.shift,
+    StatusPaid: "Chưa thanh toán",
+  });
+  
 }
 
   res.redirect(`/koi/appointment/thankyou/${AppointmentID}?doctor=${req.body.doctor}`);
@@ -315,8 +360,8 @@ module.exports.thankyou = async (req, res) => {
   let appointmentInfo; // Khai báo biến chung
 
   if(doctor == "Tự chọn"){
-    const queryAppointmentNotDoctor = `SELECT a.*,s.*,c.* , a.Date As DateAppointment, a.Name AS CustomerFullName , a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID  WHERE a.AppointmentID = '${appointmentID}'`;
-    appointmentInfo = (await Sequelize.query(queryAppointmentNotDoctor))[0][0]; // Gán giá trị cho biến chung
+    const queryAppointmentNotDoctor = `SELECT a.*,s.*,c.* ,a.Address As AddressAppointment, a.Date As DateAppointment, a.Name AS CustomerFullName , a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID  WHERE a.AppointmentID = '${appointmentID}'`;
+    appointmentInfo = (await Sequelize.query(queryAppointmentNotDoctor))[0][0]; 
       console.log("hello")
     const date = appointmentInfo.DateAppointment;
     appointmentInfo.Date = formatDate(date);
@@ -326,7 +371,7 @@ module.exports.thankyou = async (req, res) => {
     );
   } else {
     const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* ,a.Address As AddressAppointment,a.HealthKoi As HealthKoiAppointment,a.Date As DateAppointment, a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
-    appointmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0]; // Gán giá trị cho biến chung
+    appointmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
     const date = appointmentInfo.DateAppointment;
     appointmentInfo.Date = formatDate(date);
     appointmentInfo.PriceFormat = formatPrice(appointmentInfo.Price);

@@ -46,11 +46,25 @@ module.exports.index = async (req, res) => {
   listAppointment.forEach(appointment => {
     appointment.DateFormat = formatDate(appointment.Date);
   });
-
+  let dateFormat = null;
+  if (req.query.date) {
+    dateFormat = formatDate(req.query.date);
+  }
+  let filterType = 'all';
+  if (req.query.date) {
+    filterType = 'date';
+  } else if (req.query.process) {
+    filterType = 'process';
+  }
   res.render("doctor/pages/appointment/index", {
     pageTitle: "Trang Hồ Sơ Dịch Vụ",
     listAppointment: listAppointment,
     listAppointmentOrigin: listAppointmentOrigin,
+    date: req.query.date,
+    sort: req.query.sort,
+    dateFormat: dateFormat,
+    filterType: filterType,
+    processFilter: req.query.process
   });
 };
 
@@ -66,7 +80,21 @@ module.exports.changeProcess = async (req, res) => {
     const ServiceID = result[0][0].ServiceID; 
     const VetID = result[0][0].VetID; 
 
-      if(ServiceID == "DV0003"  && process == "successed"){
+      if(ServiceID == "DV0003"  && process == "process"){
+        await Appointment.update(
+          {
+            Process: "Process",
+          },
+          {
+            where: {
+              AppointmentID: appointmentID,
+            },
+          }
+        );
+        req.flash("success", "Đổi trạng thái thành công! ");
+      res.redirect("back");
+      }
+      if(ServiceID == "DV0003"  && process == "success"){
         await Appointment.update(
           {
             Process: "Successed",
@@ -78,7 +106,7 @@ module.exports.changeProcess = async (req, res) => {
           }
         );
         req.flash("success", "Đổi trạng thái thành công! ");
-      res.redirect("back");
+      res.redirect("/doctor/appointment");
       }
       if(ServiceID != "DV0003" && process == "process"){
         await Appointment.update(
@@ -90,7 +118,10 @@ module.exports.changeProcess = async (req, res) => {
               AppointmentID: appointmentID,
             },
           }
-      )}
+      )
+      req.flash("success", "Đổi trạng thái thành công! ");
+      res.redirect("back");
+    }
 
     // if(process == "Confirmed"){
     //   console.log("ok")

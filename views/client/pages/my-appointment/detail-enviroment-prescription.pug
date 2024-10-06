@@ -1,0 +1,74 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +title("Chi Tiết Đơn Thuốc")     
+    //- pre
+    //-     code= JSON.stringify(prescriptions, null, 2)
+    //-     code= JSON.stringify(appoinmentInfo, null, 2)
+    .order-details(style="height:auto; padding: 30px 100px 20px 100px !important; margin-top: 60px !important;")
+        each prescription, pIndex in prescriptions
+            
+            .prescription
+                .row 
+                    .col-2(style="margin-left: 40px;")
+                        img(src="/images/logo.png", alt="" style="width: 150px; height: 150px; object-fit: cover; border:none")
+                    .col-6(style="margin-left: 60px;")
+                        h1.text-center.font-weight-700.mt-4(style="opacity: 0.7;") Trung tâm chăm sóc cá Koi 
+                        
+                        p.text-center(style="font-size: 44px;font-weight: 900;color: #0084ff;") HealthyKoi
+                        span.text-center.font-weight-700 ______________________________________________________________
+                    .col-3.mt-3
+                        b Địa chỉ: 
+                        span.adress 🏠 Lô E2a-7, đường D1 Khu Công Nghệ Cao, P.Long Thạnh Mỹ, Tp.Thủ Đức, Tp.Hồ Chí Minh
+                        br
+                        b SĐT: 
+                        span.adress 📞 0978555479
+                        br
+                        b Email: 
+                        span.adress 📧 koivet@gmail.com
+                        br
+                        b Time:
+                        span.adress 🕒 7:00 - 17:00 hàng ngày
+                .customer-info.mt-5.mb-5.ml-5(style="display: inline-block; background-color: #d3cece70; padding: 20px; border: 2px solid black; border-radius: 15px;")
+                    h3 Họ và tên: #{appoinmentInfo.CustomerFullName}
+                    h3 Số điện thoại: #{appoinmentInfo.PhoneNumber}
+                    h3 Địa chỉ: #{appoinmentInfo.AddressAppointment}
+                if(prescriptions.length === 1)
+                    h1.text-center.font-weight-700.mb-5.mt-4(style="font-weight: bold;color: #5c96d5;") Đơn thuốc của hồ
+                else if(prescriptions.length > 1)
+                    h1.text-center.font-weight-700.mb-5.mt-4(style="font-weight: bold;color: #5c96d5;") Đơn thuốc của hồ #{pIndex + 1}
+                .bill-prescription(style="background-color: #d3cece70; padding: 20px; border: 2px solid black; border-radius: 15px;    margin-bottom: 50px;")
+                    each medicine, index in prescription.listMedicine
+                        .row(style="margin:40px;     ")
+                            .col-7
+                                h1.mb-4(style="display: inline-block;") #{index + 1}. #{medicine.NameEnglish}
+                                b(style="font-size: 25px;")  (#{medicine.Name})
+                                br
+                                if(medicine.MorningUse)
+                                    p(style="margin-left: 40px; display: inline-block;     min-width: 121px;") ◉ Buổi sáng 
+                                    b : #{medicine.MorningUse}
+                                    br
+                                if(medicine.AfternoonUse)
+                                    p(style="margin-left: 40px;display: inline-block;     min-width: 121px;") ◉ Buổi trưa    
+                                    b : #{medicine.AfternoonUse} 
+                                    br   
+                                if(medicine.EveningUse)
+                                    p(style="margin-left: 40px; display: inline-block;     min-width: 121px;") ◉ Buổi tối 
+                                    b : #{medicine.EveningUse}
+                                    br
+                            .col-2(style="background-color: white; padding: 0; width: 150px; height: 250px; border-radius: 15px;")
+                                img(src=medicine.Image, alt="" style="width: 100%; height: 100%; object-fit: cover;margin: 0; padding: 15px;")
+                            .col-3
+                                if(medicine.Quantity >= 10)
+                                    h2.text-center ◉ SL: #{medicine.Quantity} Viên
+                                else
+                                    h2.text-center ◉ SL: #{medicine.Quantity} Chai
+                .row 
+                    .col-6 
+                    .col-6 
+                        h3.text-center Bác sĩ điều trị
+                        h3.text-center #{vetInfo.FullName}
+                        img(src=vetInfo.Avatar, alt="" style="width: 150px; height: 150px; object-fit: cover; margin: 10px 41%;")
+                    
+        
