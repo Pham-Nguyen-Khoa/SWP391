@@ -230,6 +230,8 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .right-container {
     margin-top: 5rem;
+    
+    
 }
 
 .form-container.login-container {
@@ -285,6 +287,9 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .container-fluid {
     padding: 0;
+   
+    
+    
 }
 
 section.intro {
@@ -1581,6 +1586,123 @@ header {
     100% { transform: translateX(-180%); }
   }
 
+/* table forgot-password */
+.forgot-password-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  
+  body.forgot-password-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .form-forgot-password {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 420px;
+  padding: 40px 30px;
+  font-size: 18px;
+  color: #212121;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(0, 0, 0, 0.2);
+}
+
+.form-forgot-password .form-forgot-password-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.form-forgot-password .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-forgot-password .form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.form-forgot-password .form-group input {
+  padding: 16px 18px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  color: #fff;
+  background-color: #212121;
+  border: none;
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 20px;
+  gap: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.form-forgot-password .form-submit-btn:hover {
+  background-color: #313131;
+}
+
+.form-forgot-password .link {
+  color: #1778f2;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-signup-link {
+  align-self: center;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-signup-link .link {
+  font-weight: 600;
+}
+
+.form-forgot-password .link:hover {
+  text-decoration: underline;
+}
+.btn-pink {
+    background-color: pink;
+    border-color: pink;
+}
+.btn-pink:hover {
+    background-color: #ff69b4;
+    border-color: #ff69b4;
+}
 
 
 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập Mã OTP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .email-display {
+            text-align: left;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #555;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            text-align: left;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 14px;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #5a6fe0;
+        }
+        .message {
+            text-align: left;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Nhập Mã OTP</h2>
+        <div class="email-display" id="emailDisplay"></div>
+        <form id="otpForm">
+            <label for="otp">Mã OTP của bạn:</label>
+            <input type="text" id="otp" name="otp" maxlength="6" placeholder="Nhập mã OTP 6 số" required>
+            <input type="submit" value="Xác nhận">
+            <div class="message" id="message"></div>
+        </form>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const email = urlParams.get('email');
+            if (email) {
+                document.getElementById('emailDisplay').textContent = 'Email: ' + email;
+            }
+        }
+
+
+        document.getElementById('otpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const otpInput = document.getElementById('otp').value;
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = '';
+        const otpPattern = /^\d{6}$/;
+
+        if (otpPattern.test(otpInput)) {
+            messageDiv.textContent = 'Mã OTP hợp lệ. Đang chuyển hướng...';
+            messageDiv.style.color = '#4CAF50';
+            // Chuyển hướng đến trang đặt lại mật khẩu sau 2 giây
+            setTimeout(function() {
+                window.location.href = 'resetpassword.html';
+            }, 2000);
+        } else {
+            messageDiv.textContent = 'Mã OTP không hợp lệ. Vui lòng nhập lại.';
+            messageDiv.style.color = '#F44336';
+            }
+        }
+    );
+    </script>
+</body>
+</html>
