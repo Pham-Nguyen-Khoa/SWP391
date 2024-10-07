@@ -1,4 +1,4 @@
-// tinymce.init({
-//     selector: 'textarea#image',
-//     plugins: 'lists link image table code help wordcount'
-//   });
+tinymce.init({
+    selector: 'textarea#AvatarFish',
+    plugins: 'lists link image table code help wordcount'
+  });

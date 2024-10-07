@@ -61,9 +61,11 @@ block main
     form#fishForm
       .card-body
         div.form-group(upload-image)
+          //- label(for="Avatar") Hình ảnh
+          //- input.form-control-file(type="file" id="Avatar" name="Avatar" required upload-image-input)
+          //- img.upload-preview(src="" upload-image-preview)
           label(for="Avatar") Hình ảnh
-          input.form-control-file(type="file" id="Avatar" name="Avatar" required upload-image-input)
-          img.upload-preview(src="" upload-image-preview)
+          textarea#AvatarFish.form-control(name="Avatar")
         .form-group
           label(for="Problem") Vấn đề
           textarea.form-control(name="Problem" id="Problem" rows="3" required)
@@ -115,19 +117,22 @@ block main
       const formData = new FormData(this);
       const fishData = Object.fromEntries(formData.entries());
 
-      // Handle file upload
-      const fileInput = document.getElementById('Avatar');
-      const file = fileInput.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onloadend = function() {
-          fishData.imageUrl = reader.result;
-          saveFishData(fishData);
-        }
-        reader.readAsDataURL(file);
-      } else {
-        saveFishData(fishData);
-      }
+      //- // Handle file upload
+      //- const fileInput = document.getElementById('Avatar');
+      //- const file = fileInput.files[0];
+      //- if (file) {
+      //-   const reader = new FileReader();
+      //-   reader.onloadend = function() {
+      //-     fishData.imageUrl = reader.result;
+      //-     saveFishData(fishData);
+      //-   }
+      //-   reader.readAsDataURL(file);
+      //- } else {
+      //-   saveFishData(fishData);
+      //- }
+      fishData.Avatar = tinymce.get('AvatarFish').getContent();
+
+      saveFishData(fishData);
     });
 
     function saveFishData(fishData) {
@@ -138,7 +143,6 @@ block main
       window.location.href = '/doctor/current-appointment';
     }
 
-    // Image preview
     document.querySelector('[upload-image-input]').addEventListener('change', function(e) {
       const file = e.target.files[0];
       if (file) {
