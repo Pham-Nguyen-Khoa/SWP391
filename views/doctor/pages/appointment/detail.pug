@@ -14,7 +14,7 @@ block main
         b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} |
         b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift}
         if(appoinmentInfo.Name == "Tư Vấn Online")
-                span(style="background-color: #15b515; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
+                span(style="background-color: #118fad87; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
         else 
             if(appoinmentInfo.StatusPaid == "Đã thanh toán")
                 span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 700px;") Đã thanh toán
@@ -36,13 +36,25 @@ block main
         span(style="color: black; font-weight: 600; margin-left: 10px") #{appoinmentInfo.CustomerFullName}
         br
         if(appoinmentInfo.AddressAppointment)
-            b ◉ Địa chỉ: #{appoinmentInfo.Address}    |
+            b ◉ Địa chỉ: #{appoinmentInfo.Address}    
+            br
             b    ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
+            if(appoinmentInfo.Name == "Khám Sức Khỏe")
+                br
+                b ◉ Nơi khám: Tại nhà
+                
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng: 
+                p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px; width: 500px;")   #{appoinmentInfo.HealthKoi}
             //- p.lead
             //-     b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
             //-     p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px; display: inline-block;")   #{appoinmentInfo.HealthKoi}
         else   
-            b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
+            if(appoinmentInfo.Name == "Khám Sức Khỏe")
+                b ◉ Nơi khám: Tại trung tâm
+                br
+            else
+                b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}
         table.table.table-striped.mt-5.table-appointment-detail
             thead 
                 tr(style="text-align: center")  

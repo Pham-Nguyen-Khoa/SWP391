@@ -38,14 +38,14 @@ block main
             b ◉ Số điện thoại: #{appoinmentInfo.PhoneNumber}   
             br
             if(appoinmentInfo.Name == "Khám Sức Khỏe")
+                b ◉ Nơi khám: Tại nhà
+                br
                 p.lead
                 b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng: 
                 p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px; width: 500px;")   #{appoinmentInfo.HealthKoi}
 
         else   
             if(appoinmentInfo.Name == "Khám Sức Khỏe")
-                b ◉ Nơi khám: Tại trung tâm
-                br
                 b ◉ Nơi khám: Tại trung tâm
                 br
             else
@@ -72,7 +72,7 @@ block main
                     b(style="color: black; font-weight: 500; margin-left: 10px") #{appoinmentInfo.Specialization}
                     br
                     img(src=appoinmentInfo.VetAvatar)
-                if(appoinmentInfo.Name == "Tư Vấn Online")
+                if(appoinmentInfo.Name == "Tư Vấn Online" && appoinmentInfo.VetID != null)
                     b
                     b(style="display: block; margin-top: 30px") Link Google Meet:
                     a(href=appoinmentInfo.GoogleMeet style="color: #5e7cce; font-weight: 600 ;text-decoration: revert; ") #{appoinmentInfo.GoogleMeet}   

@@ -303,6 +303,7 @@ section.intro {
     font-weight: bold;
     font-size: 2.5rem;
     opacity: 0.8;
+    margin: 50px;
 }
 
 .intro-content {
@@ -340,6 +341,11 @@ section.profession {
     border-radius: 15px;
     box-shadow: 0 0 20px 6px #88afcc;
 }
+.profession-card:hover {
+    border: 5px solid  black; 
+    transform: scale(1.05); 
+    transition: transform 0.3s ease;
+}
 
 .profession-card-img {
     border-top-left-radius: 12px;
@@ -355,7 +361,7 @@ section.service {
 .image-container {
     position: relative;
     width: 100%;
-    height: 300px; /* Height of the image */
+    height: 344px; /* Height of the image */
   }
   
   /* Image styling */
@@ -431,12 +437,14 @@ section.service {
 }
 
 .review-card p {
-    color: #555; /* Màu chữ */
+    color: #555;
+    font-size: 18px;
 }
 
 .stars {
-    color: #FFD700; /* Màu vàng cho ngôi sao */
+    color: #FFD700;
     margin: 5px 0;
+    font-size: 24px;
 }
 
 /* ALERT */
