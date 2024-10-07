@@ -1,27 +1,53 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
-
+include ../../mixins/mixin-title.pug
 block main
   +alert-error("5000")
   +alert-success("5000")
-  .container.my-5
-    .row.justify-content-center
-      .col-md-6
-        .card.shadow-sm
-          .card-body
-            h2.card-title.text-center.mb-4 Lấy lại mật khẩu
-            form(action="/auth/password/forgot" method="post")
-              .mb-3
-                label.form-label(for="email") Email
-                input.form-control(
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="Nhập địa chỉ email của bạn"
-                )
-              .text-center
-                button.btn.btn-primary.btn-lg(type="submit")
-                  i.fas.fa-paper-plane.me-2
-                  | Gửi email xác nhận
-  
+    
+        //- .container.my-5
+        //-   .row.justify-content-center
+        //-     .col-md-10
+        //-       .card.shadow-sm(style="border-radius: 15px;")
+        //-         .card-body(style="padding: 2rem;")
+        //-           form(action="/auth/password/forgot" method="post")
+        //-             .mb-3
+        //-               label.form-label(for="email") Email
+        //-               input.form-control(
+        //-                 type="email"
+        //-                 id="email"
+        //-                 name="email"
+        //-                 required
+        //-                 placeholder="Nhập địa chỉ email của bạn"
+        //-                 style="border-radius: 5px; border: 1px solid #007bff;"
+        //-               )
+        //-             .text-center
+        //-               button.btn.btn-primary.btn-lg(type="submit" style="border-radius: 5px; background-color: #007bff; border: none;")
+        //-                 i.fas.fa-paper-plane.me-2
+        //-                 | Gửi email xác nhận
+  .block-footer(style="height: 85vh")
+    .container-fluid 
+      .row(style="height: 100vh;")
+          .col-7.left-column 
+              img.login-img(src="/images/Login.png" alt="Login image")
+          .col-5.right-column(style="padding: 150px 0 0 50px;")
+              .right-container 
+                  .card.shadow-sm(style="border-radius: 40px; margin-right: 100px;")
+                    .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 30px; border-top-right-radius: 30px;")
+                      h2.card-title.text-center.mb-4(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Khôi phục mật khẩu
+                    .card-body(style="padding: 2rem;")
+                      form(action="/auth/password/forgot" method="post")
+                        .mb-3
+                          label.form-label(for="email") Email
+                          input.form-control(
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            placeholder="Nhập địa chỉ email của bạn"
+                            style="border-radius: 5px; border: 1px solid #007bff;"
+                          )
+                        .text-center
+                          button.btn.btn-primary.btn-lg(type="submit" style="border-radius: 5px; background-color: #007bff; border: none;")
+                            i.fas.fa-paper-plane.me-2
+                            | Gửi email xác nhận

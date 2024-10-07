@@ -42,77 +42,135 @@
 }
 
 
-
-/* Tạo nền nhẹ và viền cho bảng */
-/* .table {
-    border-collapse: separate;
-    border-spacing: 0;
+.table-my-appointment {
     width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-} */
-/* Màu nền xám cho các mục lớn */
-/* .table-group-header td {
-    background-color: #e9ecef;
-    font-weight: bold;
-    padding: 12px;
-    text-align: left;
-    border-top: 2px solid #dee2e6;
-} */
-
-/* Tạo nền màu nhạt cho phần đầu bảng */
-/* .table thead {
-    background-color: #f8f9fa;
-    text-align: center;
-} */
-
-/* Tạo màu nền nhạt cho phần tiêu đề mỗi nhóm */
-/* .table th {
-    background-color: #f1f1f1;
-    font-weight: bold;
-    text-align: left;
-    padding: 8px;
-} */
-/* .table tr td img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid black;
-    margin: 0 28%;
-} */
-
-/* Canh giữa các ô checkbox */
-/* .form-check-input-permission {
-    margin: auto;
-} */
-
-/* Tạo khoảng cách giữa các dòng và ô */
-/* .table td, .table th {
-    vertical-align: middle;
-    padding: 8px;
-    border: 1px solid #dee2e6;
-} */
-
-/* Tạo màu đỏ cho chữ "Xóa" */
-/* .table td .text-danger {
-    color: #ff4d4f;
-    font-weight: bold;
-} */
-
-/* Tạo hiệu ứng hover cho các hàng */
-/* .table tbody tr:hover {
-    background-color: #f2f2f2;
+    border-collapse: collapse;
+    margin-top: 50px;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
- */
+
+.table-my-appointment .process {
+    background-color: #decdcd6e;
+    border-radius: 20px;
+    height: 42px;
+    padding: 10px;
+    width: 164px;
+    margin: 0 auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.table-my-appointment thead {
+    background-color: #5aaeba;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.table-my-appointment thead th {
+    padding: 12px 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
 
 
+.table-my-appointment tbody tr {
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+}
 
+.table-my-appointment tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-my-appointment tbody tr:last-of-type {
+    border-bottom: 2px solid #53afbd;
+}
+
+.table-my-appointment tbody td {
+    padding: 12px 15px;
+    color: #333;
+}
+
+.table-my-appointment tbody tr:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+}
+
+.table-my-appointment tbody td {
+    position: relative;
+    padding: 20px;
+}
+
+.table-my-appointment tbody td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dddddd;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    display: none;
+}
 /* ALERT */
-
+.alert-success{
+    border: 2px solid #12b40b;
+    font-size: 18px;
+    background-color: #28a745;
+    width: 300px;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(24 213 55 / 30%);
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+.alert-success:hover {
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+    opacity: 1; /* Độ mờ khi hover */
+}
+.alert-danger{
+    background-color: #dc3545;
+    width: 300px;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(213 24 67 / 30%);
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+    border: 2px solid #cf6262;
+    font-size: 18px;
+}
 [show-alert]{
     position: fixed;
-    top: 70px;
+    top: 100px;
     right: 15px;
     z-index: 9999;
 }
@@ -134,15 +192,16 @@
 }
 
 [close-alert]{
-    background: #ffffffc4;
+    background: #0a0a0ac4;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     line-height: 24px;
     text-align: center;
     font-weight: 600;
     border-radius: 50%;
     cursor: pointer;
+    color: #ffffff;
 }
 
 
@@ -165,7 +224,7 @@
 
 
 /* Modal */
-table.table {
+/* table.table {
     width: 100%;
     border-collapse: collapse;
     border: 2px solid black;
@@ -205,7 +264,7 @@ table.table {
 }
 .table tbody  tr td {
     text-align  : center;
-}
+} */
 
 .table  tr td img{
     width: 90px;
@@ -216,11 +275,12 @@ table.table {
     margin: 0 28%;
 }
 .badge-success-custom{
-    width: 68%;
-    height: 40px;
-    padding: 10px;
+    width: 56%;
+    height: 38px;
+    padding: 12px;
     border: 2px solid black;
-    font-size: 12px;
+    font-size: 13px;
+    border-radius: 20px;
 }
 #modal_info {
     display: none;
