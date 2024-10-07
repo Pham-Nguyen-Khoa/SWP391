@@ -68,6 +68,9 @@ module.exports.detail = async (req, res) => {
         const appointmentID = req.params.AppointmentID;
         const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
         const appoinmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
+        console.log("***************")
+        console.log(appoinmentInfo)
+        console.log("***************")
         
         if(appoinmentInfo == null){
           res.redirect("/koi/my-appointment");
@@ -102,6 +105,10 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ cải thiện môi trường", amount: 1000000 }
         ];
+        if(appoinmentInfo.Address != null){
+          totalServiceFee += 100000;
+          serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+        }
         pondProfiles.forEach((pond, index) => {
           const volume = parseFloat(pond.Volume);
           if (index > 0) {
@@ -161,6 +168,10 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ khám sức khỏe", amount: 1500000 }
         ];
+        if(appoinmentInfo.Address != null){
+          totalServiceFee += 100000;
+          serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+        }
         fishProfiles.forEach((fish, index) => {
           if(index > 0){
             totalServiceFee += 200000;
@@ -312,11 +323,35 @@ module.exports.detail = async (req, res) => {
   });
 
   };
-  
+
+
+
+  // [GET] koi/my-appointment/detail/pond/:AppointmentID
 module.exports.detailPond = async (req, res) => {
   const appointmentID = req.params.AppointmentID;
   const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
   const appoinmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
+  console.log(appoinmentInfo);
+  if(appoinmentInfo.Name == "Khám Sức Khỏe"){
+    const koiRecords = await FishRecord.findAll({
+      raw: true,
+      where: {
+          AppointmentID: appoinmentInfo.AppointmentID
+      }
+  });
+  const koiIDs = koiRecords.map(record => record.KoiID);
+  const koiProfiles = await FishProfile.findAll({
+    raw: true,
+    where: {
+      KoiID: koiIDs
+    }
+  });
+    return  res.render("client/pages/my-appointment/detail-healthyFish-fish", {
+      pageTitle: "Trang Chi Tiết Cá",
+      appoinmentInfo: appoinmentInfo,
+      koiProfiles: koiProfiles
+    });
+  }
 
   const appointmentPondRecords = await Appointment_PondRecord.findAll({
     raw: true,

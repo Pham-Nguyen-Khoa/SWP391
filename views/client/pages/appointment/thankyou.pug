@@ -8,7 +8,7 @@ block main
                h1.title-thankyou CẢM ƠN BẠN ĐÃ ĐẶT DỊCH VỤ CỦA CHÚNG TÔI
                br
                .order-information(style=`height: ${appoinmentInfo.VetID == null ? '700px' : '900px'};`)
-                  h2.text-center Thông tin đơn đặt lịch
+                  h2.mb-4 Thông tin đơn đặt lịch
                   .row 
                      .col-8
                            
@@ -39,11 +39,11 @@ block main
                                     
                      .col-4(style="    margin-top: 20px;")
                            if(appoinmentInfo.Name == "Tư Vấn Online")
-                              span(style="background-color: #0a9c0a; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Đã thanh toán
+                              span(style="background-color: #118fad87; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 220px;") Đã thanh toán
                            //- else 
                            //-    span(style="background-color: #e14d4d; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 100px;") Chưa thanh toán
                         
-                  table.table.table-striped.mt-5.table-appointment-detail(style=`margin-bottom: ${appoinmentInfo.VetID == null ? '120px' : '60px'};`)
+                  table.table.table-striped.mt-5.table-my-appointment(style=`margin-bottom: ${appoinmentInfo.VetID == null ? '120px' : '60px'};`)
                      thead 
                            tr(style="text-align: center")  
                               th Tên dịch vụ

@@ -227,7 +227,9 @@ module.exports.prescribeMedicationFish = async(req, res) => {
   
 // [Get] /doctor/current-appointment/payment
   module.exports.payment = async(req, res) => {
-
+    console.log("-----------********--")
+    console.log(req.session.paymentData)
+    console.log("-----------*********-------")
     const currentAppointment = await Appointment.findOne({
         raw: true,
         where: {
@@ -235,13 +237,16 @@ module.exports.prescribeMedicationFish = async(req, res) => {
             Process: "Process"
         }
     })
+    console.log(currentAppointment)
     const service = await Service.findOne({
         raw: true,
         where: {
             ServiceID: currentAppointment.ServiceID
         }
     })
-    if(service.ServiceID == "DV0002`"){
+    console.log(service)
+    // console.log(service)
+    if(service.ServiceID == "DV0002"){
       const paymentData = req.session.paymentData;
       if(!paymentData){
         req.flash('error', 'Không có dữ liệu thanh toán. Vui lòng thử lại.');
@@ -258,6 +263,8 @@ module.exports.prescribeMedicationFish = async(req, res) => {
         totalFee: formatCurrency(totalFee),
         serviceDetails: serviceDetails
       }
+      console.log(objectPayment)
+
       return res.render("doctor/pages/current-appointment-moitruong/payment",{
         pageTitle: "Trang Thanh Toán",
         objectPayment: objectPayment
@@ -284,10 +291,24 @@ module.exports.prescribeMedicationFish = async(req, res) => {
 module.exports.paymentPost = async(req, res) => {
   console.log(req.body)
   const informationData = JSON.parse(req.body.previousPageData);
+
+  const appointment = await Appointment.findOne({
+    raw: true,
+    where: {
+      AppointmentID: informationData[0].appointmentId
+    }
+  })
+
+  
+
   let totalServiceFee = 1000000;
   let serviceDetails =[
     {description: "Dịch vụ cải thiện môi trường", amount: 1000000}
   ]
+  if(appointment.Address != null){
+    totalServiceFee += 100000;
+    serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+  }
   informationData.forEach((pond, index) => {
     const volume = parseFloat(pond.Volume);
     if (index > 0) {
@@ -304,17 +325,15 @@ module.exports.paymentPost = async(req, res) => {
       totalServiceFee += 600000;
       serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
     }
-    req.session.paymentData = {
-      totalServiceFee,
-      serviceDetails,
-    };
+ 
    
   });
-  // console.log(req.body)
-  // res.render("doctor/pages/current-appointment-moitruong/payment",{
-  //     pageTitle: "Trang Thanh Toán",
-  //     objectPayment: objectPayment
-  // })
+  req.session.paymentData = {
+    totalServiceFee,
+    serviceDetails,
+  };
+
+
   res.redirect('/doctor/current-appointment/payment');
 }
 
@@ -334,10 +353,20 @@ module.exports.addFish = async(req, res) => {
 module.exports.paymentFishPost = async(req, res) => {
   console.log(req.body)
   const informationData = JSON.parse(req.body.previousPageData);
+  const appointment = await Appointment.findOne({
+    raw: true,
+    where: {
+      AppointmentID: informationData[0].appointmentId
+    }
+  })
   let totalServiceFee = 1500000;
   let serviceDetails =[
     {description: "Dịch vụ khám sức khỏe", amount: 1500000}
   ]
+  if(appointment.Address != null){
+    totalServiceFee += 100000;
+    serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+  }
   informationData.forEach((pond, index) => {
     const volume = parseFloat(pond.Volume);
     if (index > 0) {
