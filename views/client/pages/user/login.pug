@@ -25,20 +25,22 @@ block main
                 img.login-img(src="/images/Login.png" alt="Login image")
             .col-5.right-column(style="padding: 150px 0 0 50px;")
                 .right-container 
-                    h2.title-login(style="margin-left: 250px;") Đăng nhập
-                    .form-container.login-container
-                        form(action="/auth/login" method="post")
-                            .form-group
-                                label(for="Email") Email
-                                input#email.form-control.login-element(type="email" name="Email" required)
-                            .form-group
-                                label(for="Password") Password
-                                input#password.form-control.login-element(type="password" name="Password" required)
-                            .form-group.utilities
-                                .remember-utilities
-                                    input(type="checkbox" name="RememberMe") 
-                                    label(for="Remember")(style="margin-right: 405px;") Nhớ tài khoản 
-                                .forgot-utilities
-                                    a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
-                            .submit-login
-                                    button.btn.login-button(type="submit") Login
+                    .card.shadow-sm(style="border-radius: 40px; margin-right: 100px;")
+                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 30px; border-top-right-radius: 30px;")
+                            h2.card-title.text-center.mb-4(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng nhập
+                        .card-body(style="padding: 2rem;")
+                            form(action="/auth/login" method="post")
+                                    .form-group
+                                        label(for="Email") Email
+                                        input#email.form-control.login-element(type="email" name="Email" required)
+                                    .form-group
+                                        label(for="Password") Password
+                                        input#password.form-control.login-element(type="password" name="Password" required)
+                                    .form-group.utilities
+                                        .remember-utilities
+                                            input(type="checkbox" name="RememberMe") 
+                                            label(for="Remember")(style="margin-right: 400px; margin-left: 10px;") Nhớ tài khoản 
+                                        .forgot-utilities
+                                            a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
+                                    .submit-login
+                                            button.btn.login-button(type="submit") Đăng nhập
