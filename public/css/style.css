@@ -1788,16 +1788,18 @@ header {
   .card.contact-card{
     border-radius: 15px;
     background-color: #c2dfe594;
-    height: 850px;
+    height: 900px;
     border: 3px solid #6ea6ca;
     border-radius: 30px;
   }
 
   .card-contact-title {
+    padding-top: 10px;
     font-size: 30px;
-    font-weight: bold;
-    color: #333;
+    color: #234d7d;
     margin: 20px;
+    font-size: 1.7rem;
+    font-family: 'Oswald', sans-serif;
   }
 
   .card-contact-content {
@@ -1807,7 +1809,7 @@ header {
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
     padding: 10px;
-    
+    min-height: 13rem;
   }
 
 .card-contact-price {
@@ -1841,4 +1843,101 @@ header {
 .card-body-contact {
     text-align: center;
     padding: 30px;
+}
+
+/* CSS NEWS */
+.news-title {
+    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
+    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    color: #333; /* Màu chữ có thể điều chỉnh */
+    text-align: center; /* Căn giữa tiêu đề */
+    margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.row.card-news-box {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh các thẻ ngang hàng */
+    justify-content: space-between; /* Căn giữa các thẻ */
+    flex-wrap: wrap; /* Cho phép các thẻ xuống dòng nếu không đủ chỗ */
+    margin: 0 -15px; /* Để điều chỉnh khoảng cách giữa các cột */
+}
+
+.card-news {
+    flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
+    margin: 15px; /* Khoảng cách giữa các thẻ */
+    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
+    border-radius: 10px; /* Bo góc cho thẻ */
+    background-color: #e7e7e7; /* Màu nền cho thẻ */
+    padding: 20px; /* Khoảng cách bên trong thẻ */
+}
+
+
+.card-news h3 {
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    min-height: 4rem;
+    font-size: 1.5rem;
+}
+
+.card-news p {
+    color: #666; /* Màu chữ cho nội dung */
+    padding: 10px;
+    
+}
+
+.card-news a {
+    color: #065cb8; /* Màu chữ cho liên kết */
+    text-decoration: none; /* Bỏ gạch chân */   
+    
+}
+
+.card-news a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}
+
+.card-news{
+    padding: 40px;
+}
+
+.card-news-box{
+    text-align: center;
+}
+
+/* CSS Community */
+
+.content {
+    padding: 60px; /* Khoảng cách bên trong */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+    padding-top: 10px;
+}
+
+.content h2 {
+    font-family: 'Oswald', sans-serif; /* Sử dụng font Oswald */
+    color: #234d7d; /* Màu chữ cho tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.content p {
+    font-family: Arial, sans-serif; /* Font chữ cho đoạn văn */
+    color: #333; /* Màu chữ cho đoạn văn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 15px; /* Khoảng cách dưới đoạn văn */
+}
+
+.content ul {
+    list-style-type: disc; /* Kiểu danh sách */
+    padding-left: 20px; /* Khoảng cách bên trái cho danh sách */
+}
+
+.content ul li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục trong danh sách */
+    font-family: Arial, sans-serif; /* Font chữ cho các mục trong danh sách */
+    color: #333; /* Màu chữ cho các mục trong danh sách */
 }
