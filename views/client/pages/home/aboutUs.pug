@@ -65,9 +65,18 @@ block main
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") TS. Đinh Quốc Tuấn
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia gen và lai tạo cá Koi
                         
+        //- // Thêm phần mới cho hiệu ứng số liệu tăng dần
+        //- section.stats-section(style="padding: 60px 0; text-align: center;")
+        //-     h2(style="color: #8b0000; margin-bottom: 40px; font-size: 2.5em; font-weight: bold;") Thành Tựu Của Chúng Tôi
+        //-     .stats-container(style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;")
+        //-         each stat, index in ['Khách Hàng Hài Lòng', 'Dự Án Hoàn Thành', 'Giải Thưởng', 'Năm Kinh Nghiệm']
+        //-             .stat-item(style="flex-basis: calc(25% - 30px); background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease;")
+        //-                 .stat-number(data-target=Math.floor(Math.random() * 1000) + 500, style="font-size: 3.5em; font-weight: bold; color: #8b0000; margin-bottom: 10px;") 0
+        //-                 .stat-label(style="font-size: 1.2em; color: #333; font-weight: 500;")= stat
 
         // Thay đổi phần horizontal-scroll
         section.horizontal-scroll(style="padding: 40px 0; overflow: hidden;")
+            h2(style="color: #8b0000; text-align: center; margin-bottom: 30px; font-size: 2.5em; font-weight: bold;") 
             .scroll-container(style="display: flex; gap: 20px; overflow-x: scroll; scrollbar-width: none; -ms-overflow-style: none;")
                 each img in [1, 2, 3, 4, 5, 6, 7, 8]
                     img(src=`/images/KOI/koi-${img}.jpg`, alt=`Cá Koi ${img}`, style="width: 300px; height: 200px; object-fit: cover; border-radius: 10px; flex-shrink: 0;")
