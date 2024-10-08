@@ -353,10 +353,15 @@ module.exports.addFish = async(req, res) => {
 module.exports.paymentFishPost = async(req, res) => {
   console.log(req.body)
   const informationData = JSON.parse(req.body.previousPageData);
+  // console.log("-----------------------------------------");
+  // console.log(informationData[0]);
+
+  // console.log("-----------------------------------------");
   const appointment = await Appointment.findOne({
     raw: true,
     where: {
-      AppointmentID: informationData[0].appointmentId
+      VetID: res.locals.user.VetID,
+      Process: "Process"
     }
   })
   let totalServiceFee = 1500000;

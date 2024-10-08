@@ -4,28 +4,29 @@ include ../../mixins/mixin-title.pug
 
 block main
    
-    +alert-success("5000")
-    +alert-error('5000')
-    +title("Hồ sơ dịch vụ")
-    style.
-        #table-appointment thead tr th{
-          background-color: #86d0dbf5 !important
-        }
-        .btn-custom-outline {
-          color: #21a0b3;
-          background-color: transparent;
-          border-color: #21a0b3;
-        }
-        .btn-custom-outline.active,
-        .btn-custom-outline:active,
-        .btn-custom-outline:focus,
-        .btn-custom-outline:hover {
-          color: #ffffff !important;
-          background-color: #21a0b3 !important;
-          border-color: #21a0b3 !important;
-        }
-    //- pre
-    //-     code= JSON.stringify(listAppointment, null, 2)
+  +alert-success("5000")
+  +alert-error('5000')
+  +title("Hồ sơ dịch vụ")
+  style.
+      #table-appointment thead tr th{
+        background-color: #86d0dbf5 !important
+      }
+      .btn-custom-outline {
+        color: #21a0b3;
+        background-color: transparent;
+        border-color: #21a0b3;
+      }
+      .btn-custom-outline.active,
+      .btn-custom-outline:active,
+      .btn-custom-outline:focus,
+      .btn-custom-outline:hover {
+        color: #ffffff !important;
+        background-color: #21a0b3 !important;
+        border-color: #21a0b3 !important;
+      }
+  //- pre
+  //-     code= JSON.stringify(listAppointment, null, 2)
+  .block-sider(style="width:90%;margin-left:180px;")   
     .card.mb-3(style="margin: 0 50px 50px;")
       .card-header(style="background-color: #86d0dbf5 ;") Bộ lọc 
       .card-body 
