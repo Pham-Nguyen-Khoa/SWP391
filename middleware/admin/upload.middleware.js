@@ -32,3 +32,40 @@ module.exports.upload = function (req, res, next) {
     next();
   }
 };
+
+
+
+module.exports.uploadMultiple = function (req, res, next) {
+  if (req.files && Object.keys(req.files).length > 0) {
+    let streamUpload = (file) => {
+      return new Promise((resolve, reject) => {
+        let stream = cloudinary.uploader.upload_stream((error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        });
+        streamifier.createReadStream(file.buffer).pipe(stream);
+      });
+    };
+
+    async function uploadFiles(files) {
+      const uploadedFiles = {};
+      for (const [fieldname, fileArray] of Object.entries(files)) {
+        const uploadPromises = fileArray.map(file => streamUpload(file));
+        const results = await Promise.all(uploadPromises);
+        uploadedFiles[fieldname] = results.map(result => result.secure_url);
+      }
+      
+      // Lưu các URL đã upload vào req.body
+      Object.assign(req.body, uploadedFiles);
+      
+      next();
+    }
+
+    uploadFiles(req.files);
+  } else {
+    next();
+  }
+};

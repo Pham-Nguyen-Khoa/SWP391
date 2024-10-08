@@ -3,41 +3,42 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
-    div.sortSchedule
-        form(action="/doctor/schedule" method="get" class="form-inline my-3 form-choose-week")
-            .form-group
-                label(for="weekOffset" class="mr-2") Chọn tuần:
-                select(name="weekOffset" id="weekOffset" class="form-control form-control-sm" onchange="this.form.submit()" style="font-weight: bold;")
-                    each week in weeks
-                        option(value=week.value selected=week.value == weekOffset) #{week.label}
+    .block-sider(style="width:90%;margin-left:180px;")
+        div.sortSchedule
+            form(action="/doctor/schedule" method="get" class="form-inline my-3 form-choose-week")
+                .form-group
+                    label(for="weekOffset" class="mr-2") Chọn tuần:
+                    select(name="weekOffset" id="weekOffset" class="form-control form-control-sm" onchange="this.form.submit()" style="font-weight: bold;")
+                        each week in weeks
+                            option(value=week.value selected=week.value == weekOffset) #{week.label}
 
-        .table-container
-            table.table.table-bordered.table-hover.table-condensed.text-center.table-sm.mt-3
-                thead
-                    tr
-                        th(style="width:110px") Slot
-                        each day in days
-                            th.text-center #{day.name}
-                    tr
-                        th
-                        each day in days
-                            th.text-center #{day.date}
-                tbody
-                    each slot in slots
+            .table-container
+                table.table.table-bordered.table-hover.table-condensed.text-center.table-sm.mt-3
+                    thead
                         tr
-                            td.text-center #{slot}
+                            th(style="width:110px") Slot
                             each day in days
-                                td.text-center
-                                    .doctor-container.row
-                                        each schedule in schedules
-                                            if(schedule.VetID == user.VetID)
-                                                each shift in schedule.shifts
-                                                    if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
-                                                        .doctor-info.col
-                                                            if shift.AppointmentID == null
-                                                                img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
-                                                            else 
-                                                                img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover ; border: 3px solid red;box-shadow: 1px 1px 4px 9px #d91e45;    margin: 10px 0; " class="img-thumbnail doctor-avatar img-sm")
-                                                            .doctor-details
-                                                                p.mb-0 #{schedule.account.FullName}
-                                                                p.text-muted.mb-0 #{schedule.account.Specialization}
+                                th.text-center #{day.name}
+                        tr
+                            th
+                            each day in days
+                                th.text-center #{day.date}
+                    tbody
+                        each slot in slots
+                            tr
+                                td.text-center #{slot}
+                                each day in days
+                                    td.text-center
+                                        .doctor-container.row
+                                            each schedule in schedules
+                                                if(schedule.VetID == user.VetID)
+                                                    each shift in schedule.shifts
+                                                        if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
+                                                            .doctor-info.col
+                                                                if shift.AppointmentID == null
+                                                                    img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
+                                                                else 
+                                                                    img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover ; border: 3px solid red;box-shadow: 1px 1px 4px 9px #d91e45;    margin: 10px 0; " class="img-thumbnail doctor-avatar img-sm")
+                                                                .doctor-details
+                                                                    p.mb-0 #{schedule.account.FullName}
+                                                                    p.text-muted.mb-0 #{schedule.account.Specialization}

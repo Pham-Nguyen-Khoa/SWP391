@@ -362,3 +362,19 @@ function toggleDoctorFields() {
     doctorFields.style.display = "none";
   }
 }
+
+
+
+
+
+// Edit Website Info
+const formWebsiteInfo = document.querySelector("#form-website-info");
+const btnWebsiteInfo = document.querySelector(".btn-website-info");
+if (formWebsiteInfo) {
+  btnWebsiteInfo.addEventListener("click", (e) => {
+    e.preventDefault();
+    formWebsiteInfo.submit();
+  });
+}
+// End Edit Website Info
+

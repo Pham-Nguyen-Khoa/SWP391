@@ -9,18 +9,19 @@ block main
     table thead tr th{
           background-color: #d2d4d4 !important;
     }
-  .container-fluid
-    +title("Kê Đơn Thuốc")
-    form#prescriptionForm(action="/doctor/current-appointment/payment" method="POST")
-      input#previousPageData(type="hidden" name="previousPageData")
-      input#selectedMedications(type="hidden" name="selectedMedications")
-      
-      // Container for medication cards
-      .medication-cards
+  .block-sider(style="width:90%;margin-left:180px;")
+    .container-fluid
+      +title("Kê Đơn Thuốc")
+      form#prescriptionForm(action="/doctor/current-appointment/payment" method="POST")
+        input#previousPageData(type="hidden" name="previousPageData")
+        input#selectedMedications(type="hidden" name="selectedMedications")
+        
+        // Container for medication cards
+        .medication-cards
 
-      .text-center.mt-4
-        button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
-        a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
+        .text-center.mt-4
+          button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
+          a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
 
   script.
     const medications = !{JSON.stringify(listMedicine)};
