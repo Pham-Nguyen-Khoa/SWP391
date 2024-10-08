@@ -1,13 +1,88 @@
 prefixAdmin
-    .sider 
-        .inner-menu 
-            ul 
-                li 
-                    a(href=`${prefixAdmin}/dashboard`) Tổng quan 
-
-                li 
-                    a(href=`${prefixAdmin}/account`) Danh sách tài khoản
-                li 
-                    a(href=`${prefixAdmin}/dashboard`) Danh mục admin 
+style.
+    .admin-sider {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        width: 280px;
+        height: 100vh;
+        padding: 20px 0;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+    .sider-header {
+        text-align: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #34495e;
+    }
+    .sider-logo {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
+    }
+    .sider-title {
+        font-size: 24px;
+        margin: 0;
+        font-weight: 300;
+    }
+    .sider-nav {
+        padding-top: 30px;
+    }
+    .sider-menu {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    .sider-menu-item {
+        margin-bottom: 5px;
+    }
+    .sider-link {
+        display: flex;
+        align-items: center;
+        padding: 12px 25px;
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: all 0.3s;
+        border-left: 4px solid transparent;
+    }
+    .sider-link:hover, .sider-link.active {
+        background-color: #34495e;
+        border-left-color: #3498db;
+    }
+    .sider-link i {
+        margin-right: 15px;
+        width: 20px;
+        text-align: center;
+        font-size: 18px;
+    }
+    .sider-link span {
+        font-size: 16px;
+    }
+    .sider-footer {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        color: #bdc3c7;
+    }
+.sider 
+    .admin-sider
+        .sider-header
+            img.sider-logo(src="/images/admin-logo.png" alt="Admin Logo")
+            h2.sider-title Quản trị viên
+        nav.sider-nav
+            ul.sider-menu
+                li.sider-menu-item
+                    a.sider-link(href=`${prefixAdmin}/dashboard`)
+                        i.fas.fa-tachometer-alt
+                        span Tổng quan
+                li.sider-menu-item
+                    a.sider-link(href=`${prefixAdmin}/account`)
+                        i.fas.fa-users
+                        span Danh sách tài khoản
+                li.sider-menu-item
+                    a.sider-link(href=`${prefixAdmin}/categories`)
+                        i.fas.fa-list
+                        span Danh mục admin
 
         

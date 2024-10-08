@@ -4,8 +4,9 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
-    h1 #{pageTitle}
-    h1 #{user.FullName}
-    pre
-        code #{JSON.stringify(user,null,2)}
+    .block-sider(style="margin-left:180px;")
+        h1 #{pageTitle}
+        h1 #{user.FullName}
+        pre
+            code #{JSON.stringify(user,null,2)}
 

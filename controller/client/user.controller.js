@@ -47,7 +47,7 @@ module.exports.loginPost = async (req, res) => {
   if (user.RoleID == "RL0004") {
     res.redirect("/koi");
   } else if (user.RoleID == "RL0001") {
-    res.redirect("/admin/dashboard");
+    res.redirect("/admin/account");
   } else if (user.RoleID == "RL0002") {
     res.redirect("/doctor/appointment");
   } else if (user.RoleID == "RL0003") {
