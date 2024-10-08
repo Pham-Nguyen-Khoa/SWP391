@@ -237,7 +237,8 @@ module.exports.indexPost = async (req, res) => {
         "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào ca " + req.body.shift + ". " +
         "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
       );
-}else if(req.body.service != "Tư Vấn Online" && req.body.doctor != "Tự chọn"){
+}else if(req.body.service == "Cải Thiện Môi Trường" && req.body.doctor != "Tự chọn"){
+  console.log(req.body)
   const AppointmentID = await generateUserId(
     "AP",
     "appointment",
@@ -293,7 +294,7 @@ module.exports.indexPost = async (req, res) => {
   `;
       await Sequelize.query(queryUpdate);
 
-}else if(req.body.service != "Tư Vấn Online" && req.body.doctor == "Tự chọn"){
+}else if(req.body.service == "Cải Thiện Môi Trường" && req.body.doctor == "Tự chọn"){
   const AppointmentID = await generateUserId(
     "AP",
     "appointment",
@@ -332,6 +333,152 @@ module.exports.indexPost = async (req, res) => {
     PhoneNumber: req.body.PhoneNumber,
     Date: req.body.select_date,
     Address: req.body.address,
+    Process: "Pending",
+    Shift: req.body.shift,
+    StatusPaid: "Chưa thanh toán",
+  });
+  
+}else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor == "Tự chọn"){
+  console.log(req.body)
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+
+  const customerID = await Customer.findOne({
+    raw: true,
+    attributes: ["CustomerID"],
+    where: {
+      AccountID: res.locals.userInfo.AccountID,
+    },
+  });
+
+  const serviceID = await Service.findOne({
+    raw: true,
+    attributes: ["ServiceID"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+
+  const priceService = await Service.findOne({
+    raw: true,
+    attributes: ["Price"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+  await Appointment.create({
+    AppointmentID: AppointmentID,
+    CustomerID: customerID.CustomerID,
+    ServiceID: serviceID.ServiceID,
+    VetID: null,
+    Name: req.body.FullName,
+    PhoneNumber: req.body.PhoneNumber,
+    Date: req.body.select_date,
+    Address: req.body.address,
+    HealthKoi: req.body.Description,
+    Process: "Pending",
+    Shift: req.body.shift,
+    StatusPaid: "Chưa thanh toán",
+  });
+  
+}else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor != "Tự chọn"){
+  console.log(req.body)
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+
+  const customerID = await Customer.findOne({
+    raw: true,
+    attributes: ["CustomerID"],
+    where: {
+      AccountID: res.locals.userInfo.AccountID,
+    },
+  });
+
+  const serviceID = await Service.findOne({
+    raw: true,
+    attributes: ["ServiceID"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+
+  const priceService = await Service.findOne({
+    raw: true,
+    attributes: ["Price"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+  await Appointment.create({
+    AppointmentID: AppointmentID,
+    CustomerID: customerID.CustomerID,
+    ServiceID: serviceID.ServiceID,
+    VetID: req.body.doctor,
+    Name: req.body.FullName,
+    PhoneNumber: req.body.PhoneNumber,
+    Date: req.body.select_date,
+    Address: req.body.address,
+    HealthKoi: req.body.Description,
+    Process: "Pending",
+    Shift: req.body.shift,
+    StatusPaid: "Chưa thanh toán",
+  });
+  
+  const queryUpdate = `
+  UPDATE shiftdetail sd
+  JOIN schedule sc ON sd.ScheduleID = sc.ScheduleID
+  SET sd.AppointmentID = '${AppointmentID}'
+  WHERE sc.VetID = '${req.body.doctor}'     
+    AND sd.Shift = '${req.body.shift}' 
+    AND sc.Time = '${req.body.select_date}';
+  `;
+      await Sequelize.query(queryUpdate);
+}else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor == "Tự chọn"){
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+
+  const customerID = await Customer.findOne({
+    raw: true,
+    attributes: ["CustomerID"],
+    where: {
+      AccountID: res.locals.userInfo.AccountID,
+    },
+  });
+
+  const serviceID = await Service.findOne({
+    raw: true,
+    attributes: ["ServiceID"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+
+  const priceService = await Service.findOne({
+    raw: true,
+    attributes: ["Price"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+  await Appointment.create({
+    AppointmentID: AppointmentID,
+    CustomerID: customerID.CustomerID,
+    ServiceID: serviceID.ServiceID,
+    VetID: null,
+    Name: req.body.FullName,
+    PhoneNumber: req.body.PhoneNumber,
+    Date: req.body.select_date,
+    Address: req.body.address,
+    HealthKoi: req.body.Description,
     Process: "Pending",
     Shift: req.body.shift,
     StatusPaid: "Chưa thanh toán",

@@ -3,158 +3,158 @@ include ../../mixins/alert.pug
 block main
         +alert-success("5000")
         +alert-error('5000')
-        h1 #{pageTitle}     
-        form(
-            action=`${prefixAdmin}/account/edit/${data.AccountID}?_method=PATCH`,
-            method="POST"
-            enctype="multipart/form-data"
-        ) 
-            div(class="form-group")
-                label(for="FullName") Họ và Tên *
-                input(
-                    type="text" 
-                    id="FullName" 
-                    name="FullName"
-                    class="form-control custom-input"
-                    required
-                    value=data.FullName
-                    ) 
-            div(class="form-group")
-                label(for="Birthday") Ngày sinh
-                input(
-                    type="date"
-                    id="Birthday" 
-                    name="Birthday"
-                    class="form-control custom-input"
-                    value=data.Birthday
-                    )
-            div(class="form-group")
+        .block-sider(style="margin-left:180px;")
+            h1 #{pageTitle}     
+            form(
+                action=`${prefixAdmin}/account/edit/${data.AccountID}?_method=PATCH`,
+                method="POST"
+                enctype="multipart/form-data"
+            ) 
+                div(class="form-group")
+                    label(for="FullName") Họ và Tên *
+                    input(
+                        type="text" 
+                        id="FullName" 
+                        name="FullName"
+                        class="form-control custom-input"
+                        required
+                        value=data.FullName
+                        ) 
+                div(class="form-group")
+                    label(for="Birthday") Ngày sinh
+                    input(
+                        type="date"
+                        id="Birthday" 
+                        name="Birthday"
+                        class="form-control custom-input"
+                        value=data.Birthday
+                        )
+                div(class="form-group")
 
-                label(for="Gender") Giới tính
-                select(name="Gender" id="Gender" class="form-control custom-input")
-                    option(disabled selected) --- Lựa chọn ---
+                    label(for="Gender") Giới tính
+                    select(name="Gender" id="Gender" class="form-control custom-input")
+                        option(disabled selected) --- Lựa chọn ---
 
-                    option(value="Nam" selected=(data.Gender === "Nam") ? true : false) Nam
+                        option(value="Nam" selected=(data.Gender === "Nam") ? true : false) Nam
 
-                    option(value="Nữ" selected=(data.Gender === "Nữ") ? true : false) Nữ
-            div(class="form-group")
-                label(for="Email") Email *
-                input(
-                    type="text" 
-                    id="Email" 
-                    name="Email"
-                    class="form-control custom-input"
-                    value=data.Email
-                    required
-                    )
-            div(class="form-group")
-                label(for="Address") Địa chỉ *
-                input(
-                    type="text" 
-                    id="Address" 
-                    name="Address"
-                    class="form-control custom-input"
-                    value=data.Address
-                    )
-            div(class="form-group")
-                label(for="Password") Password *
-                input(
-                    type="password" 
-                    id="Password" 
-                    name="Password"
-                    class="form-control custom-input"
-                    placeholder="Nhập vào thay đổi mật khẩu mới"
-                    )
-            div(class="form-group")
-                label(for="PhoneNumber") Số điện thoại
-                input(
-                    type="number" 
-                    id="PhoneNumber" 
-                    name="PhoneNumber"
-                    class="form-control custom-input"
-                    value=data.PhoneNumber
-                    )
-            
-            div(
-                class="form-group"
-                upload-image
-                )
-                label(for="Avatar") Hình ảnh
-                input(
-                    type="file" 
-                    id="Avatar" 
-                    name="Avatar"
-                    class="form-control-file"
-                    upload-image-input     
-                    )
-                img(
-                    src=data.Avatar
-                    upload-image-preview
-                    class="upload-preview"
-                )
-            input(type="hidden" name="OldAvatar" value=data.Avatar)
+                        option(value="Nữ" selected=(data.Gender === "Nữ") ? true : false) Nữ
+                div(class="form-group")
+                    label(for="Email") Email *
+                    input(
+                        type="text" 
+                        id="Email" 
+                        name="Email"
+                        class="form-control custom-input"
+                        value=data.Email
+                        required
+                        )
+                div(class="form-group")
+                    label(for="Address") Địa chỉ *
+                    input(
+                        type="text" 
+                        id="Address" 
+                        name="Address"
+                        class="form-control custom-input"
+                        value=data.Address
+                        )
+                div(class="form-group")
+                    label(for="Password") Password *
+                    input(
+                        type="password" 
+                        id="Password" 
+                        name="Password"
+                        class="form-control custom-input"
+                        placeholder="Nhập vào thay đổi mật khẩu mới"
+                        )
+                div(class="form-group")
+                    label(for="PhoneNumber") Số điện thoại
+                    input(
+                        type="number" 
+                        id="PhoneNumber" 
+                        name="PhoneNumber"
+                        class="form-control custom-input"
+                        value=data.PhoneNumber
+                        )
                 
-            div(class="form-group")
-                label(for="role_id") Phân Quyền
-                select(name="RoleID" id = "RoleID" class="form-control custom-input" onchange="toggleDoctorFields()")
-                    option(disabled selected) --- Lựa chọn ---
-                    each role in roles
-                        option(
-                            value=role.RoleID
-                            selected= (role.RoleID == data.RoleID) ? true: false
-                        ) #{role.RoleName}
-                div(id="doctorFields" class="form-group" style=(data.RoleID == "RL0002" ? '' : 'display:none;') )
-                    div(class="form-group")
-                        label(for="Specialization") Chuyên ngành
-                        select(name="Specialization" id="Specialization" class="form-control custom-input")
-                            option(value="Khám Nội / Ngoại" selected= (data.Specialization == "Khám Nội / Ngoại") ? true: false) Khám Nội / Ngoại
-                            option(value="Phẫu Thuật" selected= (data.Specialization == "Phẫu Thuật") ? true: false) Phẫu Thuật
-                            option(value="Tư Vấn Môi Trường" selected= (data.Specialization == "Tư Vấn Môi Trường") ? true: false) Tư Vấn Môi Trường
-                            option(value="Tư Vấn Online" selected= (data.Specialization == "Tư Vấn Online") ? true: false) Tư Vấn Online
-                    div(class="form-group")
-                        label(for="Description") Thành tựu
-                        input(
-                            type="text"
-                            id="Description"
-                            name="Description"
-                            class="form-control custom-input"
-                            value=data.Description
+                div(
+                    class="form-group"
+                    upload-image
+                    )
+                    label(for="Avatar") Hình ảnh
+                    input(
+                        type="file" 
+                        id="Avatar" 
+                        name="Avatar"
+                        class="form-control-file"
+                        upload-image-input     
                         )
-                    div(class="form-group")
-                        label(for="GoogleMeetLink") Link Google Meet
-                        input(
-                            type="url"
-                            id="GoogleMeetLink"
-                            name="GoogleMeetLink"
-                            class="form-control custom-input"
-                            value=data.GoogleMeet
-                        )
-           
-            div(class="form-group ")
-                input(type="hidden" name="RoleID_old" value=data.RoleID)
-            
-            div(class="form-group form-check form-check-inline")
-                input(type="radio"
-                    class="form-check-input"
-                    id="statusActive"
-                    name="Status"
-                    value="Kích hoạt"
-                    checked=(data.Status === "Kích hoạt") ? true: false
-                    )  
-            
-                label(for="statusActive" class="form-check-label" ) Hoạt động 
-            div(class="form-group form-check form-check-inline")
-                input(type="radio"
-                    class="form-check-input"
-                    id="statusInactive"
-                    name="Status"
-                    value="Bị Block"
-                    checked=(data.Status === "Bị Block") ? true: false
-                    )  
-                label(for="statusInactive" class="form-check-label" ) Dừng hoạt động 
+                    img(
+                        src=data.Avatar
+                        upload-image-preview
+                        class="upload-preview"
+                    )
+                input(type="hidden" name="OldAvatar" value=data.Avatar)
                     
-            div(class="form-group")
-                button(
-                    type="submit"
-                    class="btn btn-primary"
-                ) Cập nhật           
+                div(class="form-group")
+                    label(for="role_id") Phân Quyền
+                    select(name="RoleID" id = "RoleID" class="form-control custom-input" onchange="toggleDoctorFields()")
+                        option(disabled selected) --- Lựa chọn ---
+                        each role in roles
+                            option(
+                                value=role.RoleID
+                                selected= (role.RoleID == data.RoleID) ? true: false
+                            ) #{role.RoleName}
+                    div(id="doctorFields" class="form-group" style=(data.RoleID == "RL0002" ? '' : 'display:none;') )
+                        div(class="form-group")
+                            label(for="Specialization") Chuyên ngành
+                            select(name="Specialization" id="Specialization" class="form-control custom-input")
+                                option(value="Khám Sức Khỏe" selected= (data.Specialization == "Khám Nội / Ngoại") ? true: false) Khám Nội / Ngoại
+                                option(value="Tư Vấn Môi Trường" selected= (data.Specialization == "Tư Vấn Môi Trường") ? true: false) Tư Vấn Môi Trường
+                                option(value="Tư Vấn Online" selected= (data.Specialization == "Tư Vấn Online") ? true: false) Tư Vấn Online
+                        div(class="form-group")
+                            label(for="Description") Thành tựu
+                            input(
+                                type="text"
+                                id="Description"
+                                name="Description"
+                                class="form-control custom-input"
+                                value=data.Description
+                            )
+                        div(class="form-group")
+                            label(for="GoogleMeetLink") Link Google Meet
+                            input(
+                                type="url"
+                                id="GoogleMeetLink"
+                                name="GoogleMeetLink"
+                                class="form-control custom-input"
+                                value=data.GoogleMeet
+                            )
+            
+                div(class="form-group ")
+                    input(type="hidden" name="RoleID_old" value=data.RoleID)
+                
+                div(class="form-group form-check form-check-inline")
+                    input(type="radio"
+                        class="form-check-input"
+                        id="statusActive"
+                        name="Status"
+                        value="Kích hoạt"
+                        checked=(data.Status === "Kích hoạt") ? true: false
+                        )  
+                
+                    label(for="statusActive" class="form-check-label" ) Hoạt động 
+                div(class="form-group form-check form-check-inline")
+                    input(type="radio"
+                        class="form-check-input"
+                        id="statusInactive"
+                        name="Status"
+                        value="Bị Block"
+                        checked=(data.Status === "Bị Block") ? true: false
+                        )  
+                    label(for="statusInactive" class="form-check-label" ) Dừng hoạt động 
+                        
+                div(class="form-group")
+                    button(
+                        type="submit"
+                        class="btn btn-primary"
+                    ) Cập nhật           

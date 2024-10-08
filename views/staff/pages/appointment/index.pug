@@ -4,26 +4,29 @@ include ../../mixins/mixin-title.pug
 
 block main
    
-    +alert-success("5000")
-    +alert-error('5000')
-    +title("Hồ sơ dịch vụ")
-    style.
-        #table-appointment thead tr th{
-          background-color: #86d0dbf5 !important
-        }
-        .btn-custom-outline {
-          color: #21a0b3;
-          background-color: transparent;
-          border-color: #21a0b3;
-        }
-        .btn-custom-outline.active,
-        .btn-custom-outline:active,
-        .btn-custom-outline:focus,
-        .btn-custom-outline:hover {
-          color: #ffffff !important;
-          background-color: #21a0b3 !important;
-          border-color: #21a0b3 !important;
-        }
+  +alert-success("5000")
+  +alert-error('5000')
+  +title("Hồ sơ dịch vụ")
+  style.
+      #table-appointment thead tr th{
+        background-color: #86d0dbf5 !important
+      }
+      .btn-custom-outline {
+        color: #21a0b3;
+        background-color: transparent;
+        border-color: #21a0b3;
+      }
+      .btn-custom-outline.active,
+      .btn-custom-outline:active,
+      .btn-custom-outline:focus,
+      .btn-custom-outline:hover {
+        color: #ffffff !important;
+        background-color: #21a0b3 !important;
+        border-color: #21a0b3 !important;
+      }
+  //- pre
+  //-     code= JSON.stringify(listAppointment, null, 2)
+  .block-sider(style="width:90%;margin-left:180px;")   
     .card.mb-3(style="margin: 0 50px 50px;")
       .card-header(style="background-color: #86d0dbf5 ;") Bộ lọc 
       .card-body 
@@ -117,14 +120,17 @@ block main
                     td #{appointment.Name}
                     td #{appointment.DateFormat}
                     td  
-                        
-                        if(appointment.Process == "Pending")  
+                        h1 #{appointment.VetID}
+                        if(appointment.Process == "Pending" && appointment.VetID == null)  
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
+                      
+                        //- if(appointment.Process == "Pending" && appointment.VetID == null)  
+                        //-     a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted" )
                             span(class="btn btn-primary status-btn" style="min-width: 140px;" ) Tiếp nhận
                         else if(appointment.Process == "Ready")
                             span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
-                        else if(appointment.Process == "Progress")
+                        else if(appointment.Process == "Process")
                             span(class="btn btn-dark status-btn" style="min-width: 140px;") Tiếp nhận
                         else if(appointment.Process == "Cancelled")
                             span(class="btn btn-danger status-btn" style="min-width: 140px;" ) Hủy bỏ 
@@ -138,7 +144,7 @@ block main
                                 input(type="hidden" name="specialization" value=appointment.Name)
                                 button.btn(
                                     type="submit"
-                                    style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #f52e0b;font-weight: 700;"
+                                    style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;"
                                 ) Gán Bác Sĩ
                         
                     td 
@@ -155,7 +161,7 @@ block main
                     td #{appointment.DateFormat}
                     td  
                         if(appointment.Process == "Pending")  
-                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
+                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
                             span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
                         else if(appointment.Process == "Ready")

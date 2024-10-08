@@ -1,0 +1,101 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+            //- pre
+            //-    code #{JSON.stringify(appoinmentInfo,null,2)}
+            +title("Chi Tiết Đơn Hàng")     
+            .order-details(style="margin-top: 100px;")
+               .order-information 
+                  .row 
+                     .col-8
+                           h2 Thông tin đơn đặt lịch
+                           .row 
+                              .col-5 
+
+                                 b(style="margin-right: 4px") ◉ Mã Đơn Hàng: 
+                                 span #{appoinmentInfo.AppointmentID}
+                                 br
+                                 b(style="margin-right: 4px") ◉ Ngày: 
+                                 span #{appoinmentInfo.Date} 
+                                 br
+                                 b(style="margin-right: 4px") ◉ Thời gian hẹn: 
+                                 span #{appoinmentInfo.Shift}
+                              
+                              .col-7 
+
+                                 b(style="margin-right: 4px") ◉ Tên Khách Hàng: 
+                                 span #{appoinmentInfo.CustomerFullName}
+                                 br
+                                 b(style="margin-right: 4px") ◉ Số điện thoại: 
+                                 span #{appoinmentInfo.PhoneNumber}
+                                 if(appoinmentInfo.Name != "Tư Vấn Online")
+                                    br
+                                    b(style="margin-right: 4px") ◉ Địa chỉ: 
+                                    span #{appoinmentInfo.AddressAppointment} 
+                                    br
+                                    b(style="margin-right: 4px") ◉ Thời gian hẹn: 
+                                    span #{appoinmentInfo.Shift}
+                     .col-4(style="    margin-top: 20px;")
+                           if(appoinmentInfo.Process == "Pending")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
+                           if(appoinmentInfo.Process == "Ready")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
+                           if(appoinmentInfo.Process == "Accepted")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
+                           if(appoinmentInfo.Process == "Process")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
+                           if(appoinmentInfo.Process == "Successed")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành 
+                           if(appoinmentInfo.Process == "Cancled")
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bị Hủy
+                  
+                        
+                  table.table.table-striped.mt-5.table-my-appointment
+                     thead 
+                        if(appoinmentInfo.Process == "Successed")
+                           tr(style="text-align: center")  
+                              th Tên dịch vụ
+                              th Giá
+                        else
+                           tr(style="text-align: center")  
+                              th Tên dịch vụ
+                              th Giá
+                     tbody 
+                        if(appoinmentInfo.Process == "Successed")
+                           each detail in objectPayment.serviceDetails
+                              tr 
+                                 td.text-center.align-middle #{detail.description}
+                                 td.text-center.align-middle #{detail.amount}
+
+                           tr 
+                              td.text-center.align-middle Tổng
+                              td.text-center.align-middle #{objectPayment.totalFee}
+                        else
+                           tr 
+                              td.text-center.align-middle #{appoinmentInfo.Name}
+                              td.text-center.align-middle #{appoinmentInfo.PriceFormat}
+
+                  .information-doctor
+                     .row 
+                        .col-6 
+                           h2 Bác sĩ thực hiện 
+                           b ◉ #{appoinmentInfo.VetFullName}
+                           br
+                           b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
+                           br
+                           img(src=appoinmentInfo.VetAvatar, alt="")
+                        .col-6 
+                           if(appoinmentInfo.Name == "Tư Vấn Online")
+                              p(style="margin: 0; font-size: 23px;font-weight: 700;") ◉ Link Google Meet: 
+                              a(href=appoinmentInfo.GoogleMeet style=" text-decoration: underline; color: #1695cf;") #{appoinmentInfo.GoogleMeet}
+                           else 
+                            if(appoinmentInfo.Process == "Successed")
+                                .additional-links.mb-3(style="margin-left: 200px;")
+                                    a.btn.btn-info.mr-2(href=`/koi/my-appointment/detail/prescription/${appoinmentInfo.AppointmentID}`) Chi tiết đơn thuốc
+                                    a.btn.btn-info.mr-2(href=`/koi/my-appointment/detail/pond/${appoinmentInfo.AppointmentID}`) Chi tiết thông số cá
+                            .thank-you-heart 
+                              p Koi Vet xin cảm ơn 
+                              .heart 
+
+

@@ -18,7 +18,7 @@ block main
                 tbody 
                     if(listAppointment && listAppointment.length == 0)
                         tr
-                            td(colspan="6").text-center.font-weight-bold Không có đơn hàng nào
+                            td(colspan="7").text-center.font-weight-bold Không có đơn hàng nào
 
                     else
                         each item in listAppointment
@@ -37,6 +37,8 @@ block main
                                     td Khám tại trung tâm 
                                 if(item.Address != null && item.ServiceID =="DV0002")
                                     td Tại nhà
+                                if(item.Address != null && item.ServiceID =="DV0001")
+                                    td Tại nhà
                                 if(item.ServiceID =="DV0003")
                                     td Tư vấn 
                                 else 
@@ -50,7 +52,7 @@ block main
                                 if(item.Process =="Ready")
                                     td 
                                         p.process Sẵn sàng
-                                if(item.Process =="Progress")
+                                if(item.Process =="Process")
                                     td 
                                         p.process Đang thực hiện
                                 if(item.Process =="Successed")
