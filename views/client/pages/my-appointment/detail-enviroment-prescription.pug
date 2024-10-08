@@ -8,8 +8,7 @@ block main
     //-     code= JSON.stringify(appoinmentInfo, null, 2)
     .order-details(style="height:auto; padding: 30px 100px 20px 100px !important; margin-top: 60px !important;")
         each prescription, pIndex in prescriptions
-            
-            .prescription
+            .prescription(style=(pIndex > 0) ? "margin: 150px 0; padding: 20px" : "padding: 20px")
                 .row 
                     .col-2(style="margin-left: 40px;")
                         img(src="/images/logo.png", alt="" style="width: 150px; height: 150px; object-fit: cover; border:none")
@@ -38,7 +37,7 @@ block main
                     h1.text-center.font-weight-700.mb-5.mt-4(style="font-weight: bold;color: #5c96d5;") Đơn thuốc của hồ
                 else if(prescriptions.length > 1)
                     h1.text-center.font-weight-700.mb-5.mt-4(style="font-weight: bold;color: #5c96d5;") Đơn thuốc của hồ #{pIndex + 1}
-                .bill-prescription(style="background-color: #d3cece70; padding: 20px; border: 2px solid black; border-radius: 15px;    margin-bottom: 50px;")
+                .bill-prescription(style="background-color: #d0d1d245; width: 80%;padding: 20px; border: 2px solid black; border-radius: 15px; margin: 50px auto;")
                     each medicine, index in prescription.listMedicine
                         .row(style="margin:40px;     ")
                             .col-7
@@ -60,7 +59,7 @@ block main
                             .col-2(style="background-color: white; padding: 0; width: 150px; height: 250px; border-radius: 15px;")
                                 img(src=medicine.Image, alt="" style="width: 100%; height: 100%; object-fit: cover;margin: 0; padding: 15px;")
                             .col-3
-                                if(medicine.Quantity >= 10)
+                                if(medicine.Quantity >= 20)
                                     h2.text-center ◉ SL: #{medicine.Quantity} Viên
                                 else
                                     h2.text-center ◉ SL: #{medicine.Quantity} Chai
@@ -69,6 +68,6 @@ block main
                     .col-6 
                         h3.text-center Bác sĩ điều trị
                         h3.text-center #{vetInfo.FullName}
-                        img(src=vetInfo.Avatar, alt="" style="width: 150px; height: 150px; object-fit: cover; margin: 10px 41%;")
+                        img(src=vetInfo.Avatar, alt="" style="width: 250px; height: 250px; object-fit: cover; margin: 10px 36%;")
                     
         

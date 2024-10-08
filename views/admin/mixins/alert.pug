@@ -1,11 +1,14 @@
 mixin alert-success(time)
     - if (messages.success)
         .message 
-            div(
-                class="info alert alert-success"
+            .row 
+                .col-10
+                    div(
+                        class="info alert alert-success"
                 show-alert 
-                data-time = time
-            ) #{messages.success} <span close-alert>x</span>
+                        data-time = time
+                    ) #{messages.success} <span close-alert>x</span> 
+                    
 
 
 

@@ -29,4 +29,10 @@ module.exports.news = async (req, res) => {
   });
 };
 
+// [GET] localhost:/koi/community
+module.exports.community = async (req, res) => {
+  res.render("client/pages/home/community.pug", {
+    pageTitle: "Trang cộng đồng",
+  });
+};
 

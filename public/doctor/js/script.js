@@ -32,11 +32,11 @@ if (uploadImage) {
 
 
 
-
 // Logout
 const btnLogout = document.querySelector("[button-logout]");
 console.log(btnLogout);
 btnLogout.addEventListener("click", () => {
+  console.log("click");
   let url = new URL(window.location.href);
   const check = confirm("Bạn có chắc chắn muốn đăng xuất!");
   if (check) {

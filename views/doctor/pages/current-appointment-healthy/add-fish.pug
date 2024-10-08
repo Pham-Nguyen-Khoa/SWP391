@@ -1,0 +1,155 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+  style.
+    body {
+      background-color: #f0f4f8;
+      font-family: 'Arial', sans-serif;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .card {
+      box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%);
+      border-radius: 8px;
+      border: none;
+      margin: 60px auto;
+      max-width: 800px;
+      background-color: #f7fbff;
+    }
+    .card-header {
+      background-color: #C7E3ED;
+      font-weight: bold;
+      font-size: 1.3em;
+      padding: 15px;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      text-align: center;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .btn-submit {
+      background-color: #4294b1c7;
+      color: black;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn-submit:hover {
+      background-color: #357a9e;
+    }
+    .upload-preview {
+      max-width: 200px;
+      max-height: 200px;
+      object-fit: cover;
+      margin-top: 10px;
+    }
+
+  +title("Thêm Cá Mới")
+
+  .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;background-color: #f7fbff;")
+    .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
+      span(style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá mới
+    form#fishForm
+      .card-body
+        div.form-group(upload-image)
+          //- label(for="Avatar") Hình ảnh
+          //- input.form-control-file(type="file" id="Avatar" name="Avatar" required upload-image-input)
+          //- img.upload-preview(src="" upload-image-preview)
+          label(for="Avatar") Hình ảnh
+          textarea#AvatarFish.form-control(name="Avatar")
+        .form-group
+          label(for="Problem") Vấn đề
+          textarea.form-control(name="Problem" id="Problem" rows="3" required)
+        .form-group
+          label(for="Solution") Giải pháp
+          textarea.form-control(name="Solution" id="Solution" rows="3" required)
+        .form-group
+          label(for="Description") Mô tả chi tiết
+          textarea.form-control(name="Description" id="Description" rows="3" required)
+      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;") Thông Tin Cá Koi
+      .card-body
+        .row
+          .col-md-4
+            .form-group
+              label(for="Type") Loại Cá
+              input.form-control(type="text" name="Type" id="Type" required)
+          .col-md-4
+            .form-group
+              label(for="Weight") Trọng lượng (kg)
+              input.form-control(type="number" name="Weight" id="Weight" step="0.01" required)
+          .col-md-4
+            .form-group
+              label(for="Height") Chiều dài (cm)
+              input.form-control(type="number" name="Height" id="Height" step="0.01" required)
+        .row
+          .col-md-4
+            .form-group
+              label(for="Gender") Giới tính
+              select.form-control(name="Gender" id="Gender" required)
+                option(value="" disabled selected) Chọn giới tính
+                option(value="male") Đực
+                option(value="female") Cái
+          .col-md-4
+            .form-group
+              label(for="HealthStatus") Tình trạng sức khỏe
+              select.form-control(name="HealthStatus" id="HealthStatus" required)
+                option(value="" disabled selected) Chọn tình trạng sức khỏe
+                option(value="good") Tốt
+                option(value="average") Trung bình
+                option(value="poor") Kém
+        .text-center.mt-4
+          button.btn-submit(type="submit") 
+            i.fa-solid.fa-save
+            |  Lưu thông tin
+
+  script.
+    document.getElementById('fishForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const fishData = Object.fromEntries(formData.entries());
+
+      //- // Handle file upload
+      //- const fileInput = document.getElementById('Avatar');
+      //- const file = fileInput.files[0];
+      //- if (file) {
+      //-   const reader = new FileReader();
+      //-   reader.onloadend = function() {
+      //-     fishData.imageUrl = reader.result;
+      //-     saveFishData(fishData);
+      //-   }
+      //-   reader.readAsDataURL(file);
+      //- } else {
+      //-   saveFishData(fishData);
+      //- }
+      fishData.Avatar = tinymce.get('AvatarFish').getContent();
+
+      saveFishData(fishData);
+    });
+
+    function saveFishData(fishData) {
+      let allFishData = JSON.parse(localStorage.getItem('appointmentHealthyData') || '[]');
+      allFishData.push(fishData);
+      localStorage.setItem('appointmentHealthyData', JSON.stringify(allFishData));
+      alert('Đã lưu thông tin cá thành công');
+      window.location.href = '/doctor/current-appointment';
+    }
+
+    document.querySelector('[upload-image-input]').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.querySelector('[upload-image-preview]').src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });

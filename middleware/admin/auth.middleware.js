@@ -37,13 +37,13 @@ module.exports.requireAuth = async (req, res, next) => {
       (route.startsWith("/admin") || route.startsWith("/staff"))
     ) {
       req.flash("error", "Không thể truy cập !");
-      return res.redirect("/doctor/dashboard");
+      return res.redirect("/doctor/appointment");
     } else if (
       role === "RL0003" &&
       (route.startsWith("/admin") || route.startsWith("/doctor"))
     ) {
       req.flash("error", "Không thể truy cập !");
-      return res.redirect("/staff/dashboard");
+      return res.redirect("/staff/appointment");
     }
     const roleInfo = await Role.findOne({
       where: {

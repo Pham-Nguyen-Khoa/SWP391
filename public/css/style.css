@@ -10,7 +10,7 @@
     height: 80px;
 } */
 body {
-    background-color: #d8ecf9bd; /* Light grey background color */
+    background-color: #EFEFEF; /* Light grey background color */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif; /* Default font family */
@@ -37,61 +37,67 @@ body {
 
 /* Container and Navbar Styling */
 .navbar {
-    background-color: #91c7da7d;
-    /* Light background similar to the image */
+    background-color: #4475B9;
     padding: 1rem 2rem;
-    /* Adds space around the content */
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
-    /* Adjusted font size (smaller) */
     height: 120px;
-    border-bottom: solid black;
+    border-bottom: solid black 2px;
 }
 
 .navbar-nav {
     margin-left: auto;
-    /* Push the items to the right */
     align-items: center;
 }
 
 .navbar-brand {
     font-weight: bold;
     font-size: 1.1rem;
-    /* Slightly smaller font for brand */
     margin-right: 2rem;
 }
 
 .nav-item {
     margin-left: 1.5rem;
-    /* Adds spacing between each navigation item */
     white-space: nowrap;
 }
 
 
 .nav-item:last-child {
     margin-left: 0;
-    /* Remove margin for the last nav-item */
 }
 
-/* Dropdown styling */
-.nav-item.dropdown .dropdown-toggle {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-.dropdown-menu {
-    background-color: #fff;
-    border: none;
-}
-
-.dropdown-item:hover {
-    background-color: #f7f7f7;
-}
+/* Đảm bảo dropdown-menu ẩn khi không hover */
+ul.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  /* Khi hover vào .nav-item, hiển thị dropdown-menu */
+  li.nav-item.dropdown:hover ul.dropdown-menu {
+    display: block;
+  }
+  
+  /* Cấu hình thêm cho các item bên trong dropdown */
+  ul.dropdown-menu li a {
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    color: #333;
+  }
+  
+  ul.dropdown-menu li a:hover {
+    background-color: #f1f1f1;
+  }
+  
 
 /* Nav links */
 .nav-link {
     font-size: 20px;
-    color: #000;
+    color: #F1F1F1;
     text-transform: uppercase;
     font-weight: bold;
     padding: 0.5rem 1rem;
@@ -100,10 +106,13 @@ body {
     white-space: nowrap;
 }
 
+.nav-link.hover:hover {
+    color: #F1F1F1;
+    border-bottom: 5px solid #FFD700;
+}
+
 .nav-link:hover {
-    color: #a21a1a;
-    /* Dark red on hover */
-    text-decoration: none;
+    color: #FFD700;
 }
 
 /* Button Styling */
@@ -142,14 +151,18 @@ ul.dropdown-menu a.dropdown-item-link {
     text-decoration: none !important;
     /* Ensure no underline */
     color: #000;
-    /* Ensure proper text color */
+   font-size: 1.25rem;
 }
 
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #d75858;
+    color: #FFD700  ;
     /* Change color on hover if needed */
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+    background-color: transparent; /* Hoặc màu bạn muốn */
 }
 
 .services-list {
@@ -236,11 +249,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .submit-login {
-    margin: 0 33%;
+    margin: 0 40%;
 }
 
+
 .btn.login-button {
-    width: 100px;
+    width: 150px;
     background-color: #2da0cc;
     color: white
 }
@@ -272,6 +286,17 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     object-fit: unset;
 
 }
+.banner{
+    border-bottom-left-radius: 180px;
+    border-bottom-right-radius: 180px;
+    border: 5px solid #000000;
+    background-image: url('/images/KoiBanner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 550px;
+    width: 100%;
+    background-size: 100% 100%;
+}
 
 .container-fluid {
     padding: 0;
@@ -291,6 +316,7 @@ section.intro {
     font-weight: bold;
     font-size: 2.5rem;
     opacity: 0.8;
+    margin: 50px;
 }
 
 .intro-content {
@@ -324,9 +350,19 @@ section.profession {
 
 .profession-card {
     height: 500px;
-    border: 5px solid #145dda99;
+    border: 5px solid #A9D6E2;
     border-radius: 15px;
     box-shadow: 0 0 20px 6px #88afcc;
+}
+.profession-card:hover {
+    border: 5px solid  black; 
+    transform: scale(1.05); 
+    transition: transform 0.3s ease;
+}
+
+.profession-card-img {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 section.service {
@@ -334,69 +370,177 @@ section.service {
     margin-bottom: 50px;
 }
 
-.service-title {
-    height: 68px;
-}
-
-.service-content {
-    height: auto;
-}
-
-.btn-outline-danger{
+/* Container holding the image */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 344px; /* Height of the image */
+  }
+  
+  /* Image styling */
+  .image-container img {
+    width: 100%;
+    height: 100%; /* Ensure the image takes full height */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 20px;
+  }
+  
+  /* Overlay containing text and button */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #9AD1E0; /* White background with some transparency */
+    color: black; /* Black text for contrast */
     display: flex;
-    align-items: center;
-    border-color: #d75858;
-    color: #d75858;
-}
-
-.btn-outline-danger:hover {
-    background-color: #d75858; 
-    color: #fff; 
-    border-color: #d75858; 
-}
-
-.service-detail {
-    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease;
+    border-radius: 20px;
+  }
+  
+  /* Hover effect - hiển thị overlay khi hover */
+  .image-container:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
+  }
+  
+  .overlay h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .overlay p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .overlay button {
+    border: none;
+    background-color: transparent;
+    color: black; /* Change button color to match text */
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+
+.reviews-container {
+    text-align: center;
+    margin: 40px;
+}
+
+.review-card {
+    background-color: #E3F2FD; /* Màu nền nhẹ */
+    border-radius: 10px; /* Bo góc */
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Bóng nhẹ */
+    display: inline-block;
+    width: 30%; /* Điều chỉnh chiều rộng thẻ */
+    vertical-align: top;
+}
+
+.review-card h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.review-card p {
+    color: #555;
+    font-size: 18px;
+}
+
+.stars {
+    color: #FFD700;
+    margin: 5px 0;
+    font-size: 24px;
 }
 
 /* ALERT */
 
-[show-alert] {
+/* ALERT */
+.alert-success{
+    border: 2px solid #12b40b;
+    font-size: 18px;
+    background-color: #28a745;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(24 213 55 / 30%);
     position: fixed;
-    top: 70px;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+.alert-success:hover {
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+    opacity: 1; /* Độ mờ khi hover */
+}
+.alert-danger{
+    background-color: #dc3545;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(213 24 67 / 30%);
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+    border: 2px solid #cf6262;
+    font-size: 18px;
+}
+[show-alert]{
+    position: fixed;
+    top: 100px;
     right: 15px;
     z-index: 9999;
 }
-
-[show-alert].alert-hidden {
+[show-alert].alert-hidden{
     animation-name: alert-hidden;
     animation-duration: 2s;
     animation-fill-mode: both;
 }
 
 @keyframes alert-hidden {
-    from {
+    from{
         right: 15px;
     }
-
-    to {
+    to{
         right: -100%;
         display: none;
     }
 
 }
 
-[close-alert] {
-    background: #ffffffc4;
+[close-alert]{
+    background: #0a0a0ac4;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     line-height: 24px;
     text-align: center;
     font-weight: 600;
     border-radius: 50%;
     cursor: pointer;
+    color: #ffffff;
 }
 
 
@@ -417,7 +561,7 @@ background-color: #cac0c05c; */
     display: flex;
     justify-content: space-evenly;
     height: auto;
-    padding: 75px 0 0 0;
+    padding: 75px 2rem 0 2rem;
     background-color: #bee8ee;
     border-radius: 30px;
     box-shadow: 0px 0px 12px 11px rgb(22 64 169 / 17%);
@@ -570,15 +714,15 @@ select.service_appointment option,
     background: #4a90e2;
 }
 
-input[type="text"],
-input[type="tel"],
-textarea,
-select {
+.box_appointment    input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
+.box_appointment select {
     width: 100%;
     padding: 10px 20px;
     margin-bottom: 15px;
     border: 2px solid #0a3d5f75;
-    border-radius: 5px;
+    border-radius: 20px;
     box-sizing: border-box;
     margin-top: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -588,7 +732,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #7ac7d394  inset !important; /* Màu nền của input */
+    -webkit-box-shadow: 0 0 0 30px #e0e6e794  inset !important; /* Màu nền của input */
     -webkit-text-fill-color: #000 !important; /* Màu chữ của input */
 }
 
@@ -691,9 +835,9 @@ select.service_appointment option {
 
 
 
-input[type="text"],
-input[type="tel"],
-textarea,
+.box_appointment input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
 select {
     width: 100%;
     padding: 10px;
@@ -1645,16 +1789,18 @@ header {
   .card.contact-card{
     border-radius: 15px;
     background-color: #c2dfe594;
-    height: 850px;
+    height: 900px;
     border: 3px solid #6ea6ca;
     border-radius: 30px;
   }
 
   .card-contact-title {
+    padding-top: 10px;
     font-size: 30px;
-    font-weight: bold;
-    color: #333;
+    color: #234d7d;
     margin: 20px;
+    font-size: 1.7rem;
+    font-family: 'Oswald', sans-serif;
   }
 
   .card-contact-content {
@@ -1664,7 +1810,7 @@ header {
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
     padding: 10px;
-    
+    min-height: 13rem;
   }
 
 .card-contact-price {
@@ -1793,4 +1939,99 @@ header {
     background-color: #a50000; /* Màu đỏ đậm hơn khi hover */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Tăng độ đổ bóng */
     transform: translateY(-2px); /* Nút nhấc lên một chút */
+/* CSS NEWS */
+.news-title {
+    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
+    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    color: #333; /* Màu chữ có thể điều chỉnh */
+    text-align: center; /* Căn giữa tiêu đề */
+    margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.row.card-news-box {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh các thẻ ngang hàng */
+    justify-content: space-between; /* Căn giữa các thẻ */
+    flex-wrap: wrap; /* Cho phép các thẻ xuống dòng nếu không đủ chỗ */
+    margin: 0 -15px; /* Để điều chỉnh khoảng cách giữa các cột */
+}
+
+.card-news {
+    flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
+    margin: 15px; /* Khoảng cách giữa các thẻ */
+    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
+    border-radius: 10px; /* Bo góc cho thẻ */
+    background-color: #e7e7e7; /* Màu nền cho thẻ */
+    padding: 20px; /* Khoảng cách bên trong thẻ */
+}
+
+
+.card-news h3 {
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    min-height: 4rem;
+    font-size: 1.5rem;
+}
+
+.card-news p {
+    color: #666; /* Màu chữ cho nội dung */
+    padding: 10px;
+    
+}
+
+.card-news a {
+    color: #065cb8; /* Màu chữ cho liên kết */
+    text-decoration: none; /* Bỏ gạch chân */   
+    
+}
+
+.card-news a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}
+
+.card-news{
+    padding: 40px;
+}
+
+.card-news-box{
+    text-align: center;
+}
+
+/* CSS Community */
+
+.content {
+    padding: 60px; /* Khoảng cách bên trong */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+    padding-top: 10px;
+}
+
+.content h2 {
+    font-family: 'Oswald', sans-serif; /* Sử dụng font Oswald */
+    color: #234d7d; /* Màu chữ cho tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.content p {
+    font-family: Arial, sans-serif; /* Font chữ cho đoạn văn */
+    color: #333; /* Màu chữ cho đoạn văn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 15px; /* Khoảng cách dưới đoạn văn */
+}
+
+.content ul {
+    list-style-type: disc; /* Kiểu danh sách */
+    padding-left: 20px; /* Khoảng cách bên trái cho danh sách */
+}
+
+.content ul li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục trong danh sách */
+    font-family: Arial, sans-serif; /* Font chữ cho các mục trong danh sách */
+    color: #333; /* Màu chữ cho các mục trong danh sách */
 }
