@@ -248,11 +248,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .submit-login {
-    margin: 0 33%;
+    margin: 0 40%;
 }
 
+
 .btn.login-button {
-    width: 100px;
+    width: 150px;
     background-color: #2da0cc;
     color: white
 }
@@ -284,6 +285,17 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     object-fit: unset;
 
 }
+.banner{
+    border-bottom-left-radius: 180px;
+    border-bottom-right-radius: 180px;
+    border: 5px solid #000000;
+    background-image: url('/images/KoiBanner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 550px;
+    width: 100%;
+    background-size: 100% 100%;
+}
 
 .container-fluid {
     padding: 0;
@@ -303,6 +315,7 @@ section.intro {
     font-weight: bold;
     font-size: 2.5rem;
     opacity: 0.8;
+    margin: 50px;
 }
 
 .intro-content {
@@ -340,6 +353,11 @@ section.profession {
     border-radius: 15px;
     box-shadow: 0 0 20px 6px #88afcc;
 }
+.profession-card:hover {
+    border: 5px solid  black; 
+    transform: scale(1.05); 
+    transition: transform 0.3s ease;
+}
 
 .profession-card-img {
     border-top-left-radius: 12px;
@@ -355,7 +373,7 @@ section.service {
 .image-container {
     position: relative;
     width: 100%;
-    height: 300px; /* Height of the image */
+    height: 344px; /* Height of the image */
   }
   
   /* Image styling */
@@ -431,51 +449,97 @@ section.service {
 }
 
 .review-card p {
-    color: #555; /* Màu chữ */
+    color: #555;
+    font-size: 18px;
 }
 
 .stars {
-    color: #FFD700; /* Màu vàng cho ngôi sao */
+    color: #FFD700;
     margin: 5px 0;
+    font-size: 24px;
 }
 
 /* ALERT */
 
-[show-alert] {
+/* ALERT */
+.alert-success{
+    border: 2px solid #12b40b;
+    font-size: 18px;
+    background-color: #28a745;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(24 213 55 / 30%);
     position: fixed;
-    top: 70px;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+.alert-success:hover {
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+    opacity: 1; /* Độ mờ khi hover */
+}
+.alert-danger{
+    background-color: #dc3545;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(213 24 67 / 30%);
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+    border: 2px solid #cf6262;
+    font-size: 18px;
+}
+[show-alert]{
+    position: fixed;
+    top: 100px;
     right: 15px;
     z-index: 9999;
 }
-
-[show-alert].alert-hidden {
+[show-alert].alert-hidden{
     animation-name: alert-hidden;
     animation-duration: 2s;
     animation-fill-mode: both;
 }
 
 @keyframes alert-hidden {
-    from {
+    from{
         right: 15px;
     }
-
-    to {
+    to{
         right: -100%;
         display: none;
     }
 
 }
 
-[close-alert] {
-    background: #ffffffc4;
+[close-alert]{
+    background: #0a0a0ac4;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     line-height: 24px;
     text-align: center;
     font-weight: 600;
     border-radius: 50%;
     cursor: pointer;
+    color: #ffffff;
 }
 
 
@@ -649,15 +713,15 @@ select.service_appointment option,
     background: #4a90e2;
 }
 
-input[type="text"],
-input[type="tel"],
-textarea,
-select {
+.box_appointment    input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
+.box_appointment select {
     width: 100%;
     padding: 10px 20px;
     margin-bottom: 15px;
     border: 2px solid #0a3d5f75;
-    border-radius: 5px;
+    border-radius: 20px;
     box-sizing: border-box;
     margin-top: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -667,7 +731,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #7ac7d394  inset !important; /* Màu nền của input */
+    -webkit-box-shadow: 0 0 0 30px #e0e6e794  inset !important; /* Màu nền của input */
     -webkit-text-fill-color: #000 !important; /* Màu chữ của input */
 }
 
@@ -770,9 +834,9 @@ select.service_appointment option {
 
 
 
-input[type="text"],
-input[type="tel"],
-textarea,
+.box_appointment input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
 select {
     width: 100%;
     padding: 10px;

@@ -1,0 +1,45 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    style.
+  
+
+    +title("Chi Tiết Cá")     
+    each koiProfile, index in koiProfiles
+        .container
+            .card(style=(index > 0) ? "margin: 100px 0; padding: 20px; height: auto;border: 2px solid black; border-radius: 5px;" : "padding: 20px; height: auto;border: 2px solid black; border-radius: 5px;")
+                .card-body
+                    if(koiProfiles.length > 1)
+                        h1.text-center.font-weight-bold Cá thứ #{index + 1}
+                    table.table.table-striped.mt-5.table-my-appointment
+                        thead 
+                            tr(style="text-align: center")  
+                                th Giống cá
+                                th Cân nặng
+                                th Chiều dài
+                                th Giới tính
+                                th Tình trạng sức khỏe
+                        tbody 
+                            tr 
+                                td.text-center.align-middle #{koiProfile.Type}
+                                td.text-center.align-middle #{koiProfile.Weight + ' g'}
+                                td.text-center.align-middle #{koiProfile.Height + ' cm'}
+                                td.text-center.align-middle #{koiProfile.Gender =="female" ? "Cá cái" : "Cá đực"}
+                                td.text-center.align-middle #{koiProfile.HealthStatus == "good" ? "Sức khỏe tốt" : (koiProfile.HealthStatus == "average" ? "Sức khỏe bình thường" : "Sức khỏe kém")}
+   
+                .form-control    
+                    h3.mt-4(style="color: red;font-weight: bold;") Vấn đề sức khỏe
+                    p(style="background-color: #F1F1F1; margin: 10px 0 0 0; padding: 10px; font-size: 20px; border: 2px solid black; border-radius: 5px;") #{koiProfile.Problem}
+                        
+                    h3.mt-4(style="color: green;font-weight: bold;") Giải pháp
+                    p(style="background-color: #F1F1F1; margin: 10px 0 0 0; padding: 10px; font-size: 20px; border: 2px solid black; border-radius: 5px;") #{koiProfile.Solution}
+                        
+                    h3.mt-4(style="color: #e0b50e;font-weight: bold;") Mô tả chi tiết
+                    p(style="background-color: #F1F1F1; margin: 10px 0 0 0; padding: 10px; font-size: 20px; border: 2px solid black; border-radius: 5px;") #{koiProfile.Description}
+
+                if koiProfile.Avatar
+                    .avatar(style="display: flex; justify-content: center;")
+                        .koi-avatar(style="width: 100%; height: 100%; object-fit: cover;margin: 30px 0 0 20px;")!= koiProfile.Avatar
+                else
+                    p Không có hình ảnh

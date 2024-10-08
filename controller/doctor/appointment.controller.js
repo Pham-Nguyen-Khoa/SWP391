@@ -105,7 +105,7 @@ module.exports.changeProcess = async (req, res) => {
             },
           }
         );
-        req.flash("success", "Đổi trạng thái thành công! ");
+        req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
       res.redirect("/doctor/appointment");
       }
       if(ServiceID != "DV0003" && process == "process"){

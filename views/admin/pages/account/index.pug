@@ -45,7 +45,7 @@ block main
           .col-6.text-right(style="padding-right: 150px;")
             a(href=`${prefixAdmin}/account/create` button-create-account class="btn btn-outline btn-success") + Tạo tài khoản
       if(listUser.length > 0)
-        table.table.table-striped.table-bordered.mt-5
+        table.table.table-striped.table-bordered.mt-5.table-my-appointment
           thead
             tr
               th STT
@@ -92,13 +92,16 @@ block main
                       button-change-status
                     ) Vô hiệu hóa
                 td(row-action)
-                  a(class="btn btn-primary btn-sm ml-1" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`) Chi tiết 
-                  a(class="btn btn-warning btn-sm ml-1" href=`${prefixAdmin}/account/edit/${item.AccountID}`) Sửa
+                  a(class="btn btn-primary btn-sm ml-1" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`)
+                    i(class="fa-solid fa-receipt") 
+                  a(class="btn btn-warning btn-sm ml-1" href=`${prefixAdmin}/account/edit/${item.AccountID}`)
+                    i(class="fa-solid fa-pen-to-square") 
                   button( 
                     class="btn btn-danger btn-sm ml-1"
                     button-delete-account 
                     id=item.AccountID
-                    ) Xóa 
+                    ) 
+                    <i class="fa-solid fa-trash"></i> 
 
     
   

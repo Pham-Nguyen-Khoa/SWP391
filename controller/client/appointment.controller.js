@@ -430,6 +430,60 @@ module.exports.indexPost = async (req, res) => {
     StatusPaid: "Chưa thanh toán",
   });
   
+  const queryUpdate = `
+  UPDATE shiftdetail sd
+  JOIN schedule sc ON sd.ScheduleID = sc.ScheduleID
+  SET sd.AppointmentID = '${AppointmentID}'
+  WHERE sc.VetID = '${req.body.doctor}'     
+    AND sd.Shift = '${req.body.shift}' 
+    AND sc.Time = '${req.body.select_date}';
+  `;
+      await Sequelize.query(queryUpdate);
+}else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor == "Tự chọn"){
+  const AppointmentID = await generateUserId(
+    "AP",
+    "appointment",
+    "AppointmentID"
+  );
+
+  const customerID = await Customer.findOne({
+    raw: true,
+    attributes: ["CustomerID"],
+    where: {
+      AccountID: res.locals.userInfo.AccountID,
+    },
+  });
+
+  const serviceID = await Service.findOne({
+    raw: true,
+    attributes: ["ServiceID"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+
+  const priceService = await Service.findOne({
+    raw: true,
+    attributes: ["Price"],
+    where: {
+      Name: req.body.service,
+    },
+  });
+  await Appointment.create({
+    AppointmentID: AppointmentID,
+    CustomerID: customerID.CustomerID,
+    ServiceID: serviceID.ServiceID,
+    VetID: null,
+    Name: req.body.FullName,
+    PhoneNumber: req.body.PhoneNumber,
+    Date: req.body.select_date,
+    Address: req.body.address,
+    HealthKoi: req.body.Description,
+    Process: "Pending",
+    Shift: req.body.shift,
+    StatusPaid: "Chưa thanh toán",
+  });
+  
 }
 
   res.redirect(`/koi/appointment/thankyou/${AppointmentID}?doctor=${req.body.doctor}`);
