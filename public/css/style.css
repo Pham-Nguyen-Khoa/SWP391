@@ -210,6 +210,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .col-7.left-column,
 .col-5.right-column {
+    
     padding: 0;
 }
 
@@ -225,7 +226,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .col-5.right-column {
-    padding: 5em 2rem 2rem 0;
+    padding: 0 2rem 2rem 0;
 }
 
 .right-container {
@@ -1845,6 +1846,44 @@ header {
     padding: 30px;
 }
 
+ /* Css about us */
+ .scroll-container::-webkit-scrollbar {
+    display: none;
+}
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.doctor-card {
+    position: relative;
+}
+
+.doctor-details {
+    display: none;
+}
+
+.doctor-details::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.doctor-details > * {
+    position: relative;
+    z-index: 1001;
+}
 /* CSS NEWS */
 .news-title {
     font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
