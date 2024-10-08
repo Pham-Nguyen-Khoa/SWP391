@@ -1847,98 +1847,12 @@ header {
 }
 
  /* Css about us */
- .container-about-us {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .about-section {
-    display: flex;
-    margin-top: 50px;
-  }
-  .about-image {
-    flex: 1;
-  }
-  .about-image img {
-    width: 100%;
-  }
-  .about-content {
-    flex: 1;
-    padding-left: 30px;
-  }
-  .feature-list {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  .feature-list li:before {
-    content: "✓";
-    color: #007bff;
-    margin-right: 10px;
-  }
-  .btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-  }
-  .doctor-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-top: 50px;
-  }
-  .doctor-card {
-    text-align: center;
-    background-color: #f8f9fa;
-    padding: 20px;
-  }
-  .doctor-card img {
-    width: 100%;
-    max-width: 200px;
-    border-radius: 50%;
-  }
-  .btn-learn-more {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #8b0000;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    border: 2px solid #8b0000;
 }
 
-.btn-learn-more:hover {
-    background-color: transparent;
-    color: #8b0000;
 }
 
-.custom-btn {
-    background-color: #8b0000;
-    color: white;
-    padding: 6px 12px;
-    text-decoration: none;
-    font-size: 0.9em;
-    border-radius: 4px;
-    display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    white-space: nowrap;
-    width: fit-content;
 }
 
-.custom-btn:hover {
-    background-color: #a50000; /* Màu đỏ đậm hơn khi hover */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Tăng độ đổ bóng */
-    transform: translateY(-2px); /* Nút nhấc lên một chút */
 /* CSS NEWS */
 .news-title {
     font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
