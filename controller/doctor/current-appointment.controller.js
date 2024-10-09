@@ -289,52 +289,57 @@ module.exports.prescribeMedicationFish = async(req, res) => {
 
 // [Post] /doctor/current-appointment/payment
 module.exports.paymentPost = async(req, res) => {
-  console.log(req.body)
-  const informationData = JSON.parse(req.body.previousPageData);
-
-  const appointment = await Appointment.findOne({
-    raw: true,
-    where: {
-      AppointmentID: informationData[0].appointmentId
+  if(req.body.previousPageData){
+    const informationData = JSON.parse(req.body.previousPageData);
+    const appointment = await Appointment.findOne({
+      raw: true,
+      where: {
+        AppointmentID: informationData[0].appointmentId
+      }
+    })
+  
+    
+  
+    let totalServiceFee = 1000000;
+    let serviceDetails =[
+      {description: "Dịch vụ cải thiện môi trường", amount: 1000000}
+    ]
+    if(appointment.Address != null){
+      totalServiceFee += 100000;
+      serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
     }
-  })
+    informationData.forEach((pond, index) => {
+      const volume = parseFloat(pond.Volume);
+      if (index > 0) {
+        totalServiceFee += 200000; 
+        serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: 200000 });
+      }
+      if (volume >= 1000 && volume <= 1200) {
+        totalServiceFee += 200000;
+        serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
+      } else if (volume > 1200 && volume <= 1500) {
+        totalServiceFee += 400000;
+        serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
+      } else if (volume > 1500) {
+        totalServiceFee += 600000;
+        serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
+      }
+   
+     
+    });
+    req.session.paymentData = {
+      totalServiceFee,
+      serviceDetails,
+    };
+  
+  
+    res.redirect('/doctor/current-appointment/payment');
+  }else{
+    req.flash("error", "Vui lòng cập nhật thông tin thuốc trước khi thanh toán  ");
+    return res.redirect("back")
+  }
 
   
-
-  let totalServiceFee = 1000000;
-  let serviceDetails =[
-    {description: "Dịch vụ cải thiện môi trường", amount: 1000000}
-  ]
-  if(appointment.Address != null){
-    totalServiceFee += 100000;
-    serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
-  }
-  informationData.forEach((pond, index) => {
-    const volume = parseFloat(pond.Volume);
-    if (index > 0) {
-      totalServiceFee += 200000; 
-      serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: 200000 });
-    }
-    if (volume >= 1000 && volume <= 1200) {
-      totalServiceFee += 200000;
-      serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
-    } else if (volume > 1200 && volume <= 1500) {
-      totalServiceFee += 400000;
-      serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
-    } else if (volume > 1500) {
-      totalServiceFee += 600000;
-      serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
-    }
- 
-   
-  });
-  req.session.paymentData = {
-    totalServiceFee,
-    serviceDetails,
-  };
-
-
-  res.redirect('/doctor/current-appointment/payment');
 }
 
 
