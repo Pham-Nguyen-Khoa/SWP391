@@ -1,0 +1,99 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    .block-sider(style="width:90%;margin-left:180px;")  
+        h1 chat
+        .row 
+            .col-12 
+                .chat 
+                    .inner-body 
+                        .inner-incoming 
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Anh ơi sang nhà em nha, nhà em không có ai 
+
+                        .inner-outgoing
+                            .row
+                                .inner-content 
+                                    | Ok em, anh sẽ sang ngay 
+
+                        .inner-incoming
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Nhanh nha nhanh nha anh 
+                    
+                        .inner-outgoing
+                            .row
+                                .inner-content 
+                                    | Ck đến rồi mà có thấy ai đâu e? Khóa cửa mà :(
+
+                        .inner-incoming
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Thì em bảo nhà em không có ai mà :) 
+                        .inner-incoming 
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Anh ơi sang nhà em nha, nhà em không có ai 
+
+                        .inner-outgoing
+                            .row
+                                .inner-content 
+                                    | Ok em, anh sẽ sang ngay 
+
+                        .inner-incoming
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Nhanh nha nhanh nha anh 
+                    
+                        .inner-outgoing
+                            .row
+                                .inner-content 
+                                    | Ck đến rồi mà có thấy ai đâu e? Khóa cửa mà :(
+
+                        .inner-incoming
+                            .row
+                                .inner-avatar.mt-4.mr-3
+                                    img(src="/images/logo.png", alt="Avatar" width="50px" height="50px" border-radius="50%")
+                                .content
+                                    .inner-name Em Yeeu
+                                    .inner-content 
+                                        | Thì em bảo nhà em không có ai mà :) 
+                    .inner-foot
+                        form(
+                            class="inner-form"
+                            action=""
+                        )
+                            input(
+                                type="text"
+                                class="inner-input"
+                                placeholder="Nhập tin nhắn..."
+                            )
+                            button(
+                                type="submit"
+                                class="inner-btn"
+                            ) Gửi
+

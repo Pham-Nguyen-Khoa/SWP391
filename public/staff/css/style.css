@@ -563,3 +563,96 @@ span {
     color: #000 !important; /* Màu chữ đen */
     border-color: #5aaeba !important;
 }
+
+
+
+
+/* Box Chat */
+.chat {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 0 50px;
+  }
+  
+  /* Phần thân chứa các tin nhắn */
+  .inner-body {
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+  }
+  
+  /* Định dạng chung cho tin nhắn */
+  .inner-incoming, .inner-outgoing {
+    margin-bottom: 15px;
+  }
+  
+  /* Tin nhắn đến */
+  .inner-incoming {
+    align-self: flex-start;
+  }
+  
+  /* Tin nhắn đi */
+  .inner-outgoing {
+    display: flex;
+    justify-content: end;
+  }
+  
+  /* Tên người gửi */
+  .inner-name {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  /* Nội dung tin nhắn */
+  .inner-content {
+    padding: 10px 15px;
+    border-radius: 18px;
+    display: inline-block;
+  }
+  
+  .inner-incoming .inner-content {
+    background-color: #e5e5ea;
+  }
+  
+  .inner-outgoing .inner-content {
+    background-color: #0b93f6;
+    color: white;
+  }
+  
+  /* Phần chân để nhập tin nhắn */
+  .inner-foot {
+    padding: 10px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Form nhập tin nhắn */
+  .inner-form {
+    display: flex;
+  }
+  
+  /* Ô input nhập tin nhắn */
+  .inner-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  
+  /* Nút gửi */
+  .inner-btn {
+    padding: 10px 20px;
+    background-color: #0b93f6;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .inner-btn:hover {
+    background-color: #0a84e0;
+  }
