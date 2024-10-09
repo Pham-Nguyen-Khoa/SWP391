@@ -53,8 +53,13 @@ app.use(express.static(`public`));
 
 route(app);
 routeAdmin(app);
-routeDoctor(app);
+routeDoctor(app); 
 routeStaff(app);
+app.get("*" ,  (req, res) => {
+  res.render("client/pages/errors/404",{
+    pageTitle: "Trang không tồn tại",
+  })
+})
 
 
 
