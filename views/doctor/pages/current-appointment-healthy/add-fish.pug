@@ -54,62 +54,62 @@ block main
     }
 
   +title("Thêm Cá Mới")
-
-  .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;background-color: #f7fbff;")
-    .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
-      span(style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá mới
-    form#fishForm
-      .card-body
-        div.form-group(upload-image)
-          //- label(for="Avatar") Hình ảnh
-          //- input.form-control-file(type="file" id="Avatar" name="Avatar" required upload-image-input)
-          //- img.upload-preview(src="" upload-image-preview)
-          label(for="Avatar") Hình ảnh
-          textarea#AvatarFish.form-control(name="Avatar")
-        .form-group
-          label(for="Problem") Vấn đề
-          textarea.form-control(name="Problem" id="Problem" rows="3" required)
-        .form-group
-          label(for="Solution") Giải pháp
-          textarea.form-control(name="Solution" id="Solution" rows="3" required)
-        .form-group
-          label(for="Description") Mô tả chi tiết
-          textarea.form-control(name="Description" id="Description" rows="3" required)
-      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;") Thông Tin Cá Koi
-      .card-body
-        .row
-          .col-md-4
-            .form-group
-              label(for="Type") Loại Cá
-              input.form-control(type="text" name="Type" id="Type" required)
-          .col-md-4
-            .form-group
-              label(for="Weight") Trọng lượng (kg)
-              input.form-control(type="number" name="Weight" id="Weight" step="0.01" required)
-          .col-md-4
-            .form-group
-              label(for="Height") Chiều dài (cm)
-              input.form-control(type="number" name="Height" id="Height" step="0.01" required)
-        .row
-          .col-md-4
-            .form-group
-              label(for="Gender") Giới tính
-              select.form-control(name="Gender" id="Gender" required)
-                option(value="" disabled selected) Chọn giới tính
-                option(value="male") Đực
-                option(value="female") Cái
-          .col-md-4
-            .form-group
-              label(for="HealthStatus") Tình trạng sức khỏe
-              select.form-control(name="HealthStatus" id="HealthStatus" required)
-                option(value="" disabled selected) Chọn tình trạng sức khỏe
-                option(value="good") Tốt
-                option(value="average") Trung bình
-                option(value="poor") Kém
-        .text-center.mt-4
-          button.btn-submit(type="submit") 
-            i.fa-solid.fa-save
-            |  Lưu thông tin
+  .block-sider(style="width:90%;margin-left:180px;")
+    .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;background-color: #f7fbff;")
+      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
+        span(style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá mới
+      form#fishForm
+        .card-body
+          div.form-group(upload-image)
+            //- label(for="Avatar") Hình ảnh
+            //- input.form-control-file(type="file" id="Avatar" name="Avatar" required upload-image-input)
+            //- img.upload-preview(src="" upload-image-preview)
+            label(for="Avatar") Hình ảnh
+            textarea#AvatarFish.form-control(name="Avatar")
+          .form-group
+            label(for="Problem") Vấn đề
+            textarea.form-control(name="Problem" id="Problem" rows="3" required)
+          .form-group
+            label(for="Solution") Giải pháp
+            textarea.form-control(name="Solution" id="Solution" rows="3" required)
+          .form-group
+            label(for="Description") Mô tả chi tiết
+            textarea.form-control(name="Description" id="Description" rows="3" required)
+        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;") Thông Tin Cá Koi
+        .card-body
+          .row
+            .col-md-4
+              .form-group
+                label(for="Type") Loại Cá
+                input.form-control(type="text" name="Type" id="Type" required)
+            .col-md-4
+              .form-group
+                label(for="Weight") Trọng lượng (kg)
+                input.form-control(type="number" name="Weight" id="Weight" step="0.01" required)
+            .col-md-4
+              .form-group
+                label(for="Height") Chiều dài (cm)
+                input.form-control(type="number" name="Height" id="Height" step="0.01" required)
+          .row
+            .col-md-4
+              .form-group
+                label(for="Gender") Giới tính
+                select.form-control(name="Gender" id="Gender" required)
+                  option(value="" disabled selected) Chọn giới tính
+                  option(value="male") Đực
+                  option(value="female") Cái
+            .col-md-4
+              .form-group
+                label(for="HealthStatus") Tình trạng sức khỏe
+                select.form-control(name="HealthStatus" id="HealthStatus" required)
+                  option(value="" disabled selected) Chọn tình trạng sức khỏe
+                  option(value="good") Tốt
+                  option(value="average") Trung bình
+                  option(value="poor") Kém
+          .text-center.mt-4
+            button.btn-submit(type="submit") 
+              i.fa-solid.fa-save
+              |  Lưu thông tin
 
   script.
     document.getElementById('fishForm').addEventListener('submit', function(e) {
