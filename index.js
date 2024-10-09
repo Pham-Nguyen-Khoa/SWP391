@@ -44,7 +44,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 //Flash
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
-app.use(flash());
+app.use(flash()); 
 
 app.set('views', './views')
 app.set('view engine', 'pug')
@@ -54,9 +54,7 @@ app.use(express.static(`public`));
 // Socket.io
 const server = http.createServer(app);
 const io = new Server(server);
-io.on("connection", (socket) => {
-    console.log("New user connected",socket.id);
-});
+global.io = io;
 
 // End Socket.io
 
