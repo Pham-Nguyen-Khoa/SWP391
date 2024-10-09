@@ -92,7 +92,7 @@ module.exports.chat = async (req, res) => {
         }
     }
 
-    res.render("staff/pages/chat/index",{
+    res.render("doctor/pages/chat/index",{
         pageTitle: "Trang chat ",
         chats: chats
     })

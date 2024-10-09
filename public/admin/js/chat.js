@@ -25,7 +25,7 @@ socket.on("SERVER-RETURN-MESSAGE", (data) => {
         chatItem.classList.add("inner-outgoing");
         chatItem.innerHTML = `
             <div class="row">
-                <div class="inner-content ${data.roleID === 'RL0001' ? 'admin-message' : ''}">
+                <div class="inner-content ${data.roleID === 'RL0001' ? 'admin-message' : ''} ">
                     <p>${data.content}</p>
                 </div>
             </div>
@@ -45,6 +45,7 @@ socket.on("SERVER-RETURN-MESSAGE", (data) => {
                 </div>
         `;
     }
+
     chatBody.appendChild(chatItem);
     chatBody.scrollTop = chatBody.scrollHeight;
 });
