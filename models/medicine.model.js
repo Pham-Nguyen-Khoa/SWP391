@@ -26,6 +26,10 @@ const Medicine = sequelize.define('Medicine', {
       Image: {
         type: DataTypes.TEXT('long'),
         allowNull: false
+      },
+      Unit: {
+        type: DataTypes.STRING(20),
+        allowNull: false
       }
      
 
