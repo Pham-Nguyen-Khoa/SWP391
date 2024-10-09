@@ -1,0 +1,84 @@
+extends ../../layouts/default.pug
+include ../../mixins/mixin-title.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    +title("Thanh Toán")
+    .card.shadow(style="width:70%;margin: 0 auto;")
+        .card-body(style="background-color: #d0f2f7ba;border:2px solid #4294b1c7")
+        h2.card-title.text-center.mb-4.mt-4 Xác nhận thanh toán
+        form#formTotal(action="/doctor/current-appointment/healthyFish", method="POST")(style="padding: 20px;")
+            input#previousPageData(type="hidden", name="previousPageData")
+            input#selectedMedications(type="hidden", name="selectedMedications")
+            input#fishCount(type="hidden", name="fishCount")
+            input#totalFee(type="hidden" name="totalFee" value=objectPayment.totalFee)
+            .form-group.mb-4
+                h3.form-label Chi tiết thanh toán:
+                //- ul.list-group.shadow-sm
+                //-   each detail in objectPayment.serviceDetails
+                //-     li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light #{detail.description}: #{detail.amount} VND
+                //- h5.card-title Tổng phí dịch vụ
+                //- p.card-text #{objectPayment.totalFee} VND
+                ul.list-group.shadow-sm
+                    each detail in objectPayment.serviceDetails
+                        li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light
+                            b.text-muted.h5.mb-0 #{detail.description}
+                            h3#serviceFee.badge.badge-primary.badge-pill(style="font-size: 18px;") #{detail.amount} VNĐ
+                    li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light
+                        b.font-weight-bold.h4.mb-0 Tổng cộng:
+                        h3#totalFee.badge.badge-success.badge-pill.h5.mb-0(style="font-size: 18px;")  #{objectPayment.totalFee} VNĐ
+                //-     input#totalFee(type="hidden", name="totalFee" value=objectPayment.totalFee)
+            .form-group.mb-4
+                h2.form-label.d-block.text-center.mb-4 Hình thức thanh toán:
+                .btn-group.btn-group-toggle.w-100(data-toggle="buttons")
+                    label.btn.btn-outline-primary.w-50
+                        input#cashPayment(type="radio", name="paymentMethod", value="cash", required)
+                        i.fas.fa-money-bill-wave.mr-2
+                        | Tiền mặt
+                    label.btn.btn-outline-primary.w-50
+                        input#transferPayment(type="radio", name="paymentMethod", value="transfer", required)
+                        i.fas.fa-exchange-alt.mr-2
+                        | Chuyển khoản
+
+            .text-center.mt-4
+                button.btn.btn-primary.btn-lg.px-5(type="submit" id="submitAll")
+                    i.fas.fa-check.mr-2
+                    | Hoàn tất đơn
+                a.ml-5.btn.btn-lg(href="/doctor/current-appointment/prescribe-medication-fish" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
+
+            script.
+                  document.addEventListener('DOMContentLoaded', function() {
+                    
+                    const previousPageData = localStorage.getItem(`appointmentHealthyData`);
+                    const previousPageDataInput = document.getElementById('previousPageData');
+                    const prescibeMedication = localStorage.getItem(`prescriptionData`);
+                    const prescriptionDataInput = document.getElementById('selectedMedications');
+                    if (previousPageData) {
+                        previousPageDataInput.value = previousPageData;
+                    }
+                    if (prescibeMedication) {
+                        prescriptionDataInput.value = prescibeMedication;
+                    }
+                    document.getElementById('prescriptionForm').addEventListener('submit', function() {
+                        localStorage.clear();
+                    });
+                    });
+
+                const submitAll = document.getElementById('submitAll');
+                const formTotal = document.getElementById('formTotal');
+                submitAll.addEventListener('click', function() {
+                     localStorage.clear();
+                     formTotal.submit();
+                });
+
+                   const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+                        paymentMethods.forEach(method => {
+                            method.addEventListener('change', function() {
+                                paymentMethods.forEach(m => m.parentElement.classList.remove('active-payment'));
+                                if (this.checked) {
+                                    this.parentElement.classList.add('active-payment');
+                                }
+                            });
+                        });

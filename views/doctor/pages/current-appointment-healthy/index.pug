@@ -1,15 +1,15 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
 
-block append main
+block main
   style.
     body {
       background-color: #f0f4f8;
       font-family: 'Arial', sans-serif;
     }
     label {
-      font-weight: 600;
-      font-size: 20px;
+      font-weight: 700;
+      font-size: 21px;
     }
     .card-header {
       display: flex;
@@ -20,61 +20,172 @@ block append main
       background-color: #c82333;
     }
 
-block main
   +title("Đơn Hiện Tại")
   if currentAppointment
     .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
-      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin cuộc hẹn
+      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
       .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
         .row 
-            .col-7(style="padding-right: 100px;")
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Khách hàng
-                b :  #{currentAppointment.Name}
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Dịch vụ
-                b :  Khám Sức Khỏe
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Ngày
-                b :  #{currentAppointment.DateFormat}
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Lịch hẹn
-                b :  #{currentAppointment.Shift}
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Số điện thoại
-                b :  #{currentAppointment.PhoneNumber}
-                if(currentAppointment.Address)
-                  p.lead
-                  b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
-                  b :  Tại nhà
-                  p.lead
-                  b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Địa chỉ
-                  b :  #{currentAppointment.Address}
-                else 
-                  p.lead
-                  b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
-                  b :  Tại trung tâm
-                p.lead
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
-                b :  Đang thực hiện
-                //- p.lead
-                //- b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
-                //- p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
-                
-                p.lead
-            .col-5  
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Bác sĩ
-                b  :  #{user.FullName}
-                br
-                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Chuyên ngành
-                b  :  #{user.Specialization}
-                br
-                img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
-  
+          .col-7(style="padding-right: 100px;")
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Khách hàng
+              b :  #{currentAppointment.Name}
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Dịch vụ
+              b :  Khám Sức Khỏe
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Ngày
+              b :  #{currentAppointment.DateFormat}
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Lịch hẹn
+              b :  #{currentAppointment.Shift}
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Số điện thoại
+              b :  #{currentAppointment.PhoneNumber}
+            if(currentAppointment.Address)
+              p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
+              b :  Tại nhà
+              p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Địa chỉ
+              b :  #{currentAppointment.Address}
+            else 
+              p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
+              b :  Tại trung tâm
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
+              b :  Đang thực hiện
+            p.lead
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
+              p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
+            
+            p.lead
+          .col-5  
+            b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Bác sĩ
+            b  :  #{user.FullName}
+            br
+            b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Chuyên ngành
+            b  :  #{user.Specialization}
+            br
+            img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
+
+    .fish-records
+
+
+    .text-center.mt-4
+      a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication-fish` style="background-color: #4294b1c7; color: black; padding: 10px;") 
+        i.fa-solid.fa-capsules
+        |  Kê đơn thuốc
+    a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" style="background-color: #2dde29c7; color: black; padding: 10px;") 
+      i.fa-solid.fa-plus
+      |  Thêm cá
 
   else
     .alert.alert-info.text-center
       h2 Hiện tại không có đơn đang xử lý.
 
   script.
-   
+    function displayFishRecords() {
+      const fishRecords = JSON.parse(localStorage.getItem('appointmentHealthyData') || '[]');
+      const container = document.querySelector('.fish-records');
+      container.innerHTML = '';
+
+      fishRecords.forEach((fish, index) => {
+        const fishRecord = createFishRecordElement(fish, index);
+        container.appendChild(fishRecord);
+      });
+    }
+
+    function createFishRecordElement(fish, index) {
+        const fishRecord = document.createElement('div');
+        fishRecord.className = 'fish-record';
+        if(index == 0){
+          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 150px; background-color: #f7fbff;';
+        }
+        else{
+          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px; background-color: #f7fbff;';
+        }
+
+        fishRecord.innerHTML = `
+          <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;">
+            <span style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;">Ghi nhận tình trạng cá ${index + 1}</span>
+            <button type="button" class="delete-button" style="position: absolute; right: 3%; border-radius: 5px; width: 100px; background-color: #eb7b7b; border: 2px solid #9fbfc5; cursor: pointer;">Xóa cá</button>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label>Hình ảnh</label>
+              <div class="tinymce-content" style="border: 1px solid #ddd; padding: 10px; min-height: 200px; max-height: 400px; overflow-y: auto;">
+                ${fish.Avatar || 'Không có nội dung'}
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Vấn đề</label>
+              <textarea class="form-control" rows="3" readonly>${fish.Problem || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label>Giải pháp</label>
+              <textarea class="form-control" rows="3" readonly>${fish.Solution || ''}</textarea>
+            </div>
+            <div class="form-group">
+              <label>Mô tả chi tiết</label>
+              <textarea class="form-control" rows="3" readonly>${fish.Description || ''}</textarea>
+            </div>
+          </div>
+             <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;">Thông Tin Cá Koi</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Loại Cá:</label>
+                  <input class="form-control" value="${fish.Type || ''}" disabled>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Trọng lượng (kg):</label>
+                  <input class="form-control" value="${fish.Weight || ''}" disabled>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Chiều dài (cm):</label>
+                  <input class="form-control" value="${fish.Height || ''}" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Giới tính:</label>
+                  <input class="form-control" value="${fish.Gender === 'male' ? 'Đực' : 'Cái'}" disabled>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Tình trạng sức khỏe:</label>
+                  <input class="form-control" value="${fish.HealthStatus === 'good' ? 'Tốt' : fish.HealthStatus === 'average' ? 'Trung bình' : 'Kém'}" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        fishRecord.querySelector('.delete-button').addEventListener('click', () => {
+          const fishRecords = JSON.parse(localStorage.getItem('appointmentHealthyData') || '[]');
+          fishRecords.splice(index, 1);
+          localStorage.setItem('appointmentHealthyData', JSON.stringify(fishRecords));
+          displayFishRecords();
+        });
+
+        return fishRecord;
+      }
+
+    document.addEventListener('DOMContentLoaded', displayFishRecords);
+
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      alert('Đã ghi nhận thông tin');
+    });
+
+    document.getElementById('prescribeMedicationBtn').addEventListener('click', function(e) {
+    }); 

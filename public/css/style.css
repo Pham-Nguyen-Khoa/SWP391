@@ -210,6 +210,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .col-7.left-column,
 .col-5.right-column {
+    
     padding: 0;
 }
 
@@ -225,11 +226,13 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .col-5.right-column {
-    padding: 5em 2rem 2rem 0;
+    padding: 0 2rem 2rem 0;
 }
 
 .right-container {
     margin-top: 5rem;
+    
+    
 }
 
 .form-container.login-container {
@@ -246,11 +249,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .submit-login {
-    margin: 0 33%;
+    margin: 0 40%;
 }
 
+
 .btn.login-button {
-    width: 100px;
+    width: 150px;
     background-color: #2da0cc;
     color: white
 }
@@ -282,9 +286,23 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     object-fit: unset;
 
 }
+.banner{
+    border-bottom-left-radius: 180px;
+    border-bottom-right-radius: 180px;
+    border: 5px solid #000000;
+    background-image: url('/images/KoiBanner.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 550px;
+    width: 100%;
+    background-size: 100% 100%;
+}
 
 .container-fluid {
     padding: 0;
+   
+    
+    
 }
 
 section.intro {
@@ -298,6 +316,7 @@ section.intro {
     font-weight: bold;
     font-size: 2.5rem;
     opacity: 0.8;
+    margin: 50px;
 }
 
 .intro-content {
@@ -335,6 +354,16 @@ section.profession {
     border-radius: 15px;
     box-shadow: 0 0 20px 6px #88afcc;
 }
+.profession-card:hover {
+    border: 5px solid  black; 
+    transform: scale(1.05); 
+    transition: transform 0.3s ease;
+}
+
+.profession-card-img {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
 
 .profession-card-img {
     border-top-left-radius: 12px;
@@ -350,7 +379,11 @@ section.service {
 .image-container {
     position: relative;
     width: 100%;
+<<<<<<< HEAD
     height: 300px; /* Height of the image */
+=======
+    height: 344px; /* Height of the image */
+>>>>>>> bda4f1ee234cde40539d531e80855fec7f97292d
   }
   
   /* Image styling */
@@ -426,51 +459,106 @@ section.service {
 }
 
 .review-card p {
+<<<<<<< HEAD
     color: #555; /* Màu chữ */
 }
 
 .stars {
     color: #FFD700; /* Màu vàng cho ngôi sao */
     margin: 5px 0;
+=======
+    color: #555;
+    font-size: 18px;
+}
+
+.stars {
+    color: #FFD700;
+    margin: 5px 0;
+    font-size: 24px;
+>>>>>>> bda4f1ee234cde40539d531e80855fec7f97292d
 }
 
 /* ALERT */
 
-[show-alert] {
+/* ALERT */
+.alert-success{
+    border: 2px solid #12b40b;
+    font-size: 18px;
+    background-color: #28a745;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(24 213 55 / 30%);
     position: fixed;
-    top: 70px;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+}
+.alert-success:hover {
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+    opacity: 1; /* Độ mờ khi hover */
+}
+.alert-danger{
+    background-color: #dc3545;
+    width: auto;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 10px rgb(213 24 67 / 30%);
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-weight: bold;
+    color: #fff;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.9;
+    border: 2px solid #cf6262;
+    font-size: 18px;
+}
+[show-alert]{
+    position: fixed;
+    top: 100px;
     right: 15px;
     z-index: 9999;
 }
-
-[show-alert].alert-hidden {
+[show-alert].alert-hidden{
     animation-name: alert-hidden;
     animation-duration: 2s;
     animation-fill-mode: both;
 }
 
 @keyframes alert-hidden {
-    from {
+    from{
         right: 15px;
     }
-
-    to {
+    to{
         right: -100%;
         display: none;
     }
 
 }
 
-[close-alert] {
-    background: #ffffffc4;
+[close-alert]{
+    background: #0a0a0ac4;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     line-height: 24px;
     text-align: center;
     font-weight: 600;
     border-radius: 50%;
     cursor: pointer;
+    color: #ffffff;
 }
 
 
@@ -644,15 +732,15 @@ select.service_appointment option,
     background: #4a90e2;
 }
 
-input[type="text"],
-input[type="tel"],
-textarea,
-select {
+.box_appointment    input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
+.box_appointment select {
     width: 100%;
     padding: 10px 20px;
     margin-bottom: 15px;
     border: 2px solid #0a3d5f75;
-    border-radius: 5px;
+    border-radius: 20px;
     box-sizing: border-box;
     margin-top: 10px;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -662,7 +750,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #7ac7d394  inset !important; /* Màu nền của input */
+    -webkit-box-shadow: 0 0 0 30px #e0e6e794  inset !important; /* Màu nền của input */
     -webkit-text-fill-color: #000 !important; /* Màu chữ của input */
 }
 
@@ -765,9 +853,9 @@ select.service_appointment option {
 
 
 
-input[type="text"],
-input[type="tel"],
-textarea,
+.box_appointment input[type="text"],
+.box_appointment input[type="tel"],
+.box_appointment textarea,
 select {
     width: 100%;
     padding: 10px;
@@ -1581,6 +1669,123 @@ header {
     100% { transform: translateX(-180%); }
   }
 
+/* table forgot-password */
+.forgot-password-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  
+  body.forgot-password-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .form-forgot-password {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 420px;
+  padding: 40px 30px;
+  font-size: 18px;
+  color: #212121;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(0, 0, 0, 0.2);
+}
+
+.form-forgot-password .form-forgot-password-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.form-forgot-password .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-forgot-password .form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.form-forgot-password .form-group input {
+  padding: 16px 18px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  color: #fff;
+  background-color: #212121;
+  border: none;
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 20px;
+  gap: 10px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+.form-forgot-password .form-submit-btn:hover {
+  background-color: #313131;
+}
+
+.form-forgot-password .link {
+  color: #1778f2;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-signup-link {
+  align-self: center;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.form-forgot-password .form-signup-link .link {
+  font-weight: 600;
+}
+
+.form-forgot-password .link:hover {
+  text-decoration: underline;
+}
+.btn-pink {
+    background-color: pink;
+    border-color: pink;
+}
+.btn-pink:hover {
+    background-color: #ff69b4;
+    border-color: #ff69b4;
+}
 
 
 
@@ -1596,3 +1801,200 @@ header {
     border-radius: 20px;
     box-shadow: 0px 0px 9px 4px #4296b6;
   }
+
+  /* Css Contact */
+
+  .card.contact-card{
+    border-radius: 15px;
+    background-color: #c2dfe594;
+    height: 900px;
+    border: 3px solid #6ea6ca;
+    border-radius: 30px;
+  }
+
+  .card-contact-title {
+    padding-top: 10px;
+    font-size: 30px;
+    color: #234d7d;
+    margin: 20px;
+    font-size: 1.7rem;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .card-contact-content {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #1f1e1e9d;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
+    padding: 10px;
+    min-height: 13rem;
+  }
+
+.card-contact-price {
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+    padding: 10px;
+}
+
+.btn-contact-price {
+    width: 27%;
+    margin: 0 auto;
+    border-radius: 26px;
+    background-color: #a51a1a;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-top: 6px;
+    height: 56px;
+}
+
+.btn-contact-price:hover {
+    background-color: #d75858;
+    color: #fff; 
+}
+
+.card-body-contact {
+    text-align: center;
+    padding: 30px;
+}
+
+ /* Css about us */
+ .scroll-container::-webkit-scrollbar {
+    display: none;
+}
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.doctor-card {
+    position: relative;
+}
+
+.doctor-details {
+    display: none;
+}
+
+.doctor-details::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.doctor-details > * {
+    position: relative;
+    z-index: 1001;
+}
+/* CSS NEWS */
+.news-title {
+    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
+    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    color: #333; /* Màu chữ có thể điều chỉnh */
+    text-align: center; /* Căn giữa tiêu đề */
+    margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.row.card-news-box {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh các thẻ ngang hàng */
+    justify-content: space-between; /* Căn giữa các thẻ */
+    flex-wrap: wrap; /* Cho phép các thẻ xuống dòng nếu không đủ chỗ */
+    margin: 0 -15px; /* Để điều chỉnh khoảng cách giữa các cột */
+}
+
+.card-news {
+    flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
+    margin: 15px; /* Khoảng cách giữa các thẻ */
+    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
+    border-radius: 10px; /* Bo góc cho thẻ */
+    background-color: #e7e7e7; /* Màu nền cho thẻ */
+    padding: 20px; /* Khoảng cách bên trong thẻ */
+}
+
+
+.card-news h3 {
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    min-height: 4rem;
+    font-size: 1.5rem;
+}
+
+.card-news p {
+    color: #666; /* Màu chữ cho nội dung */
+    padding: 10px;
+    
+}
+
+.card-news a {
+    color: #065cb8; /* Màu chữ cho liên kết */
+    text-decoration: none; /* Bỏ gạch chân */   
+    
+}
+
+.card-news a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}
+
+.card-news{
+    padding: 40px;
+}
+
+.card-news-box{
+    text-align: center;
+}
+
+/* CSS Community */
+
+.content {
+    padding: 60px; /* Khoảng cách bên trong */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+    padding-top: 10px;
+}
+
+.content h2 {
+    font-family: 'Oswald', sans-serif; /* Sử dụng font Oswald */
+    color: #234d7d; /* Màu chữ cho tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.content p {
+    font-family: Arial, sans-serif; /* Font chữ cho đoạn văn */
+    color: #333; /* Màu chữ cho đoạn văn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 15px; /* Khoảng cách dưới đoạn văn */
+}
+
+.content ul {
+    list-style-type: disc; /* Kiểu danh sách */
+    padding-left: 20px; /* Khoảng cách bên trái cho danh sách */
+}
+
+.content ul li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục trong danh sách */
+    font-family: Arial, sans-serif; /* Font chữ cho các mục trong danh sách */
+    color: #333; /* Màu chữ cho các mục trong danh sách */
+}

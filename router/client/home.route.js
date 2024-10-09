@@ -12,4 +12,7 @@ router.get("/aboutUs", controller.aboutUs);
 
 router.get("/news", controller.news);
 
+router.get("/community", controller.community);
+
+
 module.exports = router

@@ -23,6 +23,7 @@ if (uploadImage) {
   uploadImageInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     if (file) {
+      // uploadImageInput.value = file;
       uploadImagePreview.src = URL.createObjectURL(file);
     }
   });
@@ -31,11 +32,11 @@ if (uploadImage) {
 
 
 
-
 // Logout
 const btnLogout = document.querySelector("[button-logout]");
 console.log(btnLogout);
 btnLogout.addEventListener("click", () => {
+  console.log("click");
   let url = new URL(window.location.href);
   const check = confirm("Bạn có chắc chắn muốn đăng xuất!");
   if (check) {
