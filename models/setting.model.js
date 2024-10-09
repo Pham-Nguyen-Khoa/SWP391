@@ -10,57 +10,80 @@ const Setting = sequelize.define('Setting', {
     },
     Logo: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     BannerHome: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     BannerCommunity: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     Email: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     PhoneNumber: {
         type: DataTypes.STRING(12),
-        allowNull: false
+        allowNull: true
     },
     TimeOpen: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: true
     },
     Address: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     },
     ImageServiceHealthy: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     ImageServicePond: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     ImageServiceOnline: {
         type: DataTypes.TEXT,
-        allowNull: false
+        allowNull: true
     },
     WebsiteName: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     CompanyName: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
     Copyright: {
         type: DataTypes.STRING(50),
-        allowNull: false
+        allowNull: true
     },
-    
+    Facebook: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    Instagram: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    Messenger: {
+        type: DataTypes.STRING(255),
+        allowNull: true
+    },
+    MapEmbed: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    EmailSend: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+    },
+    AppPassword: {
+        type: DataTypes.STRING(50),
+        allowNull: true
+    },
 
 }, {
     tableName: 'setting',

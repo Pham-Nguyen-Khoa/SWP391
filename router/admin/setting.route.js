@@ -19,6 +19,8 @@ router.patch("/general/website-info",
             ]), 
         uploadMiddleware.uploadMultiple, 
 controller.settingWebsiteInfoPatch);
-
-
+router.get("/general/social-network", controller.settingSocialNetwork);
+router.patch("/general/social-network", controller.settingSocialNetworkPatch);
+router.get("/general/email-config", controller.settingEmailConfig);
+router.patch("/general/email-config", controller.settingEmailConfigPatch);
 module.exports = router

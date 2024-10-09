@@ -378,3 +378,26 @@ if (formWebsiteInfo) {
 }
 // End Edit Website Info
 
+
+
+// Edit Social Network
+const formSocialNetwork = document.querySelector("#form-social-network");
+const btnSocialNetwork = document.querySelector(".btn-social-network");
+if (formSocialNetwork) {
+  console.log(formSocialNetwork)
+  btnSocialNetwork.addEventListener("click", (e) => {
+    formSocialNetwork.submit();
+  });
+}
+// End Edit Social Network
+
+
+// Edit Email Config
+const formEmailConfig = document.querySelector("#form-email-config");
+const btnEmailConfig = document.querySelector(".btn-email-config");
+if (formEmailConfig) {
+  btnEmailConfig.addEventListener("click", (e) => {
+    formEmailConfig.submit();
+  });
+}
+// End Edit Email Config

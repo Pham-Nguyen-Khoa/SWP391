@@ -14,9 +14,7 @@ block main
         .card-body .col-md-4 {
             padding: 1rem;
         }
-        .fas, .fab {
-            color: #6c757d;
-        }
+     
         h5 {
             margin-bottom: 0.25rem;
         }
@@ -32,6 +30,7 @@ block main
             background-color: #f8f9fa;
             text-decoration: none; 
         }
+        
     .block-sider(style="margin-left:180px;")
         +title("Cấu hình")
 
@@ -55,7 +54,7 @@ block main
                                     h5 Ngôn ngữ
                                     p.mb-0 Thiết lập ngôn ngữ website
                     .col-md-4.mb-3
-                        a.setting-item(href="/admin/settings/website-info")
+                        a.setting-item(href="/admin/setting/general/email-config")
                             .d-flex.align-items-start
                                 i.fas.fa-envelope.fa-3x.me-3.text-secondary.mr-3
                                 div
@@ -85,7 +84,7 @@ block main
                                     p.mb-0 Quản lý thông tin form liên hệ
                 .row
                     .col-md-4.mb-3
-                        a.setting-item(href="/admin/settings/website-info")
+                        a.setting-item(href="/admin/setting/general/social-network")
                             .d-flex.align-items-start
                                 i.fab.fa-facebook.fa-3x.me-3.text-secondary.mr-3
                                 div
