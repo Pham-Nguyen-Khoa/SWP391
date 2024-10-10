@@ -1859,6 +1859,25 @@ header {
 }
 
  /* Css about us */
+
+ @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.feature-item {
+    transition: all 0.3s ease;
+}
+.feature-item:hover {
+    animation: bounce 0.5s ease infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.doctor-card {
+    transition: all 0.3s ease;
+}
+.doctor-card:hover {
+    animation: bounce 0.5s ease infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
  .scroll-container::-webkit-scrollbar {
     display: none;
 }

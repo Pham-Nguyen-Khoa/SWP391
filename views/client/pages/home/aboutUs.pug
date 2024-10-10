@@ -2,6 +2,7 @@ extends ../../layouts/default.pug
 
 block main
     
+
     //-.block-footer(style="height: 86vh") 
         //- h1 Trang về chúng tôi
         //- // Code tiếp từ h1 xuống 
@@ -23,6 +24,7 @@ block main
                 a.btn-learn-more.custom-btn(href="#" role="button" style="background-color: #8b0000; color: white; padding: 6px 12px; text-decoration: none; font-size: 0.9em; border-radius: 4px; display: inline-block; text-transform: uppercase; letter-spacing: 0.5px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space: nowrap; width: fit-content;") TÌM HIỂU THÊM
 
         // Thêm phần mới cho hiệu ứng chữ nổi
+        .parallax-section(style="height: 200px; background-image: url('/images/KOI/koi-9.png'); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; position: relative; display: flex; align-items: center; justify-content: center; margin-top: 10px;")
             .overlay(style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.5);")
             .content(style="position: relative; z-index: 1; text-align: center; color: white;")
                 h2(style="font-size: 2.5em; margin-bottom: 20px; color: #fff;") Chăm Sóc Cá Koi Chuyên Nghiệp
@@ -30,28 +32,39 @@ block main
 
         section.why-choose-us(style="margin: 100px 0; padding: 60px; background-color: #f0f8ff; border-radius: 20px;")
             h2(style="color: #8b0000; text-align: center; margin-bottom: 70px; font-size: 4em; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);") Tại Sao Chọn Chúng Tôi
+            .content-wrapper(style="display: flex; justify-content: space-between; align-items: flex-start; gap: 50px;")
+                .text-content(style="flex: 1; max-width: 50%;")
+                    span.feature-tag(style="background-color: #007bff; color: white; padding: 12px 30px; border-radius: 30px; font-size: 1.5em; display: inline-block; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);") Tính Năng 
+                    p(style="margin-bottom: 30px; font-size: 1.6em; line-height: 1.8; color: #333;") Chúng tôi cung cấp dịch vụ chăm sóc cá Koi chuyên nghiệp với đội ngũ chuyên gia giàu kinh nghiệm. Cam kết mang đến sự hài lòng cho khách hàng với chất lượng dịch vụ tốt nhất.
+                    .features(style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;")
                         each feature in [['Chuyên Gia', 'Giàu Kinh Nghiệm'], ['Dịch Vụ', 'Chất Lượng Cao'], ['Tư Vấn', 'Tận Tâm'], ['Hỗ Trợ', '24/7']]
+                            .feature-item(style="display: flex; align-items: center; transition: all 0.3s ease; padding: 15px; border-radius: 10px; cursor: pointer;")
+                                .icon(style="background-color: #007bff; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); transition: all 0.3s ease;")
+                                    i(class=`fas fa-${feature[0] === 'Chuyên Gia' ? 'user-md' : feature[0] === 'Dịch Vụ' ? 'check' : feature[0] === 'Tư Vấn' ? 'comments' : 'headset'}` style="font-size: 1.8em;")
                                 .text
                                     strong(style="font-size: 1.8em; color: #333; display: block; margin-bottom: 8px;")= feature[0]
                                     span(style="font-size: 1.4em; color: #555;")= feature[1]
                 .doctor-grid(style="flex: 1; display: flex; flex-wrap: wrap; justify-content: space-around; gap: 30px;")
+                    .doctor-card.animate-on-scroll(style="opacity: 0; transform: translateY(20px); transition: all 0.3s ease; flex-basis: calc(50% - 15px); text-align: center; background-color: #f0f8ff; border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer;")
                         img(src="/images/Doctors/doctor-1.png", alt="TS. Nguyễn Văn A" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") TS. Nguyễn Diệu Hiền
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia dinh dưỡng cá Koi
                         
-
                     .doctor-card.animate-on-scroll(style="opacity: 0; transform: translateY(20px); transition: all 0.3s ease; flex-basis: calc(50% - 15px); text-align: center; background-color: #f0f8ff; border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer;")
                         img(src="/images/Doctors/doctor-2.png", alt="ThS. Trần Thị B" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") ThS. Trần Trọng Hiếu
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia bệnh lý cá Koi
                         
+                    .doctor-card.animate-on-scroll(style="opacity: 0; transform: translateY(20px); transition: all 0.3s ease; flex-basis: calc(50% - 15px); text-align: center; background-color: #f0f8ff; border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer;")
                         img(src="/images/Doctors/doctor-1.png", alt="PGS. Lê Văn C" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") PGS. Đào Thị Hải Tú
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia sinh sản cá Koi
                         
+                    .doctor-card.animate-on-scroll(style="opacity: 0; transform: translateY(20px); transition: all 0.3s ease; flex-basis: calc(50% - 15px); text-align: center; background-color: #f0f8ff; border: 1px solid rgba(0, 123, 255, 0.3); border-radius: 15px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); cursor: pointer;")
                         img(src="/images/Doctors/doctor-2.png", alt="TS. Phạm Thị D" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 15px; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.1);")
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") TS. Đinh Quốc Tuấn
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia gen và lai tạo cá Koi
+
         //- // Thêm phần mới cho hiệu ứng số liệu tăng dần
         //- section.stats-section(style="padding: 60px 0; text-align: center;")
         //-     h2(style="color: #8b0000; margin-bottom: 40px; font-size: 2.5em; font-weight: bold;") Thành Tựu Của Chúng Tôi
@@ -63,6 +76,14 @@ block main
 
         // Thay đổi phần horizontal-scroll
         section.horizontal-scroll(style="padding: 40px 0; overflow: hidden;")
+            h2(style="color: #8b0000; text-align: center; margin-bottom: 30px; font-size: 2.5em; font-weight: bold;") Bộ Sưu Tập Cá Koi
+            .scroll-container(style="position: relative; width: 100%; height: 220px; overflow: hidden;")
+                .scroll-content(style="display: flex; gap: 20px; position: absolute; left: 0;")
+                    each img in [1, 2, 3, 4, 5, 6, 7, 8]
+                        img(src=`/images/KOI/koi-${img}.jpg`, alt=`Cá Koi ${img}`, style="width: 300px; height: 200px; object-fit: cover; border-radius: 10px; flex-shrink: 0;")
+                    each img in [1, 2, 3, 4, 5, 6, 7, 8]
+                        img(src=`/images/KOI/koi-${img}.jpg`, alt=`Cá Koi ${img}`, style="width: 300px; height: 200px; object-fit: cover; border-radius: 10px; flex-shrink: 0;")
+        
     script.
         // Hiệu ứng xuất hiện khi cuộn
         function animateOnScroll() {
@@ -140,6 +161,38 @@ block main
             }
         }
 
+        // Thêm mã JavaScript cho chức năng tự động di chuyển
+        function smoothScroll() {
+            const scrollContent = document.querySelector('.scroll-content');
+            const scrollWidth = scrollContent.scrollWidth / 2; // Chỉ lấy một nửa vì chúng ta đã nhân đôi nội dung
+            let currentPosition = 0;
+
+            function animate() {
+                currentPosition -= 0.5; // Điều chỉnh tốc độ di chuyển ở đây
+                if (currentPosition <= -scrollWidth) {
+                    currentPosition = 0;
+                }
+                scrollContent.style.transform = `translateX(${currentPosition}px)`;
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        // Gọi hàm smoothScroll khi trang đã tải xong
+        window.addEventListener('load', function() {
+            console.log('Page loaded, starting smooth scroll');
+            smoothScroll();
+        });
+
+        
        
 
+        
+ 
+        
+
+  
+
+    
         
