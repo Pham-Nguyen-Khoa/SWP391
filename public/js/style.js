@@ -617,6 +617,7 @@ if (buttonSubmitAppointment) {
     }
   });
 // }
+}
 
 
 let MY_BANK = {
@@ -734,7 +735,9 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
 
 const closeModalButton = document.getElementById("closeModalMessage");
 if (closeModalButton) {
+
   closeModalButton.addEventListener("click", function () {
+    console.log("Neronmen")
     document.getElementById("confirmationModal").style.display = "none";
   });
 } else {
@@ -747,30 +750,30 @@ if (closeModalButton) {
 // const marquee = document.querySelector('.marquee');
 // let index = 0;
 
-// function scrollText() {
-//   const lines = marquee.querySelectorAll('p');
-//   lines.forEach((line, i) => {
-//     line.style.display = i === index ? 'block' : 'none';
-//   });
-//   index = (index + 1) % lines.length;
-// }
+function scrollText() {
+  const lines = marquee.querySelectorAll('p');
+  lines.forEach((line, i) => {
+    line.style.display = i === index ? 'block' : 'none';
+  });
+  index = (index + 1) % lines.length;
+}
 
-// setInterval(scrollText, 5000); 
+setInterval(scrollText, 5000); 
 
-// console.log("Neronmen")
-// function initializeSlider() {
-//   const slide = document.querySelector('.review-slide');
-//   const groups = document.querySelectorAll('.review-group');
-//   if(slide && groups){
-//       let currentIndex = 0;
-//       function nextSlide() {
-//         currentIndex = (currentIndex + 1) % groups.length;
-//         slide.style.transform = `translateX(-${currentIndex * 100}%)`;
-//     }
+console.log("Neronmen")
+function initializeSlider() {
+  const slide = document.querySelector('.review-slide');
+  const groups = document.querySelectorAll('.review-group');
+  if(slide && groups){
+      let currentIndex = 0;
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % groups.length;
+        slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
   
-//     setInterval(nextSlide,4000);
+    setInterval(nextSlide,4000);
   
-//   }
-// }
+  }
+}
 
-// document.addEventListener('DOMContentLoaded', initializeSlider)
+document.addEventListener('DOMContentLoaded', initializeSlider);
