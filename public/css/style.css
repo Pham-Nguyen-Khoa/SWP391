@@ -18,7 +18,7 @@ body {
     height: 100%;
 }
 .footer {
-    background-color: #4c4a4a;
+    background: linear-gradient(#333738, #303535cf);
     position: relative;
     color: #fff;
     justify-content: center;
@@ -37,7 +37,7 @@ body {
 
 /* Container and Navbar Styling */
 .navbar {
-    background-color: #4475B9;
+    background: linear-gradient(#4c79b6, #477a9ecf);
     padding: 1rem 2rem;
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
@@ -157,7 +157,7 @@ ul.dropdown-menu a.dropdown-item-link {
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #FFD700  ;
+    color: #4475B9  ;
     /* Change color on hover if needed */
 }
 
@@ -208,32 +208,14 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     justify-content: center;
 }
 
-.col-7.left-column,
-.col-5.right-column {
-    padding: 0;
-}
-
 .login-img {
-    max-width: 100%;
+    width:  100%;
     height: 100%;
 }
 
-.col-7.left-column {
-    /* clip-path: ellipse(95% 100% at 0% 50%); */
-    position: relative;
-    z-index: 0;
+.right-column{
+    padding-right: 0;
 }
-
-.col-5.right-column {
-    padding: 5em 2rem 2rem 0;
-}
-
-.right-container {
-    margin-top: 5rem;
-    
-    
-}
-
 .form-container.login-container {
     margin-top: 3rem;
 
@@ -241,14 +223,11 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .form-group.utilities {
     display: flex;
+    justify-content: space-between;
 }
 
-.form-control.login-element {
-    max-width: 40rem;
-}
-
-.submit-login {
-    margin: 0 40%;
+.form-control {
+    width: 100%;
 }
 
 
@@ -256,12 +235,6 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     width: 150px;
     background-color: #2da0cc;
     color: white
-}
-
-.form-control.register-element {
-    max-width: 40rem;
-    margin: 0;
-    padding: 6px 12px;
 }
 
 .register-img {
@@ -288,7 +261,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .banner{
     border-bottom-left-radius: 180px;
     border-bottom-right-radius: 180px;
-    border: 5px solid #000000;
+    border: 2px solid #000000;
     background-image: url('/images/KoiBanner.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -297,12 +270,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     background-size: 100% 100%;
 }
 
-.container-fluid {
-    padding: 0;
-   
-    
-    
-}
+
 
 section.intro {
     padding: 3rem 7rem 3rem 7rem;
@@ -335,16 +303,14 @@ section.profession {
 }
 
 .card-title {
-    padding: 30px;
-    margin: 35px;
-    margin-bottom: 30px;
-    font-size: 28px;
+    padding-top: 10px;
+    font-size: 2rem;
     font-weight: bold;
     color: #0065c2;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    
 }
 
 .profession-card {
@@ -354,9 +320,15 @@ section.profession {
     box-shadow: 0 0 20px 6px #88afcc;
 }
 .profession-card:hover {
-    border: 5px solid  black; 
+<<<<<<< HEAD
+    border: 2px solid  black; 
     transform: scale(1.05); 
+=======
+    border: 5px solid rgb(92 178 217);
+    transform: scale(1.05);
+>>>>>>> 09a158806a3f5b6849881b7f25eb239343813e48
     transition: transform 0.3s ease;
+    box-shadow: 0px 0px 11px 8px #76b8d7;
 }
 
 .profession-card-img {
@@ -433,7 +405,7 @@ section.service {
 }
 
 .review-card {
-    background-color: #E3F2FD; /* Màu nền nhẹ */
+    background: linear-gradient(to bottom, #a0c5ce73, #93b9cecf);
     border-radius: 10px; /* Bo góc */
     padding: 20px;
     margin: 10px;
@@ -441,6 +413,13 @@ section.service {
     display: inline-block;
     width: 30%; /* Điều chỉnh chiều rộng thẻ */
     vertical-align: top;
+}
+
+.review-card:hover {
+
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+
 }
 
 .review-card h3 {
@@ -454,9 +433,33 @@ section.service {
 }
 
 .stars {
-    color: #FFD700;
+    color: #e6c40d;
     margin: 5px 0;
-    font-size: 24px;
+    font-size: 36px;
+}
+
+.banner-service-container  {
+    position: relative;
+    width: 100%; 
+    overflow: hidden;
+}
+
+.overlay-service {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    transform: translate(-50%, -50%);
+    color: white; 
+    font-size: 2rem; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px; 
+    border-radius: 10px; 
 }
 
 /* ALERT */
@@ -564,7 +567,7 @@ background-color: #cac0c05c; */
     background-color: #bee8ee;
     border-radius: 30px;
     box-shadow: 0px 0px 12px 11px rgb(22 64 169 / 17%);
-    border: 2px solid #1346c8;
+    border: 2px solid #8fbbd0;
 }
 
 .title_appointment {
@@ -702,11 +705,11 @@ select.service_appointment option,
     cursor: pointer;
     text-align: center;
     display: block;
-    width: 221px;
-    padding: 10px;
+    width: auto;
+    padding: 15px;
     text-align: center;
-    margin: 50px 45%;
-    height: 58px;
+    
+    height: auto;
 }
 
 .confirm-btn:hover {
@@ -1803,16 +1806,18 @@ header {
   .card.contact-card{
     border-radius: 15px;
     background-color: #c2dfe594;
-    height: 850px;
+    height: 900px;
     border: 3px solid #6ea6ca;
     border-radius: 30px;
   }
 
   .card-contact-title {
+    padding-top: 10px;
     font-size: 30px;
-    font-weight: bold;
-    color: #333;
+    color: #234d7d;
     margin: 20px;
+    font-size: 1.7rem;
+    font-family: 'Oswald', sans-serif;
   }
 
   .card-contact-content {
@@ -1822,7 +1827,7 @@ header {
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
     padding: 10px;
-    
+    min-height: 10rem;
   }
 
 .card-contact-price {
@@ -1856,4 +1861,139 @@ header {
 .card-body-contact {
     text-align: center;
     padding: 30px;
+}
+
+ /* Css about us */
+ .scroll-container::-webkit-scrollbar {
+    display: none;
+}
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.doctor-card {
+    position: relative;
+}
+
+.doctor-details {
+    display: none;
+}
+
+.doctor-details::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.doctor-details > * {
+    position: relative;
+    z-index: 1001;
+}
+/* CSS NEWS */
+.news-title {
+    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
+    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    color: #333; /* Màu chữ có thể điều chỉnh */
+    text-align: center; /* Căn giữa tiêu đề */
+    margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
+}
+
+.news-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 40px;
+}
+
+.row.card-news-box {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh các thẻ ngang hàng */
+    justify-content: space-between; /* Căn giữa các thẻ */
+    flex-wrap: wrap; /* Cho phép các thẻ xuống dòng nếu không đủ chỗ */
+    margin: 0 -15px; /* Để điều chỉnh khoảng cách giữa các cột */
+}
+
+.card-news {
+    flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
+    margin: 15px; /* Khoảng cách giữa các thẻ */
+    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
+    border-radius: 10px; /* Bo góc cho thẻ */
+    background-color: #e7e7e7; /* Màu nền cho thẻ */
+    padding: 20px; /* Khoảng cách bên trong thẻ */
+}
+
+
+.card-news h3 {
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    min-height: 4rem;
+    font-size: 1.5rem;
+}
+
+.card-news p {
+    color: #666; /* Màu chữ cho nội dung */
+    padding: 10px;
+    
+}
+
+.card-news a {
+    color: #065cb8; /* Màu chữ cho liên kết */
+    text-decoration: none; /* Bỏ gạch chân */   
+    
+}
+
+.card-news a:hover {
+    text-decoration: underline; /* Gạch chân khi hover */
+}
+
+.card-news{
+    padding: 40px;
+}
+
+.card-news-box{
+    text-align: center;
+}
+
+/* CSS Community */
+
+.content {
+    padding: 60px; /* Khoảng cách bên trong */
+    margin: 20px 0; /* Khoảng cách trên và dưới */
+    padding-top: 10px;
+}
+
+.content h2 {
+    font-family: 'Oswald', sans-serif; /* Sử dụng font Oswald */
+    color: #234d7d; /* Màu chữ cho tiêu đề */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.content p {
+    font-family: Arial, sans-serif; /* Font chữ cho đoạn văn */
+    color: #333; /* Màu chữ cho đoạn văn */
+    line-height: 1.6; /* Khoảng cách giữa các dòng */
+    margin-bottom: 15px; /* Khoảng cách dưới đoạn văn */
+}
+
+.content ul {
+    list-style-type: disc; /* Kiểu danh sách */
+    padding-left: 20px; /* Khoảng cách bên trái cho danh sách */
+}
+
+.content ul li {
+    margin-bottom: 5px; /* Khoảng cách giữa các mục trong danh sách */
+    font-family: Arial, sans-serif; /* Font chữ cho các mục trong danh sách */
+    color: #333; /* Màu chữ cho các mục trong danh sách */
 }

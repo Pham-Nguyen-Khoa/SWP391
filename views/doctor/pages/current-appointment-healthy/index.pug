@@ -21,69 +21,70 @@ block main
     }
 
   +title("Đơn Hiện Tại")
-  if currentAppointment
-    .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
-      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
-      .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
-        .row 
-          .col-7(style="padding-right: 100px;")
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Khách hàng
-              b :  #{currentAppointment.Name}
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Dịch vụ
-              b :  Khám Sức Khỏe
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Ngày
-              b :  #{currentAppointment.DateFormat}
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Lịch hẹn
-              b :  #{currentAppointment.Shift}
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Số điện thoại
-              b :  #{currentAppointment.PhoneNumber}
-            if(currentAppointment.Address)
+  .block-sider(style="width:90%;margin-left:180px;")
+    if currentAppointment
+      .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
+        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
+        .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
+          .row 
+            .col-7(style="padding-right: 100px;")
               p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
-              b :  Tại nhà
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Khách hàng
+                b :  #{currentAppointment.Name}
               p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Địa chỉ
-              b :  #{currentAppointment.Address}
-            else 
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Dịch vụ
+                b :  Khám Sức Khỏe
               p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
-              b :  Tại trung tâm
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
-              b :  Đang thực hiện
-            p.lead
-              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
-              p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
-            
-            p.lead
-          .col-5  
-            b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Bác sĩ
-            b  :  #{user.FullName}
-            br
-            b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Chuyên ngành
-            b  :  #{user.Specialization}
-            br
-            img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Ngày
+                b :  #{currentAppointment.DateFormat}
+              p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Lịch hẹn
+                b :  #{currentAppointment.Shift}
+              p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Số điện thoại
+                b :  #{currentAppointment.PhoneNumber}
+              if(currentAppointment.Address)
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
+                b :  Tại nhà
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Địa chỉ
+                b :  #{currentAppointment.Address}
+              else 
+                p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Nơi Khám
+                b :  Tại trung tâm
+              p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
+                b :  Đang thực hiện
+              p.lead
+                b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
+                p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
+              
+              p.lead
+            .col-5  
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Bác sĩ
+              b  :  #{user.FullName}
+              br
+              b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Chuyên ngành
+              b  :  #{user.Specialization}
+              br
+              img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;") 
 
-    .fish-records
+      .fish-records
 
 
-    .text-center.mt-4
-      a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication-fish` style="background-color: #4294b1c7; color: black; padding: 10px;") 
-        i.fa-solid.fa-capsules
-        |  Kê đơn thuốc
-    a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" style="background-color: #2dde29c7; color: black; padding: 10px;") 
-      i.fa-solid.fa-plus
-      |  Thêm cá
+      .text-center.mt-4
+        a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication-fish` style="background-color: #4294b1c7; color: black; padding: 10px;") 
+          i.fa-solid.fa-capsules
+          |  Kê đơn thuốc
+      a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" style="background-color: #2dde29c7; color: black; padding: 10px;") 
+        i.fa-solid.fa-plus
+        |  Thêm cá
 
-  else
-    .alert.alert-info.text-center
-      h2 Hiện tại không có đơn đang xử lý.
+    else
+      .alert.alert-info.text-center
+        h2 Hiện tại không có đơn đang xử lý.
 
   script.
     function displayFishRecords() {
@@ -189,3 +190,5 @@ block main
 
     document.getElementById('prescribeMedicationBtn').addEventListener('click', function(e) {
     }); 
+
+    

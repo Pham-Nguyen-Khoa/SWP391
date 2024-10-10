@@ -1,0 +1,109 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    .block-sider(style="margin-left:180px; margin-bottom: 100px;")
+        .mixin-title
+            h1.mb-0.font-weight-bold
+                i.fas.fa-share-alt.mr-3
+                | Cấu Hình Email
+        .card.shadow-lg(style="border-radius: 20px; border: none; overflow: hidden;")
+            .card-header.bg-gradient-primary.text-white.d-flex.justify-content-between.align-items-center(style="border-bottom: none;")
+                h2
+                button.btn.btn-light.btn-email-config(type="submit")
+                    i.fas.fa-save.mr-2
+                    | Cập nhật 
+            .card-body.bg-white
+                form(action="/admin/setting/general/email-config?_method=PATCH" method="POST" id="form-email-config" )
+                    .row
+                        .col-md-6.mb-4
+                            .form-group
+                                label.text-primary.font-weight-bold(for="Email")
+                                    i.fas.fa-envelope.mr-2
+                                    | Email
+                                .input-group.shadow-sm.rounded-pill.overflow-hidden
+                                    .input-group-prepend
+                                        span.input-group-text.bg-primary.text-white.border-0(style="width: 50px;")
+                                            i.fas.fa-envelope   
+                                    input.form-control.border-0#Email(type="text" name="Email" value=settingData.EmailSend placeholder="Nhập Email")
+                        .col-md-6.mb-4
+                            .form-group
+                                label.text-primary.font-weight-bold(for="AppPassword")
+                                    i.fas.fa-key.mr-2
+                                    | Mật khẩu ứng dụng
+                                .input-group.shadow-sm.rounded-pill.overflow-hidden
+                                    .input-group-prepend
+                                        span.input-group-text.bg-primary.text-white.border-0(style="width: 50px;")
+                                            i.fas.fa-key
+                                    input.form-control.border-0#AppPassword(type="text" name="AppPassword" value=settingData.AppPassword  placeholder="Nhập Mật khẩu ứng dụng")
+
+    
+    style.
+        .card {
+            transition: all 0.3s ease;
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+        }
+
+        .form-group label {
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        .form-group:hover label {
+            transform: translateY(-2px);
+        }
+        .input-group {
+            transition: all 0.3s ease;
+        }
+        .input-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.1)!important;
+        }
+        .input-group-text {
+            border: none;
+        }
+
+        .btn-social-network {
+            transition: all 0.3s ease;
+        }
+        .btn-social-network:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15)!important;
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(45deg, #4e73df, #224abe);
+        }
+        .bg-gradient-danger {
+            background: linear-gradient(45deg, #e74a3b, #be2617);
+        }
+        .input-group-text i {
+            font-size: 1.2em;
+        }
+        .form-control {
+        transition: all 0.3s ease;
+        padding-left: 15px;
+        font-size: 1rem;
+        color: #495057;
+        }
+        .form-control::placeholder {
+            color: #6c757d;
+            opacity: 1;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            background-color: #fff;
+            border-color: #80bdff;
+        }
+        .input-group-text {
+            border: none;
+            font-size: 1.2rem;
+        }
+        .input-group {
+            background-color: #fff;
+        }
+        .input-group:hover, .input-group:focus-within {
+            box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
