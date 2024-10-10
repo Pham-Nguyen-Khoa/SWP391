@@ -36,3 +36,23 @@ module.exports.community = async (req, res) => {
   });
 };
 
+// [GET] localhost:/koi/envConsult
+module.exports.envConsult = async (req, res) => {
+  res.render("client/pages/home/envConsult.pug", {
+    pageTitle: "Trang tư vấn môi trường",
+  });
+};
+
+// [GET] localhost:/koi/onlConsult
+module.exports.onlConsult = async (req, res) => {
+  res.render("client/pages/home/onlConsult.pug", {
+    pageTitle: "Trang tư vấn Online",
+  });
+};
+
+// [GET] localhost:/koi/checkUp
+module.exports.checkUp = async (req, res) => {
+  res.render("client/pages/home/checkUp.pug", {
+    pageTitle: "Trang khám bệnh",
+  });
+};

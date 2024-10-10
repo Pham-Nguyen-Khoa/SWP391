@@ -14,5 +14,10 @@ router.get("/news", controller.news);
 
 router.get("/community", controller.community);
 
+router.get("/envConsult", controller.envConsult);
+
+router.get("/onlConsult", controller.onlConsult);
+
+router.get("/checkUp", controller.community);
 
 module.exports = router
