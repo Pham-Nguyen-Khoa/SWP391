@@ -1,3 +1,4 @@
+ import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 // CLIENT SEND MESSAGE
     const formSendData = document.querySelector(".inner-form");
     if(formSendData) {
@@ -61,9 +62,14 @@ if(chatBody) {
 
 
 // Emoji picker
-document.querySelector('emoji-picker')
-
-  .addEventListener('emoji-click', event => console.log(event.detail));
+    const buttonEmoji = document.querySelector(".button-emoji");
+    const tooltip = document.querySelector(".tooltip");
+    if(buttonEmoji && tooltip) {
+        Popper.createPopper(buttonEmoji, tooltip) ;
+        buttonEmoji.onclick = () => {
+            tooltip.classList.toggle('shown')
+        }   
+    }
 
 
 // .inner-incoming

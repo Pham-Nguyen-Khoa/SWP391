@@ -637,3 +637,13 @@ span {
 
 
 
+
+/* Emoji picker */
+.tooltip {
+    visibility: hidden;
+}
+.tooltip.shown {
+    visibility: visible;
+    opacity: 1;
+}
+

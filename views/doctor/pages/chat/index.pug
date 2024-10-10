@@ -38,6 +38,8 @@ block main
                                 name="content"
                                 placeholder="Nhập tin nhắn..."
                             )
+                            span(class="button-emoji btn btn-light mx-2") 
+                                i.fa-regular.fa-face-smile
                             button(
                                 type="submit"
                                 class="inner-btn"
@@ -45,3 +47,5 @@ block main
                                 i.fas.fa-paper-plane
                                 span.ml-2 
 
+        .tooltip
+            emoji-picker

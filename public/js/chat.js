@@ -1,3 +1,4 @@
+ import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 // CLIENT SEND MESSAGE
     const formSendData = document.querySelector(".inner-form");
     if(formSendData) {

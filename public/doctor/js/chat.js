@@ -56,3 +56,16 @@ const chatBody = document.querySelector(".inner-body");
 if(chatBody) {  
     chatBody.scrollTop = chatBody.scrollHeight;
 }
+
+
+
+
+// Emoji picker
+const buttonEmoji = document.querySelector(".button-emoji");
+const tooltip = document.querySelector(".tooltip");
+if(buttonEmoji && tooltip) {
+    Popper.createPopper(buttonEmoji, tooltip) ;
+    buttonEmoji.onclick = () => {
+        tooltip.classList.toggle('shown')
+    }   
+}
