@@ -1,3 +1,4 @@
+ import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js'
 // CLIENT SEND MESSAGE
     const formSendData = document.querySelector(".inner-form");
     if(formSendData) {
@@ -59,3 +60,26 @@ if(chatBody) {
 
 
 
+// Emoji picker
+const buttonEmoji = document.querySelector(".button-emoji");
+const tooltip = document.querySelector(".tooltip");
+if(buttonEmoji && tooltip) {
+    Popper.createPopper(buttonEmoji, tooltip) ;
+    buttonEmoji.onclick = () => {
+        tooltip.classList.toggle('shown')
+    }   
+}
+// Insert emoji input
+    const emojiPicker = document.querySelector("emoji-picker");
+    if(emojiPicker) {
+        emojiPicker.addEventListener('emoji-click', event => {
+            const inputMessage = document.querySelector("input[name='content']");
+            if(inputMessage) {
+                inputMessage.value += event.detail.unicode;
+            }
+        })
+    }
+
+
+//End Insert emoji input
+//End Emoji picker
