@@ -18,7 +18,7 @@ body {
     height: 100%;
 }
 .footer {
-    background-color: #4c4a4a;
+    background: linear-gradient(#333738, #303535cf);
     position: relative;
     color: #fff;
     justify-content: center;
@@ -37,7 +37,7 @@ body {
 
 /* Container and Navbar Styling */
 .navbar {
-    background-color: #4475B9;
+    background: linear-gradient(#4c79b6, #477a9ecf);
     padding: 1rem 2rem;
     font-family: 'Arial', sans-serif;
     font-size: 0.9rem;
@@ -261,7 +261,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .banner{
     border-bottom-left-radius: 180px;
     border-bottom-right-radius: 180px;
-    border: 5px solid #000000;
+    border: 2px solid #000000;
     background-image: url('/images/KoiBanner.jpg');
     background-position: center;
     background-repeat: no-repeat;
@@ -320,9 +320,15 @@ section.profession {
     box-shadow: 0 0 20px 6px #88afcc;
 }
 .profession-card:hover {
+<<<<<<< HEAD
     border: 2px solid  black; 
     transform: scale(1.05); 
+=======
+    border: 5px solid rgb(92 178 217);
+    transform: scale(1.05);
+>>>>>>> 09a158806a3f5b6849881b7f25eb239343813e48
     transition: transform 0.3s ease;
+    box-shadow: 0px 0px 11px 8px #76b8d7;
 }
 
 .profession-card-img {
@@ -399,7 +405,7 @@ section.service {
 }
 
 .review-card {
-    background-color: #E3F2FD; /* Màu nền nhẹ */
+    background: linear-gradient(to bottom, #a0c5ce73, #93b9cecf);
     border-radius: 10px; /* Bo góc */
     padding: 20px;
     margin: 10px;
@@ -407,6 +413,13 @@ section.service {
     display: inline-block;
     width: 30%; /* Điều chỉnh chiều rộng thẻ */
     vertical-align: top;
+}
+
+.review-card:hover {
+
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+
 }
 
 .review-card h3 {
@@ -420,9 +433,9 @@ section.service {
 }
 
 .stars {
-    color: #FFD700;
+    color: #e6c40d;
     margin: 5px 0;
-    font-size: 24px;
+    font-size: 36px;
 }
 
 .banner-service-container  {
@@ -554,7 +567,7 @@ background-color: #cac0c05c; */
     background-color: #bee8ee;
     border-radius: 30px;
     box-shadow: 0px 0px 12px 11px rgb(22 64 169 / 17%);
-    border: 2px solid #1346c8;
+    border: 2px solid #8fbbd0;
 }
 
 .title_appointment {
@@ -1799,7 +1812,7 @@ header {
     font-family: 'Arial', sans-serif;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
     padding: 10px;
-    min-height: 13rem;
+    min-height: 10rem;
   }
 
 .card-contact-price {

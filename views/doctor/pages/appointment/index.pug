@@ -25,90 +25,91 @@ block main
         }
     //- pre
     //-   code #{JSON.stringify(listAppointment,null,2)}
-    .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header(style="background-color: #86d0dbf5 ; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;")  Bộ lọc 
-      .card-body 
-        .row 
-          .col-6#filter-buttons
-            a(
-              href=`/doctor/appointment`
-                class=`btn btn-sm ml-1 btn-custom-outline  `
-                button-filter
-                button-all
-              ) Tất cả (#{listAppointmentOrigin.length})
-            a(
-              href=`/doctor/appointment?process=ready`
-                class=`btn btn-sm ml-1 btn-custom-outline   `
-                button-filter
-              ) Sẵn sàng (#{listAppointmentOrigin.filter(a => a.Process === 'Ready').length})
-            a(
-              href=`/doctor/appointment?process=process`
-                class=`btn btn-sm ml-1 btn-custom-outline  `
-                button-filter
-              ) Đang thực hiện (#{listAppointmentOrigin.filter(a => a.Process === 'Process').length})
-            a(
-              href=`/doctor/appointment?process=successed`
-                class=`btn btn-sm ml-1 btn-custom-outline  `
-                button-filter
-              ) Hoàn thành (#{listAppointmentOrigin.filter(a => a.Process === 'Successed').length})
-          .col-6
-            form#filterForm(action="/doctor/appointment" method="GET")
-              .form-group
-                label(for="dateFilter") Lọc theo ngày:
-                input.form-control(type="date" id="dateFilter" name="date" value=date)
-              .form-group
-                label(for="sortOrder") Sắp xếp theo:
-                select.form-control(id="sortOrder" name="sort" value=sort)
-                  option(value="asc") Tăng dần
-                  option(value="desc") Giảm dần
-              button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
-    if listAppointment.length === 0
-      if filterType === 'date'
-        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
-      else if filterType === 'process'
-        case processFilter
-          when 'ready'
-            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Sẵn sàng.
-          when 'process'
-            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đang thực hiện.
-          when 'successed'
-            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;")| Không có đơn hẹn nào trong trạng thái Hoàn thành.
-          when 'cancelled'
-            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đã hủy.
-          default
-            p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái này.
-    else      
-      table.table#table-appointment
-        thead
-            tr
-                th Mã đơn hàng
-                th Tên khách hàng
-                th Dịch vụ
-                th Ngày hẹn
-                th Trạng Thái
-                th Chi tiết lịch hẹn
-        tbody
-            each appointment in listAppointment
-                
-                tr 
-                    td #{appointment.AppointmentID}
-                    td #{appointment.NameCustomer}    
-                    td #{appointment.Name}
-                    td #{appointment.DateFormat}
-                    td  
-                        if(appointment.Process == "Ready" && appointment.ServiceID == "DV0003")
-                            a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
-                        if(appointment.Process == "Ready" && appointment.ServiceID != "DV0003")
-                            a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
-                        else if(appointment.Process == "Process")
-                            span(class="btn btn-dark") Đang thực hiện 
-                        else if(appointment.Process == "Cancelled")
-                            span(class="btn btn-danger") Hủy bỏ
-                        else if(appointment.Process == "Successed")
-                            span(class="btn btn-success") Thành công 
-                    td 
-                        a(href=`/doctor/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
-                          i(class="fa-solid fa-receipt")
+    .block-sider(style="width:90%;margin-left:180px;")
+      .card.mb-3(style="margin: 0 50px 50px;")
+        .card-header(style="background-color: #86d0dbf5 ; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;")  Bộ lọc 
+        .card-body 
+          .row 
+            .col-6#filter-buttons
+              a(
+                href=`/doctor/appointment`
+                  class=`btn btn-sm ml-1 btn-custom-outline  `
+                  button-filter
+                  button-all
+                ) Tất cả (#{listAppointmentOrigin.length})
+              a(
+                href=`/doctor/appointment?process=ready`
+                  class=`btn btn-sm ml-1 btn-custom-outline   `
+                  button-filter
+                ) Sẵn sàng (#{listAppointmentOrigin.filter(a => a.Process === 'Ready').length})
+              a(
+                href=`/doctor/appointment?process=process`
+                  class=`btn btn-sm ml-1 btn-custom-outline  `
+                  button-filter
+                ) Đang thực hiện (#{listAppointmentOrigin.filter(a => a.Process === 'Process').length})
+              a(
+                href=`/doctor/appointment?process=successed`
+                  class=`btn btn-sm ml-1 btn-custom-outline  `
+                  button-filter
+                ) Hoàn thành (#{listAppointmentOrigin.filter(a => a.Process === 'Successed').length})
+            .col-6
+              form#filterForm(action="/doctor/appointment" method="GET")
+                .form-group
+                  label(for="dateFilter") Lọc theo ngày:
+                  input.form-control(type="date" id="dateFilter" name="date" value=date)
+                .form-group
+                  label(for="sortOrder") Sắp xếp theo:
+                  select.form-control(id="sortOrder" name="sort" value=sort)
+                    option(value="asc") Tăng dần
+                    option(value="desc") Giảm dần
+                button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
+      if listAppointment.length === 0
+        if filterType === 'date'
+          p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
+        else if filterType === 'process'
+          case processFilter
+            when 'ready'
+              p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Sẵn sàng.
+            when 'process'
+              p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đang thực hiện.
+            when 'successed'
+              p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;")| Không có đơn hẹn nào trong trạng thái Hoàn thành.
+            when 'cancelled'
+              p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái Đã hủy.
+            default
+              p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong trạng thái này.
+      else      
+        table.table#table-appointment
+          thead
+              tr
+                  th Mã đơn hàng
+                  th Tên khách hàng
+                  th Dịch vụ
+                  th Ngày hẹn
+                  th Trạng Thái
+                  th Chi tiết lịch hẹn
+          tbody
+              each appointment in listAppointment
+                  
+                  tr 
+                      td #{appointment.AppointmentID}
+                      td #{appointment.NameCustomer}    
+                      td #{appointment.Name}
+                      td #{appointment.DateFormat}
+                      td  
+                          if(appointment.Process == "Ready" && appointment.ServiceID == "DV0003")
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
+                          if(appointment.Process == "Ready" && appointment.ServiceID != "DV0003")
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary")  Sẵn sàng
+                          else if(appointment.Process == "Process")
+                              span(class="btn btn-dark") Đang thực hiện 
+                          else if(appointment.Process == "Cancelled")
+                              span(class="btn btn-danger") Hủy bỏ
+                          else if(appointment.Process == "Successed")
+                              span(class="btn btn-success") Thành công 
+                      td 
+                          a(href=`/doctor/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
+                            i(class="fa-solid fa-receipt")
                         
     script.
         document.addEventListener('DOMContentLoaded', function() {

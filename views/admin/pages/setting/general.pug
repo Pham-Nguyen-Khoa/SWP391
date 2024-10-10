@@ -1,0 +1,133 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug  
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    
+    style.
+        .card-body .row:not(:last-child) {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+        .card-body .col-md-4 {
+            padding: 1rem;
+        }
+     
+        h5 {
+            margin-bottom: 0.25rem;
+        }
+        .setting-item {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .setting-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #f8f9fa;
+            text-decoration: none; 
+        }
+        
+    .block-sider(style="margin-left:180px;")
+        +title("Cấu hình")
+
+        .card.mb-4
+            .card-header
+                h2 Cài đặt chung
+            .card-body
+                .row.mb-4
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/setting/general/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-info-circle.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Thông tin Website
+                                    p.mb-0 Thiết lập thông tin website
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-language.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Ngôn ngữ
+                                    p.mb-0 Thiết lập ngôn ngữ website
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/setting/general/email-config")
+                            .d-flex.align-items-start
+                                i.fas.fa-envelope.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Cấu hình email
+                                    p.mb-0 Thiết lập cấu hình email
+                .row.mb-4
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-city.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Tỉnh thành
+                                    p.mb-0 Quản lý tỉnh thành
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-cogs.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Thuộc tính mở rộng
+                                    p.mb-0 Tùy chỉnh các thuộc tính mở rộng của sản phẩm và bài viết
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-paper-plane.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Form liên hệ
+                                    p.mb-0 Quản lý thông tin form liên hệ
+                .row
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/setting/general/social-network")
+                            .d-flex.align-items-start
+                                i.fab.fa-facebook.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Mạng xã hội
+                                    p.mb-0 Cấu hình các thông tin liên quan đến các trang mạng xã hội
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-code.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Mã nhúng
+                                    p.mb-0 Quản lý mã nhúng
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-sms.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Sms Brandname
+                                    p.mb-0 Thiết lập cấu hình sms brandname
+
+        .card.mb-4
+            .card-header
+                h2 Bán hàng
+            .card-body
+                .row
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-box.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Sản phẩm
+                                    p.mb-0 Thiết lập cấu hình sản phẩm
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-shopping-cart.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Đơn hàng
+                                    p.mb-0 Thiết lập cấu hình đơn hàng
+                    .col-md-4.mb-3
+                        a.setting-item(href="/admin/settings/website-info")
+                            .d-flex.align-items-start
+                                i.fas.fa-print.fa-3x.me-3.text-secondary.mr-3
+                                div
+                                    h5 Mẫu in
+                                    p.mb-0 Thiết lập cấu hình mẫu in

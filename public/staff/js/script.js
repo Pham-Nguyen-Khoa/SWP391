@@ -76,3 +76,22 @@ function addDefaultDoctorOption() {
     })
   }
   
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const adminMessages = document.querySelectorAll('.admin-message');
+    if(adminMessages){    
+        adminMessages.forEach(message => {
+            message.addEventListener('mouseover', () => {
+            message.style.animation = 'pulse 1s infinite';
+        });
+
+        message.addEventListener('mouseout', () => {
+            message.style.animation = 'none';
+        });
+    });
+  }
+  });
+
+  

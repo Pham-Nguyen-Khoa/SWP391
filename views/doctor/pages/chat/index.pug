@@ -1,0 +1,47 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    //- pre 
+    //-     code=JSON.stringify(chats, null, 2)
+    .block-sider(style="width:90%;margin-left:180px;")  
+        h1 chat
+        .row 
+            .col-12 
+                .chat(my-id=user.AccountID role=user.RoleID)
+                    .inner-body 
+                        each chat in chats
+                            if chat.User_ID != user.AccountID
+                                .inner-incoming
+                                    .row
+                                        .inner-avatar.mt-4.mr-3
+                                            img(src=chat.infoUser.Avatar, alt="Avatar" style="width:50px;height:50px;border-radius:50%;")
+                                        .content
+                                            .inner-name #{chat.infoUser.FullName}
+                                            .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                                p  #{chat.Content}
+                            else
+                                .inner-outgoing 
+                                    .row
+                                        .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                            p #{chat.Content}
+                    .inner-foot
+                        form(
+                            class="inner-form"
+                            action=""
+                        )
+                            input(
+                                type="text"
+                                class="inner-input"
+                                name="content"
+                                placeholder="Nhập tin nhắn..."
+                            )
+                            button(
+                                type="submit"
+                                class="inner-btn"
+                            ) 
+                                i.fas.fa-paper-plane
+                                span.ml-2 
+
