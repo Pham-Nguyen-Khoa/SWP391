@@ -8,48 +8,11 @@ block main
     .container-fluid 
         .row(style="height: 100vh;")
             .col-7.left-column 
-<<<<<<< HEAD
-                img.register-img(src="/images/Login.png" alt="Login image")
-            .col-5.right-column
-                h2.title-register.text-center Đăng ký
-                .form-container(style="margin: 0 113px  ")
-                    form(action="/auth/register" method="post")
-                        .form-group
-                            label(for="Email") Email
-                            input#email.form-control.register-element(type="Email" name="Email" required)
-                        .form-group
-                            label(for="FullName") Họ & Tên
-                            input#name.form-control.register-element(type="text" name="FullName" required)
-                        .form-group
-                            label(for="PhoneNumber") Số Điện Thoại
-                            input#phone.form-control.register-element(type="tel" name="PhoneNumber" required)
-                        .form-group
-                            label(for="Address") Địa Chỉ
-                            input#address.form-control.register-element(type="text" name="Address" required)
-                        .form-group
-                            label(for="Gender") Giới Tính
-                            select#gender.form-control.register-element(name="Gender" required)
-                                option(value="Nam") Nam
-                                option(value="Nữ") Nữ
-                        .form-group
-                            label(for="Birthday") Ngày Sinh
-                            input#dob.form-control.register-element(type="date" name="Birthday" required)
-                        .form-group
-                            label(for="Password") Mật khẩu
-                            input#password.form-control.register-element(type="password" name="Password" required)
-                        .form-group
-                            label(for="confirm_password") Xác nhận Mật khẩu
-                            input#confirm_password.form-control.register-element(type="password" name="confirm_password" required)
-                        .form-group.text-center
-                        .submit-register
-                            //- button( type="submit" class = "btn register-button") Tiếp tục  
-                            button.btn.login-button(type="submit" style="margin-top: 40px;") Register 
-=======
                 img.login-img(src="/images/Login.png" alt="Login image")
             .col-5.right-column(style="padding: 0 0 0 50px;")
                 .right-container(style="margin-top:30px;") 
                     .card.shadow-sm(style="border-radius: 40px; margin-right: 100px;")
-                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 30px; border-top-right-radius: 30px;")
+                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 30px; border-top-right-radius: 30px; height: 120px")
                             h2.card-title.text-center.mb-4(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng ký
                         .card-body(style="padding: 2rem;")  
                              form(action="/auth/register" method="post")
@@ -83,4 +46,4 @@ block main
                                 .submit-register
                                     //- button( type="submit" class = "btn register-button") Tiếp tục  
                                     button.btn.login-button(type="submit" style="margin-top: 40px;") Đăng ký
->>>>>>> bda4f1ee234cde40539d531e80855fec7f97292d
+

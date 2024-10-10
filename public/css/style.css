@@ -157,7 +157,7 @@ ul.dropdown-menu a.dropdown-item-link {
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #FFD700  ;
+    color: #4475B9  ;
     /* Change color on hover if needed */
 }
 
@@ -208,33 +208,14 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     justify-content: center;
 }
 
-.col-7.left-column,
-.col-5.right-column {
-    
-    padding: 0;
-}
-
 .login-img {
-    max-width: 100%;
+    width:  100%;
     height: 100%;
 }
 
-.col-7.left-column {
-    /* clip-path: ellipse(95% 100% at 0% 50%); */
-    position: relative;
-    z-index: 0;
+.right-column{
+    padding-right: 0;
 }
-
-.col-5.right-column {
-    padding: 0 2rem 2rem 0;
-}
-
-.right-container {
-    margin-top: 5rem;
-    
-    
-}
-
 .form-container.login-container {
     margin-top: 3rem;
 
@@ -242,14 +223,11 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .form-group.utilities {
     display: flex;
+    justify-content: space-between;
 }
 
-.form-control.login-element {
-    max-width: 40rem;
-}
-
-.submit-login {
-    margin: 0 40%;
+.form-control {
+    width: 100%;
 }
 
 
@@ -257,12 +235,6 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     width: 150px;
     background-color: #2da0cc;
     color: white
-}
-
-.form-control.register-element {
-    max-width: 40rem;
-    margin: 0;
-    padding: 6px 12px;
 }
 
 .register-img {
@@ -298,12 +270,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     background-size: 100% 100%;
 }
 
-.container-fluid {
-    padding: 0;
-   
-    
-    
-}
+
 
 section.intro {
     padding: 3rem 7rem 3rem 7rem;
@@ -336,16 +303,14 @@ section.profession {
 }
 
 .card-title {
-    padding: 30px;
-    margin: 35px;
-    margin-bottom: 30px;
-    font-size: 28px;
+    padding-top: 10px;
+    font-size: 2rem;
     font-weight: bold;
     color: #0065c2;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 50px;
+    
 }
 
 .profession-card {
@@ -355,14 +320,9 @@ section.profession {
     box-shadow: 0 0 20px 6px #88afcc;
 }
 .profession-card:hover {
-    border: 5px solid  black; 
+    border: 2px solid  black; 
     transform: scale(1.05); 
     transition: transform 0.3s ease;
-}
-
-.profession-card-img {
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
 }
 
 .profession-card-img {
@@ -732,11 +692,11 @@ select.service_appointment option,
     cursor: pointer;
     text-align: center;
     display: block;
-    width: 221px;
-    padding: 10px;
+    width: auto;
+    padding: 15px;
     text-align: center;
-    margin: 50px 45%;
-    height: 58px;
+    
+    height: auto;
 }
 
 .confirm-btn:hover {

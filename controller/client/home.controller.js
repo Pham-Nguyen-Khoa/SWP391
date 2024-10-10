@@ -46,13 +46,13 @@ module.exports.envConsult = async (req, res) => {
 // [GET] localhost:/koi/onlConsult
 module.exports.onlConsult = async (req, res) => {
   res.render("client/pages/home/onlConsult.pug", {
-    pageTitle: "Trang cộng đồng",
+    pageTitle: "Trang tư vấn Online",
   });
 };
 
 // [GET] localhost:/koi/checkUp
 module.exports.checkUp = async (req, res) => {
   res.render("client/pages/home/checkUp.pug", {
-    pageTitle: "Trang cộng đồng",
+    pageTitle: "Trang khám bệnh",
   });
 };
