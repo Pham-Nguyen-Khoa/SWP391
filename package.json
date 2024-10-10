@@ -16,7 +16,7 @@
     "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
-    "express": "^4.20.0",
+    "express": "^4.21.1",
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
     "flatpickr": "^4.6.13",
