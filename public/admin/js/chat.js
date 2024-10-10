@@ -57,3 +57,17 @@ const chatBody = document.querySelector(".inner-body");
 if(chatBody) {  
     chatBody.scrollTop = chatBody.scrollHeight;
 }
+
+
+
+
+
+
+// .inner-incoming
+//             .row
+//                 .inner-avatar.mt-4.mr-3
+//                     img(src=chat.infoUser.Avatar, alt="Avatar" style="width:50px;height:50px;border-radius:50%;")
+//                 .content
+//                     .inner-name #{chat.infoUser.FullName}
+//                     .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+//                         p  #{chat.Content}

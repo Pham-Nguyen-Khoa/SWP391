@@ -43,7 +43,10 @@ module.exports.chat = async (req, res) => {
                 userID: userID,
                 roleID: roleID
             })
+
+            
         })
+
     });
     //- End Socket IO
 
