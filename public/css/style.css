@@ -1997,3 +1997,88 @@ header {
     font-family: Arial, sans-serif; /* Font chữ cho các mục trong danh sách */
     color: #333; /* Màu chữ cho các mục trong danh sách */
 }
+
+
+.review-carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.review-slide {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.review-group {
+    display: flex;
+    min-width: 100%; 
+}
+
+.review-card {
+    flex: 1;
+    margin: 0 10px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#feedbackModal{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content{
+    border-radius: 20px;
+    background: linear-gradient(181deg, #68bccf, #78818ca3);
+    border: 2px solid #f5f5dc8a;
+}
+.modal-body{
+    padding: 0 1rem 1rem 1rem;
+}
+
+.modal-title{
+    font-weight: 900;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 30px;
+    font-style: italic;
+}
+.star-rating{
+    color: gold;
+    font-size: 40px;
+    margin: 0 40px;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+#comment{
+       background: repeating-linear-gradient(43deg, #e5d8d87a, #e3d5d50d 100px);
+    border: 2px solid #3d3b3b;
+    width: 86%;
+    margin: 20px 0 0 7%;
+    border-radius: 20px;
+    height: 100px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal-footer{
+    display: flex;
+    justify-content: space-evenly;
+    border-top: 2px solid #81848582;
+}
+
+.modal-footer .btn-danger{
+        width: 125px;
+    border-radius: 22px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #ac3131b3, #b92222c9);
+}
+
+.modal-footer .btn-success{
+        width: 125px;
+    border-radius: 22px;
+    font-size: 18px;
+    background: linear-gradient(45deg, #33ac338f, #2d9a2dc9);
+}

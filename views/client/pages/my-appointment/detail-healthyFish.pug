@@ -46,7 +46,8 @@ block main
                            if(appoinmentInfo.Process == "Process")
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành 
+                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 20px;") Đã hoàn thành 
+                              button.btn.btn-primary.ml-3#feedbackBtn(style="font-size: 16px;") Đánh giá
                            if(appoinmentInfo.Process == "Cancled")
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bị Hủy
                   
@@ -97,5 +98,39 @@ block main
                             .thank-you-heart 
                               p Koi Vet xin cảm ơn 
                               .heart 
+            #feedbackModal.modal.fade
+               .modal-dialog
+                  .modal-content
+
+                     h5.modal-title Đánh giá chúng tôi
+                     .modal-body
+                        form#feedbackForm
+                           .form-group
+                              .star-rating
+                                 b(for="star5") ★
+
+                                 b(for="star4") ★
+
+                                 b(for="star3") ★
+
+                                 b(for="star2") ★
+                                 b(for="star1") ★
+                           .form-group
+                              textarea#comment.form-control(name="comment" rows="3" placeholder="Nhận xét của bạn")
+                     .modal-footer.r
+                        button.btn.btn-danger(type="button" data-dismiss="modal") Hủy
+                        button.btn.btn-success(type="button" onclick="submitFeedback()") Gửi
+
+
+
+            script.
+                  document.getElementById('feedbackBtn').addEventListener('click', function() {
+                     $('#feedbackModal').modal('show');
+                  });
+
+                  function submitFeedback() {
+                     alert('Cảm ơn bạn đã gửi đánh giá!');
+                     $('#feedbackModal').modal('hide');
+                  }
 
 

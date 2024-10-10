@@ -56,3 +56,6 @@ const chatBody = document.querySelector(".inner-body");
 if(chatBody) {  
     chatBody.scrollTop = chatBody.scrollHeight;
 }
+
+
+

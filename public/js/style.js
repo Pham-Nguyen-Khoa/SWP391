@@ -539,9 +539,11 @@ if (selectDate) {
 // Confirm Submit
 const buttonSubmitAppointment = document.querySelector(".confirm-btn");
 const confirmAppointment = document.querySelector(".confirm-appointment");
+if(confirmAppointment){
 const confirmSuccessAppointment = confirmAppointment.querySelector(
   "#confirm-success-appointment"
-);
+    );
+}
 if (buttonSubmitAppointment) {
   const cancleAppointment = confirmAppointment.querySelector(
     "#confirm-cancle-appointment"
@@ -732,14 +734,14 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
   }
 }
 
-const closeModalButton = document.getElementById("closeModalMessage");
-if (closeModalButton) {
-  closeModalButton.addEventListener("click", function () {
-    document.getElementById("confirmationModal").style.display = "none";
-  });
-} else {
-  console.error('Element with ID "closeModal" not found.');
-}
+// const closeModalButton = document.getElementById("closeModalMessage");
+// if (closeModalButton) {
+//   closeModalButton.addEventListener("click", function () {
+//     document.getElementById("confirmationModal").style.display = "none";
+//   });
+// } else {
+//   console.error('Element with ID "closeModal" not found.');
+// }
 
 
 
@@ -756,3 +758,21 @@ if (closeModalButton) {
 // }
 
 // setInterval(scrollText, 5000); 
+
+console.log("Neronmen")
+function initializeSlider() {
+  const slide = document.querySelector('.review-slide');
+  const groups = document.querySelectorAll('.review-group');
+  if(slide && groups){
+      let currentIndex = 0;
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % groups.length;
+        slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  
+    setInterval(nextSlide,4000);
+  
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initializeSlider);
