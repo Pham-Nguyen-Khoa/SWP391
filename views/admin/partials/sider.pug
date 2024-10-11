@@ -39,14 +39,16 @@ style.
         display: flex;
         align-items: center;
         padding: 12px 25px;
-        color: #ecf0f1;
+        color: #6c757d;
         text-decoration: none;
         transition: all 0.3s;
         border-left: 4px solid transparent;
     }
     .sider-link:hover, .sider-link.active {
         background-color: #34495e;
+        border-left: 20px solid #3498db;
         border-left-color: #3498db;
+        text-decoration: none;
     }
     .sider-link i {
         margin-right: 15px;
@@ -74,15 +76,19 @@ style.
             ul.sider-menu
                 li.sider-menu-item
                     a.sider-link(href=`${prefixAdmin}/dashboard`)
-                        i.fas.fa-tachometer-alt
+                        i.fas.fa-tachometer-alt(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
                         span Tổng quan
                 li.sider-menu-item
                     a.sider-link(href=`${prefixAdmin}/account`)
-                        i.fas.fa-users
+                        i.fas.fa-users(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
                         span Danh sách tài khoản
                 li.sider-menu-item
-                    a.sider-link(href=`${prefixAdmin}/categories`)
-                        i.fas.fa-list
-                        span Danh mục admin
+                    a.sider-link(href=`${prefixAdmin}/setting/general`)
+                        i.fas.fa-cogs.fa-3x.me-3(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
+                        span Cài đặt chung
+                li.sider-menu-item
+                    a.sider-link(href=`${prefixAdmin}/chat`)
+                        i.fas.fa-cogs.fa-3x.me-3(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
+                        span Chat
 
         

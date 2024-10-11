@@ -82,7 +82,9 @@ block main
                     id= item.AccountID
                     button-change-status
                 
-                    ) Kích hoạt
+                    ) 
+                      i(class="fas fa-check-circle" style="font-size: 22px;")  
+                      
                   if(item.Status == "Bị Block")
                     a(
                       href="javascript:;" 
@@ -90,7 +92,9 @@ block main
                       data-status= item.Status 
                       id= item.AccountID
                       button-change-status
-                    ) Vô hiệu hóa
+                    ) 
+                      i(class="fas fa-ban" style="font-size: 22px;") 
+                      
                 td(row-action)
                   a(class="btn btn-primary btn-sm ml-1" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`)
                     i(class="fa-solid fa-receipt") 

@@ -6,8 +6,9 @@ const forgotpPasswordRoute = require("./forgotPassword.route");
 const myAppointmentRoute = require("./myAppointment.route");
 const middleware = require("../../middleware/client/userInfo.middleware");
 const authMiddleware = require("../../middleware/client/auth.middleware");
-
+const settingMiddleware = require("../../middleware/client/setting.middleware");
 module.exports = (app) => {
+  app.use(settingMiddleware.SettingMiddleware);
   app.use("/koi",middleware.userInfo , homeRoute);
   app.use("/auth", userRoute);
   app.use("/auth/password/", forgotpPasswordRoute);

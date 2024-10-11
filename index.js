@@ -6,6 +6,9 @@ const port = process.env.PORT || 7777;
 const sequelize = require("./config/database"); // Database
 const methodOverride = require('method-override')
 const systemConfig = require("./config/system")
+const http = require("http");
+const { Server } = require("socket.io");
+
 
 const route = require("./router/client/index.route")
 const routeAdmin = require("./router/admin/index.route")
@@ -41,20 +44,32 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 //Flash
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
-app.use(flash());
+app.use(flash()); 
 
 app.set('views', './views')
 app.set('view engine', 'pug')
 
 app.use(express.static(`public`));
 
+// Socket.io
+const server = http.createServer(app);
+const io = new Server(server);
+global.io = io;
+
+// End Socket.io
+
 
 // Router
 
 route(app);
 routeAdmin(app);
-routeDoctor(app);
+routeDoctor(app); 
 routeStaff(app);
+app.get("*" ,  (req, res) => {
+  res.render("client/pages/errors/404",{
+    pageTitle: "Trang không tồn tại",
+  })
+})
 
 
 
@@ -63,6 +78,6 @@ routeStaff(app);
 
 // Biến admin local 
 app.locals.prefixAdmin = systemConfig.prefixAdmin; 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

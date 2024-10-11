@@ -18,10 +18,11 @@ module.exports.requireAuth = async (req, res, next) => {
     if (!user) {
       res.redirect("/auth/login");
       return;
-    } else if (user.RoleID == "RL0004") {
-      res.redirect("/koi");
-      return;
-    }
+    } 
+    // else if (user.RoleID == "RL0004") {
+    //   res.redirect("/koi");
+    //   return;
+    // }
 
     const role = String(user.RoleID);
     const route = (req.originalUrl || req.baseUrl || req.path).trim();
@@ -30,20 +31,35 @@ module.exports.requireAuth = async (req, res, next) => {
       role === "RL0001" &&
       (route.startsWith("/doctor") || route.startsWith("/staff"))
     ) {
-      req.flash("error", "Không thể truy cập !");
-      return res.redirect("/admin/dashboard");
+      // req.flash("error", "Không thể truy cập !");
+      // return res.redirect("/admin/dashboard");
+      res.render("client/pages/errors/405",{
+        pageTitle: "Không có quyền truy cập",
+      })
     } else if (
       role === "RL0002" &&
       (route.startsWith("/admin") || route.startsWith("/staff"))
     ) {
-      req.flash("error", "Không thể truy cập !");
-      return res.redirect("/doctor/appointment");
+      res.render("client/pages/errors/405",{
+        pageTitle: "Không có quyền truy cập",
+      })
     } else if (
       role === "RL0003" &&
       (route.startsWith("/admin") || route.startsWith("/doctor"))
     ) {
-      req.flash("error", "Không thể truy cập !");
-      return res.redirect("/staff/appointment");
+
+      res.render("client/pages/errors/405",{
+        pageTitle: "Không có quyền truy cập",
+      })
+    }
+    else if (
+      role === "RL0004" &&
+      (route.startsWith("/admin") || route.startsWith("/doctor") || route.startsWith("/staff"))
+    ) {
+
+      res.render("client/pages/errors/405",{
+        pageTitle: "Không có quyền truy cập",
+      })
     }
     const roleInfo = await Role.findOne({
       where: {
