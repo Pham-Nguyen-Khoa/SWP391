@@ -1,0 +1,32 @@
+extends ../../layouts/default.pug
+
+block main
+    head
+        link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+    .block-footer(style="height: 180vh")
+        img(src="/images/koinews.png", alt="news 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Tin Tức Nổi Bật
+        .btn-home(style="position: absolute; bottom: 370px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Tin Tức
+        .news-container
+            .row.card-news-box
+                .col-md-4.card-news 
+                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                    p April 12, 2024
+                    h3 Information About Patients' Rights And Responsibilities
+                    p Section 1. PATIENTS' RIGHTS Right to be medical examination and treatment...
+                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
+                .col-md-4.card-news 
+                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                    p August 16, 2022
+                    h3 Pre-Pregnant Examination Package
+                    p Pregnant is the most important occasion in a Koi's life...
+                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
+                .col-md-4.card-news 
+                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                    p August 16, 2022
+                    h3 General Health Check-Up Packages At Koi...
+                    p General health checkup packages from basic to advanced...
+                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
+                

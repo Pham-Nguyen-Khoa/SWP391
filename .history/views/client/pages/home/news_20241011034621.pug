@@ -1,0 +1,36 @@
+extends ../../layouts/default.pug
+
+block main
+    head
+        link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+    .block-footer(style="height: 180vh")
+        img(src="/images/koinews.png", alt="news 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Tư vấn 
+        .btn-home(style="position: absolute; bottom: 370px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Tư vấn
+        .content-section(style="text-align: center; padding: 40px; ")
+        h2(style="font-family: 'Oswald', sans-serif; font-size: 4rem; color: #333; max-width: 150px; margin: 0 auto; margin-bottom: 20px ") F A Q
+        p(style="font-size: 2rem; color: #666; max-width: 600px; margin: 0 auto; text-align: center;") Các câu hỏi thường gặp khi chăm sóc cá Koi
+        .container 
+            .faq
+                .faq-item
+                    h3.faq-question(style="cursor: pointer; color: #e91e63;")
+                        span.faq-toggle(+)
+                        | How can I install this theme?
+                    p.faq-answer(style="display: none;") Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                .faq-item
+                    h3.faq-question(style="cursor: pointer; color: #e91e63;")
+                        span.faq-toggle(+)
+                        | What is terms & conditions?
+                    p.faq-answer(style="display: none;") Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                .faq-item
+                    h3.faq-question(style="cursor: pointer; color: #e91e63;")
+                        span.faq-toggle(+)
+                        | How can I make change on this theme?
+                    p.faq-answer(style="display: none;") Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                .faq-item
+                    h3.faq-question(style="cursor: pointer; color: #e91e63;")
+                        span.faq-toggle(+)
+                        | What is your payment system?
+                    p.faq-answer(style="display: none;") Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

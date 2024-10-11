@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+
+block main
+    head 
+       link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+    .block-footer(style="height: 500vh") 
+        img(src="/images/banner6.png", alt="Contact 1" style="height: 600px; object-fit: cover; width: 100%;")
+        h1.news-title Cộng Đồng Koi Healthy
+        div.container
+            .faq-item
+                .faq-question(onclick="toggle(this)")
+                    h2 Which Plan Is Right For Me?
+                    span.toggle + 
+                .faq-answer(style="display: none;") 
+                    p With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to.
+            .faq-item
+                .faq-question(onclick="toggle(this)")
+                    h2 Do I Have To Commit To A Contract?
+                    span.toggle + 
+                .faq-answer(style="display: none;") 
+                    p You are not required to commit to a contract.
+            .faq-item
+                .faq-question(onclick="toggle(this)")
+                    h2 What Payment Methods Are Available?
+                    span.toggle + 
+                .faq-answer(style="display: none;") 
+                    p We accept various payment methods including credit cards and PayPal.
