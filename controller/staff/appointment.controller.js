@@ -11,42 +11,42 @@ const NodeMailer = require("../../helpers/nodemailer");
 module.exports.index =  async (req, res) => {
     let queryListAppointment ;
     if(req.query.process == "pending"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Pending'`
     }
     if(req.query.process == "cancelled"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Cancelled'`
     }
     if(req.query.process == "accepted"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Accepted'`
     }
     if(req.query.process == "ready"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Ready'`
     }
     if(req.query.process == "successed"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID where a.Process = 'Successed'`
     }
     if(req.query.process == "process"){
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
@@ -55,7 +55,7 @@ module.exports.index =  async (req, res) => {
    
     if(!req.query.process){
         // queryListAppointment = `SELECT * FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`
-        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet 
+        queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
                                 FROM appointment a 
                                 LEFT JOIN service s ON s.ServiceID = a.ServiceID 
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
@@ -70,7 +70,7 @@ module.exports.index =  async (req, res) => {
     }
   
     const [listAppointment] = await Sequelize.query(queryListAppointment);
-    const [listAppointmentOrigin] = await Sequelize.query(`SELECT a.*, s.*, c.*, a.Name As NameCustomer FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`);
+    const [listAppointmentOrigin] = await Sequelize.query(`SELECT a.*, s.*, c.*, a.Name As NameCustomer,a.Address As AdressAppointment FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`);
     listAppointment.forEach(appointment => {
         appointment.DateFormat = formatDate(appointment.Date);
       });
@@ -147,6 +147,14 @@ module.exports.changeProcess =  async (req, res) => {
             }else if(process == "accepted"){
                 await Appointment.update({
                     Process: "Ready"
+                },{
+                    where:{
+                        AppointmentID: appointmentID
+                    }
+                })
+            }else if(process == "process"){
+                await Appointment.update({
+                    Process: "Process"
                 },{
                     where:{
                         AppointmentID: appointmentID

@@ -101,8 +101,7 @@ const inputTyping = document.querySelector("input[name='content']");
 
 if (inputTyping) {
   inputTyping.addEventListener("keyup", function () {
-    showTyping();
-   
+    showTyping();  
   });
 }
 

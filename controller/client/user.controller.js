@@ -62,15 +62,22 @@ module.exports.register = async (req, res) => {
   });
 };
 
+// const generateUserId = async (rolePrefix, table, id) => {
+//   const query = `SELECT COUNT(*) AS count FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
+//   const [results] = await db.query(query);
+//   const count = results[0].count + 1;
+//   return `${rolePrefix}${String(count).padStart(4, "0")}`;
+// };
 const generateUserId = async (rolePrefix, table, id) => {
-  const query = `SELECT COUNT(*) AS count FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
+  const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
   const [results] = await db.query(query);
-  const count = results[0].count + 1;
-  return `${rolePrefix}${String(count).padStart(4, "0")}`;
+  const maxId = results[0].maxId || 0;
+  const newId = maxId + 1;
+  return `${rolePrefix}${String(newId).padStart(4, "0")}`;
 };
-
 // [POST] localhost:/auth/register
 module.exports.registerPost = async (req, res) => {
+    console.log(req.body);
   try {
     const password = md5(req.body.Password);
 
@@ -107,10 +114,12 @@ module.exports.registerPost = async (req, res) => {
         Birthday: req.body.Birthday,
         AccountID: accountId,
       });
+
       req.flash("success", "Đăng ký thành công!");
       res.redirect("/auth/login");
     }
   } catch (error) {
+    console.log(error);
     req.flash("error", "Tạo tài khoản thất tại");
     res.redirect("/auth/register");
   }

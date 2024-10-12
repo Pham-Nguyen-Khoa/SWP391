@@ -6,6 +6,7 @@
     position: sticky;
     top: 0;
     z-index: 999;
+    height: 60px;
 }
 
 .header .inner-logo a{
@@ -616,6 +617,7 @@ span {
   }
   
   .inner-outgoing .inner-content {
+    margin-left: 500px;
     background-color: #0b93f6;
     color: white;
   }
@@ -662,6 +664,8 @@ span {
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
+    width: auto;
+    max-width: 700px;
 }
 
 .admin-message::before {
