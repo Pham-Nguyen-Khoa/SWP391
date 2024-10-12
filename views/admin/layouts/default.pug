@@ -20,6 +20,10 @@ html
 
     //- End Tiny
 
+    //- Emoji picker element
+    script( type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+    //- End Emoji picker element
+
 
     script(src="https://code.jquery.com/jquery-3.2.1.slim.min.js") 
     script(src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js") 
@@ -29,4 +33,4 @@ html
       //- Socket IO
     script(src="/socket.io/socket.io.js")
     script(src="/admin/js/socket.js")
-    script(src="/admin/js/chat.js")
+    script(type="module" src="/admin/js/chat.js")

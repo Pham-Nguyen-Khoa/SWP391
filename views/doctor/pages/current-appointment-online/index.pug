@@ -14,8 +14,9 @@ block append main
 
 
 block main
-  +title("Đơn Hiện Tại")
-  .block-sider(style="width:90%;margin-left:180px;")
+  .title-appointment-online(style="margin-left: 87px;")
+    +title("Đơn Hiện Tại")
+  .block-sider(style="width:100%;margin-left:45px;")
     if currentAppointment
       .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;     margin: 60px 200px 80px ; background-color: #f7fbff")
         .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn

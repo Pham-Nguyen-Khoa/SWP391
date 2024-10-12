@@ -45,6 +45,19 @@ module.exports.chat = async (req, res) => {
             })
         })
 
+       // Typing
+       socket.on("CLIENT-SEND-TYPING", async (type) => {
+        console.log(type)
+        socket.broadcast.emit("SERVER-RETURN-TYPING", {
+            fullName: fullName,
+            avatar: avatar,
+            userID: userID,
+            type: type
+        })
+    })
+    // End Typing
+
+
     });
     //- End Socket IO
 

@@ -18,6 +18,6 @@ router.get("/envConsult", controller.envConsult);
 
 router.get("/onlConsult", controller.onlConsult);
 
-router.get("/checkUp", controller.community);
+router.get("/checkUp", controller.checkUp);
 
 module.exports = router

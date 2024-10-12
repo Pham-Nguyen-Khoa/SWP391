@@ -320,13 +320,8 @@ section.profession {
     box-shadow: 0 0 20px 6px #88afcc;
 }
 .profession-card:hover {
-<<<<<<< HEAD
     border: 2px solid  black; 
     transform: scale(1.05); 
-=======
-    border: 5px solid rgb(92 178 217);
-    transform: scale(1.05);
->>>>>>> 09a158806a3f5b6849881b7f25eb239343813e48
     transition: transform 0.3s ease;
     box-shadow: 0px 0px 11px 8px #76b8d7;
 }
@@ -1864,6 +1859,25 @@ header {
 }
 
  /* Css about us */
+
+ @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+.feature-item {
+    transition: all 0.3s ease;
+}
+.feature-item:hover {
+    animation: bounce 0.5s ease infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.doctor-card {
+    transition: all 0.3s ease;
+}
+.doctor-card:hover {
+    animation: bounce 0.5s ease infinite;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
  .scroll-container::-webkit-scrollbar {
     display: none;
 }
