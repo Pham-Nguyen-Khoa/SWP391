@@ -729,7 +729,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #e0e6e794  inset !important; /* Màu nền của input */
+    -webkit-box-shadow: 0 0 0 30px #9bd5d9cc inset !important;
     -webkit-text-fill-color: #000 !important; /* Màu chữ của input */
 }
 
@@ -2096,3 +2096,99 @@ header {
     font-size: 18px;
     background: linear-gradient(45deg, #33ac338f, #2d9a2dc9);
 }
+
+
+/* Table đạt chuẩn  */
+.tableGood {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f0f8ff;
+    font-size: 18px; /* Tăng kích thước chữ tổng thể */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Hiệu ứng đổ bóng mềm mại */
+    border-radius: 10px; /* Bo góc bảng */
+    overflow: hidden;
+}
+
+.tableGood th, .tableGood td {
+    padding: 20px; /* Tăng khoảng cách giữa các nội dung trong ô */
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold; /* Chữ đậm hơn cho toàn bộ bảng */
+}
+
+.tableGood th {
+    background-color: #5aaeba;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1.5px; /* Giãn chữ cho đẹp hơn */
+    font-size: 22px; /* Chữ to hơn cho tiêu đề */
+    border-bottom: 4px solid #4a8b8b; /* Đường viền dưới đậm hơn cho tiêu đề */
+}
+
+.tableGood td {
+    background-color: #e0f7fa;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 20px; /* Chữ to hơn trong ô dữ liệu */
+}
+
+/* Hiệu ứng hover cho các hàng */
+.tableGood tr:hover td {
+    background-color: #b2ebf2;
+    transform: scale(1.08); /* Phóng to mạnh hơn khi hover */
+    font-size: 22px; /* Chữ to hơn khi hover */
+    font-weight: bolder; /* Làm cho chữ đậm hơn khi hover */
+    color: #333; /* Đổi màu chữ khi hover */
+}
+
+.tableGood td.red {
+    color: red;
+    font-weight: bolder; /* Chữ đậm hơn cho giá trị không đạt chuẩn */
+    font-size: 22px; /* Tăng kích thước chữ cho các giá trị ngoài chuẩn */
+}
+
+/* Hiệu ứng hover cho tiêu đề */
+.tableGood th:hover {
+    background-color: #3a8e9e;
+    font-size: 24px; /* Chữ to hơn khi hover trên tiêu đề */
+    color: #fff;
+}
+
+/* Căn chỉnh khoảng cách giữa các hàng */
+.tableGood tr {
+    height: 70px; /* Tăng chiều cao các hàng để thoáng hơn */
+}
+
+/* Hiệu ứng border bo góc cho bảng */
+.tableGood th:first-child,
+.tableGood td:first-child {
+    border-left: none;
+}
+
+.tableGood th:last-child,
+.tableGood td:last-child {
+    border-right: none;
+       
+}
+
+.tableGood td:last-child a {
+    display: block;
+    text-align: left; /* Hoặc center nếu bạn muốn căn giữa */
+    padding: 10px;
+    word-wrap: break-word; /* Hoặc dùng word-break nếu cần */
+    font-size: 22px; /* Điều chỉnh kích thước chữ */
+    font-weight: bold;
+    color: #007bff; /* Giữ nguyên màu sắc hiện tại */
+    margin-left: 120px;
+}
+
+.tableGood td:last-child a:hover {
+    text-decoration: underline; /* Hiệu ứng hover nếu cần */
+}
+
+
+
+
+

@@ -15,6 +15,7 @@ const Bill = require("../../models/bill.model");
 const Appointment_PondRecord = require("../../models/appointment_pondrecord.model");
 const FishRecord = require("../../models/koiRecord.model");
 const FishProfile = require("../../models/koiProfile.model");
+const PondSetting = require("../../models/pondSetting.model");
 
 
 function formatDate(dateString) {
@@ -74,6 +75,7 @@ module.exports.detail = async (req, res) => {
         
         if(appoinmentInfo == null){
           res.redirect("/koi/my-appointment");
+          return;
         }
         appoinmentInfo.Date = formatDate(appoinmentInfo.Date);
         appoinmentInfo.PriceFormat = formatPrice(appoinmentInfo.Price);
@@ -105,10 +107,17 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ cải thiện môi trường", amount: 1000000 }
         ];
+        if(appoinmentInfo.Distance){
+          const distance = appoinmentInfo.Distance;
+        const baseFee = 100000; // Phí cơ bản cho 10km
+        const additionalFee = Math.ceil(distance / 10) * baseFee; 
+        serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
         if(appoinmentInfo.Address != null){
-          totalServiceFee += 100000;
-          serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+          totalServiceFee += additionalFee;
+          // serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
         }
+        }
+        
         pondProfiles.forEach((pond, index) => {
           const volume = parseFloat(pond.Volume);
           if (index > 0) {
@@ -126,6 +135,22 @@ module.exports.detail = async (req, res) => {
               serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
               }
           });
+
+
+          // if (index > 0) {
+          //   totalServiceFee += 200000; 
+          //   serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: 200000 });
+          // }
+          // if (volume >= 1000 && volume <= 1200) {
+          //   totalServiceFee += 200000;
+          //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
+          // } else if (volume > 1200 && volume <= 1500) {
+          //   totalServiceFee += 400000;
+          //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
+          // } else if (volume > 1500) {
+          //   totalServiceFee += 600000;
+          //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
+          // }
           const objectPayment = {
             totalFee: formatCurrency(totalServiceFee),
             serviceDetails: serviceDetails.map(detail => ({
@@ -133,7 +158,8 @@ module.exports.detail = async (req, res) => {
                 amount: formatCurrency(detail.amount)
                 }))
             };
-            console.log(objectPayment)
+            
+
               res.render("client/pages/my-appointment/detail-enviroment", {
                 pageTitle: "Trang Chi Tiết Đơn Hàng",
                 appoinmentInfo: appoinmentInfo,
@@ -168,10 +194,17 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ khám sức khỏe", amount: 1500000 }
         ];
-        if(appoinmentInfo.Address != null){
-          totalServiceFee += 100000;
-          serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+        if(appoinmentInfo.Distance){
+          const distance = appoinmentInfo.Distance;
+          const baseFee = 100000; // Phí cơ bản cho 10km
+          const additionalFee = Math.ceil(distance / 10) * baseFee; 
+          serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
+          if(appoinmentInfo.Address != null){
+            totalServiceFee += additionalFee;
+            // serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+          }
         }
+      
         fishProfiles.forEach((fish, index) => {
           if(index > 0){
             totalServiceFee += 200000;
@@ -375,11 +408,16 @@ module.exports.detailPond = async (req, res) => {
     }
   });
 
-  console.log(pondProfiles);  
+  const pondSettings = await PondSetting.findAll({
+      raw: true
+  })
+
+  console.log(pondSettings);  
   res.render("client/pages/my-appointment/detail-enviroment-pond", {
     pageTitle: "Trang Thông Số Hồ",
     appoinmentInfo: appoinmentInfo,
-    pondProfiles: pondProfiles
+    pondProfiles: pondProfiles,
+    pondSettings: pondSettings
   });
 }
 

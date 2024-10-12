@@ -81,6 +81,10 @@ module.exports.index = async(req, res) => {
       const informationData = JSON.parse(formData.previousPageData);
       const paymentData = req.body.paymentMethod;
       const pondCount = req.body.pondCount;
+
+    //Thêm 
+      const distance = req.body.distance;
+    // End thêm
       const pondRecordIDs = [];
       console.log(informationData.length)
       for(let i = 0 ; i < informationData.length ; i++){
@@ -133,6 +137,17 @@ module.exports.index = async(req, res) => {
   
     
     
+      // const billID = await generateUserId("bill", "BillID", "BILL");
+      // const method = paymentData == "cash" ? "Tiền mặt" : "Thanh toán online";
+      // const totalString = req.body.totalFee;
+      // const totalDouble = parseFloat(totalString.replace(/\./g, ''));
+      // await Bill.create({
+      //   BillID: billID,
+      //   Method: method,
+      //   Total: totalDouble,
+      //   Status: "Đã thanh toán"
+      // })
+
       const billID = await generateUserId("bill", "BillID", "BILL");
       const method = paymentData == "cash" ? "Tiền mặt" : "Thanh toán online";
       const totalString = req.body.totalFee;
@@ -140,7 +155,7 @@ module.exports.index = async(req, res) => {
       await Bill.create({
         BillID: billID,
         Method: method,
-        Total: totalDouble,
+        Total: req.body.totalFee,
         Status: "Đã thanh toán"
       })
 
@@ -160,7 +175,8 @@ module.exports.index = async(req, res) => {
   await Appointment.update({
     Process: "Successed",
     StatusPaid: "Đã thanh toán",
-    BillID: billID
+    BillID: billID,
+    Distance: distance
 },{
     where: {
         VetID: res.locals.user.VetID,
@@ -203,7 +219,7 @@ module.exports.index = async(req, res) => {
             Type: "Cải thiện môi trường"    
         }
     });
-    console.log(listMedicine)
+
     res.render("doctor/pages/current-appointment-moitruong/prescribe-medication",{
         pageTitle: "Trang Kê Đơn Thuốc",
         listMedicine: listMedicine
@@ -218,10 +234,18 @@ module.exports.prescribeMedicationFish = async(req, res) => {
           Type: "Khám sức khỏe"
       }
   });
-  console.log(listMedicine)
+  const currentAppointmentFish = await Appointment.findOne({
+    raw: true,
+    where: {
+        VetID: res.locals.user.VetID,
+        Process: "Process"
+    }
+})
+  console.log(currentAppointmentFish)
   res.render("doctor/pages/current-appointment-healthy/prescribe-medication-fish",{
       pageTitle: "Trang Kê Đơn Thuốc",
-      listMedicine: listMedicine
+      listMedicine: listMedicine,
+      currentAppointmentFish:currentAppointmentFish
   })
 }
   
@@ -247,28 +271,32 @@ module.exports.prescribeMedicationFish = async(req, res) => {
     console.log(service)
     // console.log(service)
     if(service.ServiceID == "DV0002"){
-      const paymentData = req.session.paymentData;
-      if(!paymentData){
-        req.flash('error', 'Không có dữ liệu thanh toán. Vui lòng thử lại.');
-        console.log("hello")
+      if(req.session.paymentData){
+        const paymentData = req.session.paymentData;
+        if(!paymentData){
+          req.flash('error', 'Không có dữ liệu thanh toán. Vui lòng thử lại.');
+          console.log("hello")
+        }
+        console.log(paymentData)
+        const totalFee = paymentData.totalServiceFee;
+        const serviceDetails = paymentData.serviceDetails.map(detail => ({
+          description: detail.description,
+          amount: formatCurrency(detail.amount)
+        }));
+        console.log(serviceDetails)
+        const objectPayment = {
+          totalFee: formatCurrency(totalFee),
+          serviceDetails: serviceDetails
+        }
+        console.log(objectPayment)
+  
+        return res.render("doctor/pages/current-appointment-moitruong/payment",{
+          pageTitle: "Trang Thanh Toán",
+          objectPayment: objectPayment,
+          currentAppointment: currentAppointment
+        })
       }
-      console.log(paymentData)
-      const totalFee = paymentData.totalServiceFee;
-      const serviceDetails = paymentData.serviceDetails.map(detail => ({
-        description: detail.description,
-        amount: formatCurrency(detail.amount)
-      }));
-      console.log(serviceDetails)
-      const objectPayment = {
-        totalFee: formatCurrency(totalFee),
-        serviceDetails: serviceDetails
-      }
-      console.log(objectPayment)
-
-      return res.render("doctor/pages/current-appointment-moitruong/payment",{
-        pageTitle: "Trang Thanh Toán",
-        objectPayment: objectPayment
-      })
+   
     }
     else{
       const priceService = service.Price;
@@ -281,7 +309,8 @@ module.exports.prescribeMedicationFish = async(req, res) => {
     }
     res.render("doctor/pages/current-appointment-moitruong/payment",{
         pageTitle: "Trang Thanh Toán",
-        objectPayment: objectPayment
+        objectPayment: objectPayment,
+        currentAppointment:currentAppointment
       })
     }
   }
@@ -289,7 +318,8 @@ module.exports.prescribeMedicationFish = async(req, res) => {
 
 // [Post] /doctor/current-appointment/payment
 module.exports.paymentPost = async(req, res) => {
-  if(req.body.previousPageData){
+  // if(req.body.previousPageData){
+  console.log(req.body)
     const informationData = JSON.parse(req.body.previousPageData);
     const appointment = await Appointment.findOne({
       raw: true,
@@ -304,10 +334,10 @@ module.exports.paymentPost = async(req, res) => {
     let serviceDetails =[
       {description: "Dịch vụ cải thiện môi trường", amount: 1000000}
     ]
-    if(appointment.Address != null){
-      totalServiceFee += 100000;
-      serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
-    }
+    // if(appointment.Address != null){
+    //   totalServiceFee += 100000;
+    //   serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+    // }
     informationData.forEach((pond, index) => {
       const volume = parseFloat(pond.Volume);
       if (index > 0) {
@@ -334,10 +364,10 @@ module.exports.paymentPost = async(req, res) => {
   
   
     res.redirect('/doctor/current-appointment/payment');
-  }else{
-    req.flash("error", "Vui lòng cập nhật thông tin thuốc trước khi thanh toán  ");
-    return res.redirect("back")
-  }
+  // }else{
+  //   req.flash("error", "Vui lòng cập nhật thông tin thuốc trước khi thanh toán  ");
+  //   return res.redirect("back")
+  // }
 
   
 }
@@ -373,10 +403,10 @@ module.exports.paymentFishPost = async(req, res) => {
   let serviceDetails =[
     {description: "Dịch vụ khám sức khỏe", amount: 1500000}
   ]
-  if(appointment.Address != null){
-    totalServiceFee += 100000;
-    serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
-  }
+  // if(appointment.Address != null){
+  //   totalServiceFee += 100000;
+  //   serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+  // }
   informationData.forEach((pond, index) => {
     const volume = parseFloat(pond.Volume);
     if (index > 0) {
@@ -450,7 +480,8 @@ module.exports.paymentFish = async(req, res) => {
     console.log(objectPayment)
      res.render("doctor/pages/current-appointment-healthy/payment-fish",{
       pageTitle: "Trang Thanh Toán",
-      objectPayment: objectPayment
+      objectPayment: objectPayment,
+      currentAppointment: currentAppointment
     })
   }
 }
@@ -526,12 +557,12 @@ module.exports.healthyFishPost = async(req, res) => {
   
     const billID = await generateUserId("bill", "BillID", "BILL");
     const method = paymentData == "cash" ? "Tiền mặt" : "Thanh toán online";
-    const totalString = req.body.totalFee;
-    const totalDouble = parseFloat(totalString.replace(/\./g, ''));
+    // const totalString = req.body.totalFee;
+    // const totalDouble = parseFloat(totalString.replace(/\./g, ''));
     await Bill.create({
       BillID: billID,
       Method: method,
-      Total: totalDouble,
+      Total: req.body.totalFee,
       Status: "Đã thanh toán"
     })
 
@@ -551,7 +582,8 @@ module.exports.healthyFishPost = async(req, res) => {
 await Appointment.update({
   Process: "Successed",
   StatusPaid: "Đã thanh toán",
-  BillID: billID
+  BillID: billID,
+  Distance: req.body.distance
 },{
   where: {
       VetID: res.locals.user.VetID,
@@ -575,4 +607,69 @@ await Appointment.update({
     req.flash("error", "Có lỗi xảy ra khi hoàn thành công việc. Vui lòng thử lại.");
     res.redirect("back")
   }
+}
+
+
+
+
+
+// [POST] /doctor/current-appointment/payment-fish-center
+module.exports.paymentFishCenterPost = async(req, res) => {
+  const formData = req.body;
+      const MedicineData = JSON.parse(formData.selectedMedications);
+      const informationData = JSON.parse(formData.previousPageData);
+      const fishCount = informationData.length;
+      console.log(MedicineData)
+      console.log(informationData)
+      console.log(fishCount)
+      for(let i = 0 ; i < fishCount ; i++){
+        const fish = informationData[i];
+        const PrescriptionID = await generateUserId("prescription", "PrescriptID", "PRES");
+        await Prescription.create({
+            PrescriptID: PrescriptionID,
+            Time: new Date(),
+        })
+    
+    
+  
+          const KoiID = await generateUserId("koiprofile", "KoiID", "KOI");
+          await KoiProfile.create({
+            KoiID: KoiID,
+            PrescriptID: PrescriptionID,
+            Avatar: fish.Avatar,
+            Problem: fish.Problem,
+            Solution: fish.Solution,
+            Description: fish.Description,
+            Type: fish.Type,
+            Weight: fish.Weight,
+            Height: fish.Height,
+            HealthStatus: fish.HealthStatus,  
+            Gender: fish.Gender   
+          });
+        const pondMedications = MedicineData.find(med => med.fish === i + 1).medications;
+        for (const medicineId of pondMedications) {
+          await Prescription_Medicine.create({
+            PrescriptID: PrescriptionID,
+            MedicineID: medicineId.medicineId,
+            Quantity: medicineId.quantity,
+            MorningUse: medicineId.morning,
+            AfternoonUse: medicineId.noon,
+            EveningUse: medicineId.evening,
+          });
+        }
+      const appointment = await Appointment.findOne({
+          where: {
+              VetID: res.locals.user.VetID,
+              Process: "Process"
+          }
+      });
+
+        await KoiRecord.create({
+          AppointmentID: appointment.AppointmentID,
+          KoiID: KoiID
+      });
+
+      }
+      req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
+      res.redirect("/doctor/appointment")
 }

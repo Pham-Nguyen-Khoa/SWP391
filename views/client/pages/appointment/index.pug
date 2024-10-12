@@ -10,9 +10,9 @@ block main
                 div.left-section(style="width: 500px")
                      
                     label(for="name") Họ và Tên
-                    input#name(type="text" name="FullName" placeholder="Nhập họ và tên")
+                    input#name(type="text" name="FullName" placeholder="Nhập họ và tên" value=userInfo.FullName)
                     label(for="phone") Số Điện Thoại
-                    input#phone(type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" pattern="[0-9]*" inputmode="numeric" required)
+                    input#phone(type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" pattern="[0-9]*" inputmode="numeric" required value=userInfo.PhoneNumber)
                     
                     label(for="service") Chọn dịch vụ
                     div
@@ -26,7 +26,7 @@ block main
                         option(value="nha") • Tại nhà
                         option(value="center") • Tại trung tâm
                     label(for="address" id = "label-address" style="display: none") Địa chỉ
-                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required)
+                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="select_doctor" ) Chọn Bác Sĩ
                     select(id="select_doctor" name="doctor" required)
                         option(value selected, disabled) Chọn Bác Sĩ
@@ -88,10 +88,10 @@ block main
                 button#closeModalMessage(type="button") Đóng
 
                     
-                    
+                            
 
-    script.
-        var listService = !{JSON.stringify(listService)};
-        var doctorSchedules = !{JSON.stringify(doctorSchedules)};
-        var listAccount = !{JSON.stringify(listAccount)};
-        var listDoctor = !{JSON.stringify(listDoctor)};
+            script.
+                var listService = !{JSON.stringify(listService)};
+                var doctorSchedules = !{JSON.stringify(doctorSchedules)};
+                var listAccount = !{JSON.stringify(listAccount)};
+                var listDoctor = !{JSON.stringify(listDoctor)};

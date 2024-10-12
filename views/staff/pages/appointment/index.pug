@@ -69,6 +69,10 @@ block main
                 class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
+            .form-control 
+              form#filterForm(action="/staff/appointment" method="GET")
+                input(type= "text" name="searchName" placeholder="Nhập tên khách hàng" value=searchName)
+                button.btn(type="submit" style="background-color: #21a0b3; color: white;") Tìm
           .col-6
             form#filterForm(action="/staff/appointment" method="GET")
               .form-group
@@ -83,6 +87,8 @@ block main
     if listAppointment.length === 0
       if filterType === 'date'
         p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
+      else if filterType ==='search'
+        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn khách hàng tên #{searchName}.
       else if filterType === 'process'
         case processFilter
           when 'pending'
@@ -128,8 +134,13 @@ block main
                         //-     a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted" )
                             span(class="btn btn-primary status-btn" style="min-width: 140px;" ) Tiếp nhận
-                        else if(appointment.Process == "Ready")
+                        else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" && appointment.AdressAppointment != null)
                             span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                        //-test
+                        else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment == null)
+                            a(href=`/koi` class="btn btn-primary status-btn" style="min-width: 120px;") Sẵn sàng
+                        
+                        
                         else if(appointment.Process == "Process")
                             span(class="btn btn-dark status-btn" style="min-width: 140px;") Tiếp nhận
                         else if(appointment.Process == "Cancelled")
@@ -164,8 +175,15 @@ block main
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
                             span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
-                        else if(appointment.Process == "Ready")
-                            span(class="btn btn-primary" style="min-width: 140px;") Sẵn sàng
+                        //- else if(appointment.Process == "Ready")
+                        //-     span(class="btn btn-primary" style="min-width: 140px;") Sẵn sàng
+                        else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" )
+                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                        else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment != null)
+                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                        //-test
+                        else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment == null)
+                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=process` class="btn btn-primary status-btn" style="min-width: 120px;") Sẵn sàng
                         else if(appointment.Process == "Process")
                             span(class="btn btn-dark" style="min-width: 140px;") Đang thực hiện
                         else if(appointment.Process == "Cancelled")
@@ -181,13 +199,13 @@ block main
                         a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 button-delete") 
                           i(class="fa fa-trash " aria-hidden="true") 
 
-    div#deleteModal.modal(style="top: 50%;    position: fixed;margin: 0 auto;width: 350px;    display: none;")
-      div.modal-content
-        span.close-button &times;
-        h1 hello
-        p Bạn có muốn hủy lịch hẹn này không?
-        button.btn.btn-danger#confirmDelete Xác nhận
-        button.btn.btn-secondary#cancelDelete Hủy
+    //- div#deleteModal.modal(style="top: 50%;    position: fixed;margin: 0 auto;width: 350px;    display: none;")
+    //-   div.modal-content
+    //-     span.close-button &times;
+    //-     h1 hello
+    //-     p Bạn có muốn hủy lịch hẹn này không?
+    //-     button.btn.btn-danger#confirmDelete Xác nhận
+    //-     button.btn.btn-secondary#cancelDelete Hủy
 
     script.
       document.addEventListener('DOMContentLoaded', function() {
