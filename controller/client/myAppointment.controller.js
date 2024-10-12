@@ -75,6 +75,7 @@ module.exports.detail = async (req, res) => {
         
         if(appoinmentInfo == null){
           res.redirect("/koi/my-appointment");
+          return;
         }
         appoinmentInfo.Date = formatDate(appoinmentInfo.Date);
         appoinmentInfo.PriceFormat = formatPrice(appoinmentInfo.Price);
@@ -106,7 +107,8 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ cải thiện môi trường", amount: 1000000 }
         ];
-        const distance = appoinmentInfo.Distance;
+        if(appoinmentInfo.Distance){
+          const distance = appoinmentInfo.Distance;
         const baseFee = 100000; // Phí cơ bản cho 10km
         const additionalFee = Math.ceil(distance / 10) * baseFee; 
         serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
@@ -114,6 +116,8 @@ module.exports.detail = async (req, res) => {
           totalServiceFee += additionalFee;
           // serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
         }
+        }
+        
         pondProfiles.forEach((pond, index) => {
           const volume = parseFloat(pond.Volume);
           if (index > 0) {
@@ -190,14 +194,17 @@ module.exports.detail = async (req, res) => {
           let serviceDetails = [
             { description: "Dịch vụ khám sức khỏe", amount: 1500000 }
         ];
-        const distance = appoinmentInfo.Distance;
-        const baseFee = 100000; // Phí cơ bản cho 10km
-        const additionalFee = Math.ceil(distance / 10) * baseFee; 
-        serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
-        if(appoinmentInfo.Address != null){
-          totalServiceFee += additionalFee;
-          // serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+        if(appoinmentInfo.Distance){
+          const distance = appoinmentInfo.Distance;
+          const baseFee = 100000; // Phí cơ bản cho 10km
+          const additionalFee = Math.ceil(distance / 10) * baseFee; 
+          serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
+          if(appoinmentInfo.Address != null){
+            totalServiceFee += additionalFee;
+            // serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+          }
         }
+      
         fishProfiles.forEach((fish, index) => {
           if(index > 0){
             totalServiceFee += 200000;

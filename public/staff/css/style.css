@@ -756,3 +756,36 @@ span {
 .inner-dots span:nth-child(3) {
     animation-delay: 0.6s;
 }
+
+
+
+
+.btn-pay-center {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    font-weight: 500; /* Đặt trọng số cho chữ */
+    font-family: 'Roboto', sans-serif; /* Sử dụng phông chữ tùy chỉnh */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-pay-center {
+    background-color: #FFD700; /* Màu vàng */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng mạnh hơn */
+}
+
+.btn-pay-center:hover {
+    background-color: #FFC107; /* Màu vàng nhạt hơn khi hover */
+    transform: translateY(-4px); /* Hiệu ứng nâng lên */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Đổ bóng sâu hơn khi hover */
+}
+
+.btn-pay-center i {
+    margin-right: 10px; /* Khoảng cách giữa icon và chữ */
+    font-size: 20px; /* Tăng kích thước icon */
+}

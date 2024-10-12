@@ -11,8 +11,8 @@ block main
     }
 
   .block-sider(style="width:90%;margin-left:180px;")
-    pre
-        code= JSON.stringify(currentAppointmentFish, null, 2)
+    //- pre
+    //-     code= JSON.stringify(currentAppointmentFish, null, 2)
     .container-fluid
       +title("Kê Đơn Thuốc")
       form#prescriptionForm(action="/doctor/current-appointment/payment-fish" method="POST")
@@ -237,6 +237,7 @@ block main
         document.getElementById('previousPageDataCenter').value = previousPageData;
         document.getElementById('selectedMedicationsCenter').value = prescriptionData;
         formPayCenter.submit();
+        localStorage.clear();
       })
     }
     
