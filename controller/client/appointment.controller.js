@@ -369,6 +369,13 @@ module.exports.indexPost = async (req, res) => {
       Name: req.body.service,
     },
   });
+  let addressAppointment = req.body.location ;
+  if( req.body.location == "center"){
+    addressAppointment = null
+    console.log("Ko có địa chỉ nè");
+  }else{
+    addressAppointment = req.body.address;
+  }
   await Appointment.create({
     AppointmentID: AppointmentID,
     CustomerID: customerID.CustomerID,
@@ -377,7 +384,7 @@ module.exports.indexPost = async (req, res) => {
     Name: req.body.FullName,
     PhoneNumber: req.body.PhoneNumber,
     Date: req.body.select_date,
-    Address: req.body.address,
+    Address: addressAppointment,
     HealthKoi: req.body.Description,
     Process: "Pending",
     Shift: req.body.shift,
@@ -415,6 +422,13 @@ module.exports.indexPost = async (req, res) => {
       Name: req.body.service,
     },
   });
+  let addressAppointment = req.body.location ;
+  if( req.body.location == "center"){
+    addressAppointment = null
+    console.log("Ko có địa chỉ nè");
+  }else{
+    addressAppointment = req.body.address;
+  }
   await Appointment.create({
     AppointmentID: AppointmentID,
     CustomerID: customerID.CustomerID,
@@ -423,7 +437,7 @@ module.exports.indexPost = async (req, res) => {
     Name: req.body.FullName,
     PhoneNumber: req.body.PhoneNumber,
     Date: req.body.select_date,
-    Address: req.body.address,
+    Address: addressAppointment,
     HealthKoi: req.body.Description,
     Process: "Pending",
     Shift: req.body.shift,
@@ -439,52 +453,60 @@ module.exports.indexPost = async (req, res) => {
     AND sc.Time = '${req.body.select_date}';
   `;
       await Sequelize.query(queryUpdate);
-}else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor == "Tự chọn"){
-  const AppointmentID = await generateUserId(
-    "AP",
-    "appointment",
-    "AppointmentID"
-  );
-
-  const customerID = await Customer.findOne({
-    raw: true,
-    attributes: ["CustomerID"],
-    where: {
-      AccountID: res.locals.userInfo.AccountID,
-    },
-  });
-
-  const serviceID = await Service.findOne({
-    raw: true,
-    attributes: ["ServiceID"],
-    where: {
-      Name: req.body.service,
-    },
-  });
-
-  const priceService = await Service.findOne({
-    raw: true,
-    attributes: ["Price"],
-    where: {
-      Name: req.body.service,
-    },
-  });
-  await Appointment.create({
-    AppointmentID: AppointmentID,
-    CustomerID: customerID.CustomerID,
-    ServiceID: serviceID.ServiceID,
-    VetID: null,
-    Name: req.body.FullName,
-    PhoneNumber: req.body.PhoneNumber,
-    Date: req.body.select_date,
-    Address: req.body.address,
-    HealthKoi: req.body.Description,
-    Process: "Pending",
-    Shift: req.body.shift,
-    StatusPaid: "Chưa thanh toán",
-  });
-  
 }
+// }else if(req.body.service == "Khám Sức Khỏe" && req.body.doctor == "Tự chọn"){
+//   const AppointmentID = await generateUserId(
+//     "AP",
+//     "appointment",
+//     "AppointmentID"
+//   );
+
+//   const customerID = await Customer.findOne({
+//     raw: true,
+//     attributes: ["CustomerID"],
+//     where: {
+//       AccountID: res.locals.userInfo.AccountID,
+//     },
+//   });
+
+//   const serviceID = await Service.findOne({
+//     raw: true,
+//     attributes: ["ServiceID"],
+//     where: {
+//       Name: req.body.service,
+//     },
+//   });
+
+//   const priceService = await Service.findOne({
+//     raw: true,
+//     attributes: ["Price"],
+//     where: {
+//       Name: req.body.service,
+//     },
+//   });
+//   let addressAppointment = req.body.location ;
+//   if( req.body.location == "center"){
+//     addressAppointment = null
+//     console.log("Ko có địa chỉ nè");
+//   }else{
+//     console.log("có địa chỉ")
+//   }
+//   await Appointment.create({
+//     AppointmentID: AppointmentID,
+//     CustomerID: customerID.CustomerID,
+//     ServiceID: serviceID.ServiceID,
+//     VetID: null,
+//     Name: req.body.FullName,
+//     PhoneNumber: req.body.PhoneNumber,
+//     Date: req.body.select_date,
+//     Address: addressAppointment,
+//     HealthKoi: req.body.Description,
+//     Process: "Pending",
+//     Shift: req.body.shift,
+//     StatusPaid: "Chưa thanh toán",
+//   });
+  
+// }
 
   res.redirect(`/koi/appointment/thankyou/${AppointmentID}?doctor=${req.body.doctor}`);
 };

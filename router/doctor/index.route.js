@@ -5,8 +5,10 @@ const AppointmentRoute = require("./appointment.route");
 const currentAppointmentRoute = require("./current-appointment.route");
 const authMiddleware = require("../../middleware/admin/auth.middleware")
 const chatRoute = require("./chat.route");
+const settingMiddleware = require("../../middleware/client/setting.middleware");
 module.exports = (app) => {
   app.use(authMiddleware.requireAuth)
+  app.use(settingMiddleware.SettingMiddleware)
   app.use("/doctor/dashboard", dashboardRoute);
   app.use("/doctor/my-account", myAccountRoute);
   app.use("/doctor/schedule", scheduleRoute);

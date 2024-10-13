@@ -15,12 +15,12 @@ block main
             b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} |
             b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift}
             if(appoinmentInfo.Name == "Tư Vấn Online")
-                    span(style="background-color: #118fad87; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 600px;") Đã thanh toán
+                    span(style="background-color: #118fad87; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 500px;") Đã thanh toán
             else 
                 if(appoinmentInfo.StatusPaid == "Đã thanh toán")
-                    span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 600px;") Đã thanh toán
+                    span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 500px;") Đã thanh toán
                 else 
-                    span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left:600px ;") Chưa thanh toán
+                    span(style="background-color: #5AAEBA; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left:500px ;") Chưa thanh toán
             p ______________________________________________________________
             if(appoinmentInfo.Name == "Tư Vấn Online")
                     span(style="color: black; font-weight: 700") ◉ Thanh Toán: 

@@ -9,4 +9,14 @@ block main
         h1 #{user.FullName}
         pre
             code #{JSON.stringify(user,null,2)}
+        pre
+            code #{JSON.stringify(listBills,null,2)}
+
+
+
+
+
+                
+        script.
+                var listBills = !{JSON.stringify(listBills)};
 
