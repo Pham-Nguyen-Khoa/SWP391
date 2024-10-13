@@ -2192,3 +2192,15 @@ header {
 
 
 
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.selected,
+.star.active {
+    color: gold;
+}
