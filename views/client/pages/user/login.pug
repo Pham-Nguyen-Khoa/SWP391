@@ -16,12 +16,12 @@ block main
                             h2.card-title.text-center.mb-3(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng nhập
                         .card-body
                             form(action="/auth/login" method="post")
-                                .form-group
-                                    label(for="Email") Email
-                                    input#email.form-control.login-element(type="email" name="Email" required)
-                                .form-group
-                                    label(for="Password") Password
-                                    input#password.form-control.login-element(type="password" name="Password" required)
+                                .form-group.container
+                                    label.label(style="color: #4475B9")(for="Email") Email
+                                    input.input#email.form-control.login-element(type="email" name="Email" required)
+                                .form-group.container
+                                    label.label(style="color: #4475B9")(for="Password") Password
+                                    input.input#password.form-control.login-element(type="password" name="Password" required)
                                 .form-group.utilities
                                     .remember-utilities
                                         input(type="checkbox" name="RememberMe") 
