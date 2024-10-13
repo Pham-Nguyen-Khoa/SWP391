@@ -1,9 +1,8 @@
 extends ../../layouts/default.pug
 include ../../mixins/back-to-top.pug
-
 block main
 
-    .container-fluid 
+    .container-fluid.p-0
         .banner-service-container 
             img.banner-service-image(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
             .overlay-service 
@@ -44,10 +43,32 @@ block main
                 //-         img.process-img(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
                 //- .call-action.mt-5(style="display: flex; align-items: center; justify-content: center;")
                 .col-md-7(style="display: flex; align-items: center; justify-content: center;")
-                    p.content(style="font-size: 1.25rem") Đối với những chủ nuôi cá Koi, bên cạnh yếu tố thức ăn và dinh dưỡng thì vấn đề về hồ nuôi luôn là một trong những mối bận tâm hàng đầu. Như hiểu được nổi niềm đó, Healthy Koi cung cấp dịch vụ tư vấn và hỗ trợ cải thiện hồ giúp đảm bảo hồ cá đạt chuẩn. Đến với Healthy Koi, với sự tận tâm phục vụ của các chuyên gia hàng đầu về cá Koi và trang thiết bị hiện đại. Không chỉ giúp tạo ra môi trường sống lý tưởng cho cá Koi, dịch vụ cải thiện hồ tại Healthy Koi còn giúp duy trì sức khỏe lâu dài cho cá và giảm thiểu chi phí phát sinh từ việc sửa chữa hoặc bảo trì không cần thiết.
+                    p.content(style="font-size: 1.5rem") Đối với những chủ nuôi cá Koi, bên cạnh yếu tố thức ăn và dinh dưỡng thì vấn đề về hồ nuôi luôn là một trong những mối bận tâm hàng đầu. Như hiểu được nổi niềm đó, Healthy Koi cung cấp dịch vụ tư vấn và hỗ trợ cải thiện hồ giúp đảm bảo hồ cá đạt chuẩn. Đến với Healthy Koi, với sự tận tâm phục vụ của các chuyên gia hàng đầu về cá Koi và trang thiết bị hiện đại. Không chỉ giúp tạo ra môi trường sống lý tưởng cho cá Koi, dịch vụ cải thiện hồ tại Healthy Koi còn giúp duy trì sức khỏe lâu dài cho cá và giảm thiểu chi phí phát sinh từ việc sửa chữa hoặc bảo trì không cần thiết.
                 .col-md-5
                     img.process-img(style ="width: 100%; height: 100%" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
                 .col-md-12(style="display: flex; align-items: center; justify-content: center;") 
-                    
-            
-            button(class="btn btn-appointment" onclick="window.location.href='/koi/appointment'" ) Đặt lịch hẹn
+                .col-md-6(style="font-size: 1.5rem")  
+                    ul.process.pt-5(style="list-style-type: none;") Quy trình thực hiện dịch vụ:
+                        li.pl-3 Xác nhận đơn hẹn sau khi khách hàng đặt hẹn thành công.
+                        li.pl-3 Đến nhà của khách hàng theo đúng thời gian chỉ định.
+                        li.pl-3 Khảo sát thực tế và giải đáp thắc mắc (optional).
+                        li.pl-3 Tiến hành lấy mẫu và giám định kết quả xét nghiệm.
+                        li.pl-3 Giải thích rõ ràng về kết quả xét nghiệm cho khách hàng.
+                        li.pl-3 Tư vấn và đưa ra giải pháp giúp cải thiện chất lượng hồ.
+                .col-md-6(style="font-size: 1.5rem")
+                    ul.process.pt-5(style="list-style-type: none;") Chúng tôi cam kết:
+                        li.pl-3 Đội ngũ bác sĩ của chúng tôi không chỉ có bằng cấp mà còn có nhiều năm kinh nghiệm trong lĩnh vực chăm sóc sức khỏe cho cá Koi.
+                        li.pl-3 Cung cấp hỗ trợ tận tình từ khâu tư vấn đến sau khi dịch vụ kết thúc, đảm bảo bạn luôn nhận được sự chăm sóc tốt nhất.
+                        li.pl-3 Chúng tôi cung cấp hỗ trợ tận tình từ khâu tư vấn đến sau khi dịch vụ kết thúc, đảm bảo bạn luôn nhận được sự chăm sóc tốt nhất.
+            .col-md-12.mt-5(style="display: flex; justify-content: center; align-item: center")
+                button(class="btn btn-appointment" onclick="window.location.href='/koi/appointment'") Đặt lịch hẹn
+            //- button.back-to-top(onclick="scrollToTop()")
+            //-     svg.svgIcon(viewBox="0 0 384 512")
+            //-         path(d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z")
+            //- script.
+            //-     function scrollToTop() {
+            //-         window.scrollTo({
+            //-             top: 0,
+            //-             behavior: 'smooth' 
+            //-         });
+            //-     }
