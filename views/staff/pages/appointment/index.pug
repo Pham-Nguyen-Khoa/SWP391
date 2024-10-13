@@ -69,15 +69,29 @@ block main
                 class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
-            .form-control 
-              form#filterForm(action="/staff/appointment" method="GET")
-                input(type= "text" name="searchName" placeholder="Nhập tên khách hàng" value=searchName)
-                button.btn(type="submit" style="background-color: #21a0b3; color: white;") Tìm
+            //- form#filterForm(action="/staff/appointment" method="GET")
+            //-   .search(style="margin: 50px 0;")
+            //-     .form-group
+            //-       label(for="searchName") Tìm kiếm
+            //-       input(type= "text" class="form-control" id="searchName" name="searchName" placeholder="Nhập tên khách hàng" value=searchName style="font-size: 18px;padding: 10px;border-radius: 5px;border: 2px solid grey;height: 40px;")
+            //-       button.btn(type="submit" style="background-color: #21a0b3; color: white; display: none") Tìm
+              
           .col-6
             form#filterForm(action="/staff/appointment" method="GET")
               .form-group
                 label(for="dateFilter") Lọc theo ngày:
                 input.form-control(type="date" id="dateFilter" name="date" value=date)
+              .form-group
+                  label(for="searchName") Tên khách hàng
+                  input(type= "text" class="form-control" id="searchName" name="searchName" placeholder="Nhập tên khách hàng" value=searchName style="font-size: 18px;padding: 10px;border-radius: 5px;border: 2px solid grey;height: 40px;")
+                  button.btn(type="submit" style="background-color: #21a0b3; color: white; display: none") Tìm
+              .form-group
+                label(for="services") Dịch vụ
+                select.form-control(id="services" name="services" )
+                  option( disabled selected) --- Chọn dịch vụ ---
+                  option(value="DV0001") Khám sức khỏe
+                  option(value="DV0002") Cải thiện môi trường
+                  option(value="DV0003") Tư vấn Online
               .form-group
                 label(for="sortOrder") Sắp xếp theo:
                 select.form-control(id="sortOrder" name="sort" value=sort)
@@ -191,7 +205,7 @@ block main
                         else if(appointment.Process == "Successed")
                             span(class="btn btn-success" style="min-width: 140px;") Thành công 
                     td 
-                        span(style="background-color: #5AAEBA; color: black; min-width: 178px;" class="btn " ) #{appointment.NameVet}
+                        span(style="background-color: #5AAEBA; color: black; min-width: 200px;" class="btn " ) #{appointment.NameVet}
                       
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
