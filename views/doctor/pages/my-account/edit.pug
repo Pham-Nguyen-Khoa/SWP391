@@ -56,6 +56,9 @@ block main
                                     .col-md-6
                                         .form-group(upload-image)
                                             label(for="Avatar") Hình ảnh
+                                            input(type="file", id="Avatar", name="Avatar", class="form-control-file", upload-image-input)
+                                            small.form-text.text-muted Chỉ chọn file nếu bạn muốn thay đổi ảnh đại diện
+                                            img(src=user.Avatar, upload-image-preview, class="upload-preview")
                                 .form-group
                                     button.btn.btn-primary.btn-lg.btn-block(type="submit") Cập nhật 
 
@@ -133,6 +136,7 @@ block main
             min-height: 30px;
         }
         .select-wrapper {
+            position: relative; 
             display: inline-block;
             width: 100%;
         }
@@ -143,3 +147,4 @@ block main
             font-size: 14px; /* Giữ nguyên kích thước chữ */
             border: 1px solid #ced4da;
             border-radius: 10px;
+            appearance: none
