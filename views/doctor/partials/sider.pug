@@ -69,8 +69,9 @@ style.
 .sider 
     .admin-sider
         .sider-header
-            img.sider-logo(src="/images/admin-logo.png" alt="Admin Logo")
-            h2.sider-title Quản trị viên
+            img(src=user.Avatar, alt="" srcset="" style="border-radius: 40px;width: 200px;height: 200px;object-fit: cover;  margin: 20px; cursor: pointer;" onclick="window.location.href='/doctor/my-account'")
+            h2.sider-title Bác sĩ
+
         nav.sider-nav
             ul.sider-menu
                 li.sider-menu-item
@@ -87,5 +88,5 @@ style.
                         span Hồ sơ lịch hẹn
                 li.sider-menu-item
                     a.sider-link(href=`/doctor/chat`)
-                        i.fas.fa-list
+                        i.fas.fa-comments
                         span Chat

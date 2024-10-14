@@ -40,21 +40,26 @@ style.
         display: flex;
         align-items: center;
         padding: 12px 25px;
-        color: #ecf0f1;
+        color: #6c757d;
         text-decoration: none;
         transition: all 0.3s;
         border-left: 4px solid transparent;
     }
     .sider-link:hover, .sider-link.active {
         background-color: #34495e;
+        border-left: 20px solid #3498db;
         border-left-color: #3498db;
+        text-decoration: none;
     }
     .sider-link i {
         margin-right: 15px;
         width: 20px;
         text-align: center;
-        font-size: 18px;
+        font-size: 40px;
+        margin-right: 40px;
+        display: inline-block;
     }
+    
     .sider-link span {
         font-size: 16px;
     }
@@ -69,8 +74,8 @@ style.
 .sider 
     .admin-sider
         .sider-header
-            img.sider-logo(src="/images/admin-logo.png" alt="Admin Logo")
-            h2.sider-title Quản trị viên
+            img(src=user.Avatar, alt="" srcset="" style="border-radius: 40px;width: 200px;height: 200px;object-fit: cover;  margin: 20px; cursor: pointer;" onclick="window.location.href='/staff/my-account'")
+            h2.sider-title Nhân viên
         nav.sider-nav
             ul.sider-menu
                 li.sider-menu-item
@@ -86,8 +91,12 @@ style.
                         i.fas.fa-list
                         span Hồ sơ dịch vụ
                 li.sider-menu-item
+                    a.sider-link(href=`/staff/feedback`)
+                        i.fa-solid.fa-star
+                        span FeedBack
+                li.sider-menu-item
                     a.sider-link(href=`/staff/chat`)
-                        i.fas.fa-list
+                        i.fas.fa-comments
                         span Chat
 
         

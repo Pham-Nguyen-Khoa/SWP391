@@ -1,10 +1,12 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
-
+include ../../mixins/alert.pug
 block main
             //- pre
             //-    code #{JSON.stringify(appoinmentInfo,null,2)}
-            +title("Chi Tiết Đơn Hàng")     
+            +title("Chi Tiết Đơn Hàng")   
+            +alert-success("5000")
+            +alert-error("5000")  
             .order-details(style="margin-top: 100px;")
                .order-information 
                   .row 
@@ -47,7 +49,10 @@ block main
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 20px;") Đã hoàn thành 
-                              button.btn.btn-primary.ml-3#feedbackBtn(style="font-size: 16px;") Đánh giá
+                              if feedBack && feedBack.Content
+                                 i.fa.fa-star.ml-3#feedbackBtn(style="font-size: 32px; cursor: pointer; color: #d9bd21") 
+                              else 
+                                 i.fa.fa-star.ml-3#feedbackBtn(style="font-size: 32px; cursor: pointer;") 
                            if(appoinmentInfo.Process == "Cancled")
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bị Hủy
                   
@@ -104,33 +109,121 @@ block main
 
                      h5.modal-title Đánh giá chúng tôi
                      .modal-body
-                        form#feedbackForm
+                        form#feedbackForm(action=`/koi/my-appointment/feedback/${appoinmentInfo.AppointmentID}` method="post")
                            .form-group
                               .star-rating
-                                 b(for="star5") ★
+                                 b.star(data-value="1") &#9733;
 
-                                 b(for="star4") ★
+                                 b.star(data-value="2") &#9733;
 
-                                 b(for="star3") ★
+                                 b.star(data-value="3") &#9733;
 
-                                 b(for="star2") ★
-                                 b(for="star1") ★
+                                 b.star(data-value="4") &#9733;
+                                 b.star(data-value="5") &#9733;
+                              input(type="hidden" name = "starSelect" id="starSelect")
+                              input(type="hidden" name = "accountID" id="accountID" value=userInfo.AccountID)
+                                    
                            .form-group
-                              textarea#comment.form-control(name="comment" rows="3" placeholder="Nhận xét của bạn")
-                     .modal-footer.r
-                        button.btn.btn-danger(type="button" data-dismiss="modal") Hủy
-                        button.btn.btn-success(type="button" onclick="submitFeedback()") Gửi
-
+                              if feedBack && feedBack.Content
+                                 textarea#comment.form-control(name="comment" rows="3"  required)  #{feedBack.Content}
+                                
+                              else 
+                                 textarea#comment.form-control(name="comment" rows="3" placeholder="Nhận xét của bạn" required)
+                           .modal-footer.r
+                              button.btn.btn-danger(type="button" data-dismiss="modal") Hủy
+                              if feedBack != null
+                                 button.btn.btn-success#btn-update-feedback(type="submit" ) Cập nhật
+                              else 
+                                 button.btn.btn-success#btn-success-feedback(type="submit" ) Gửi
 
 
             script.
-                  document.getElementById('feedbackBtn').addEventListener('click', function() {
-                     $('#feedbackModal').modal('show');
-                  });
+                    const feedBack = !{JSON.stringify(feedBack)};
+                        const formFeedback = document.getElementById("feedbackForm");
+                        var starSelect = document.getElementById("starSelect");
+                        const btnSuccessFeedback =  document.getElementById('btn-success-feedback');
+                        if(btnSuccessFeedback){
+                           document.getElementById('btn-success-feedback').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            if(!starSelect.value){
+                                 alert('Vui lòng chọn số sao đánh giá');
+                            }else{
+                               alert('Cảm ơn bạn đã gửi đánh giá!');
+                           $('#feedbackModal').modal('hide');
+                           formFeedback.submit();
+                            }
+                          
+                        });
+                        }
+                      
+                        const btnUpdateFeedBack = document.getElementById("btn-update-feedback");
+                        console.log("------");
+                        console.log(btnUpdateFeedBack)
+                        if(btnUpdateFeedBack){
+                           
+                           btnUpdateFeedBack.addEventListener('click', (e) => {
+                              e.preventDefault();
+                              const starRating = document.querySelector(".star-rating");
+                              console.log(starRating)
+                              const countStarUpdate = starRating.querySelectorAll(".active").length;
+                              console.log("*****************")
+                              console.log(countStarUpdate)
+                              console.log("*****************")
+                              starSelect.value = countStarUpdate;
+                              alert('Cảm ơn bạn đã cập nhật đánh giá!');
+                              $('#feedbackModal').modal('hide');
+                              formFeedback.submit();
+                           })
+                        }
 
-                  function submitFeedback() {
-                     alert('Cảm ơn bạn đã gửi đánh giá!');
-                     $('#feedbackModal').modal('hide');
-                  }
+
+                    const stars = document.querySelectorAll('.star');
+                        if(stars){    
+                              const starSelect = document.getElementById('starSelect');
+                        stars.forEach(star => {
+                        star.addEventListener('click', () => {
+                              const rating = star.getAttribute('data-value');
+                              starSelect.value = rating;
+                              stars.forEach(s => {
+                                 s.classList.remove('selected');
+                              });
+                              star.classList.add('selected');
+                              highlightStars(rating);
+                        });
+
+                        star.addEventListener('mouseover', () => {
+                              const rating = star.getAttribute('data-value');
+                              highlightStars(rating);
+                        });
+
+                        star.addEventListener('mouseout', () => {
+                              highlightStars(selectedRating);
+                        });
+                        });
+                        }
+                     
+                        if(feedBack && feedBack.Content != null){
+                           const starOld=feedBack.Star;
+                           console.log("okkkkkkk")
+                           console.log(starOld)
+                           console.log(stars)
+                           highlightStars(starOld);
+                           
+                           
+                        }
+                        
 
 
+                        function highlightStars(rating) {
+                           stars.forEach(star => {
+                              if (star.getAttribute('data-value') <= rating) {
+                                    star.classList.add('active');
+                              } else {
+                                    star.classList.remove('active');
+                              }
+                           });
+                        }
+
+                        document.getElementById('feedbackBtn').addEventListener('click', function() {
+                           $('#feedbackModal').modal('show');
+                        });

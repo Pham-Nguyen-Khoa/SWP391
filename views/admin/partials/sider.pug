@@ -70,7 +70,7 @@ style.
 .sider 
     .admin-sider
         .sider-header
-            img.sider-logo(src="/images/admin-logo.png" alt="Admin Logo")
+            img(src=user.Avatar, alt="" srcset="" style="border-radius: 40px;width: 200px;height: 200px;object-fit: cover;  margin: 20px; cursor: pointer;" onclick="window.location.href='/admin/my-account'")
             h2.sider-title Quản trị viên
         nav.sider-nav
             ul.sider-menu
@@ -88,7 +88,9 @@ style.
                         span Cài đặt chung
                 li.sider-menu-item
                     a.sider-link(href=`${prefixAdmin}/chat`)
-                        i.fas.fa-cogs.fa-3x.me-3(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
-                        span Chat
+                        i.fas.fa-comments.fa-3x.me-3(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
+                        span Chat 
+
+
 
         

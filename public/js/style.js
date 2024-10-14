@@ -84,7 +84,19 @@ function generateRandomString(length) {
   }
   return result;
 }
+const closeModalButton = document.getElementById("closeModalMessage");
+if (closeModalButton) {
 
+  closeModalButton.addEventListener("click", function () {
+    console.log("Neronmen")
+    document.getElementById("confirmationModal").style.display = "none";
+  });
+} else {
+  console.error('Element with ID "closeModal" not found.');
+}
+
+
+console.log("okkk")
 
 // Chọn dịch vụ
 const labelAddress = document.querySelector("#label-address");
@@ -536,13 +548,12 @@ if (selectDate) {
   });
 }
 
+
 // Confirm Submit
 const buttonSubmitAppointment = document.querySelector(".confirm-btn");
 const confirmAppointment = document.querySelector(".confirm-appointment");
 if(confirmAppointment){
-const confirmSuccessAppointment = confirmAppointment.querySelector(
-  "#confirm-success-appointment"
-    );
+const confirmSuccessAppointment = confirmAppointment.querySelector("#confirm-success-appointment");
 }
 if (buttonSubmitAppointment) {
   const cancleAppointment = confirmAppointment.querySelector(
@@ -612,12 +623,14 @@ if (buttonSubmitAppointment) {
   cancleAppointment.addEventListener("click", () => {
     confirmAppointment.style.display = "none";
   });
-
-  confirmSuccessAppointment.addEventListener("click", () => {
-    if (selectService == "Tư Vấn Online") {
+  // if(confirmSuccessAppointment){
+    const confirmSuccessAppointment = confirmAppointment.querySelector("#confirm-success-appointment");
+    confirmSuccessAppointment.addEventListener("click", () => {
+      if (selectService == "Tư Vấn Online") {
       confirmAppointment.style.display = "none";
     }
   });
+// }
 }
 
 
@@ -630,6 +643,7 @@ const paidAppointmentContent = document.querySelector(
   ".content-paid-appointment"
 );
 document.addEventListener("DOMContentLoaded", () => {
+  const confirmSuccessAppointment = confirmAppointment.querySelector("#confirm-success-appointment");
   if (confirmSuccessAppointment) {
     confirmSuccessAppointment.addEventListener("click", () => {
       if (selectService.value == "Tư Vấn Online") {
@@ -676,13 +690,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // nếu thanh toán thành công
 
-        // setTimeout(() => {
-        //   const intervalId = setInterval(() => {
-        //     checkPaid(priceService, generateRandomText, intervalId);
-        //   }, 1000);    
-        // }, 15000);
-        const formAppointment = document.querySelector(".form_appointment");
-        formAppointment.submit();
+        setTimeout(() => {
+          const intervalId = setInterval(() => {
+            checkPaid(priceService, generateRandomText, intervalId);
+          }, 1000);    
+        }, 15000);
+        // const formAppointment = document.querySelector(".form_appointment");
+        // formAppointment.submit();
       } else {
         const formAppointment = document.querySelector(".form_appointment");
         formAppointment.submit();
@@ -734,14 +748,6 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
   }
 }
 
-// const closeModalButton = document.getElementById("closeModalMessage");
-// if (closeModalButton) {
-//   closeModalButton.addEventListener("click", function () {
-//     document.getElementById("confirmationModal").style.display = "none";
-//   });
-// } else {
-//   console.error('Element with ID "closeModal" not found.');
-// }
 
 
 
@@ -749,15 +755,15 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
 // const marquee = document.querySelector('.marquee');
 // let index = 0;
 
-// function scrollText() {
-//   const lines = marquee.querySelectorAll('p');
-//   lines.forEach((line, i) => {
-//     line.style.display = i === index ? 'block' : 'none';
-//   });
-//   index = (index + 1) % lines.length;
-// }
+function scrollText() {
+  const lines = marquee.querySelectorAll('p');
+  lines.forEach((line, i) => {
+    line.style.display = i === index ? 'block' : 'none';
+  });
+  index = (index + 1) % lines.length;
+}
 
-// setInterval(scrollText, 5000); 
+setInterval(scrollText, 5000); 
 
 console.log("Neronmen")
 function initializeSlider() {
@@ -776,3 +782,49 @@ function initializeSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeSlider);
+
+
+
+
+//Feedback
+
+// const stars = document.querySelectorAll('.star');
+// if(stars){
+//   const starSelect = document.getElementById('starSelect');
+// stars.forEach(star => {
+//   star.addEventListener('click', () => {
+//       const rating = star.getAttribute('data-value');
+//       starSelect.value = rating;
+
+
+//       // Remove the selected class from all stars
+//       stars.forEach(s => {
+//           s.classList.remove('selected');
+//       });
+
+//       // Highlight the selected number of stars
+//       star.classList.add('selected');
+//       highlightStars(rating);
+//   });
+
+//   star.addEventListener('mouseover', () => {
+//       const rating = star.getAttribute('data-value');
+//       highlightStars(rating);
+//   });
+
+//   star.addEventListener('mouseout', () => {
+//       highlightStars(selectedRating);
+//   });
+// });
+// }
+
+
+// function highlightStars(rating) {
+//     stars.forEach(star => {
+//         if (star.getAttribute('data-value') <= rating) {
+//             star.classList.add('active');
+//         } else {
+//             star.classList.remove('active');
+//         }
+//     });
+// }

@@ -55,6 +55,10 @@ const Appointment = sequelize.define('Appointment', {
         type: DataTypes.STRING(10),
         allowNull: true,
     },
+    Distance:{
+        type: DataTypes.DOUBLE,
+        allowNull: true,
+    }
 }, {
     tableName: 'appointment',
     timestamps: false

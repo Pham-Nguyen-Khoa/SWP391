@@ -10,34 +10,59 @@ block main
                 h1.text-center.font-weight-bold.mb-5.text-dark Thông số hồ
             else if(pondProfiles.length > 1)
                 h1.text-center.font-weight-bold.mb-5.text-dark Thông số hồ #{pIndex + 1}
+            -const pondSetting = pondSettings.find(pond => pondProfile.Volume <= pond.Volume)
             .row.mb-4
                 .col-md-6
                     .card
-                        .card-body(style="background-color: #aeaed4;")
+                        .card-body(style="background-color: #58a5d2;")
                             h5.card-title(style="color: black;") Thể tích
                             h2.card-text.text-primary #{pondProfile.Volume} m³
                 .col-md-6
-                    .card
-                        .card-body(style="background-color: #e47979;")
-                            h5.card-title(style="color: black;") Nhiệt độ
-                            h2.card-text.text-danger #{pondProfile.Temperature} °C
+                    .card.bg-success
+                        if(parseFloat(pondProfile.Temperature) > parseFloat(pondSetting.Temperature) + 2 || parseFloat(pondProfile.Temperature) < parseFloat(pondSetting.Temperature) - 2 )
+                            .card-body(style="background-color: #e47979;")
+                                h5.card-title(style="color: black;") Nhiệt độ
+                                h2.card-text.text-danger #{pondProfile.Temperature} °C
+                        else 
+                            .card-body(style="background-color: #4db84dd4;")
+                                h5.card-title(style="color: black;") Nhiệt độ
+                                h2.card-text(style="color: black") #{pondProfile.Temperature} °C
+
             
             .row.mb-4
                 .col-md-4
-                    .card.bg-info.text-white
-                        .card-body
-                            h5.card-title(style="color: black;") pH
-                            h2.card-text #{pondProfile.pH}
+                    .card.bg-info.text-white.bg-success
+                        if(parseFloat(pondProfile.pH) > parseFloat(pondSetting.PH) + 1 || parseFloat(pondProfile.pH) < parseFloat(pondSetting.PH) - 1 )
+                            .card-body(style="background-color: #e47979;")
+                                h5.card-title(style="color: black;") pH
+                                h2.card-text.text-danger #{pondProfile.pH}
+                        else 
+                            .card-body(style="background-color: #4db84dd4;")
+                                h5.card-title(style="color: black;") pH
+                                h2.card-text(style="color: black") #{pondProfile.pH}
+
                 .col-md-4
                     .card.bg-success.text-white
-                        .card-body
-                            h5.card-title(style="color: black;") Oxy hòa tan
-                            h2.card-text #{pondProfile.Oxygen} mg/L
+                        if(parseFloat(pondProfile.Oxygen) > parseFloat(pondSetting.Oxygen) + 1 || parseFloat(pondProfile.Oxygen) < parseFloat(pondSetting.Oxygen) - 1 )
+                            .card-body(style="background-color: #e47979;")
+                                h5.card-title(style="color: black;") Oxy hòa tan
+                                h2.card-text.text-danger #{pondProfile.Oxygen} mg/L
+                        else 
+                            .card-body(style="background-color: #4db84dd4;")
+                                h5.card-title(style="color: black;") Oxy hòa tan
+                                h2.card-text(style="color: black") #{pondProfile.Oxygen} mg/L
+
                 .col-md-4
-                    .card.bg-warning.text-dark
-                        .card-body
-                            h5.card-title(style="color: black;") Độ mặn
-                            h2.card-text #{pondProfile.Salt} ppt
+                    .card.bg-success.text-dark
+                        if(parseFloat(pondProfile.Salt) > parseFloat(pondSetting.Salt) + 0.05 || parseFloat(pondProfile.Salt) < parseFloat(pondSetting.Salt) - 0.05 )
+                            .card-body(style="background-color: #e47979;")
+                                h5.card-title(style="color: black;") Độ mặn
+                                h2.card-text.text-danger #{pondProfile.Salt} ppt
+                        else 
+                            .card-body(style="background-color: #4db84dd4;")
+                                h5.card-title(style="color: black;") Độ mặn
+                                h2.card-text(style="color: #black") #{pondProfile.Salt} ppt
+
 
             h3.mb-3 Các thông số khác
             table.table.table-striped.table-hover.table-my-appointment
@@ -47,15 +72,105 @@ block main
                         th Giá trị
                         th Đơn vị
                 tbody
+                    
                     tr
                         td CO₂
-                        td #{pondProfile.CO2}
+                        if(parseFloat(pondProfile.CO2) > parseFloat(pondSetting.Co2) + 2 || parseFloat(pondProfile.CO2) < parseFloat(pondSetting.Co2) - 2 )
+                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
+                            
+                            
+                        else 
+                            td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
                         td ppm
+                    
                     tr
                         td Nitrite
-                        td #{pondProfile.Nitrite}
+                        if(parseFloat(pondProfile.Nitrite) > parseFloat(pondSetting.Nitrite) + 0.005 || parseFloat(pondProfile.Nitrite) < parseFloat(pondSetting.Nitrite) - 0.005 )
+                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrite}
+                        else 
+                            td(style="color: #59b160; font-size: 20px; font-weight: 700;")  #{pondProfile.Nitrite}
                         td mg/L
                     tr
                         td Nitrate
-                        td #{pondProfile.Nitrate}
+                        if(parseFloat(pondProfile.Nitrate) > parseFloat(pondSetting.Nitrate) + 5 || parseFloat(pondProfile.Nitrate) < parseFloat(pondSetting.Nitrate) - 5 )
+                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
+                        else 
+                            td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
                         td mg/L
+            h3.mb-3 Chi tiết
+            
+            table.table.table-striped.table-hover.table-standard.tableGood
+                thead
+                    tr
+                        th Thông số
+                        th Giá trị hiện tại
+                        th Giá trị đạt chuẩn
+                        th Cách cải thiện
+                tbody
+                    //- tr
+                    //-     td Thể tích
+                    //-     td(style="color: red") #{pondProfile.Volume} m³
+                    //-     td #{pondSetting.Volume}
+                    tr
+                        td Nhiệt độ
+                        if(parseFloat(pondProfile.Temperature) > (parseFloat(pondSetting.Temperature) + 2) || parseFloat(pondProfile.Temperature) < (parseFloat(pondSetting.Temperature) - 2) )
+                            td(style="color: red") #{pondProfile.Temperature} °C
+                        else 
+                            td #{pondProfile.Temperature} °C
+                        td #{parseFloat(pondSetting.Temperature) - 2} - #{parseFloat(pondSetting.Temperature) + 2} °C
+                        td 
+                            a(href="https://keen.com.vn/vi/posts/tu-van-san-pham/may-lam-lanh-nuoc/may-lanh-ho-ca/9-cach-lam-mat-cho-be-ca-trong-nhung-ngay-he-165.html" target="_blank") Cách cải thiện nhiệt đồ hồ  
+                    tr
+                        td pH
+                        if(parseFloat(pondProfile.pH) > parseFloat(pondSetting.PH) + 1 || parseFloat(pondProfile.pH) < parseFloat(pondSetting.PH) - 1 )
+                            td(style="color: red") #{pondProfile.pH} mg/L
+                        else 
+                            td #{pondProfile.pH} mg/L
+                        td #{parseFloat(pondSetting.PH) - 1} -  #{parseFloat(pondSetting.PH) + 1} mg/L
+                        td 
+                            a(href="https://tincay.com/5-bien-phap-kiem-soat-on-dinh-ph-nuoc-ho-nuoi-ca-koi/" target="_blank") Cách cải thiện độ PH hồ
+                    tr
+                        td Oxy hòa tan
+                        if(parseFloat(pondProfile.Oxygen) > parseFloat(pondSetting.Oxygen) + 1 || parseFloat(pondProfile.Oxygen) < parseFloat(pondSetting.Oxygen) - 1 )
+                            td(style="color: red") #{pondProfile.Oxygen} mg/L
+                        else 
+                            td #{pondProfile.Oxygen} mg/L
+                        td #{parseFloat(pondSetting.Oxygen) - 1} - #{parseFloat(pondSetting.Oxygen) + 1} mg/L
+                        td 
+                            a(href="https://koilover.vn/chi-tiet-tin/oxy-hoa-tan-trong-ho-ca-koi-1-3456.html" target="_blank") Cách cải thiện Oxy hòa tan hồ 
+                    tr
+                        td Độ mặn
+                        if(parseFloat(pondProfile.Salt) > parseFloat(pondSetting.Salt) + 0.05 || parseFloat(pondProfile.Salt) < parseFloat(pondSetting.Salt) - 0.05 )
+                            td(style="color: red") #{pondProfile.Salt} ppt
+                        else 
+                            td #{pondProfile.Salt} ppt
+                        td #{(parseFloat(pondSetting.Salt) - 0.05).toFixed(2)} - #{(parseFloat(pondSetting.Salt) + 0.05).toFixed(2)} ppt
+                        td 
+                            a(href="https://hocakoinguyenhung.com/nong-do-muoi-ho-ca-koi.html" target="_blank") Cách cải thiện Độ mặn hồ 
+                    tr
+                        td CO₂
+                        if(parseFloat(pondProfile.CO2) > parseFloat(pondSetting.Co2) + 2 || parseFloat(pondProfile.CO2) < parseFloat(pondSetting.Co2) - 2 )
+                            td(style="color: red") #{pondProfile.CO2} ppm
+                        else 
+                            td #{pondProfile.CO2} ppm
+                        td #{parseFloat(pondSetting.Co2) - 2} - #{parseFloat(pondSetting.Co2) + 2} ppm
+                        td 
+                            a(href="https://koilover.vn/chi-tiet-tin/ham-luong-oxy-trong-ho-ca-koi-quan-trong-the-nao-1-3430.html" target="_blank") Cách cải thiện CO₂ hồ 
+                    tr
+                        td Nitrite
+                        if(parseFloat(pondProfile.Nitrite) > parseFloat(pondSetting.Nitrite) + 0.005 || parseFloat(pondProfile.Nitrite) < parseFloat(pondSetting.Nitrite) - 0.005 )
+                            td(style="color: red") #{pondProfile.Nitrite}  mg/L
+                        else 
+                            td #{pondProfile.Nitrite}  mg/L
+                        td #{(parseFloat(pondSetting.Nitrite) - 0.005).toFixed(3)} - #{(parseFloat(pondSetting.Nitrite) + 0.005).toFixed(3)}  mg/L
+                        td 
+                            a(href="https://koilover.vn/chi-tiet-tin/chu-trinh-nito-ammonia-nitrit-va-nitrat-trong-ho-koi-1-3178.html#:~:text=M%E1%BB%A9c%20l%C3%BD%20t%C6%B0%E1%BB%9Fng%20c%E1%BB%A7a%20nitrit,sinh%20%C4%91%C6%B0%E1%BB%A3c%20k%C3%ADch%20ho%E1%BA%A1t%20s%E1%BA%B5n." target="_blank") Cách cải thiện Nitrite hồ 
+                    tr
+                        td Nitrate
+                        if(parseFloat(pondProfile.Nitrate) > parseFloat(pondSetting.Nitrate) + 5 || parseFloat(pondProfile.Nitrate) < parseFloat(pondSetting.Nitrate) - 5 )
+                            td(style="color: red") #{pondProfile.Nitrate}  mg/L
+                        else 
+                            td #{pondProfile.Nitrate}  mg/L
+                        td #{parseFloat(pondSetting.Nitrate) - 5} - #{parseFloat(pondSetting.Nitrate) + 5}  mg/L
+                        td 
+                            a(href="https://honnonbomiennam.vn/nitrate-trong-ho-ca-koi/" target="_blank") Cách cải thiện Nitrate hồ 
