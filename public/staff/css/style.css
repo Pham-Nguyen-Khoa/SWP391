@@ -27,7 +27,8 @@
 .body .main{
     margin: 15px;
     position: relative;
-    left: 150px;
+    /* left: 150px; */
+    left: 8%;
     width: calc(100% - 180px);
 }
 
@@ -617,7 +618,8 @@ span {
   }
   
   .inner-outgoing .inner-content {
-    margin-left: 500px;
+    /* margin-left: 500px; */
+    margin-left: -11%;
     background-color: #0b93f6;
     color: white;
   }
