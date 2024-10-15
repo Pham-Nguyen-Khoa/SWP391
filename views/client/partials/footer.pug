@@ -1,10 +1,10 @@
 footer.footer.sticky-bottom 
     .footer-container(style="margin: 0 30px;")
         .row
-            .map.mr-5.ml-5
+            .map.col-md-2
                 #mapEmbed
                     != SettingGeneral.MapEmbed  
-            .footer-content(style="display: flex; justify-content: center; align-items: center;")
+            .footer-content.col-md-10.p-0(style="display: flex; justify-content: center; align-items: center;")
                 .service-footer(style="max-width: 300px;").mr-5
                     h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;") Dịch vụ
                     ul.services-list(style="font-size: 18px;")
