@@ -1,8 +1,23 @@
 
+const { Op } = require("sequelize");
+const md5 = require("md5");
+const Sequelize = require("../../config/database");
+const { query } = require("express");
+const db = require("../../config/database");
+const Account = require("../../models/account1.model");
+const Customer = require("../../models/customer.model");
+const Feedback = require("../../models/feedback.model");
+
+
+
 // [GET] localhost:/koi
 module.exports.index = async (req, res) => {
+  let quertFeedBack =`Select * from feedback fb Join account1 ac on ac.AccountID = fb.AccountID Join customer cs on cs.AccountID = ac.AccountID where fb.Star = '5' ORDER BY fb.Time DESC`
+  const [listFeedBack] = await Sequelize.query(quertFeedBack);
+  console.log(listFeedBack);
   res.render("client/pages/home/index.pug", {
     pageTitle: res.locals.SettingGeneral.WebsiteName,
+    listFeedBack: listFeedBack,
   });
 };
 

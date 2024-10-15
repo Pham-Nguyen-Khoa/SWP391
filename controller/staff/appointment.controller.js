@@ -13,6 +13,7 @@ const Appointment_PondRecord = require("../../models/appointment_pondrecord.mode
 const PondRecord = require("../../models/pondRecord.model");
 const PondProfile = require("../../models/pondProfile.model");
 
+
 // [Get] /staff/appointment
 module.exports.index =  async (req, res) => {
     let queryListAppointment ;
@@ -67,16 +68,42 @@ module.exports.index =  async (req, res) => {
                                 LEFT JOIN customer c ON c.CustomerID = a.CustomerID 
                                 LEFT JOIN vet v ON v.VetID = a.VetID`
     }
-    if(req.query.date){
-        queryListAppointment += ` where a.Date = '${req.query.date}'`;
-      }
-    if(req.query.searchName){
-        queryListAppointment += ` where a.Name Like '%${req.query.searchName}%'`;
-    }
+    // if(req.query.date){
+    //     queryListAppointment += ` where a.Date = '${req.query.date}'`;
+    //   }
+    // if(req.query.searchName && req.query.date ){
+    //     queryListAppointment += ` and a.Name Like '%${req.query.searchName}%'`;
+    // }
+    // if(req.query.services){
+    //     queryListAppointment += ` where a.ServiceID = '${req.query.services}'`;
+    // }
 
-    if(req.query.sort){
-        queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
-    }
+    // if(req.query.sort){
+    //     queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+    // }
+    // Filter by date
+    let conditions = [];
+if (req.query.date) {
+    conditions.push(`a.Date = '${req.query.date}'`);
+  }
+  
+  if (req.query.searchName) {
+    conditions.push(`a.Name LIKE '%${req.query.searchName}%'`);
+  }
+
+  if (req.query.services) {
+    conditions.push(`a.ServiceID = '${req.query.services}'`);
+  }
+  
+
+  if (conditions.length > 0) {
+    queryListAppointment += ' WHERE ' + conditions.join(' AND ');
+  }
+  
+
+  if (req.query.sort) {
+    queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+  }
     
   
     const [listAppointment] = await Sequelize.query(queryListAppointment);

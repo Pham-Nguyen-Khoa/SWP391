@@ -782,3 +782,49 @@ function initializeSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeSlider);
+
+
+
+
+//Feedback
+
+// const stars = document.querySelectorAll('.star');
+// if(stars){
+//   const starSelect = document.getElementById('starSelect');
+// stars.forEach(star => {
+//   star.addEventListener('click', () => {
+//       const rating = star.getAttribute('data-value');
+//       starSelect.value = rating;
+
+
+//       // Remove the selected class from all stars
+//       stars.forEach(s => {
+//           s.classList.remove('selected');
+//       });
+
+//       // Highlight the selected number of stars
+//       star.classList.add('selected');
+//       highlightStars(rating);
+//   });
+
+//   star.addEventListener('mouseover', () => {
+//       const rating = star.getAttribute('data-value');
+//       highlightStars(rating);
+//   });
+
+//   star.addEventListener('mouseout', () => {
+//       highlightStars(selectedRating);
+//   });
+// });
+// }
+
+
+// function highlightStars(rating) {
+//     stars.forEach(star => {
+//         if (star.getAttribute('data-value') <= rating) {
+//             star.classList.add('active');
+//         } else {
+//             star.classList.remove('active');
+//         }
+//     });
+// }
