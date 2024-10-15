@@ -151,6 +151,6 @@ module.exports.analyze = async (req, res) => {
     const avareStar2 = (star2 / countFeedback) * 100;
     const avareStar1 = (star1 / countFeedback) * 100;
     let averageStar = sumStar / countFeedback;
-    res.json({averageStar: averageStar,countFeedback: countFeedback, star5: avareStar5.toFixed(0), star4: avareStar4.toFixed(0), star3: avareStar3.toFixed(0), star2: avareStar2.toFixed(0), star1: avareStar1.toFixed(0)});
+    res.json({averageStar: averageStar.toFixed(2),countFeedback: countFeedback, star5: avareStar5.toFixed(0), star4: avareStar4.toFixed(0), star3: avareStar3.toFixed(0), star2: avareStar2.toFixed(0), star1: avareStar1.toFixed(0)});
 }
   

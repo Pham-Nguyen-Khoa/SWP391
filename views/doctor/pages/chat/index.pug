@@ -21,13 +21,24 @@ block main
                                             img(src=chat.infoUser.Avatar, alt="Avatar" style="width:50px;height:50px;border-radius:50%;")
                                         .content
                                             .inner-name #{chat.infoUser.FullName}
-                                            .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
-                                                p  #{chat.Content}
+                                            if(chat.Content)
+                                                .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                                    p  #{chat.Content}
+                                            if(chat.Images)
+                                                .inner-image
+                                                    each image in chat.Images
+                                                        img(src=image, alt="Image" )
                             else
                                 .inner-outgoing 
                                     .row
-                                        .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
-                                            p #{chat.Content}
+                                        .content
+                                            if chat.Content
+                                                .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                                    p #{chat.Content}
+                                            if chat.Images
+                                                .inner-image
+                                                    each image in chat.Images
+                                                        img(src=image, alt="Image")
                         div(class="inner-list-typing")
                             //- div(class="box-typing")
                             //-     .row
@@ -51,6 +62,7 @@ block main
                             //-                     span 
                             //-                     span 
                             //-                     span 
+                    div(class="custom-file-container" data-upload-id="my-unique-id")
                     .inner-foot
                         form(
                             class="inner-form"
@@ -62,6 +74,8 @@ block main
                                 name="content"
                                 placeholder="Nhập tin nhắn..."
                             )
+                            label(class="custom-file-container__custom-file-label" for="file-upload-with-preview-my-unique-id") 
+                                i.fa-regular.fa-image
                             span(class="button-emoji btn btn-light mx-2") 
                                 i.fa-regular.fa-face-smile
                             button(
@@ -73,3 +87,5 @@ block main
 
         .tooltip
             emoji-picker
+
+        

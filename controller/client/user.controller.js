@@ -42,7 +42,8 @@ module.exports.loginPost = async (req, res) => {
     return;
   }
 
-  res.cookie("token", user.Token);
+  res.cookie("token", user.Token , { httpOnly: true });
+
 
   if (user.RoleID == "RL0004") {
     res.redirect("/koi");
