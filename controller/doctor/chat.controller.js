@@ -8,6 +8,7 @@ const Account = require("../../models/account1.model");
 const Admin = require("../../models/admin.model");
 const Staff = require("../../models/staff.model");
 const Vet = require("../../models/vet.model");
+const uploadToCloudinaryHelper = require("../../helpers/uploadToClloudinary");
 
 
 
@@ -27,21 +28,28 @@ module.exports.chat = async (req, res) => {
     const userID = res.locals.user.AccountID
     const roleID = res.locals.user.RoleID
     io.once("connection", async (socket) => {
-        socket.on("CLIENT-SEND-MESSAGE", async (content) => {
+        socket.on("CLIENT-SEND-MESSAGE", async (data) => {
             const chatID = await generateUserId("CHAT", "chat", "ChatID");
-            //Lưu vào database
+            let images = []
+            for(const image of data.images){
+                const link = await uploadToCloudinaryHelper.uploadToCloudinary(image)
+                images.push(link)
+            }
+            // Lưu vào database
             await Chat.create({
                 ChatID: chatID,
-                Content: content,
-                User_ID: res.locals.user.AccountID
+                Content: data.content,
+                User_ID: res.locals.user.AccountID,
+                Images: JSON.stringify(images)
             })
             //Gửi về client
             io.emit("SERVER-RETURN-MESSAGE", {
-                content: content,
+                content: data.content,
                 fullName: fullName,
                 avatar: avatar,
                 userID: userID,
-                roleID: roleID
+                roleID: roleID,
+                Images: images
             })
         })
 
@@ -62,19 +70,29 @@ module.exports.chat = async (req, res) => {
     //- End Socket IO
 
     //Lấy data từ Database
-    const chats = await Chat.findAll({
+    let chats = await Chat.findAll({
         raw: true,
     });
-    for(const chat of chats){
-        const accountId = chat.User_ID
-        const account = await Account.findOne({
+    chats.forEach(chat => {
+        if(chat.Images != null){
+            try {
+                chat.Images = JSON.parse(JSON.parse(chat.Images));
+                console.log(chat.Images); // Kiểm tra giá trị sau khi parse
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        }
+    })
+    for(let chat of chats){
+        let accountId = chat.User_ID
+        let account = await Account.findOne({
             raw: true,
             where: {
                 AccountID: accountId
             }
         })
         if(account.RoleID == "RL0001"){
-            const admin = await Admin.findOne({
+            let admin = await Admin.findOne({
                 raw: true,
                 attributes: ["FullName","Avatar"],
                 where: {
@@ -84,7 +102,7 @@ module.exports.chat = async (req, res) => {
             chat.infoUser = admin
             chat.infoUser.RoleID = "RL0001"
         }else if(account.RoleID == "RL0003"){
-            const staff = await Staff.findOne({
+            let staff = await Staff.findOne({
                 raw: true,
                 attributes: ["FullName","Avatar"],
                 where: {
@@ -94,7 +112,7 @@ module.exports.chat = async (req, res) => {
             chat.infoUser = staff
             chat.infoUser.RoleID = "RL0003"
         }else if(account.RoleID == "RL0002"){
-            const vet = await Vet.findOne({
+            let vet = await Vet.findOne({
                 raw: true,
                 attributes: ["FullName","Avatar"],
                 where: {
@@ -105,7 +123,7 @@ module.exports.chat = async (req, res) => {
             chat.infoUser.RoleID = "RL0002"
         }
     }
-
+    // console.log(chats)  
     res.render("doctor/pages/chat/index",{
         pageTitle: "Trang chat ",
         chats: chats

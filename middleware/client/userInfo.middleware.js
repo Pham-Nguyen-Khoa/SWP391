@@ -3,6 +3,7 @@ const Account = require("../../models/account1.model");
 const Customer = require("../../models/customer.model");
 module.exports.userInfo = async (req, res, next) => {
   const token = req.cookies.token;
+  // const token = req.session.token;
   // const user = await User.findOne({tokenUser: tokenUser});
   if(token){
     const user = await Account.findOne({
