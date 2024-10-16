@@ -7,7 +7,8 @@ const db = require("../../config/database");
 const Account = require("../../models/account1.model");
 const Customer = require("../../models/customer.model");
 const Feedback = require("../../models/feedback.model");
-
+const axios = require('axios');
+const { GoogleGenerativeAI } = require("@google/generative-ai")
 
 
 // [GET] localhost:/koi
@@ -70,4 +71,31 @@ module.exports.checkUp = async (req, res) => {
   res.render("client/pages/home/checkUp.pug", {
     pageTitle: "Trang khám bệnh",
   });
+};
+
+
+
+
+
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+// [POST] localhost:/koi/api/chat
+module.exports.chat = async (req, res) => {
+  try {
+    const { message } = req.body;
+    
+    // Sử dụng mô hình gemini-pro
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
+    const result = await model.generateContent(message);
+    const response = await result.response;
+    const text = response.text();
+
+    res.json({ response: text });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ 
+      error: 'Đã xảy ra lỗi khi xử lý yêu cầu của bạn. Vui lòng thử lại sau.',
+      details: error.message
+    });
+  }
 };
