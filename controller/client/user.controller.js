@@ -43,7 +43,9 @@ module.exports.loginPost = async (req, res) => {
   }
 
   res.cookie("token", user.Token , { httpOnly: true });
+  // req.session.token = user.Token;
 
+    // res.cookie("token", user.Token , { httpOnly: true });
 
   if (user.RoleID == "RL0004") {
     res.redirect("/koi");
@@ -129,5 +131,6 @@ module.exports.registerPost = async (req, res) => {
 // [GET] localhost:/auth/logout
 module.exports.logout = async (req, res) => {
   res.clearCookie("token");
+  // req.session.destroy();
   res.redirect(`/auth/login`);
 };

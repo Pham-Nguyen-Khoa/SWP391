@@ -7,7 +7,8 @@ const Role = require("../../models/role.model");
 const Vet = require("../../models/vet.model");
 module.exports.requireAuth = async (req, res, next) => {
   const token = req.cookies.token;
-
+  // const tokenSession = req.session.token;
+  
   if (!token) {
     res.redirect("/auth/login");
     return;

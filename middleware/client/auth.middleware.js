@@ -5,6 +5,7 @@ const Customer = require("../../models/customer.model");
 // const Role = require("../../models/roles.model");
 module.exports.requireAuth = async (req, res, next) => {
   const token = req.cookies.token;
+  // const token = req.session.token;   
   // const token = localStorage.getItem("token");
   if (!token) {
     res.redirect("/auth/login");
