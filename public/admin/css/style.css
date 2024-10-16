@@ -277,12 +277,91 @@
     margin: 0 28%;
 }
 .badge-success-custom{
-    width: 64%;
-    height: 46px;
-    padding: 12px;
-    border: 2px solid black;
-    font-size: 13px;
-    border-radius: 20px;
+    width: 43%;
+    height: 40px;
+    padding: 8px;
+    border: 2px solid #28a745;
+    font-size: 4px;
+    border-radius: 25px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.badge-success-custom:hover {
+    background-color: #28a745;
+    transform: scale(1.05); 
+}
+
+.custom-info-button {
+    background-color: #007bff; /* Màu xanh dương */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Không có viền */
+    border-radius: 5px; /* Bo góc */
+    padding: 10px 15px; /* Padding cho nút */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển đổi */
+}
+
+.custom-info-button:hover {
+    background-color: #0056b3; /* Màu khi hover */
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+}
+
+.custom-edit-button {
+    background-color: #ffc107; /* Màu vàng */
+    color: black; /* Màu chữ đen */
+    border: none; /* Không có viền */
+    border-radius: 5px; /* Bo góc */
+    padding: 10px 15px; /* Padding cho nút */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển đổi */
+}
+
+.custom-edit-button:hover {
+    background-color: #e0a800; /* Màu khi hover */
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+}
+
+.custom-delete-button {
+    background-color: #dc3545; /* Màu đỏ */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Không có viền */
+    border-radius: 5px; /* Bo góc */
+    padding: 10px 15px; /* Padding cho nút */
+    transition: background-color 0.3s, transform 0.2s; /* Hiệu ứng chuyển đổi */
+}
+
+.custom-delete-button:hover {
+    background-color: #c82333; /* Màu khi hover */
+    transform: scale(1.05); /* Tăng kích thước khi hover */
+}
+
+/* Định dạng cho các nút */
+.btn {
+    display: inline-flex; /* Hiển thị inline-flex */
+    align-items: center; /* Căn giữa nội dung */
+    font-size: 16px; /* Kích thước chữ */
+}
+
+.btn i {
+    margin-right: 5px; /* Khoảng cách giữa biểu tượng và chữ */
+}
+.badge-danger-custom{
+    width: 43%;
+    height: 40px;
+    padding: 8px;
+    border: 2px solid #dc3545;
+    font-size: 4px;
+    border-radius: 25px;
+    background-color: #dc3545;
+    color: white;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.badge-danger-custom:hover {
+    background-color: #c82333; /* Màu nền khi hover */
+    transform: scale(1.05); /* Tăng kích thước khi hover */
 }
 #modal_info {
     display: none;
@@ -497,7 +576,7 @@ span {
 /* mixin-title */
 .mixin-title{
     text-align: center;
-    margin: 50px auto 30px;
+    margin: 50px 17% 30px;
     width: 70%;
     background-color: #21a0b3;
     border-radius: 32px;
@@ -761,3 +840,118 @@ span {
 }
 
 
+
+
+
+
+/* Filter */
+.filter-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    overflow: hidden; /* Thêm để tạo hiệu ứng mượt mà hơn */
+}
+
+.filter-card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.15); /* Tăng độ bóng khi hover */
+    transform: translateY(-2px);
+}
+
+.btn-filter {
+    padding: 10px 18px;
+    border: 2px solid #3182ce;
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative; /* Thêm để tạo hiệu ứng */
+}
+
+.btn-filter:hover, .btn-filter:focus {
+    background-color: #3182ce;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(49, 130, 206, 0.25);
+}
+
+.btn-create {
+    padding: 12px 24px;
+    background-color: #38a169;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 6px rgba(56, 161, 105, 0.25);
+    position: relative; /* Thêm để tạo hiệu ứng */
+}
+
+.btn-create:hover {
+    background-color: #2f855a;
+    box-shadow: 0 6px 8px rgba(56, 161, 105, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Thêm hiệu ứng cho các nút */
+.btn-filter::after, .btn-create::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-filter:hover::after, .btn-create:hover::after {
+    opacity: 1; /* Hiện hiệu ứng khi hover */
+}
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    border: 1px solid #ced4da; /* Border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding */
+    width: 75%; /* Width */
+    transition: border-color 0.3s; /* Transition */
+    font-size: 16px; /* Font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.search-input:focus {
+    border-color: #80bdff; /* Focus border color */
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5); /* Focus shadow */
+}
+
+/* Search button */
+.btn-search {
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding */
+    margin-left: 10px; /* Space between input and button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Transition */
+}
+
+.btn-search:hover {
+    background-color: #0056b3; /* Hover background color */
+    transform: scale(1.05); /* Scale effect on hover */
+}
