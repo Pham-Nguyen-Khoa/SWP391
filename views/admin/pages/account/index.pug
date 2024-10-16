@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/filterStatus.pug
 include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
   
 block main
   div(class="mainWrapper")
@@ -8,42 +9,43 @@ block main
     div#alert-container
       +alert-success("5000")
       +alert-error("5000")
-    h1.text-center Danh sách tài khoản
+    +title("Danh sách tài khoản")
     div(class="form-group")
-    .card.mb-3(style="width:88%;margin-left:180px;")
-      .card-header Bộ lọc 
-      .card-body 
-        .row 
-          .col-6
-            a(
-              href=`${prefixAdmin}/account`
-                class=`btn btn-sm ml-1 btn-outline-success `
-                button-filter
-                button-all
-              ) Tất cả
-            a(
-              href=`${prefixAdmin}/account?filter=customer`
-                class=`btn btn-sm ml-1 btn-outline-success `
-                button-filter
-              )  Customer
-            a(
-              href=`${prefixAdmin}/account?filter=staff`
-                class=`btn btn-sm ml-1 btn-outline-success  `
-                button-filter
-              ) Staff
-            a(
-              href=`${prefixAdmin}/account?filter=vet`
-                class=`btn btn-sm ml-1 btn-outline-success  `
-                button-filter
-              ) Vet
-            a(
-              href=`${prefixAdmin}/account?filter=admin`
-                class=`btn btn-sm ml-1 btn-outline-success  `
-                button-filter
+    .block-sider(style="margin-left:180px; margin-right:50px")
+      .card.mb-3.filter-card(style="width:100%;")
+        .card-header.filter-header Bộ lọc 
+        .card-body.filter-body
+          .row 
+            .col-md-8.filter-buttons
+              a(
+                href=`${prefixAdmin}/account`
+                  class=`btn btn-sm ml-1 btn-outline-success  btn-filter `
+                  button-filter
+                  button-all
+                ) Tất cả
+              a(
+                href=`${prefixAdmin}/account?filter=customer`
+                  class=`btn btn-sm ml-1 btn-outline-success  btn-filter`
+                  button-filter
+                )  Customer
+              a(
+                href=`${prefixAdmin}/account?filter=staff`
+                  class=`btn btn-sm ml-1 btn-outline-success  btn-filter `
+                  button-filter
+                ) Staff
+              a(
+                href=`${prefixAdmin}/account?filter=vet`
+                  class=`btn btn-sm ml-1 btn-outline-success   btn-filter`
+                  button-filter
+                ) Vet
+              a(
+                href=`${prefixAdmin}/account?filter=admin`
+                  class=`btn btn-sm ml-1 btn-outline-success  btn-filter `
+                  button-filter
 
-              ) Admin
-          .col-6.text-right(style="padding-right: 150px;")
-            a(href=`${prefixAdmin}/account/create` button-create-account class="btn btn-outline btn-success") + Tạo tài khoản
+                ) Admin
+            .col-md-4.text-right.create-account-button
+              a(href=`${prefixAdmin}/account/create` button-create-account class="btn btn-outline btn-create btn-success") + Tạo tài khoản
       if(listUser.length > 0)
         table.table.table-striped.table-bordered.mt-5.table-my-appointment
           thead
@@ -88,7 +90,7 @@ block main
                   if(item.Status == "Bị Block")
                     a(
                       href="javascript:;" 
-                      class="badge badge-danger badge-success-custom"
+                      class="badge badge-danger badge-danger-custom"
                       data-status= item.Status 
                       id= item.AccountID
                       button-change-status
@@ -96,31 +98,31 @@ block main
                       i(class="fas fa-ban" style="font-size: 22px;") 
                       
                 td(row-action)
-                  a(class="btn btn-primary btn-sm ml-1" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`)
+                  a(class="btn btn-primary btn-sm ml-1 custom-info-button" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`)
                     i(class="fa-solid fa-receipt") 
-                  a(class="btn btn-warning btn-sm ml-1" href=`${prefixAdmin}/account/edit/${item.AccountID}`)
+                  a(class="btn btn-warning btn-sm ml-1 custom-edit-button" href=`${prefixAdmin}/account/edit/${item.AccountID}`)
                     i(class="fa-solid fa-pen-to-square") 
                   button( 
-                    class="btn btn-danger btn-sm ml-1"
+                    class="btn btn-danger btn-sm ml-1 custom-delete-button"
                     button-delete-account 
                     id=item.AccountID
                     ) 
                     <i class="fa-solid fa-trash"></i> 
 
+      
     
-  
 
-    form(action="",
-      method="POST",
-      id="form-change-status"
-      PATH=`${prefixAdmin}/account/change-status/`
-    ) 
+      form(action="",
+        method="POST",
+        id="form-change-status"
+        PATH=`${prefixAdmin}/account/change-status/`
+      ) 
 
-    form(action="",
-      method="POST",
-      id="form-delete-account"
-      PATH=`${prefixAdmin}/account/delete/`
-      )
+      form(action="",
+        method="POST",
+        id="form-delete-account"
+        PATH=`${prefixAdmin}/account/delete/`
+        )
   #modal_info
       .row
         .col-5
@@ -133,5 +135,5 @@ block main
 
   script.
     var listUser = !{JSON.stringify(listUser)};
-  
+    
 

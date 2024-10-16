@@ -5,11 +5,12 @@ include ../../mixins/mixin-title.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
-    .block-sider(style="margin-left:180px; margin-bottom: 100px;")
-        .mixin-title
+    .mixin-title
             h1.mb-0.font-weight-bold
                 i.fas.fa-share-alt.mr-3
                 | Cài đặt mạng xã hội
+    .block-sider(style="margin-left:180px; margin-right:50px")
+        
         .card.shadow-lg(style="border-radius: 20px; border: none; overflow: hidden;")
             .card-header.bg-gradient-primary.text-white.d-flex.justify-content-between.align-items-center(style="border-bottom: none;")
                 h2

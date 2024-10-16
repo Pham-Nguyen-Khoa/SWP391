@@ -395,10 +395,10 @@ block main
                 overflow: hidden;
             }
 
-
-    .block-sider(style="width:90%;margin-left:180px;") 
+    +title("Quản lý Feedback")
+    .block-sider(style="margin-left:180px; margin-right:50px") 
         h1.page-title 
-        +title("Quản lý Feedback")
+        
 
         .filter-section
             .row 
@@ -592,11 +592,11 @@ block main
                     document.getElementById('analysisContent').innerHTML = `
                            <p><i class="fas fa-star"></i> <strong>Số sao trung bình: ${data.averageStar}</strong></p>
                             <p><i class="fas fa-comments"></i> <strong 60px;>Tổng số feedback: ${data.countFeedback}</strong></p>
-                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star5}%</b></p>
-                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star4}%</b></p>
-                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star3}%</b></p>
-                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star2}%</b></p>
-                            <p><i class="fas fa-star"></i> <b> ${data.star1}%</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star5Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star4Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star3Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star2Count}</b></p>
+                            <p><i class="fas fa-star"></i> <b> ${data.star1Count}</b></p>
                         `;
 
 

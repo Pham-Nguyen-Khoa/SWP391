@@ -7,8 +7,9 @@ block main
     +alert-error('5000')
     //- pre 
     //-     code=JSON.stringify(chats, null, 2)
-    .block-sider(style="width:90%;margin-left:180px;")  
-        +title("Chat")
+    +title("Chat")
+    .block-sider(style="margin-left:180px; margin-right:50px;margin-bottom: 100px;")  
+        
         .row 
             .col-12 
                 .chat(my-id=user.AccountID role=user.RoleID)
