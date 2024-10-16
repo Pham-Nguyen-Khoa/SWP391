@@ -9,7 +9,7 @@ const Admin = require("../../models/admin.model");
 const Staff = require("../../models/staff.model");
 const Vet = require("../../models/vet.model");
 const Customer = require("../../models/customer.model");
-
+const removeDiacritics = require('remove-diacritics'); 
 const generateUserId = async (rolePrefix, table, id) => {
   const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
   const [results] = await db.query(query);
@@ -68,6 +68,11 @@ module.exports.index = async (req, res) => {
     queryFilter = `SELECT * FROM account1 JOIN ${table} ON ${joinCondition}`;
   }
   var [listUser] = await Sequelize.query(queryFilter);
+  if(req.query.search){
+    listUser = listUser.filter(user =>
+      removeDiacritics(user.FullName.toLowerCase()).includes(removeDiacritics(req.query.search.toLowerCase()))
+    );
+  }
   res.render("admin/pages/account/index", {
     pageTitle: "Trang danh sách tài khoản",
     listUser: listUser,

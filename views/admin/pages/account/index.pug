@@ -16,7 +16,7 @@ block main
         .card-header.filter-header Bộ lọc 
         .card-body.filter-body
           .row 
-            .col-md-8.filter-buttons
+            .col-md-5.filter-buttons
               a(
                 href=`${prefixAdmin}/account`
                   class=`btn btn-sm ml-1 btn-outline-success  btn-filter `
@@ -44,7 +44,11 @@ block main
                   button-filter
 
                 ) Admin
-            .col-md-4.text-right.create-account-button
+            .col-md-5.text-left
+              form(action=`${prefixAdmin}/account` method="GET" class="search-form")
+                input.search-input(type="text" name="search"  placeholder="Tìm kiếm")
+                button(type="submit" class="btn ml-2 btn-search") Tìm kiếm
+            .col-md-2.text-right.create-account-button
               a(href=`${prefixAdmin}/account/create` button-create-account class="btn btn-outline btn-create btn-success") + Tạo tài khoản
       if(listUser.length > 0)
         table.table.table-striped.table-bordered.mt-5.table-my-appointment

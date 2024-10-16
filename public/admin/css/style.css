@@ -917,3 +917,41 @@ span {
 .btn-filter:hover::after, .btn-create:hover::after {
     opacity: 1; /* Hiện hiệu ứng khi hover */
 }
+
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+.search-input {
+    border: 1px solid #ced4da; /* Border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Padding */
+    width: 75%; /* Width */
+    transition: border-color 0.3s; /* Transition */
+    font-size: 16px; /* Font size */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow */
+}
+
+.search-input:focus {
+    border-color: #80bdff; /* Focus border color */
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 5px rgba(128, 189, 255, 0.5); /* Focus shadow */
+}
+
+/* Search button */
+.btn-search {
+    background-color: #007bff; /* Background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding */
+    margin-left: 10px; /* Space between input and button */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s, transform 0.2s; /* Transition */
+}
+
+.btn-search:hover {
+    background-color: #0056b3; /* Hover background color */
+    transform: scale(1.05); /* Scale effect on hover */
+}
