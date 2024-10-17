@@ -19,27 +19,36 @@ const generateUserId = async (rolePrefix, table, id) => {
 };
 // [GET] /admin/account
 module.exports.index = async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 5;
+  let skip = (page-1)*limit;
+
   let find = {
     RoleID: "RL0004",
   };
   let table = "";
+  let model = Account;
   let joinCondition = "";
   let queryFilter = "";
 
   if (req.query.filter == "vet") {
     table = "vet";
+    model = Vet;
     // joinCondition = `${table}.AccountID = account1.AccountID  where account1.Deleted = 0`;
   }
   if (req.query.filter == "staff") {
     table = "staff";
+    model = Staff;
     // joinCondition = `${table}.AccountID = account1.AccountID where account1.Deleted = 0`;
   }
   if (req.query.filter == "customer") {
     table = "customer";
+    model = Customer;
     // joinCondition = `${table}.AccountID = account1.AccountID where account1.Deleted = 0 `;
   }
   if (req.query.filter == "admin") {
     table = "admin";
+    model = Admin;
     // joinCondition = `${table}.AccountID = account1.AccountID where account1.Deleted = 0`;
   }
   joinCondition = `${table}.AccountID = account1.AccountID  where account1.Deleted = 0`;
@@ -68,14 +77,26 @@ module.exports.index = async (req, res) => {
     queryFilter = `SELECT * FROM account1 JOIN ${table} ON ${joinCondition}`;
   }
   var [listUser] = await Sequelize.query(queryFilter);
+
+
+  let totalUsers = await model.count({
+  });
+  
+
   if(req.query.search){
     listUser = listUser.filter(user =>
       removeDiacritics(user.FullName.toLowerCase()).includes(removeDiacritics(req.query.search.toLowerCase()))
     );
+     totalUsers = listUser.length;
   }
+  const totalPages = Math.ceil(totalUsers / limit);
+  listUser = listUser.slice(skip, skip + limit);
   res.render("admin/pages/account/index", {
     pageTitle: "Trang danh sách tài khoản",
     listUser: listUser,
+    totalPages: totalPages,
+    currentPage: page,
+    limit: limit,
   });
 };
 

@@ -19,6 +19,7 @@ module.exports.login = async (req, res) => {
 module.exports.loginPost = async (req, res) => {
   const password = md5(req.body.Password);
   const email = req.body.Email;
+
   const user = await Account1.findOne({
     where: {
       Email: email,

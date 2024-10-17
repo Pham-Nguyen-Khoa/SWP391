@@ -15,7 +15,7 @@ block main
                         .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 20px; border-top-right-radius: 20px;")
                             h2.card-title.text-center.mb-3(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng nhập
                         .card-body
-                            form(action="/auth/login" method="post")
+                            form(action="/auth/login" class="login-form" method="post")
                                 .form-group
                                     label(for="Email") Email
                                     input#email.form-control.login-element(type="email" name="Email" required)
@@ -29,4 +29,4 @@ block main
                                     .forgot-utilities
                                         a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
                                 .submit-login(style="display: flex; justify-content: center;")
-                                        button.btn.login-button(type="submit") Đăng nhập
+                                        button.btn.login-button(type="javascript:") Đăng nhập

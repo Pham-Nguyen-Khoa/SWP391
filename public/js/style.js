@@ -1,3 +1,60 @@
+
+//Remember Password 
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(";");
+  for (var i = 0; i < ca.length; i++) {
+  var c = ca[i];
+  while (c.charAt(0) == " ") {
+  c = c.substring(1);
+  }
+  if (c.indexOf(name) == 0) {
+  return c.substring(name.length, c.length);
+  }
+  }
+  return "";
+}
+
+const loginBtnForm = document.querySelector(".login-button");
+if(loginBtnForm){
+  const loginForm = document.querySelector(".login-form");
+  console.log(loginForm)
+  loginBtnForm.addEventListener("click", (e)=>{
+    e.preventDefault();
+    const rememberInput = document.querySelector(".remember-utilities input[name=RememberMe]");
+    if(rememberInput.checked){
+      const email = document.querySelector(".login-element[name=Email]").value;
+      const password = document.querySelector(".login-element[name=Password]").value;
+      document.cookie = "user=" + email + "; path=/auth/login";
+      document.cookie = "password=" + password + "; path=/auth/login";
+    }else{
+      document.cookie = "user=; path=/auth/login";
+      document.cookie = "password=; path=/auth/login";
+    }
+    loginForm.submit(); 
+  })
+}
+
+window.onload = function() {
+  if(window.location.pathname == "/auth/login"){
+    const user = getCookie("user");
+    const password = getCookie("password");
+    if (user) {
+      document.querySelector(".login-element[name=Email]").value = user;
+    }
+    if (password) {
+      document.querySelector(".login-element[name=Password]").value = password;
+    }
+  }
+}
+// End Remember Password 
+
+
+
+
+
+
+
 // Show Alert
 const showAlert = document.querySelector("[show-alert]");
 if (showAlert) {
@@ -802,6 +859,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const messagesContainer = document.querySelector('.ai-chatbox-messages');
 
   chatButton.addEventListener('click', function() {
+    const messageElement = document.createElement('div');
+    messageElement.setAttribute('data-sender', 'AI');
+    messageElement.textContent = 'Xin chào, tôi là trợ lý AI của Healthy Koi. Tôi có thể giúp gì cho bạn hôm nay?';
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
     chatbox.style.display = 'block';
   });
 
