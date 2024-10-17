@@ -132,5 +132,6 @@ module.exports.registerPost = async (req, res) => {
 module.exports.logout = async (req, res) => {
   res.clearCookie("token");
   // req.session.destroy();
+  console.log("hello")
   res.redirect(`/auth/login`);
 };
