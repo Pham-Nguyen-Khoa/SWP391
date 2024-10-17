@@ -167,11 +167,16 @@ block main
                                 input(type="hidden" name="date" value=appointment.Date)
                                 input(type="hidden" name="time" value=appointment.Shift)
                                 input(type="hidden" name="specialization" value=appointment.Name)
-                                button.btn(
-                                    type="submit"
-                                    style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;"
-                                ) Gán Bác Sĩ
-                        
+                                if(appointment.Process == "Pending" )
+                                  button.btn(
+                                      type="submit"
+                                      style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" disabled
+                                  ) Gán Bác Sĩ
+                                else
+                                  button.btn(
+                                      type="submit"
+                                      style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" 
+                                  ) Gán Bác Sĩ
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
                           i(class="fa-solid fa-receipt")
