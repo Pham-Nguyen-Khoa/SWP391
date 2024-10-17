@@ -29,75 +29,75 @@ block main
                                 h2.card-text(style="color: black") #{pondProfile.Temperature} °C
 
             
-            .row.mb-4
-                .col-md-4
-                    .card.bg-info.text-white.bg-success
-                        if(parseFloat(pondProfile.pH) > parseFloat(pondSetting.PH) + 1 || parseFloat(pondProfile.pH) < parseFloat(pondSetting.PH) - 1 )
-                            .card-body(style="background-color: #e47979;")
-                                h5.card-title(style="color: black;") pH
-                                h2.card-text.text-danger #{pondProfile.pH}
-                        else 
-                            .card-body(style="background-color: #4db84dd4;")
-                                h5.card-title(style="color: black;") pH
-                                h2.card-text(style="color: black") #{pondProfile.pH}
+            //- .row.mb-4
+            //-     .col-md-4
+            //-         .card.bg-info.text-white.bg-success
+            //-             if(parseFloat(pondProfile.pH) > parseFloat(pondSetting.PH) + 1 || parseFloat(pondProfile.pH) < parseFloat(pondSetting.PH) - 1 )
+            //-                 .card-body(style="background-color: #e47979;")
+            //-                     h5.card-title(style="color: black;") pH
+            //-                     h2.card-text.text-danger #{pondProfile.pH}
+            //-             else 
+            //-                 .card-body(style="background-color: #4db84dd4;")
+            //-                     h5.card-title(style="color: black;") pH
+            //-                     h2.card-text(style="color: black") #{pondProfile.pH}
 
-                .col-md-4
-                    .card.bg-success.text-white
-                        if(parseFloat(pondProfile.Oxygen) > parseFloat(pondSetting.Oxygen) + 1 || parseFloat(pondProfile.Oxygen) < parseFloat(pondSetting.Oxygen) - 1 )
-                            .card-body(style="background-color: #e47979;")
-                                h5.card-title(style="color: black;") Oxy hòa tan
-                                h2.card-text.text-danger #{pondProfile.Oxygen} mg/L
-                        else 
-                            .card-body(style="background-color: #4db84dd4;")
-                                h5.card-title(style="color: black;") Oxy hòa tan
-                                h2.card-text(style="color: black") #{pondProfile.Oxygen} mg/L
+            //-     .col-md-4
+            //-         .card.bg-success.text-white
+            //-             if(parseFloat(pondProfile.Oxygen) > parseFloat(pondSetting.Oxygen) + 1 || parseFloat(pondProfile.Oxygen) < parseFloat(pondSetting.Oxygen) - 1 )
+            //-                 .card-body(style="background-color: #e47979;")
+            //-                     h5.card-title(style="color: black;") Oxy hòa tan
+            //-                     h2.card-text.text-danger #{pondProfile.Oxygen} mg/L
+            //-             else 
+            //-                 .card-body(style="background-color: #4db84dd4;")
+            //-                     h5.card-title(style="color: black;") Oxy hòa tan
+            //-                     h2.card-text(style="color: black") #{pondProfile.Oxygen} mg/L
 
-                .col-md-4
-                    .card.bg-success.text-dark
-                        if(parseFloat(pondProfile.Salt) > parseFloat(pondSetting.Salt) + 0.05 || parseFloat(pondProfile.Salt) < parseFloat(pondSetting.Salt) - 0.05 )
-                            .card-body(style="background-color: #e47979;")
-                                h5.card-title(style="color: black;") Độ mặn
-                                h2.card-text.text-danger #{pondProfile.Salt} ppt
-                        else 
-                            .card-body(style="background-color: #4db84dd4;")
-                                h5.card-title(style="color: black;") Độ mặn
-                                h2.card-text(style="color: #black") #{pondProfile.Salt} ppt
+            //-     .col-md-4
+            //-         .card.bg-success.text-dark
+            //-             if(parseFloat(pondProfile.Salt) > parseFloat(pondSetting.Salt) + 0.05 || parseFloat(pondProfile.Salt) < parseFloat(pondSetting.Salt) - 0.05 )
+            //-                 .card-body(style="background-color: #e47979;")
+            //-                     h5.card-title(style="color: black;") Độ mặn
+            //-                     h2.card-text.text-danger #{pondProfile.Salt} ppt
+            //-             else 
+            //-                 .card-body(style="background-color: #4db84dd4;")
+            //-                     h5.card-title(style="color: black;") Độ mặn
+            //-                     h2.card-text(style="color: #black") #{pondProfile.Salt} ppt
 
 
-            h3.mb-3 Các thông số khác
-            table.table.table-striped.table-hover.table-my-appointment
-                thead
-                    tr
-                        th Thông số
-                        th Giá trị
-                        th Đơn vị
-                tbody
+            //- h3.mb-3 Các thông số khác
+            //- table.table.table-striped.table-hover.table-my-appointment
+            //-     thead
+            //-         tr
+            //-             th Thông số
+            //-             th Giá trị
+            //-             th Đơn vị
+            //-     tbody
                     
-                    tr
-                        td CO₂
-                        if(parseFloat(pondProfile.CO2) > parseFloat(pondSetting.Co2) + 2 || parseFloat(pondProfile.CO2) < parseFloat(pondSetting.Co2) - 2 )
-                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
+            //-         tr
+            //-             td CO₂
+            //-             if(parseFloat(pondProfile.CO2) > parseFloat(pondSetting.Co2) + 2 || parseFloat(pondProfile.CO2) < parseFloat(pondSetting.Co2) - 2 )
+            //-                 td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
                             
                             
-                        else 
-                            td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
-                        td ppm
+            //-             else 
+            //-                 td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.CO2}
+            //-             td ppm
                     
-                    tr
-                        td Nitrite
-                        if(parseFloat(pondProfile.Nitrite) > parseFloat(pondSetting.Nitrite) + 0.005 || parseFloat(pondProfile.Nitrite) < parseFloat(pondSetting.Nitrite) - 0.005 )
-                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrite}
-                        else 
-                            td(style="color: #59b160; font-size: 20px; font-weight: 700;")  #{pondProfile.Nitrite}
-                        td mg/L
-                    tr
-                        td Nitrate
-                        if(parseFloat(pondProfile.Nitrate) > parseFloat(pondSetting.Nitrate) + 5 || parseFloat(pondProfile.Nitrate) < parseFloat(pondSetting.Nitrate) - 5 )
-                            td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
-                        else 
-                            td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
-                        td mg/L
-            h3.mb-3 Chi tiết
+            //-         tr
+            //-             td Nitrite
+            //-             if(parseFloat(pondProfile.Nitrite) > parseFloat(pondSetting.Nitrite) + 0.005 || parseFloat(pondProfile.Nitrite) < parseFloat(pondSetting.Nitrite) - 0.005 )
+            //-                 td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrite}
+            //-             else 
+            //-                 td(style="color: #59b160; font-size: 20px; font-weight: 700;")  #{pondProfile.Nitrite}
+            //-             td mg/L
+            //-         tr
+            //-             td Nitrate
+            //-             if(parseFloat(pondProfile.Nitrate) > parseFloat(pondSetting.Nitrate) + 5 || parseFloat(pondProfile.Nitrate) < parseFloat(pondSetting.Nitrate) - 5 )
+            //-                 td(style="color: red; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
+            //-             else 
+            //-                 td(style="color: #59b160; font-size: 20px; font-weight: 700;") #{pondProfile.Nitrate}
+            //-             td mg/L
+            h3.mb-3.font-weight-bold Chi tiết
             
             table.table.table-striped.table-hover.table-standard.tableGood
                 thead

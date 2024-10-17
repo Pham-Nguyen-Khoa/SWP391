@@ -955,3 +955,41 @@ span {
     background-color: #0056b3; /* Hover background color */
     transform: scale(1.05); /* Scale effect on hover */
 }
+
+
+
+
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+
+
+/* Modal confirm block account */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Màu đen với độ mờ 70% */
+    transition: opacity 0.3s ease; /* Hiệu ứng chuyển động */
+}
+
+.modal-content {
+    border-radius: 10px; /* Bo tròn các góc */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng cho modal */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng chuyển động */
+    background-color: #ffffff; /* Màu nền cho modal */
+}
+
+.modal-header {
+    background-color: #007bff; /* Màu nền cho header */
+    color: #ffffff; /* Màu chữ cho header */
+    border-bottom: 1px solid #dee2e6; /* Đường viền dưới header */
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6; /* Đường viền trên footer */
+}
