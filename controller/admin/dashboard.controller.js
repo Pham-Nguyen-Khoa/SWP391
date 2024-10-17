@@ -6,40 +6,7 @@ const Bill = require("../../models/bill.model");
 
 // [Get] /admin/dashboard
 module.exports.index = async (req, res) => {
-//     const query = `SELECT 
-//     DATE_FORMAT(appointment.Date, '%Y-%m') AS month,  
-//     appointment.ServiceID,                         
-//     SUM(bill.Total) AS total_amount                  
-// FROM 
-//     bill
-// JOIN 
-//     appointment ON bill.BillID = appointment.BillID  
-// GROUP BY 
-//     month, appointment.ServiceID;`;
 
-//     const listBills = await Sequelize.query(query);
-
-
-// const ListService = (listBills,ServiceID) => {
-//     const currentMonth = new Date().getMonth() + 1;
-//     const result = new Array(12).fill(0);
-    
-//     listBills.forEach(bill => {
-//         if (bill.ServiceID == ServiceID) {
-//             const billMonth = new Date(bill.month).getMonth();
-//             console.log('month' + billMonth);
-
-//             if (billMonth <= currentMonth) {
-//                 result[billMonth] = bill.total_amount;
-//             }
-//         }
-//     });
-//     return result.slice(0, currentMonth);
-// }
-    
-//     const listService1 = ListService(listBills[0],'DV0001');
-//     const listService2 = ListService(listBills[0],'DV0002');
-//     const listService3 = ListService(listBills[0],'DV0003');
     
     res.render("admin/pages/dashboard/index",{
         pageTitle: "Trang tổng quan ",
@@ -59,25 +26,25 @@ JOIN
 GROUP BY 
     month, appointment.ServiceID;`;
 
-//     const queryDate = `SELECT 
-//     DATE(appointment.Date) AS date,  
-//     appointment.ServiceID,                         
-//     SUM(bill.Total) AS total_amount                  
-// FROM 
-//     bill
-// JOIN 
-//     appointment ON bill.BillID = appointment.BillID  
-// WHERE
-//     YEAR(appointment.Date) = YEAR(CURDATE()) AND
-//     MONTH(appointment.Date) = MONTH(CURDATE())
-// GROUP BY 
-//     date, appointment.ServiceID
-// ORDER BY
-//     date ASC, appointment.ServiceID`;
+    const queryDate = `SELECT 
+    DATE(appointment.Date) AS date,  
+    appointment.ServiceID,                         
+    SUM(bill.Total) AS total_amount                  
+FROM 
+    bill
+JOIN 
+    appointment ON bill.BillID = appointment.BillID  
+WHERE
+    YEAR(appointment.Date) = YEAR(CURDATE()) AND
+    MONTH(appointment.Date) = MONTH(CURDATE())
+GROUP BY 
+    date, appointment.ServiceID
+ORDER BY
+    date ASC, appointment.ServiceID`;
 
 
     const billsMonth = await Sequelize.query(queryMonth);
-    // const billsDate = await Sequelize.query(queryDate);
+    const billsDate = await Sequelize.query(queryDate);
 
 const ListServiceMonth = (listBills,ServiceID) => {
     const currentMonth = new Date().getMonth() + 1;
@@ -117,9 +84,11 @@ const ListServiceDate = (listBills, ServiceID) => {
     
     return result;
 }
-    
+    const day1 = ListServiceDate(billsDate[0],'DV0001');
+    const day2 = ListServiceDate(billsDate[0],'DV0002');
+    const day3 = ListServiceDate(billsDate[0],'DV0003');
     const month1 = ListServiceMonth(billsMonth[0],'DV0001');
     const month2 = ListServiceMonth(billsMonth[0],'DV0002');
     const month3 = ListServiceMonth(billsMonth[0],'DV0003');
-    return res.json({month1, month2, month3});
+    return res.json({day1, day2, day3, month1, month2, month3});
   }

@@ -16,6 +16,7 @@ const Appointment_PondRecord = require("../../models/appointment_pondrecord.mode
 const FishRecord = require("../../models/koiRecord.model");
 const FishProfile = require("../../models/koiProfile.model");
 const PondSetting = require("../../models/pondSetting.model");
+const Feedback = require("../../models/feedback.model");
 
 
 function formatDate(dateString) {
@@ -69,14 +70,22 @@ module.exports.detail = async (req, res) => {
         const appointmentID = req.params.AppointmentID;
         const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
         const appoinmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
-        console.log("***************")
-        console.log(appoinmentInfo)
-        console.log("***************")
         
         if(appoinmentInfo == null){
           res.redirect("/koi/my-appointment");
           return;
         }
+        let feedBack = ""
+        if(appoinmentInfo.Process == "Successed"){
+           feedBack = await Feedback.findOne({
+            raw: true,
+            where:{
+              AppointmentID: appointmentID
+            }
+          })
+        }
+       
+        
         appoinmentInfo.Date = formatDate(appoinmentInfo.Date);
         appoinmentInfo.PriceFormat = formatPrice(appoinmentInfo.Price);
         appoinmentInfo.PriceTotalFormat = formatPrice(
@@ -164,6 +173,7 @@ module.exports.detail = async (req, res) => {
                 pageTitle: "Trang Chi Tiết Đơn Hàng",
                 appoinmentInfo: appoinmentInfo,
                 objectPayment: objectPayment,
+                feedBack: feedBack
 
 
               });
@@ -240,6 +250,7 @@ module.exports.detail = async (req, res) => {
                 pageTitle: "Trang Chi Tiết Đơn Hàng",
                 appoinmentInfo: appoinmentInfo,
                 objectPayment: objectPayment,
+                feedBack: feedBack
 
               });
               return;
@@ -250,7 +261,8 @@ module.exports.detail = async (req, res) => {
   // Tư vấn Online
     res.render("client/pages/my-appointment/detail", {
       pageTitle: "Trang Chi Tiết Đơn Hàng",
-      appoinmentInfo: appoinmentInfo
+      appoinmentInfo: appoinmentInfo,
+      feedBack: feedBack
     });
 
 
@@ -447,5 +459,59 @@ module.exports.detailAdvice = async (req, res) => {
     appoinmentInfo: appoinmentInfo,
     pondRecords: pondRecords
   });
+}
+
+
+
+
+const generateUserId = async (rolePrefix, table, id) => {
+  const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
+  const [results] = await db.query(query);
+  const maxId = results[0].maxId || 0;
+  const newId = maxId + 1;
+  return `${rolePrefix}${String(newId).padStart(4, "0")}`;
+};
+
+// [POST] koi/my-appointment/feedback/:AppointmentID
+
+module.exports.feedBack = async (req, res) => {
+    const appointmentID = req.params.AppointmentID;
+    const star = req.body.starSelect;
+    const accountID = req.body.accountID;
+    const comment = req.body.comment;
+    const existedFeedBack = await Feedback.findOne({
+      raw: true,
+      where: {
+        AppointmentID: appointmentID
+      }
+    })
+    if(existedFeedBack){
+      await Feedback.update({
+        Content: comment,
+        Star: star,
+        Time: new Date()
+      },{
+        where:{
+          AppointmentID: appointmentID
+        }
+      })
+      req.flash("success","🩵🩵🩵 Đánh giá của bạn đã được cập nhật 🩵🩵🩵")
+      res.redirect("back")
+    }else{
+      const FeedBackID = await generateUserId("FB","feedback","FeedBackID");
+      await Feedback.create({
+        FeedBackID: FeedBackID,
+        AccountID: accountID,
+        AppointmentID: appointmentID,
+        Content: comment,
+        Star: star,
+        Time: new Date()
+      })
+      req.flash("success","🩵🩵🩵 Cảm ơn bạn đã đánh giá dịch vụ chúng tôi 🩵🩵🩵")
+      res.redirect("back")
+    }
+
+  
+    
 }
 

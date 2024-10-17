@@ -1,27 +1,36 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database"); // Database
 // const { UPDATE } = require("sequelize/lib/query-types");
-const Chat = sequelize.define('Chat', {
-    ChatID: {
+const Feedback = sequelize.define('Feedback', {
+    FeedBackID: {
         type: DataTypes.STRING(10),
         allowNull: false,
         primaryKey: true
     },
-    User_ID: {
+    AccountID: {
+        type: DataTypes.STRING(10),
+        allowNull: false
+    },
+    AppointmentID: {
         type: DataTypes.STRING(10),
         allowNull: false
     },
     Content: {
-        type: DataTypes.TEXT,
-        allowNull: true
+        type: DataTypes.STRING(500),
+        allowNull: false
     },
-    Images: {
-        type: DataTypes.JSON,
+    Star:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    Time:{
+        type: DataTypes.DATE,
         allowNull: true
     }
+
 }, {
-    tableName: 'chat',
+    tableName: 'feedback',
     timestamps: false
 });
 
-module.exports = Chat;
+module.exports = Feedback;

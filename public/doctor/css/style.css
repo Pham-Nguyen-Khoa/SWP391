@@ -25,7 +25,8 @@
 .body .main{
     margin: 15px;
     position: relative;
-    left: 150px;
+    /* left: 150px; */
+    left: 8%;
     width: calc(100% - 180px);
 }
 
@@ -547,13 +548,27 @@ span {
     border-radius: 18px;
     display: inline-block;
   }
+  .inner-outgoing .row {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.inner-outgoing .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 70%; /* Bạn có thể điều chỉnh giá trị này theo nhu cầu */
+}
   
   .inner-incoming .inner-content {
     background-color: #e5e5ea;
+    margin-bottom: 10px;
   }
   
   .inner-outgoing .inner-content {
     margin-left: 500px;
+    margin-bottom: 10px;
+    /* margin-left: -11%; */
     background-color: #0b93f6;
     color: white;
   }
@@ -693,3 +708,45 @@ span {
 .inner-dots span:nth-child(3) {
     animation-delay: 0.6s;
 }
+
+
+
+
+/* Upload file */
+.chat .custom-file-container .label-container{
+    display: none;
+}
+.chat .custom-file-container .input-container{
+    display: none;
+}
+
+
+.chat .custom-file-container .image-preview{
+    height: auto;
+    padding: 0;
+    border-radius: 0;
+}
+.chat .custom-file-container .image-preview-item{
+     width: 100px;
+     background-size: cover;
+     background-position: center;
+}
+
+
+.chat .inner-image img{
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    background: #cdc7c7;
+    padding: 10px;
+    margin: 0 5px 5px 0;
+    border-radius: 5px;
+    border: 1px solid grey
+}
+
+.chat .inner-outgoing .inner-image{
+    margin-left: auto;
+    text-align: right;
+}
+
+

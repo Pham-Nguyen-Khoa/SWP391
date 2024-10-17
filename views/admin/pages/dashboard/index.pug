@@ -4,16 +4,17 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
+
     .block-sider(style="margin-left:180px;")
         h1 #{pageTitle}
         h1 #{user.FullName}
+        button#finance Doanh thu
+        button#rating Đánh giá
         div(style="width: 1300px")   
             canvas#test
+        button#month Theo tháng
+        button#date Theo ngày   
 
     script(type="module", src="/admin/js/chart.js")
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
-    //- script.
-    //-         var listBills = !{JSON.stringify(listBills)};
-    //-         var listService1 = !{JSON.stringify(listService1)};
-    //-         var listService2 = !{JSON.stringify(listService2)};
-    //-         var listService3 = !{JSON.stringify(listService3)};
+

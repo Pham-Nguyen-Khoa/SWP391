@@ -782,3 +782,193 @@ function initializeSlider() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeSlider);
+
+
+
+
+
+
+
+
+
+// Tư vấn AI
+
+document.addEventListener('DOMContentLoaded', function() {
+  const chatButton = document.getElementById('ai-chat-button');
+  const chatbox = document.getElementById('ai-chatbox');
+  const closeChat = document.getElementById('close-chat');
+  const sendMessage = document.getElementById('send-message');
+  const messageInput = document.querySelector('.ai-chatbox-input input');
+  const messagesContainer = document.querySelector('.ai-chatbox-messages');
+
+  chatButton.addEventListener('click', function() {
+    chatbox.style.display = 'block';
+  });
+
+  closeChat.addEventListener('click', function() {
+    chatbox.style.display = 'none';
+  });
+
+  sendMessage.addEventListener('click', sendMessageToAI);
+  messageInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      sendMessageToAI();
+    }
+  });
+
+  const koiCareQA = {
+    // Chào hỏi và thông tin cơ bản
+    "xin chào": "Healthy Koi xin chào! Tôi có thể giúp gì cho bạn hôm nay?",
+    "bạn là ai": "Tôi là trợ lý AI của Healthy Koi, được tạo ra để hỗ trợ khách hàng với các câu hỏi về chăm sóc cá Koi.",
+    "địa chỉ của trung tâm": "Healthy Koi tọa lạc tại Vinhome GrandPark Quận 9, Thành Phố Thủ Đức",
+    "số điện thoại liên hệ": "Bạn có thể liên hệ với chúng tôi qua số điện thoại: 0382417490",
+    "giờ làm việc": "Chúng tôi mở cửa từ  07:00 - 17:00 Từ T2 đến T6. Chúng tôi nghỉ vào Chủ Nhật và các ngày lễ.",
+  
+    // Thông tin chung về cá Koi
+    "cá koi là gì": "Cá Koi là một loài cá chép được lai tạo, nổi tiếng với màu sắc đẹp và giá trị văn hóa cao, đặc biệt ở Nhật Bản.",
+    "tuổi thọ của cá koi": "Cá Koi có thể sống rất lâu, thường từ 25-35 năm, nhưng có những con đã sống hơn 200 năm.",
+    "kích thước trung bình của cá koi": "Cá Koi trưởng thành thường có kích thước từ 60-90 cm, nhưng có thể lớn hơn trong điều kiện tốt.",
+  
+    // // Chăm sóc và nuôi dưỡng
+    // "làm thế nào để cho cá koi ăn": "Cho cá Koi ăn 2-4 lần mỗi ngày, với lượng thức ăn vừa đủ để cá có thể ăn hết trong vòng 5 phút.",
+    // "thức ăn tốt nhất cho cá koi": "Thức ăn tốt nhất cho cá Koi là thức ăn cân bằng dinh dưỡng dành riêng cho cá Koi, bao gồm protein, chất béo, vitamin và khoáng chất.",
+    // "nhiệt độ nước lý tưởng cho cá koi": "Nhiệt độ nước lý tưởng cho cá Koi là từ 15°C đến 25°C.",
+    // "làm sạch hồ cá koi như thế nào": "Làm sạch hồ cá Koi bằng cách thay 10-15% nước mỗi tuần, loại bỏ cặn bẩn và kiểm tra bộ lọc thường xuyên.",
+    // "tần suất thay nước cho hồ cá koi": "Nên thay 10-15% nước hồ cá Koi mỗi tuần để duy trì chất lượng nước tốt.",
+    // "dấu hiệu cá koi khỏe mạnh": "Cá Koi khỏe mạnh có màu sắc tươi sáng, bơi lội linh hoạt, ăn uống tốt và không có dấu hiệu bệnh tật trên cơ thể.",
+  
+    // // Bệnh lý và điều trị
+    // "các bệnh phổ biến ở cá koi": "Các bệnh phổ biến ở cá Koi bao gồm bệnh nấm, ký sinh trùng, và các bệnh do vi khuẩn gây ra.",
+    // "cách phòng bệnh cho cá koi": "Phòng bệnh cho cá Koi bằng cách duy trì chất lượng nước tốt, cho ăn đúng cách, và kiểm tra sức khỏe cá thường xuyên.",
+    // "dấu hiệu cá koi bị bệnh": "Dấu hiệu cá Koi bị bệnh bao gồm ăn ít, bơi lội bất thường, màu sắc nhợt nhạt, hoặc có các vết thương trên cơ thể.",
+  
+    // // Thiết kế và bảo trì hồ cá
+    // "kích thước hồ cá koi lý tưởng": "Kích thước hồ cá Koi lý tưởng phụ thuộc vào số lượng cá, nhưng thông thường nên có ít nhất 1000 lít nước cho mỗi con cá trưởng thành.",
+    // "hệ thống lọc nước cho hồ cá koi": "Hệ thống lọc nước cho hồ cá Koi nên bao gồm lọc cơ học, lọc sinh học và UV sterilizer để đảm bảo nước sạch và an toàn cho cá.",
+    // "cách tạo môi trường tự nhiên trong hồ cá koi": "Tạo môi trường tự nhiên trong hồ cá Koi bằng cách thêm thực vật thủy sinh, đá tự nhiên và tạo các khu vực nước nông và sâu.",
+  
+    // // Các vấn đề khác
+    // "cách phân biệt cá koi đực và cái": "Phân biệt cá Koi đực và cái dựa trên hình dáng cơ thể, kích thước vây ngực và hành vi trong mùa sinh sản.",
+    // "thời gian sinh sản của cá koi": "Cá Koi thường sinh sản vào mùa xuân khi nhiệt độ nước tăng lên khoảng 18°C.",
+    // "cách vận chuyển cá koi an toàn": "Vận chuyển cá Koi an toàn bằng cách sử dụng túi chuyên dụng có oxy, giữ nhiệt độ ổn định và hạn chế thời gian vận chuyển.",
+  
+    // Câu hỏi về dịch vụ
+    "các dịch vụ chăm sóc cá koi": `Tại Healthy Koi, chúng tôi tự hào cung cấp một loạt các dịch vụ \
+chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
+1. Tư vấn Online: Giải đáp mọi thắc mắc về chăm sóc cá Koi từ xa. \n
+2. Khám bệnh cho cá: Dịch vụ khám, chẩn đoán và điều trị bệnh tận nơi. \n
+3. Cải thiện môi trường hồ: Tối ưu hóa chất lượng nước và môi trường sống.`,
+    "chi phí dịch vụ": "Chi phí các dịch vụ chăm sóc cá Koi của chúng tôi thay đổi tùy theo loại dịch vụ. Vui lòng liên hệ trực tiếp để được báo giá cụ thể.",
+    "đặt lịch hẹn": "Để đặt lịch hẹn, bạn có thể sử dụng form đặt lịch trên website của chúng tôi.",
+  
+    "default": "Xin lỗi, tôi không có thông tin về câu hỏi này. Bạn có thể hỏi về cách chăm sóc cá Koi, bệnh lý, hoặc các dịch vụ của chúng tôi không?"
+  };
+  const keywords = {
+    "dịch vụ": ["dịch vụ", "chăm sóc", "hỗ trợ"],
+    "chi phí": ["chi phí", "giá", "phí"],
+    "đặt lịch": ["đặt lịch", "hẹn", "lịch hẹn"],
+    "xin chào": ["chào", "hello", "hi", "xin chào"],
+    "bạn là ai": ["bạn là ai", "ai vậy", "giới thiệu"],
+    "địa chỉ": ["địa chỉ", "ở đâu", "chỗ nào", "tọa lạc"],
+    "số điện thoại": ["số điện thoại", "liên hệ", "gọi"],
+    "giờ làm việc": ["giờ làm việc", "mở cửa", "đóng cửa"],
+    // "cá koi": ["cá koi", "koi", "cá chép"],
+    // "tuổi thọ": ["tuổi thọ", "sống bao lâu", "thọ"],
+    // "kích thước": ["kích thước", "to", "lớn"],
+    // "cho ăn": ["cho ăn", "thức ăn", "ăn uống", "dinh dưỡng"],
+    // "nhiệt độ": ["nhiệt độ", "nóng lạnh", "ấm"],
+    // "làm sạch": ["làm sạch", "vệ sinh", "dọn dẹp", "thay nước"],
+    // "dấu hiệu khỏe mạnh": ["dấu hiệu khỏe mạnh", "khỏe", "sức khỏe"],
+    // "bệnh": ["bệnh", "ốm", "không khỏe", "bệnh tật"],
+    // "phòng bệnh": ["phòng bệnh", "ngừa bệnh", "bảo vệ"],
+    // "hồ cá": ["hồ cá", "bể cá", "ao"],
+    // "lọc nước": ["lọc nước", "hệ thống lọc", "làm sạch nước"],
+    // "môi trường tự nhiên": ["môi trường tự nhiên", "tự nhiên", "sinh thái"],
+    // "phân biệt đực cái": ["phân biệt đực cái", "giới tính", "đực cái"],
+    // "sinh sản": ["sinh sản", "đẻ trứng", "mùa sinh sản"],
+    // "vận chuyển": ["vận chuyển", "di chuyển", "đưa đi"],
+
+  };
+  function getAIResponse(userMessage) {
+    const lowerCaseMessage = userMessage.toLowerCase();
+    console.log(lowerCaseMessage)
+    let matchedAnswers = [];
+   for (const [key, keywordList] of Object.entries(keywords)) {
+    if (keywordList.some(keyword => lowerCaseMessage.includes(keyword.toLowerCase()))) {
+        console.log(key)
+      for (const [question, answer] of Object.entries(koiCareQA)) {
+        if (question.includes(key)) {
+          console.log(answer)
+          matchedAnswers.push(answer);
+        }
+      }
+    }
+  }
+    
+  if (matchedAnswers.length > 1) {
+    return matchedAnswers.reduce((best, current) => 
+      Math.abs(current.length - lowerCaseMessage.length) > Math.abs(best.length - lowerCaseMessage.length) ? current : best
+    );
+
+  } else if (matchedAnswers.length === 1) {
+    return matchedAnswers[0];
+  }
+
+    return getGeneralAIResponse(userMessage);
+  }
+
+
+
+  async function getGeneralAIResponse(message) {
+    try {
+      const response = await fetch('http://localhost:7777/koi/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: message })
+      });
+      console.log(response)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data.response;
+    } catch (error) {
+      console.error('Error getting AI response:', error);
+      return "Xin lỗi, tôi đang gặp sự cố kỹ thuật. Vui lòng thử lại sau hoặc liên hệ trực tiếp với trung tâm để được hỗ trợ.";
+    }
+  }
+  
+
+  async function sendMessageToAI() {
+    const message = messageInput.value.trim();
+    if (message) {
+      addMessageToChat('Bạn', message);
+      messageInput.value = '';
+      const typingIndicator = document.createElement('div');
+      typingIndicator.className = 'typing-indicator';
+      typingIndicator.textContent = 'AI đang trả lời...';
+      messagesContainer.appendChild(typingIndicator);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      try {
+        const aiResponse = await getAIResponse(message);
+        messagesContainer.removeChild(typingIndicator);
+        addMessageToChat('AI', aiResponse);
+      } catch (error) {
+        messagesContainer.removeChild(typingIndicator);
+        addMessageToChat('AI', 'Xin lỗi, đã xảy ra lỗi. Vui lòng thử lại sau.');
+      }
+    }
+  }
+
+  function addMessageToChat(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.setAttribute('data-sender', sender);
+    messageElement.textContent = message;
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  }
+});

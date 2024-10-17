@@ -1,0 +1,662 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    
+    style.
+        body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f2f5;
+        color: #333;
+            }
+
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-select, .form-input, .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+        }
+
+        .btn {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .table-container-feedback {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        #feedback-table {
+            text-align: center;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        #feedback-table thead tr th {
+            text-align: center;
+        }
+        #feedback-table tbody tr td {
+            text-align: center;
+        }
+
+        #feedback-table th, #feedback-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        #feedback-table th {
+            background-color: #f8fafc;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
+        #feedback-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .id-cell {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .star-rating {
+            color: #d1d5db;
+        }
+
+        .star.filled {
+            color: #f59e0b;
+        }
+        .star{
+            font-size: 30px;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-read {
+            background-color: #10b981;
+            color: white;
+        }
+
+        .status-unread {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .action-cell {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+ 
+
+        .btn-view {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        #page-info {
+            font-weight: 500;
+        }
+        .filter-section {
+        background: linear-gradient(to right, #4295b6, #8ed9cc);
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        position: relative;
+        }
+
+        .filter-section form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            padding-left: 20px;
+            
+        }
+
+        .filter-section .form-input,
+        .filter-section .form-select {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            height: 43px;
+        }
+
+        .filter-section .btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-section .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .filter-section .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .filter-section .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .filter-section .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        @media (max-width: 768px) {
+            .filter-section form {
+                flex-direction: column;
+            }
+
+            .filter-section .form-input,
+            .filter-section .form-select,
+            .filter-section .btn {
+                width: 100%;
+            }
+        }
+        .analyst{
+            position: absolute;
+            right: 48px;
+            top: 20px;
+        }
+         .modal-content {
+                background-color: #f0f8ff;
+                margin: 7% 39%;
+                padding: 30px;
+                border: none;
+                width: 90%;
+                max-width: 700px;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                background-image: linear-gradient(80deg, rgb(67 67 238 / 25%) 0%, rgb(134 156 196 / 14%) 50%), linear-gradient(163deg, rgb(165 171 176 / 53%) 50%, rgba(0, 70, 209, 0.25) 100%);
+            }
+
+            .modal-content h2 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 30px;
+                font-size: 28px;
+                text-transform: uppercase;
+            }
+
+            #analysisContent {
+                    display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+
+                border-radius: 10px;
+            }
+
+            .stat-box {
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 10px;
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                flex: 1 1 200px;
+            }
+
+            .stat-box h3 {
+                font-size: 18px;
+                color: #34495e;
+                margin-bottom: 10px;
+            }
+
+            .stat-box p {
+                font-size: 24px;
+                font-weight: bold;
+                color: #3498db;
+            }
+
+            #chartContainer {
+                width: 100%;
+                height: 300px;
+                margin-top: 30px;
+            }
+
+            .close {
+                color: #000000;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #2c3e50;
+                text-decoration: none;
+            }
+
+            #analysisContent {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            #analysisContent p {
+                padding: 10px;
+                background-color: #559eb65e;
+                border-radius: 6px;
+                transition: background-color 0.3s;
+                min-width: 200px;
+                text-align: center;
+                font-weight: 700;
+                border: 1px solid #c2bfbff2;
+                position: relative;
+            }
+
+            #analysisContent p:hover {
+                background-color: #e9ecef;
+                cursor: pointer;
+                transform: translateY(-3px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                transition: all 0.3s ease;
+            }
+            .spinner-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px; /* Điều chỉnh chiều cao nếu cần */
+                width: 100%;
+            }
+            .spinner {
+                margin: 20px auto;
+                width: 70px;
+                text-align: center;
+            }
+
+            .spinner > div {
+                width: 18px;
+                height: 18px;
+                background-color: #333;
+                border-radius: 100%;
+                display: inline-block;
+                animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            }
+
+            .spinner .bounce1 {
+                animation-delay: -0.32s;
+            }
+
+            .spinner .bounce2 {
+                animation-delay: -0.16s;
+            }
+
+            @keyframes sk-bouncedelay {
+                0%, 80%, 100% { 
+                    transform: scale(0);
+                } 40% { 
+                    transform: scale(1.0);
+                }
+            }
+
+            b{
+                position: absolute;
+                right: 0px;
+                background-color: #95999ade;
+                height: 100%;
+                top: 0;
+                padding: 10px;
+                min-width: 60px;
+            }
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(5px);
+                z-index: 999;
+                display: none;
+            }
+
+            #analyzeModal {
+                z-index: 1000;
+            }
+
+            body.modal-open {
+                overflow: hidden;
+            }
+
+    +title("Quản lý Feedback")
+    .block-sider(style="margin-left:180px; margin-right:50px") 
+        h1.page-title 
+        
+
+        .filter-section
+            .row 
+                form(action="/admin/feedback" method="get")
+                    input#date-filter.form-input(type="date" name="dateFilter" value=dateFilter)
+                    input#search-filter.form-input(type="text" name="searchFilter" placeholder="Tìm kiếm..." value=searchFilter)
+                    select#star-filter.form-select(name="starFilter" value=starFilter style="color: #e9b219; font-size: 22px;")
+                        option(value="" selected) Tất cả sao
+                        option(value="5" selected=starFilter==="5" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  5 sao ★★★★★
+                        option(value="4" selected=starFilter==="4" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  4 sao ★★★★☆
+                        option(value="3" selected=starFilter==="3" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  3 sao ★★★☆☆
+                        option(value="2" selected=starFilter==="2" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  2 sao ★★☆☆☆
+                        option(value="1" selected=starFilter==="1" class="star-option" style="color: #e9b219; font-size: 22px;" )
+                            |  1 sao ★☆☆☆☆
+                    button#filter-button.btn.btn-primary Lọc
+                    button#reset-filter.btn(type="button") Tất cả
+                a.btn.btn-primary#analyzeBtn(href="javascript:void(0)" class="analyst") Phân tích
+            #overlay
+            #analyzeModal.modal
+                .modal-content
+                    span.close &times;
+                    h2 Phân tích Feedback
+                    #analysisContent
+                    .spinner-container
+                        .spinner
+                            .bounce1
+                            .bounce2
+                            .bounce3
+                        
+                    #chartContainer
+        .table-container-feedback
+            h5
+                if listFeedback.length === 0
+                    if filterType === 'date'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào trong ngày #{dateFormat}.
+                    else if filterType === 'star'
+                        case starFilter
+                            when '5'
+                                p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có 5 sao
+                            when '4'
+                                p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có 4 sao
+                            when '3'
+                                p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có 3 sao
+                            when '2'
+                                p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có 2 sao
+                            when '1'
+                                p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có 1 sao
+                    else if filterType === 'search_star'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có tên khách hàng #{searchName} và #{starFilter} sao.
+                    else if filterType === 'date_search'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có tên khách hàng #{searchName} trong ngày #{dateFormat}.
+                    else if filterType === 'date_star'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có #{starFilter} sao trong ngày #{dateFormat}.
+                    else if filterType === 'date_search_star'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có tên khách hàng #{searchName}, #{starFilter} sao trong ngày #{dateFormat}.
+                    else if filterType ==='search'
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào có tên khách hàng #{searchName}.
+                    else
+                        p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có feedback nào phù hợp với các tiêu chí tìm kiếm.
+                    
+                    
+                    
+                else
+                    table#feedback-table
+                        thead
+                            tr
+                                th STT
+                                th Khách hàng
+                                th Ngày
+                                th Nội dung
+                                th Số sao
+                                th Hành động
+                        tbody
+                            each feedback,index in listFeedback
+                                tr
+                                    td.id-cell #{ (currentPage - 1) * limit + index + 1} 
+                                    td #{feedback.FullName} 
+                                    td #{feedback.Time}
+                                    td #{feedback.Content}
+                                    td 
+                                        .star-rating
+                                            - for (var i = 0; i < feedback.Star; i++)
+                                                span.star.filled ★
+                                            - for (var i = 0; i < 5 - feedback.Star; i++)
+                                                span.star ★
+                                    td.action-cell
+                                        button.btn.btn-view(onclick=`window.location.href="/staff/appointment/detail/${feedback.AppointmentID}"`) Xem
+                            //- tr
+                            //-     td.id-cell 2
+                            //-     td Trần Thị B
+                            //-     td 2023-07-14
+                            //-     td Cần cải thiện thời gian giao hàng
+                            //-     td 
+                            //-         .star-rating
+                            //-             - for (var i = 0; i < 3; i++)
+                            //-                 span.star.filled ★
+                            //-             - for (var i = 0; i < 2; i++)
+                            //-                 span.star ★
+                            //-     td.action-cell
+                            //-         button.btn.btn-view Xem
+                            //-         button.btn.btn-delete Xóa
+
+                .pagination
+                    if totalPages > 1
+                        if currentPage > 1
+                            button#prev-page.btn.btn-secondary Trước
+                        - for (var i = 1; i <= totalPages; i++)
+                            if i === currentPage
+                                button.btn.btn-primary.btnPage #{i}
+                            else
+                                button.btn.btn-secondary.btnPage #{i}
+                        button#next-page.btn.btn-secondary Sau
+                    else if totalPages === 1
+                        button.btn.btn-primary 1
+        script(src="https://cdn.jsdelivr.net/npm/chart.js") 
+        script.
+            
+            const totalPages = #{totalPages};
+            document.getElementById('reset-filter').addEventListener('click', function() {
+                //- document.getElementById('date-filter').value = '';
+                //- document.getElementById('search-filter').value = '';
+                //- document.getElementById('star-filter').value = '';
+                window.location.href = '/admin/feedback';
+            });
+            const buttonPagination = document.querySelectorAll('.btn-secondary');
+            buttonPagination.forEach(button => {
+                button.addEventListener('click', function() {
+                    const url = new URL(window.location.href);
+                    let currentPage = url.searchParams.get('page') || 1;
+                    if(this.id === 'prev-page'){
+                        url.searchParams.set('page', parseInt(currentPage) - 1);
+                    }
+                    else if(this.id === 'next-page'){
+                        url.searchParams.set('page', parseInt(currentPage) + 1);
+                    }
+                    else{
+                        url.searchParams.set('page', button.textContent);
+                    }
+                    currentPage = url.searchParams.get('page') || 1;
+                    window.location.href = url.toString();
+                });
+            });
+
+
+            let chartExisted;
+
+             const currentPage = new URL(window.location.href).searchParams.get('page') || 1;
+             const pagination = document.querySelector('.pagination');
+            const btnPages = pagination.querySelectorAll('.btnPage');
+            const currentPageButton = btnPages[currentPage - 1]; 
+            const prevPageButton = document.getElementById('prev-page');
+            const nextPageButton = document.getElementById('next-page');
+            if (currentPageButton) {
+                currentPageButton.classList.add('btn-primary');
+                currentPageButton.classList.remove('btn-secondary');
+                if(currentPage === '1'){
+                    if(prevPageButton){
+                        prevPageButton.style.display = 'none'; 
+                    }
+                }
+                console.log(currentPage);
+                if(parseInt(currentPage) === totalPages){
+                    if(nextPageButton){
+                        nextPageButton.style.display = 'none'; 
+                    }
+                }
+            }
+                const spinnerContainer = document.querySelector('.spinner-container');
+
+                   document.getElementById('analyzeBtn').addEventListener('click', function() {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                modal.style.display = "block";
+                 overlay.style.display = "block";
+                    if (chartExisted) {
+                    chartExisted.destroy();
+                }
+                
+
+                document.getElementById('chartContainer').innerHTML = '';
+                setTimeout(() => {
+                    fetch('/admin/feedback/analyze')
+                    .then(response => response.json())
+                    .then(data => {
+                        spinnerContainer.style.display = 'none';
+                        console.log(data);
+                    document.getElementById('analysisContent').innerHTML = `
+                           <p><i class="fas fa-star"></i> <strong>Số sao trung bình: ${data.averageStar}</strong></p>
+                            <p><i class="fas fa-comments"></i> <strong 60px;>Tổng số feedback: ${data.countFeedback}</strong></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star5Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star4Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star3Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star2Count}</b></p>
+                            <p><i class="fas fa-star"></i> <b> ${data.star1Count}</b></p>
+                        `;
+
+
+
+                        const ctx = document.createElement('canvas');
+                        document.getElementById('chartContainer').appendChild(ctx);
+                      chartExisted =  new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['5 sao', '4 sao', '3 sao', '2 sao', '1 sao'],
+                        datasets: [{
+                            label: 'Phân bố Feedback',
+                            data: [data.star5, data.star4, data.star3, data.star2, data.star1],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 206, 86, 0.8)',
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(153, 102, 255, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                    })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                }, 1000);
+            });
+
+            document.querySelector('.close').addEventListener('click', function() {
+                closeModal();
+            });
+
+           window.addEventListener('click', function(event) {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                if (event.target === modal || event.target === overlay) {
+                    closeModal();
+                }
+            });
+            
+
+            function closeModal() {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                modal.style.display = "none";
+                overlay.style.display = "none";
+                document.body.classList.remove('modal-open');
+            }

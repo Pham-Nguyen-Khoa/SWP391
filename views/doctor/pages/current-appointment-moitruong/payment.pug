@@ -168,10 +168,9 @@ block main
                 }
 
 
-                                const autoDistanceBtn = document.querySelector("#auto-distance");
+                const autoDistanceBtn = document.querySelector("#auto-distance");
                 var  distanceAuto = 0;
                 const currentAppointmentJson = !{JSON.stringify(currentAppointment)};
-                console.log(currentAppointmentJson.Address);
                 autoDistanceBtn.addEventListener("click",() => {
                 const settingGeneral = !{JSON.stringify(SettingGeneral)}; 
                     const originAddress = settingGeneral.Address
