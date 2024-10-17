@@ -96,7 +96,7 @@ module.exports.index = async (req, res) => {
         filterType = 'none';
     }
 
-    res.render("staff/pages/feedback/index",{
+    res.render("admin/pages/feedback/index",{
         pageTitle: "Trang đánh giá ",
         listFeedback: listFeedback,
         totalPages: totalPages,
@@ -111,3 +111,46 @@ module.exports.index = async (req, res) => {
     })
   }
     
+
+// [Get] /admin/feedback/analyze
+module.exports.analyze = async (req, res) => {
+    let quertFeedBack =`Select * from feedback fb Join account1 ac on ac.AccountID = fb.AccountID Join customer cs on cs.AccountID = ac.AccountID `
+    const [listFeedback] = await db.query(quertFeedBack,{
+        raw: true
+    })
+    let countFeedback = listFeedback.length;
+    let sumStar = 0;
+    listFeedback.forEach(feedback => {
+        sumStar += feedback.Star;
+    });
+    let star5 = 0;
+    let star4 = 0;
+    let star3 = 0;
+    let star2 = 0;
+    let star1 = 0;
+    listFeedback.forEach(feedback => {
+        if(feedback.Star === 5){
+            star5++;
+        }
+        if(feedback.Star === 4){
+            star4++;
+        }
+        if(feedback.Star === 3){
+            star3++;
+        }
+        if(feedback.Star === 2){
+            star2++;
+        }
+        if(feedback.Star === 1){
+            star1++;
+        }   
+    });
+    const avareStar5 = (star5 / countFeedback) * 100;
+    const avareStar4 = (star4 / countFeedback) * 100;
+    const avareStar3 = (star3 / countFeedback) * 100;
+    const avareStar2 = (star2 / countFeedback) * 100;
+    const avareStar1 = (star1 / countFeedback) * 100;
+    let averageStar = sumStar / countFeedback;
+    res.json({averageStar: averageStar.toFixed(2),countFeedback: countFeedback, star5Count: star5,star4Count: star4, star3Count: star3, star2Count: star2, star1Count: star1, star5: avareStar5.toFixed(0), star4: avareStar4.toFixed(0), star3: avareStar3.toFixed(0), star2: avareStar2.toFixed(0), star1: avareStar1.toFixed(0)});
+}
+  

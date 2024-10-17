@@ -1,13 +1,15 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
 
 block main
     +alert-success("5000")
     +alert-error('5000')
     //- pre 
     //-     code=JSON.stringify(chats, null, 2)
-    .block-sider(style="width:90%;margin-left:180px;")  
-        h1 chat
+    +title("Chat")
+    .block-sider(style="margin-left:180px; margin-right:50px;margin-bottom: 100px;")  
+        
         .row 
             .col-12 
                 .chat(my-id=user.AccountID role=user.RoleID)
@@ -20,13 +22,24 @@ block main
                                             img(src=chat.infoUser.Avatar, alt="Avatar" style="width:50px;height:50px;border-radius:50%;")
                                         .content
                                             .inner-name #{chat.infoUser.FullName}
-                                            .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
-                                                p  #{chat.Content}
+                                            if(chat.Content)
+                                                .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                                    p  #{chat.Content}
+                                            if(chat.Images)
+                                                .inner-image
+                                                    each image in chat.Images
+                                                        img(src=image, alt="Image" )
                             else
                                 .inner-outgoing 
                                     .row
-                                        .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
-                                            p #{chat.Content}
+                                        .content
+                                            if chat.Content
+                                                .inner-content(class=chat.infoUser.RoleID === 'RL0001' ? 'admin-message' : '')
+                                                    p #{chat.Content}
+                                            if chat.Images
+                                                .inner-image
+                                                    each image in chat.Images
+                                                        img(src=image, alt="Image")
                         div(class="inner-list-typing")
                             //- div(class="box-typing")
                             //-     .row
@@ -50,6 +63,7 @@ block main
                             //-                     span 
                             //-                     span 
                             //-                     span 
+                    div(class="custom-file-container" data-upload-id="my-unique-id")
                     .inner-foot
                         form(
                             class="inner-form"
@@ -61,6 +75,8 @@ block main
                                 name="content"
                                 placeholder="Nhập tin nhắn..."
                             )
+                            label(class="custom-file-container__custom-file-label" for="file-upload-with-preview-my-unique-id" style="padding-top: 13px;") 
+                                i.fa-regular.fa-image
                             span(class="button-emoji btn btn-light mx-2") 
                                 i.fa-regular.fa-face-smile
                             button(
@@ -69,5 +85,8 @@ block main
                             ) 
                                 i.fas.fa-paper-plane
                                 span.ml-2 
+
         .tooltip
             emoji-picker
+
+        

@@ -20,4 +20,5 @@ router.get("/onlConsult", controller.onlConsult);
 
 router.get("/checkUp", controller.checkUp);
 
+router.post("/api/chat", controller.chat);
 module.exports = router

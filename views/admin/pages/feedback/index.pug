@@ -167,6 +167,7 @@ block main
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         margin-bottom: 20px;
+        position: relative;
         }
 
         .filter-section form {
@@ -175,6 +176,7 @@ block main
             gap: 10px;
             align-items: center;
             padding-left: 20px;
+            
         }
 
         .filter-section .form-input,
@@ -226,31 +228,211 @@ block main
                 width: 100%;
             }
         }
+        .analyst{
+            position: absolute;
+            right: 48px;
+            top: 20px;
+        }
+         .modal-content {
+                background-color: #f0f8ff;
+                margin: 7% 39%;
+                padding: 30px;
+                border: none;
+                width: 90%;
+                max-width: 700px;
+                border-radius: 15px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                background-image: linear-gradient(80deg, rgb(67 67 238 / 25%) 0%, rgb(134 156 196 / 14%) 50%), linear-gradient(163deg, rgb(165 171 176 / 53%) 50%, rgba(0, 70, 209, 0.25) 100%);
+            }
 
+            .modal-content h2 {
+                color: #2c3e50;
+                text-align: center;
+                margin-bottom: 30px;
+                font-size: 28px;
+                text-transform: uppercase;
+            }
 
-    .block-sider(style="width:90%;margin-left:180px;") 
+            #analysisContent {
+                    display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+
+                border-radius: 10px;
+            }
+
+            .stat-box {
+                background-color: #ffffff;
+                border-radius: 10px;
+                padding: 20px;
+                margin: 10px;
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                flex: 1 1 200px;
+            }
+
+            .stat-box h3 {
+                font-size: 18px;
+                color: #34495e;
+                margin-bottom: 10px;
+            }
+
+            .stat-box p {
+                font-size: 24px;
+                font-weight: bold;
+                color: #3498db;
+            }
+
+            #chartContainer {
+                width: 100%;
+                height: 300px;
+                margin-top: 30px;
+            }
+
+            .close {
+                color: #000000;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: color 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: #2c3e50;
+                text-decoration: none;
+            }
+
+            #analysisContent {
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            #analysisContent p {
+                padding: 10px;
+                background-color: #559eb65e;
+                border-radius: 6px;
+                transition: background-color 0.3s;
+                min-width: 200px;
+                text-align: center;
+                font-weight: 700;
+                border: 1px solid #c2bfbff2;
+                position: relative;
+            }
+
+            #analysisContent p:hover {
+                background-color: #e9ecef;
+                cursor: pointer;
+                transform: translateY(-3px);
+                box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+                transition: all 0.3s ease;
+            }
+            .spinner-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100px; /* Điều chỉnh chiều cao nếu cần */
+                width: 100%;
+            }
+            .spinner {
+                margin: 20px auto;
+                width: 70px;
+                text-align: center;
+            }
+
+            .spinner > div {
+                width: 18px;
+                height: 18px;
+                background-color: #333;
+                border-radius: 100%;
+                display: inline-block;
+                animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+            }
+
+            .spinner .bounce1 {
+                animation-delay: -0.32s;
+            }
+
+            .spinner .bounce2 {
+                animation-delay: -0.16s;
+            }
+
+            @keyframes sk-bouncedelay {
+                0%, 80%, 100% { 
+                    transform: scale(0);
+                } 40% { 
+                    transform: scale(1.0);
+                }
+            }
+
+            b{
+                position: absolute;
+                right: 0px;
+                background-color: #95999ade;
+                height: 100%;
+                top: 0;
+                padding: 10px;
+                min-width: 60px;
+            }
+            #overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(5px);
+                z-index: 999;
+                display: none;
+            }
+
+            #analyzeModal {
+                z-index: 1000;
+            }
+
+            body.modal-open {
+                overflow: hidden;
+            }
+
+    +title("Quản lý Feedback")
+    .block-sider(style="margin-left:180px; margin-right:50px") 
         h1.page-title 
-        +title("Quản lý Feedback")
+        
 
         .filter-section
-            form(action="/staff/feedback" method="get")
-                input#date-filter.form-input(type="date" name="dateFilter" value=dateFilter)
-                input#search-filter.form-input(type="text" name="searchFilter" placeholder="Tìm kiếm..." value=searchFilter)
-                select#star-filter.form-select(name="starFilter" value=starFilter style="color: #e9b219; font-size: 22px;")
-                    option(value="" selected) Tất cả sao
-                    option(value="5" selected=starFilter==="5" class="star-option" style="color: #e9b219; font-size: 22px;")
-                        |  5 sao ★★★★★
-                    option(value="4" selected=starFilter==="4" class="star-option" style="color: #e9b219; font-size: 22px;")
-                        |  4 sao ★★★★☆
-                    option(value="3" selected=starFilter==="3" class="star-option" style="color: #e9b219; font-size: 22px;")
-                        |  3 sao ★★★☆☆
-                    option(value="2" selected=starFilter==="2" class="star-option" style="color: #e9b219; font-size: 22px;")
-                        |  2 sao ★★☆☆☆
-                    option(value="1" selected=starFilter==="1" class="star-option" style="color: #e9b219; font-size: 22px;" )
-                        |  1 sao ★☆☆☆☆
-                button#filter-button.btn.btn-primary Lọc
-                button#reset-filter.btn(type="button") Tất cả
-
+            .row 
+                form(action="/admin/feedback" method="get")
+                    input#date-filter.form-input(type="date" name="dateFilter" value=dateFilter)
+                    input#search-filter.form-input(type="text" name="searchFilter" placeholder="Tìm kiếm..." value=searchFilter)
+                    select#star-filter.form-select(name="starFilter" value=starFilter style="color: #e9b219; font-size: 22px;")
+                        option(value="" selected) Tất cả sao
+                        option(value="5" selected=starFilter==="5" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  5 sao ★★★★★
+                        option(value="4" selected=starFilter==="4" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  4 sao ★★★★☆
+                        option(value="3" selected=starFilter==="3" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  3 sao ★★★☆☆
+                        option(value="2" selected=starFilter==="2" class="star-option" style="color: #e9b219; font-size: 22px;")
+                            |  2 sao ★★☆☆☆
+                        option(value="1" selected=starFilter==="1" class="star-option" style="color: #e9b219; font-size: 22px;" )
+                            |  1 sao ★☆☆☆☆
+                    button#filter-button.btn.btn-primary Lọc
+                    button#reset-filter.btn(type="button") Tất cả
+                a.btn.btn-primary#analyzeBtn(href="javascript:void(0)" class="analyst") Phân tích
+            #overlay
+            #analyzeModal.modal
+                .modal-content
+                    span.close &times;
+                    h2 Phân tích Feedback
+                    #analysisContent
+                    .spinner-container
+                        .spinner
+                            .bounce1
+                            .bounce2
+                            .bounce3
+                        
+                    #chartContainer
         .table-container-feedback
             h5
                 if listFeedback.length === 0
@@ -335,15 +517,15 @@ block main
                         button#next-page.btn.btn-secondary Sau
                     else if totalPages === 1
                         button.btn.btn-primary 1
-
+        script(src="https://cdn.jsdelivr.net/npm/chart.js") 
         script.
+            
             const totalPages = #{totalPages};
-            console.log(totalPages);
             document.getElementById('reset-filter').addEventListener('click', function() {
                 //- document.getElementById('date-filter').value = '';
                 //- document.getElementById('search-filter').value = '';
                 //- document.getElementById('star-filter').value = '';
-                window.location.href = '/staff/feedback';
+                window.location.href = '/admin/feedback';
             });
             const buttonPagination = document.querySelectorAll('.btn-secondary');
             buttonPagination.forEach(button => {
@@ -365,20 +547,116 @@ block main
             });
 
 
+            let chartExisted;
 
-           
              const currentPage = new URL(window.location.href).searchParams.get('page') || 1;
              const pagination = document.querySelector('.pagination');
             const btnPages = pagination.querySelectorAll('.btnPage');
             const currentPageButton = btnPages[currentPage - 1]; 
+            const prevPageButton = document.getElementById('prev-page');
+            const nextPageButton = document.getElementById('next-page');
             if (currentPageButton) {
                 currentPageButton.classList.add('btn-primary');
                 currentPageButton.classList.remove('btn-secondary');
                 if(currentPage === '1'){
-                    document.getElementById('prev-page').style.display = 'none'; 
+                    if(prevPageButton){
+                        prevPageButton.style.display = 'none'; 
+                    }
                 }
                 console.log(currentPage);
                 if(parseInt(currentPage) === totalPages){
-                    document.getElementById('next-page').style.display = 'none'; 
+                    if(nextPageButton){
+                        nextPageButton.style.display = 'none'; 
+                    }
                 }
+            }
+                const spinnerContainer = document.querySelector('.spinner-container');
+
+                   document.getElementById('analyzeBtn').addEventListener('click', function() {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                modal.style.display = "block";
+                 overlay.style.display = "block";
+                    if (chartExisted) {
+                    chartExisted.destroy();
+                }
+                
+
+                document.getElementById('chartContainer').innerHTML = '';
+                setTimeout(() => {
+                    fetch('/admin/feedback/analyze')
+                    .then(response => response.json())
+                    .then(data => {
+                        spinnerContainer.style.display = 'none';
+                        console.log(data);
+                    document.getElementById('analysisContent').innerHTML = `
+                           <p><i class="fas fa-star"></i> <strong>Số sao trung bình: ${data.averageStar}</strong></p>
+                            <p><i class="fas fa-comments"></i> <strong 60px;>Tổng số feedback: ${data.countFeedback}</strong></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star5Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star4Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star3Count}</b></p>
+                            <p><i class="fas fa-star"></i><i class="fas fa-star"></i> <b> ${data.star2Count}</b></p>
+                            <p><i class="fas fa-star"></i> <b> ${data.star1Count}</b></p>
+                        `;
+
+
+
+                        const ctx = document.createElement('canvas');
+                        document.getElementById('chartContainer').appendChild(ctx);
+                      chartExisted =  new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['5 sao', '4 sao', '3 sao', '2 sao', '1 sao'],
+                        datasets: [{
+                            label: 'Phân bố Feedback',
+                            data: [data.star5, data.star4, data.star3, data.star2, data.star1],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.8)',
+                                'rgba(54, 162, 235, 0.8)',
+                                'rgba(255, 206, 86, 0.8)',
+                                'rgba(75, 192, 192, 0.8)',
+                                'rgba(153, 102, 255, 0.8)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+                    })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+                }, 1000);
+            });
+
+            document.querySelector('.close').addEventListener('click', function() {
+                closeModal();
+            });
+
+           window.addEventListener('click', function(event) {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                if (event.target === modal || event.target === overlay) {
+                    closeModal();
+                }
+            });
+            
+
+            function closeModal() {
+                const modal = document.getElementById('analyzeModal');
+                const overlay = document.getElementById('overlay');
+                modal.style.display = "none";
+                overlay.style.display = "none";
+                document.body.classList.remove('modal-open');
             }
