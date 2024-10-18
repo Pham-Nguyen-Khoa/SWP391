@@ -9,21 +9,6 @@ block main
     .block-sider(style="width:90%;margin-left:100px;")
         .card.shadow(style="width:80%;margin: 0 auto;")
             .card-body(style="background-color: #d0f2f7ba;border:2px solid #4294b1c7")
-            //- h2.card-title.text-center.mb-4.mt-4 Vui lòng nhập khoảng cách di chuyển 
-            //- .row(style="margin: 0 auto")
-            //-     .col-auto
-            //-             //- input.form-control(type="number" id="distance" style="width: 200px; display: inline-block;" min="1" value="1")
-            //-             //- button(id="auto-distance" class="btn btn-primary" style="display: inline-block;") 
-            //-             //-     i.fa.fa-calculator(style="margin-right: 5px;")  
-                            
-            //-             .d-flex.align-items-start(style="border: 2px solid black; position: relative; ")
-            //-                 input.form-control(type="number" id="distance" style="width: 200px; display: inline-block; border-radius:0   ;  height: 39px;" min="1" value="1")
-            //-                 button(id="auto-distance"  style="display: inline-block; height: 39px;     width: 50px;    background-color: #e92c46d9; cursor: pointer") 
-            //-                     i.fa.fa-calculator(style="margin-right: 5px;")  
-            //-                 b(style="    position: absolute;    left: 53%;top: 10%; font-size: 22px;") km
-                                    
-            //-     .col-auto
-            //-         button(name=cal-distance id="cal-distance" class="btn btn-primary" style="display: inline-block;") Cập nhật
             h2.card-title.text-center.mb-4.mt-4 Xác nhận thanh toán
             form#formTotal(action=`/staff/appointment/paymentCenter/${appointmentID}`, method="POST")(style="padding: 20px;")
                 input(type="hidden" name="objectPayment" value =objectPayment)
