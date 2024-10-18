@@ -6,6 +6,7 @@ const authMiddleware = require("../../middleware/admin/auth.middleware")
 const settingRoute = require("./setting.route");
 const chatRoute = require("./chat.route");
 const feedBackRoute = require("./feedback.route");
+const appointmentRoute = require("./appointment.route");
 module.exports = (app) => {
   const PATH_ADMIN = systemConfig.prefixAdmin;
   app.use(authMiddleware.requireAuth);
@@ -15,4 +16,5 @@ module.exports = (app) => {
   app.use(PATH_ADMIN + "/setting", settingRoute);
   app.use(PATH_ADMIN + "/chat", chatRoute);
   app.use(PATH_ADMIN + "/feedback", feedBackRoute);
+  app.use(PATH_ADMIN + "/appointment", appointmentRoute);
 };

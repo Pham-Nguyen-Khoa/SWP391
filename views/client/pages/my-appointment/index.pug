@@ -1,5 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/mixin-title.pug
+include ../../../admin/mixins/pagination.pug
+
 block main
     .block-footer(style="height: 86vh ; margin-bottom: 20vh")
         +title("Lịch Hẹn Của Bạn")
@@ -63,5 +65,6 @@ block main
                                         p.process Bị Hủy 
                                 td 
                                     a(href=`/koi/my-appointment/detail/${item.AppointmentID}` value=`/koi/my-appointment/detail/${item.AppointmentID}` button-delete class="btn btn-info") Chi tiết 
-
-    
+            +pagination(totalPages, currentPage, "/koi/my-appointment")  
+            script(src="/admin/js/pagination.general.js") 
+           

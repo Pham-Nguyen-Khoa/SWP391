@@ -993,3 +993,56 @@ span {
 .modal-footer {
     border-top: 1px solid #dee2e6; /* Đường viền trên footer */
 }
+
+
+
+
+/* Detail Appointment */
+
+
+.order-details{
+    background-color: #dde9edba;
+    padding: 50px;
+    border: 2px solid #c5bdbd;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+
+.table-appointment-detail{
+    margin-bottom: 50px;
+    border: 2px solid #2e2b2b;
+}
+
+.table-appointment-detail th, 
+.table-appointment-detail td {
+    padding: 10px; /* Thêm khoảng cách bên trong ô */
+    text-align: left; /* Căn trái cho nội dung */
+    text-align: center;
+    border: 1px solid #6f7478d1; /* Viền màu đen */
+}
+
+.table-appointment-detail th {
+    background-color: #5aaeba; /* Màu nền cho tiêu đề */
+    color: #FFF; /* Màu chữ cho tiêu đề */
+}
+
+.order-details img{
+    width: 218px;
+    height: 234px;
+    object-fit: cover;
+    border: 2px solid #00000094;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.btn-detail-back{
+    margin: 0 auto;
+    display: block;
+    width: 192px;
+    border-radius: 29px;
+    height: 53px;
+    font-size: 20px;
+    background-color: #5aaeba;
+    color: white;
+}

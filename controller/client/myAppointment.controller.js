@@ -28,13 +28,16 @@ function formatDate(dateString) {
 }
 // [GET] localhost:/koi/my-appointment/
 module.exports.index = async (req, res) => {
+  const page = req.query.page || 1;
+  const limit = 5;
+  let skip = (page-1)*limit;
   const userInfo = res.locals.userInfo;
   console.log(userInfo);
   if( userInfo.RoleID != "RL0004"){
     res.redirect("/auth/login");
     return;
   }
-  const listAppointment = await Appointment.findAll({
+  let listAppointment = await Appointment.findAll({
     raw: true, 
     where: {
       CustomerID: userInfo.CustomerID
@@ -44,10 +47,15 @@ module.exports.index = async (req, res) => {
   listAppointment.forEach((item) => {
     item.DateFormat = formatDate(item.Date);
   })
+  const totalAppointment = listAppointment.length;
+  const totalPages = Math.ceil(totalAppointment / limit);
+  listAppointment = listAppointment.slice(skip, skip + limit);
   console.log(listAppointment);
     res.render("client/pages/my-appointment/index.pug", {
       pageTitle: "Đơn Hàng Của Bạn",
-      listAppointment: listAppointment
+      listAppointment: listAppointment,
+      totalPages: totalPages,
+      currentPage: page
     });
   };
   
