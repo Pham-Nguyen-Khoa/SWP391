@@ -20,6 +20,11 @@ const generateUserId = async (rolePrefix, table, id) => {
 // [GET] /admin/account
 module.exports.index = async (req, res) => {
   const page = req.query.page || 1;
+  if(page < 1){
+    req.flash("error", "Trang không tồn tại");
+    res.redirect("/admin/account");
+    return;
+  }
   const limit = 5;
   let skip = (page-1)*limit;
 

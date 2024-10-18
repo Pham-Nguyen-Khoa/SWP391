@@ -2397,3 +2397,67 @@ header {
     gap: 1rem;
     margin-top: 1.5rem;
 }
+
+
+.pagination-container {
+    display: block;
+}
+.pagination-container:empty {
+    display: none;
+}
+
+
+
+
+
+/* Filter My Appointment */
+.filter-section {
+    background: linear-gradient(to top, #bfc6cb, #c8d9dd);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin: 20px auto; 
+    max-width: 956px;
+}
+
+.filter-section .form-group label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+    font-size: 1.1rem; 
+}
+
+.filter-section .form-control {
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    padding: 10px; 
+    height: 45px; 
+    transition: all 0.3s;
+    font-size: 1rem; 
+    margin: 10px 0 0 0;
+    height: 38px;
+}
+
+.filter-section .form-control:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3); 
+}
+
+.filter-section .btn-primary {
+    background-color: #4a90e2;
+    border-color: #4a90e2;
+    padding: 12px 24px; 
+    font-weight: 600;
+    transition: all 0.3s;
+    height: auto;
+    border-radius: 5px; 
+    color: white; 
+    font-size: 1rem; 
+}
+
+.filter-section .btn-primary:hover {
+    background-color: #3a7bc8;
+    border-color: #3a7bc8;
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}

@@ -29,6 +29,11 @@ function formatDate(dateString) {
 // [GET] localhost:/koi/my-appointment/
 module.exports.index = async (req, res) => {
   const page = req.query.page || 1;
+  if(page < 1){
+    req.flash("error", "Trang không tồn tại");
+    res.redirect("/koi/my-appointment");
+    return;
+  }
   const limit = 5;
   let skip = (page-1)*limit;
   const userInfo = res.locals.userInfo;
@@ -37,25 +42,47 @@ module.exports.index = async (req, res) => {
     res.redirect("/auth/login");
     return;
   }
-  let listAppointment = await Appointment.findAll({
-    raw: true, 
-    where: {
-      CustomerID: userInfo.CustomerID
-    },
-    order: [['Date', 'DESC']]
-  })
+
+  const queryConditions = [];
+  const queryParams = [];
+
+  queryConditions.push(`CustomerID = ?`);
+  queryParams.push(userInfo.CustomerID);
+
+  if(req.query.serviceFilter){
+    queryConditions.push(`ServiceID = ?`);
+    queryParams.push(req.query.serviceFilter);
+  }
+  if(req.query.dateFilter){
+    const formattedDate = new Date(req.query.dateFilter).toISOString().split('T')[0];
+    queryConditions.push(`Date = ?`);
+    queryParams.push(formattedDate);
+  }
+  if(req.query.statusFilter){
+    queryConditions.push(`Process = ?`);
+    queryParams.push(req.query.statusFilter);
+  }
+  const query = `SELECT * FROM appointment WHERE ${queryConditions.join(' AND ')}`;
+  let listAppointment = await Sequelize.query(query, {
+    replacements: queryParams,
+    type: Sequelize.QueryTypes.SELECT
+  });
   listAppointment.forEach((item) => {
     item.DateFormat = formatDate(item.Date);
   })
+
   const totalAppointment = listAppointment.length;
   const totalPages = Math.ceil(totalAppointment / limit);
   listAppointment = listAppointment.slice(skip, skip + limit);
-  console.log(listAppointment);
     res.render("client/pages/my-appointment/index.pug", {
       pageTitle: "Đơn Hàng Của Bạn",
       listAppointment: listAppointment,
       totalPages: totalPages,
-      currentPage: page
+      currentPage: page,
+      limit: limit,
+      serviceFilter: req.query.serviceFilter,
+      dateFilter: req.query.dateFilter,
+      statusFilter: req.query.statusFilter
     });
   };
   
