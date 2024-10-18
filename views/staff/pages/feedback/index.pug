@@ -231,6 +231,8 @@ block main
     .block-sider(style="width:90%;margin-left:180px;") 
         h1.page-title 
         +title("Quản lý Feedback")
+        +alert-success("5000")
+        +alert-error('5000')
 
         .filter-section
             form(action="/staff/feedback" method="get")
