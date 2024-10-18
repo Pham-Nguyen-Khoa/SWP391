@@ -310,20 +310,7 @@ block main
                                                 span.star ★
                                     td.action-cell
                                         button.btn.btn-view(onclick=`window.location.href="/staff/appointment/detail/${feedback.AppointmentID}"`) Xem
-                            //- tr
-                            //-     td.id-cell 2
-                            //-     td Trần Thị B
-                            //-     td 2023-07-14
-                            //-     td Cần cải thiện thời gian giao hàng
-                            //-     td 
-                            //-         .star-rating
-                            //-             - for (var i = 0; i < 3; i++)
-                            //-                 span.star.filled ★
-                            //-             - for (var i = 0; i < 2; i++)
-                            //-                 span.star ★
-                            //-     td.action-cell
-                            //-         button.btn.btn-view Xem
-                            //-         button.btn.btn-delete Xóa
+
 
                 .pagination
                     if totalPages > 1
@@ -342,9 +329,6 @@ block main
             const totalPages = #{totalPages};
             console.log(totalPages);
             document.getElementById('reset-filter').addEventListener('click', function() {
-                //- document.getElementById('date-filter').value = '';
-                //- document.getElementById('search-filter').value = '';
-                //- document.getElementById('star-filter').value = '';
                 window.location.href = '/staff/feedback';
             });
             const buttonPagination = document.querySelectorAll('.btn-secondary');

@@ -54,9 +54,6 @@ block main
                   p.lead
                   b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
                   b :  Đang thực hiện
-                  //- p.lead
-                  //- b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
-                  //- p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
                   
                   p.lead
               .col-5  
@@ -124,7 +121,6 @@ block main
                       input.form-control(type="number" name="Nitrate" step="0.01")
           .text-center.mt-4
             a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-capsules"></i> Kê đơn thuốc
-            //- button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Cập nhật và Hoàn thành
           button.btn.btn-lg(type="button" id="addPondBtn" style="background-color: #2dde29c7; color: black; padding: 10px;") <i class="fa-solid fa-plus"></i> Thêm hồ cá
 
     else

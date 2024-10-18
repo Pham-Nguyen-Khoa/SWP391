@@ -69,12 +69,6 @@ block main
                 class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
-            //- form#filterForm(action="/staff/appointment" method="GET")
-            //-   .search(style="margin: 50px 0;")
-            //-     .form-group
-            //-       label(for="searchName") Tìm kiếm
-            //-       input(type= "text" class="form-control" id="searchName" name="searchName" placeholder="Nhập tên khách hàng" value=searchName style="font-size: 18px;padding: 10px;border-radius: 5px;border: 2px solid grey;height: 40px;")
-            //-       button.btn(type="submit" style="background-color: #21a0b3; color: white; display: none") Tìm
               
           .col-6
             form#filterForm(action="/staff/appointment" method="GET")
@@ -194,8 +188,6 @@ block main
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
                             span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
-                        //- else if(appointment.Process == "Ready")
-                        //-     span(class="btn btn-primary" style="min-width: 140px;") Sẵn sàng
                         else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" )
                             span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
                         else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment != null)
@@ -218,13 +210,6 @@ block main
                         a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 button-delete") 
                           i(class="fa fa-trash " aria-hidden="true") 
 
-    //- div#deleteModal.modal(style="top: 50%;    position: fixed;margin: 0 auto;width: 350px;    display: none;")
-    //-   div.modal-content
-    //-     span.close-button &times;
-    //-     h1 hello
-    //-     p Bạn có muốn hủy lịch hẹn này không?
-    //-     button.btn.btn-danger#confirmDelete Xác nhận
-    //-     button.btn.btn-secondary#cancelDelete Hủy
 
     script.
       document.addEventListener('DOMContentLoaded', function() {
