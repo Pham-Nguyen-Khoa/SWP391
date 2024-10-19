@@ -13,10 +13,11 @@ block main
                     input#name(type="text" name="FullName" placeholder="Nhập họ và tên" value=userInfo.FullName)
                     label(for="phone") Số Điện Thoại
                     input#phone(type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" pattern="[0-9]*" inputmode="numeric" required value=userInfo.PhoneNumber)
-                    
+                    label(for="address" id = "label-address" style="display: none") Địa chỉ
+                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="service") Chọn dịch vụ
                     div
-                        select#service(name="service" class="service_appointment" required)
+                        select#service(name="service" class="service_appointment" requir    ed)
                             option(value selected disabled) Chọn Dịch Vụ
                             each  service in listService
                                 option(value=service.Name) • #{service.Name}
@@ -25,8 +26,8 @@ block main
                         option( selected disabled) Chọn Nơi Khám
                         option(value="nha") • Tại nhà
                         option(value="center") • Tại trung tâm
-                    label(for="address" id = "label-address" style="display: none") Địa chỉ
-                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
+                    //- label(for="address" id = "label-address" style="display: none") Địa chỉ
+                    //- input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="select_doctor" ) Chọn Bác Sĩ
                     select(id="select_doctor" name="doctor" required)
                         option(value selected, disabled) Chọn Bác Sĩ
@@ -80,6 +81,20 @@ block main
                 p#modalMessage
                 button#closeModalMessage(type="button") Đóng
 
+        #modalDistance.modal-distance(style="display: none;")
+            .modal-distance-content
+                .modal-icon
+                    i.fas.fa-map-marker-alt
+                h2 Xin lỗi quý khách
+                p Chúng tôi rất tiếc phải thông báo rằng địa chỉ của quý khách nằm ngoài phạm vi phục vụ của chúng tôi.
+                p Khoảng cách quá xa khiến chúng tôi không thể đảm bảo chất lượng dịch vụ tốt nhất cho quý khách.
+                p Chúng tôi chân thành xin lỗi vì sự bất tiện này và hy vọng sẽ có cơ hội phục vụ quý khách trong tương lai.
+                .text-center
+                    button.modal-distance-button(type="button" id="closeModalDistance") Đóng
+        
+
+        button#openModalDistance(type="button") Mở Modal
+
                     
                             
 
@@ -88,3 +103,12 @@ block main
                 var doctorSchedules = !{JSON.stringify(doctorSchedules)};
                 var listAccount = !{JSON.stringify(listAccount)};
                 var listDoctor = !{JSON.stringify(listDoctor)};
+                const settingGeneral = !{JSON.stringify(SettingGeneral)};
+                document.getElementById('openModalDistance').addEventListener('click', function() {
+                    document.getElementById('modalDistance').style.display = 'block';
+                });
+
+                document.getElementById('closeModalDistance').addEventListener('click', function() {
+                    document.getElementById('modalDistance').style.display = 'none';
+                });
+

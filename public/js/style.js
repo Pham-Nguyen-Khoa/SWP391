@@ -254,12 +254,15 @@ if (selectLocation) {
     if (selectLocation.value == "nha") {
       labelAddress.style.display = "block";
       inputAddress.style.display = "block";
+      inputAddress.setSelectionRange(inputAddress.value.length, inputAddress.value.length);
+      inputAddress.focus();
     } else {
       labelAddress.style.display = "none";
       inputAddress.style.display = "none";
     }
   });
 }
+
 
 // Chọn bác sĩ
 if (selectDoctor) {
@@ -755,8 +758,79 @@ document.addEventListener("DOMContentLoaded", () => {
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
       } else {
-        const formAppointment = document.querySelector(".form_appointment");
-        formAppointment.submit();
+        const addressInput = document.getElementById("address").value
+        let distanceAutoCustomer= 0;
+        if(addressInput != null){
+          const originAddress = settingGeneral.Address
+          const destinationAddress = addressInput;
+          console.log(destinationAddress);
+          
+          Promise.all([
+              fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(originAddress)}&key=5f86e5613fca4318a89493ef1f4053da`),
+              fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(destinationAddress)}&key=5f86e5613fca4318a89493ef1f4053da`)
+          ])
+          .then(responses => {
+              if (!responses[0].ok || !responses[1].ok) {
+                  throw new Error('Yêu cầu đến API không thành công.');
+              }
+              return Promise.all(responses.map(res => res.json()));
+          })
+          .then(data => {
+              const originResult = data[0].results[0];
+              const destinationResult = data[1].results[0];
+
+              if (originResult && destinationResult) {
+                  const originCoords = originResult.geometry;
+                  const destinationCoords = destinationResult.geometry;
+
+                  if (originCoords && destinationCoords) {
+                      const origin = `${originCoords.lng},${originCoords.lat}`;
+                      const destination = `${destinationCoords.lng},${destinationCoords.lat}`;
+
+                      return fetch(`http://router.project-osrm.org/route/v1/driving/${origin};${destination}?overview=false`);
+                  } else {
+                      console.log('Không tìm thấy tọa độ cho một trong các địa chỉ.');
+                  }
+              } else {
+                  console.log('Không tìm thấy kết quả cho một trong các địa chỉ.');
+              }
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Không thể lấy dữ liệu lộ trình.');
+              }
+              return response.json();
+          })
+          .then(data => {
+              if (data && data.routes && data.routes.length > 0) {
+                   distanceAuto = data.routes[0].distance; // Khoảng cách tính bằng mét
+                   distanceAutoCustomer = (distanceAuto / 1000).toFixed(2);
+                   if (distanceAutoCustomer > 50) {
+                    const modalDistance = document.getElementById("modalDistance");
+                  modalDistance.style.display = "block"; // Hiển thị modal
+                  console.log("Neronmen")
+                  console.log(document.getElementById("closeModalDistance"))
+                  confirmAppointment.style.display = "none";
+                  document.getElementById("closeModalDistance").addEventListener("click", () => {
+                      // window.location.reload();
+                      modalDistance.style.display = "none"; // Hiển thị modal
+                      
+                  });
+                    return;
+                }
+                  const formAppointment = document.querySelector(".form_appointment");
+                formAppointment.submit();
+              } else {
+                  console.log('Không tìm thấy lộ trình hoặc dữ liệu không hợp lệ.');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+        }
+        console.log("----------")
+        console.log(distanceAutoCustomer)
+       
+        // const formAppointment = document.querySelector(".form_appointment");
+        // formAppointment.submit();
       }
     });
   }
@@ -1034,3 +1108,5 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 });
+
+
