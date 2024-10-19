@@ -9,11 +9,11 @@ const pondCount = localStorage.getItem('pondCount');
     for (let i = 1; i <= fishCount; i++) {
       const card = document.createElement('div');
       card.className = 'card';
-      card.style = 'box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px; background-color: #f7fbff; padding-bottom: 20px;';
+      card.style = 'box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px; background: linear-gradient(#bdd2dc 0%, #93bfe4db 100%); padding-bottom: 20px;';
       card.innerHTML = `
-        <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;">Đơn thuốc cho cá ${i}</div>
+        <div class="card-header" style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;">Đơn thuốc cho cá ${i}</div>
         <div class="card-body">
-             <div class="tinymce-content" style="border: 1px solid #ddd; padding: 10px; min-height: 200px; max-height: 400px; overflow-y: auto;">
+             <div class="tinymce-content" >
                 ${informationDataFishesJS[i-1].Avatar || 'Không có nội dung'}
               </div>
           <div class="form-group">
@@ -22,7 +22,7 @@ const pondCount = localStorage.getItem('pondCount');
               <option value="">-- Chọn thuốc --</option>
             </select>
           </div>
-          <table class="table prescription-table text-center" id="prescriptionTable${i}">
+          <table class="table prescription-table text-center table-prescribe" id="prescriptionTable${i}">
             <thead>
               <tr>
                 <th class="text-center">Hình ảnh</th>
@@ -32,7 +32,7 @@ const pondCount = localStorage.getItem('pondCount');
                 <th class="text-center">Chai/Lọ/Viên</th>
                 <th class="text-center">Sáng</th>
                 <th class="text-center">Trưa</th>
-                <th class="text-center">Chiều</th>
+                <th class="text-center">Tối</th>
                 <th class="text-center">Thao tác</th>
               </tr>
             </thead>
@@ -78,7 +78,7 @@ const pondCount = localStorage.getItem('pondCount');
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
-          <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+          <td><button type="button" class="btn btn-danger payment-btn" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
         `;
         saveFormData();
       }
@@ -129,7 +129,7 @@ const pondCount = localStorage.getItem('pondCount');
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger payment-btn" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')"><span>Xóa</span></button></td>
           `;
               attachChangeEventListeners(row);
               saveFormData();
@@ -165,7 +165,7 @@ const pondCount = localStorage.getItem('pondCount');
             <td><input type="text" class="form-control" value="${medication.morning}"></td>
             <td><input type="text" class="form-control" value="${medication.noon}"></td>
             <td><input type="text" class="form-control" value="${medication.evening}"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger payment-btn" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')"><span style="color: white; font-size: 1.2em;">Xóa</span></button></td>
               `;
               attachChangeEventListeners(row);  
             }

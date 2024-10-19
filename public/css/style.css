@@ -248,8 +248,9 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 }
 
 .register-button {
-    color: #fff;
-    background-color: #d75858;
+    width: 150px;
+    background-color: #2da0cc;
+    color: white;
 }
 
 .img-banner {

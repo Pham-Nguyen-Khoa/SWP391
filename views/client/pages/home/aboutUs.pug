@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/chatAi.pug
 block main
     
 
@@ -65,7 +65,7 @@ block main
                         h3(style="color: #333; margin-bottom: 8px; font-size: 1.4em;") TS. Đinh Quốc Tuấn
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia gen và lai tạo cá Koi
 
-
+        +chatAi()
 
         // Thay đổi phần horizontal-scroll
         section.horizontal-scroll(style="padding: 40px 0; overflow: hidden;")

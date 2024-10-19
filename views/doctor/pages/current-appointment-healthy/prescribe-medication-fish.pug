@@ -10,7 +10,7 @@ block main
           background-color: #d2d4d4 !important;
     }
 
-  .block-sider(style="width:90%;margin-left:180px;")
+  .block-sider(style="width:90%;margin-left:150px;")
     //- pre
     //-     code= JSON.stringify(currentAppointmentFish, null, 2)
     .container-fluid
@@ -26,8 +26,12 @@ block main
           if(currentAppointmentFish.Address == null)
               button.btn.btn-lg.mr-5( id="payCenter" style="background-color: #4294b1c7; color: black; padding: 10px;") Hoàn tất
           else
-            button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
-          a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
+            button.btn.btn-lg.mr-5.payment-btn(type="submit")
+              i.fas.fa-credit-card
+              span Thanh toán
+          a.btn.btn-lg(href="/doctor/current-appointment" class="payment-btn") 
+            i.fas.fa-arrow-left
+            span Quay lại
     form#formPayCenter(action="/doctor/current-appointment/payment-fish-center" method="POST")
         input#previousPageDataCenter(type="hidden" name="previousPageData")
         input#selectedMedicationsCenter(type="hidden" name="selectedMedications")
