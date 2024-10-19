@@ -3,4 +3,136 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
-    h1 #{pageTitle}
+    .block-sider(style="width:90%;margin-left:180px;")
+        .dashboard-doctor
+            .dashboard-doctor-header.row.mb-5
+                .col-md-4
+                    .card
+                        .card-body.d-flex.align-items-center
+                            i.fas.fa-users.text-4xl.text-blue-500.mr-4
+                            .card-content
+                                h2 Tổng số lịch hẹn
+                                p #{appointmentsTotal}+
+                            
+                .col-md-4
+                    .card
+                        .card-body.d-flex.align-items-center
+                            i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
+                            .card-content   
+                                h2 Lịch hẹn hôm nay
+                                p #{appointmentsToday.length}
+                .col-md-4
+                    .card
+                        .card-body.d-flex.align-items-center
+                            i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
+                            .card-content   
+                                h2 Thông tin lịch hẹn hôm nay
+                                    if(appointmentsToday.length > 0)
+                                        table.table-mini.mt-3(style="width: 100%;")
+                                            thead 
+                                                tr 
+                                                    th Tên khách hàng
+                                                    th Thời gian
+                                                    th Chi tiết
+                                            tbody 
+                                                each appointment in appointmentsToday
+                                                    tr 
+                                                        td #{appointment.Name}
+                                                        td #{appointment.Shift}
+                                                        td 
+                                                            a.btn.btn-outline-primary.btn-sm(href=`/doctor/appointment/detail/${appointment.AppointmentID}`) Xem chi tiết
+                                    else 
+                                        p 0
+                //- .col-md-4
+                //-     .card
+                //-         .card-body.d-flex.align-items-center
+                //-             i.fas.fa-calendar-check.text-4xl.text-blue-500.mr-4 
+                //-             .card-content   
+                //-                 h2 Cuộc hẹn hôm nay
+                //-                 p 085
+
+            .dashboard-doctor-chart
+                .dashboard-doctor-chart-content.row
+                    .chart.col-md-4.appointment-content.px-2.appointment-today
+                        .card(style=(listFeedback.length > 0) ? "height: auto;" : "height: auto;")
+                            strong Feedback
+                            .feedback-chart(style="height: 250px;")
+                                canvas#chartContainer2(style="position: relative; height:400px; width:100%")
+                            if(listFeedback.length > 0)
+                                table#feedback-table
+                                    thead
+                                        tr
+                                            th Khách hàng
+                                            th Nội dung
+                                            th Số sao
+                                            th Chi tiết
+                                    tbody
+                                        each feedback,index in listFeedback
+                                            tr 
+                                                td #{feedback.FullName}
+                                                td #{feedback.Content}
+                                                td 
+                                                    .star-rating
+                                                        - for (var i = 0; i < feedback.Star; i++)
+                                                            span.star.filled ★
+                                                        - for (var i = 0; i < 5 - feedback.Star; i++)
+                                                            span.star ★
+                                                td 
+                                                    a(href=`/doctor/appointment/detail/${feedback.AppointmentID}`) Xem chi tiết
+                            else 
+                                p.no-feedback Không có feedback nào
+                            if(allFeedback.length > limit)
+                                button.btn.btn-primary#openFeedbackModal Xem tất cả feedback
+                    .chart.col-md-8.appointment-content.appointment-today.px-2
+                        .card(style="height: 586px;")
+                            .filter-appointment-chart.d-flex.justify-content-between
+                                strong Biểu đồ lịch hẹn theo thời gian
+                                div.button-group
+                                    button.btn.btn-outline-primary(type="button" id="filterByDay") Theo Ngày
+                                    button.btn.btn-outline-primary.m-2.active(type="button" id="filterByMonth") Theo Tháng
+                                    button.btn.btn-outline-primary(type="button" id="filterByYear") Theo Năm
+                            canvas#appointmentLineChart(style="height: 300px; width: 100%;")
+    
+        #feedbackModal.modal.fade
+            .modal-dialog.modal-lg
+                .modal-content
+                    .modal-header
+                        h5.modal-title Tất cả Feedback
+                        button.close(type="button" data-dismiss="modal" aria-label="Close")
+                            span(aria-hidden="true") &times;
+                    .modal-body
+                        table.table.table-hover
+                            thead
+                                tr
+                                    th Khách hàng
+                                    th Nội dung
+                                    th Số sao
+                                    th Ngày
+                                    th Chi tiết
+                            tbody
+                                each feedback in allFeedback
+                                    tr 
+                                        td.font-weight-bold #{feedback.FullName}
+                                        td.feedback-content #{feedback.Content}
+                                        td 
+                                            .star-rating
+                                                - for (var i = 0; i < feedback.Star; i++)
+                                                    span.star.filled ★
+                                                - for (var i = 0; i < 5 - feedback.Star; i++)
+                                                    span.star ☆
+                                        td.text-muted #{feedback.FormattedDate}
+                                        td 
+                                            a.btn.btn-outline-primary.btn-sm(href=`/doctor/appointment/detail/${feedback.AppointmentID}`) Xem chi tiết
+                    .modal-footer
+                        button.btn.btn-secondary(type="button" data-dismiss="modal") Đóng
+           
+
+
+
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script.
+            const star = !{JSON.stringify(star)}
+            const appointmentData = !{JSON.stringify(appointmentData)}
+            const appointmentDataMonthCount = !{JSON.stringify(appointmentDataMonthCount)}
+    script(src="/doctor/js/dashboard_doctor.js") 
+           
