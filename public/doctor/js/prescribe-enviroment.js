@@ -9,7 +9,7 @@ const pondCount = localStorage.getItem('pondCount');
       card.className = 'card';
       card.style = 'box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 30px; background-color: #f7fbff; padding-bottom: 20px;';
       card.innerHTML = `
-        <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;">Đơn thuốc cho hồ ${i}</div>
+        <div class="card-header" style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;">Đơn thuốc cho hồ ${i}</div>
         <div class="card-body">
           <div class="form-group">
             <label for="medicationSelect${i}">Chọn thuốc</label>
@@ -17,7 +17,7 @@ const pondCount = localStorage.getItem('pondCount');
               <option value="">-- Chọn thuốc --</option>
             </select>
           </div>
-          <table class="table prescription-table text-center" id="prescriptionTable${i}">
+          <table class="table prescription-table text-center table-prescribe" id="prescriptionTable${i}">
             <thead>
               <tr>
                 <th class="text-center">Hình ảnh</th>
@@ -73,7 +73,7 @@ const pondCount = localStorage.getItem('pondCount');
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
           <td><input type="text" class="form-control" ></td>
-          <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+          <td><button type="button" class="btn  btn-sm payment-btn" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')"><span>Xóa</span></button></button></td>
         `;
         saveFormData();
       }
@@ -124,7 +124,7 @@ const pondCount = localStorage.getItem('pondCount');
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
             <td><input type="text" class="form-control" onchange="saveFormData()"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger btn-sm payment-btn" style="width:90px" onclick="removeMedication(this, '${tableId}', '${medication.MedicineID}')"><span>Xóa</span></button></button></td>
           `;
               attachChangeEventListeners(row);
               saveFormData();
@@ -160,7 +160,7 @@ const pondCount = localStorage.getItem('pondCount');
             <td><input type="text" class="form-control" value="${medication.morning}"></td>
             <td><input type="text" class="form-control" value="${medication.noon}"></td>
             <td><input type="text" class="form-control" value="${medication.evening}"></td>
-            <td><button type="button" class="btn btn-danger btn-sm" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')">Xóa</button></td>
+            <td><button type="button" class="btn btn-danger btn-sm payment-btn" style="width:90px"  onclick="removeMedication(this, 'prescriptionTable${prescription.pond}', '${med.MedicineID}')"><span>Xóa</span></button></button></td>
               `;
               attachChangeEventListeners(row);  
             }

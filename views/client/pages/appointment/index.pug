@@ -1,8 +1,11 @@
 extends ../../layouts/default.pug
+include ../../mixins/chatAi.pug
 
 block main
     .header-bar.mb-5(style="background-color: #353636; padding: 18px; text-align: center; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;")
             h3(style="color: white; font-weight: bold; font-style: italic; font-size: 32px; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); letter-spacing: 1px;") Đặt Lịch Hẹn
+    //- pre 
+    //-     | #{JSON.stringify(listDoctor)}
     div.background_appointment
         div(class="box_appointment")
             form(action="/koi/appointment" method="post").form_appointment
@@ -94,21 +97,15 @@ block main
         
 
         button#openModalDistance(type="button") Mở Modal
-
+        +chatAi()
                     
                             
 
-            script.
-                var listService = !{JSON.stringify(listService)};
-                var doctorSchedules = !{JSON.stringify(doctorSchedules)};
-                var listAccount = !{JSON.stringify(listAccount)};
-                var listDoctor = !{JSON.stringify(listDoctor)};
-                const settingGeneral = !{JSON.stringify(SettingGeneral)};
-                document.getElementById('openModalDistance').addEventListener('click', function() {
-                    document.getElementById('modalDistance').style.display = 'block';
-                });
+        script.
+            var listService = !{JSON.stringify(listService)};
+            var doctorSchedules = !{JSON.stringify(doctorSchedules)};
+            var listAccount = !{JSON.stringify(listAccount)};
+            var listDoctor = !{JSON.stringify(listDoctor)};
+            const settingGeneral = !{JSON.stringify(SettingGeneral)};
 
-                document.getElementById('closeModalDistance').addEventListener('click', function() {
-                    document.getElementById('modalDistance').style.display = 'none';
-                });
 

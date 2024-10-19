@@ -84,7 +84,6 @@ module.exports.index = async (req, res) => {
   const listDoctor = await Vet.findAll({
     raw: true,
   });
-
   res.render("client/pages/appointment/index.pug", {
     pageTitle: "Trang Đặt Lịch",
     listService: listService,

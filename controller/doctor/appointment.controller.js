@@ -291,7 +291,7 @@ module.exports.detail =  async (req, res) => {
           serviceDetailsFormat,
           totalServiceFeeFormat
       }
-     return  res.render("staff/pages/appointment/detail",{
+     return  res.render("doctor/pages/appointment/detail",{
           pageTitle: "Trang Chi Tiết Lịch Hẹn ",
           appoinmentInfo: appoinmentInfo,
           VetID: VetID,
@@ -357,7 +357,7 @@ module.exports.detail =  async (req, res) => {
               amount: formatCurrency(detail.amount)
               }))
           };
-          return res.render("staff/pages/appointment/detail",{
+          return res.render("doctor/pages/appointment/detail",{
               pageTitle: "Trang Chi Tiết Lịch Hẹn ",
               appoinmentInfo: appoinmentInfo,
               VetID: VetID,

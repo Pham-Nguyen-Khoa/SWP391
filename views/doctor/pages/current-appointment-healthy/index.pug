@@ -11,6 +11,10 @@ block main
       font-weight: 700;
       font-size: 21px;
     }
+    b{
+      font-weight: bold;
+      font-size: 21px;
+    }
     .card-header {
       display: flex;
       justify-content: space-between;
@@ -20,11 +24,12 @@ block main
       background-color: #c82333;
     }
 
-  +title("Đơn Hiện Tại")
-  .block-sider(style="width:90%;margin-left:180px;")
+  +title("Đơn Hiện Tại")    
+
+  .block-sider(style="width:88%;margin-left:175px;")
     if currentAppointment
-      .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
-        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
+      .card(style="box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.06); border-radius: 16px; border: none; margin: 60px 200px 80px; background: linear-gradient(145deg, #ffffff, #f0f7ff); font-family: 'Arial', sans-serif; overflow: hidden; position: relative; padding: 2px; background-clip: padding-box, border-box; background-origin: padding-box, border-box; background-image: linear-gradient(to right, #f0f7ff, #f0f7ff), linear-gradient(346deg, #8e44ad, #9b59b6);")
+        .card-header(style="      background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
         .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
           .row 
             .col-7(style="padding-right: 100px;")
@@ -74,13 +79,13 @@ block main
       .fish-records
 
 
-      .text-center.mt-4
-        a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication-fish` style="background-color: #4294b1c7; color: black; padding: 10px;") 
-          i.fa-solid.fa-capsules
-          |  Kê đơn thuốc
-      a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" style="background-color: #2dde29c7; color: black; padding: 10px;") 
-        i.fa-solid.fa-plus
-        |  Thêm cá
+      .text-center.mt-4.precribe-medication-btn
+        //- a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication-fish` style="background-color: #4294b1c7; color: black; padding: 10px;") 
+        //-   i.fa-solid.fa-capsules
+        //-   |  Kê đơn thuốc
+      a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" class="payment-btn") 
+        i.fa-solid.fa-plus(style="margin-right: 8px;")
+        span  Thêm cá
 
     else
       .alert.alert-info.text-center
@@ -91,6 +96,14 @@ block main
       const fishRecords = JSON.parse(localStorage.getItem('appointmentHealthyData') || '[]');
       const container = document.querySelector('.fish-records');
       container.innerHTML = '';
+      //Thêm code 
+      if(fishRecords.length >= 1){  
+        document.querySelector('.precribe-medication-btn').innerHTML =`<a class="btn btn-lg payment-btn" href="/doctor/current-appointment/prescribe-medication-fish" >
+          <i class="fa-solid fa-capsules" style="margin-right: 8px;"></i>
+          <span>Kê đơn thuốc</span>
+        </a>`
+      }
+      //Thêm code   
 
       fishRecords.forEach((fish, index) => {
         const fishRecord = createFishRecordElement(fish, index);
@@ -102,16 +115,16 @@ block main
         const fishRecord = document.createElement('div');
         fishRecord.className = 'fish-record';
         if(index == 0){
-          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 150px; background-color: #f7fbff;';
+          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 150px; background: linear-gradient(to top,#bdd2dc 0%, #93bfe4db 100%);';
         }
         else{
-          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px; background-color: #f7fbff;';
+          fishRecord.style = 'position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px;    background: linear-gradient(to top,#bdd2dc 0%, #93bfe4db 100%);';
         }
 
         fishRecord.innerHTML = `
-          <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;">
-            <span style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;">Ghi nhận tình trạng cá ${index + 1}</span>
-            <button type="button" class="delete-button" style="position: absolute; right: 3%; border-radius: 5px; width: 100px; background-color: #eb7b7b; border: 2px solid #9fbfc5; cursor: pointer;">Xóa cá</button>
+          <div class="card-header" style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;">
+            <span style="font-weight: bold; color: #ffffff; padding: 12px 20px; border-radius: 8px; background: linear-gradient(4deg, #107bd0, #249ab6c4);     box-shadow: 1px 4px 8px 0px rgb(38 36 36); display: inline-block; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2em;">Ghi nhận tình trạng cá ${index + 1}</span>
+            <button type="button" class="delete-button payment-btn" ><span style="color: white; font-size: 1.2em;">Xóa cá</span></button>
           </div>
           <div class="card-body">
             <div class="form-group">
@@ -133,7 +146,7 @@ block main
               <textarea class="form-control" rows="3" readonly>${fish.Description || ''}</textarea>
             </div>
           </div>
-             <div class="card-header" style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;">Thông Tin Cá Koi</div>
+             <div class="card-header" style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px;">Thông Tin Cá Koi</div>
           <div class="card-body">
             <div class="row">
               <div class="col-md-4">

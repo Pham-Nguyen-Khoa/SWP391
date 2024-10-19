@@ -10,7 +10,7 @@ block main
     table thead tr th{
           background-color: #d2d4d4 !important;
     }
-  .block-sider(style="width:90%;margin-left:180px;")
+  .block-sider(style="width:90%;margin-left:150px;")
     .container-fluid
       +title("Kê Đơn Thuốc")
       +alert-success("5000")
@@ -23,8 +23,12 @@ block main
         .medication-cards
 
         .text-center.mt-4
-          button.btn.btn-lg.mr-5(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Thanh toán
-          a.btn.btn-lg(href="/doctor/current-appointment" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
+          button.btn.btn-lg.mr-5.payment-btn(type="submit")
+              i.fas.fa-credit-card
+              span Thanh toán
+          a.btn.btn-lg(href="/doctor/current-appointment" class="payment-btn") 
+            i.fas.fa-arrow-left
+            span Quay lại
 
   script.
     const medications = !{JSON.stringify(listMedicine)};

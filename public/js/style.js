@@ -22,6 +22,7 @@ if(loginBtnForm){
   loginBtnForm.addEventListener("click", (e)=>{
     e.preventDefault();
     const rememberInput = document.querySelector(".remember-utilities input[name=RememberMe]");
+    if(rememberInput){
     if(rememberInput.checked){
       const email = document.querySelector(".login-element[name=Email]").value;
       const password = document.querySelector(".login-element[name=Password]").value;
@@ -32,8 +33,9 @@ if(loginBtnForm){
       document.cookie = "password=; path=/auth/login";
     }
     loginForm.submit(); 
+  }
   })
-}
+  }
 
 window.onload = function() {
   if(window.location.pathname == "/auth/login"){
@@ -883,8 +885,8 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
 
 
 
-// const marquee = document.querySelector('.marquee');
-// let index = 0;
+const marquee = document.querySelector('.marquee');
+let index = 0;
 
 function scrollText() {
   const lines = marquee.querySelectorAll('p');

@@ -15,15 +15,15 @@ block main
             b(style="    font-size: 25px;") ◉ Ngày: #{appoinmentInfo.Date} |  
             b(style="    font-size: 25px;") ◉ Thời gian hẹn: #{appoinmentInfo.Shift} 
             if(appoinmentInfo.Name == "Tư Vấn Online")
-                    span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") Đã thanh toán
+                    span(style="background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") Đã thanh toán
             else 
                     if(payCenter == "thanh toán")
                         .payInCenter(style="margin-left: 200px;display: inline;")
                             a(href=`/staff/appointment/paymentCenter/${appoinmentInfo.AppointmentID}` class="btn btn-pay-center " style="margin-right: 70px;") 
                                 i.fas.fa-money-bill-wave Thanh toán 
-                            span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; ") #{appoinmentInfo.StatusPaid}
+                            span(style="background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; ") #{appoinmentInfo.StatusPaid}
                     else
-                        span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") #{appoinmentInfo.StatusPaid}
+                        span(style="background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") #{appoinmentInfo.StatusPaid}
             p ______________________________________________________________
             
             h2(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin lịch hẹn
@@ -128,13 +128,15 @@ block main
                     
                 .col-7 
                     if(appoinmentInfo.Name == "Tư Vấn Online")
-                        h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;    background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
+                        h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;  background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền thanh toán: #{appoinmentInfo.PriceFormat} 
                     else
                         if(appoinmentInfo.ServiceID == "DV0001" && appoinmentInfo.StatusPaid =="Đã thanh toán" && appoinmentInfo.BillID != null && appoinmentInfo.Process =="Successed")
-                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền : #{objectPayment.totalServiceFeeFormat} VNĐ
+                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền : #{objectPayment.totalServiceFeeFormat} VNĐ
                         else if(appoinmentInfo.ServiceID == "DV0002" && appoinmentInfo.StatusPaid =="Đã thanh toán" && appoinmentInfo.BillID != null && appoinmentInfo.Process =="Successed")
-                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền : #{objectPayment.totalFee} VNĐ
+                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền : #{objectPayment.totalFee} VNĐ
                         else
-                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background-color: #b0d0db; border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền ước tính: #{appoinmentInfo.PriceFormat} VNĐ
+                            h4(style="margin-bottom: 100px;font-family: 'Arial', sans-serif;font-size: 32px; font-weight: 600;     background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%); border-radius: 41px; text-align: center; height: 73px; padding: 19px; width: 800px;") Tổng tiền ước tính: #{appoinmentInfo.PriceFormat} VNĐ
         
-            button(class="btn btn-detail-back" onclick=`history.back()`) Quay lại 
+            button.payment-btn(class="btn btn-detail-back" onclick=`history.back()` style="margin: 0 42%;") 
+                i.fas.fa-arrow-left
+                span Quay lại
