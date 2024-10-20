@@ -2595,5 +2595,101 @@ header {
     }
 }
 
+/* CSS checkup */
+
+.menu-banner-checkup{
+    display: flex;
+    justify-content:space-between; 
+    padding:50px;
+}
+
+.menu-service{
+    text-align: center;   
+    background: linear-gradient(#6291d2a2, #497a9dcf);
+    border-radius: 15px;
+    width: 260px;
+    padding: 20px; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+    height:400px;
+}
+
+.checkup-service{
+    padding: 15px 0;
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.service-menu{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    display: block;
+    text-decoration: none;
+    padding: 15px 0;
+    transition: 0.5s;
+}
+
+.service-menu:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #bd2222;
+    border-radius: 15px;
+}
+
+.banner-checkup h3{
+    left: 480px;
+    font-size: 3rem;
+    position: absolute;
+    color: white; 
+}
+
+.banner-checkup p{
+    position: absolute;
+    font-size: 1.5rem;
+    color: white; 
+    bottom: -80px;
+    left: 50px;
+}
 
 
+
+.body-checkup h1 {
+    font-size: 2.5em; 
+    color: #333; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+    padding: 50px;
+    text-align: center; 
+    font-family: 'Oswald', sans-serif;
+}
+
+.service-checkup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-checkup h2 {
+    font-size: 2.5rem;
+    color: #555; 
+    min-height: 3rem;
+    text-align: center;
+}
+
+.service-checkup li{
+    font-size: 1.5rem;
+    padding: 10px 0;
+    font-family: 'Oswald', sans-serif;
+    color: #1a4091e0
+}
+
+.card-intro{
+    background: linear-gradient(to top, #91aecb, #f2f8ff);
+}
+
+.card-intro:nth-child(2), .card-intro:nth-child(3), .card-intro:nth-child(4){
+    border-left: 1px solid black;
+}
