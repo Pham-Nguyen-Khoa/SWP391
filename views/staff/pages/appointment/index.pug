@@ -28,7 +28,7 @@ block main
   //-     code= JSON.stringify(listAppointment, null, 2)
   .block-sider(style="width:90%;margin-left:180px;")   
     .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header(style="background-color: #86d0dbf5 ;") Bộ lọc 
+      .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);") Bộ lọc 
       .card-body 
         .row 
           .col-6#filter-buttons
@@ -91,7 +91,8 @@ block main
                 select.form-control(id="sortOrder" name="sort" value=sort)
                   option(value="asc") Tăng dần
                   option(value="desc") Giảm dần
-              button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
+              button.btn.payment-btn(type="submit" style="background-color: #21a0b3;   height: 40px;width: 100px;") 
+                  span Áp dụng
     if listAppointment.length === 0
       if filterType === 'date'
         p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
@@ -116,7 +117,7 @@ block main
     else     
      
       table.table#table-appointment
-        thead.custom-thead(style="background-color: #5AAEBA;")
+        thead.custom-thead(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);")
             tr
                 th Mã đơn hàng
                 th Tên khách hàng

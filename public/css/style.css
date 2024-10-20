@@ -1477,7 +1477,7 @@ header {
     text-align: center;
     margin: 40px auto 30px;
     width: 70%;
-    background-color: #21a0b3;
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     border-radius: 32px;
     color: #fafafa;
     font-weight: bold;
