@@ -39,21 +39,26 @@ style.
         display: flex;
         align-items: center;
         padding: 12px 25px;
-        color: #ecf0f1;
+        color: #6c757d;
         text-decoration: none;
         transition: all 0.3s;
         border-left: 4px solid transparent;
     }
     .sider-link:hover, .sider-link.active {
         background-color: #34495e;
+        border-left: 20px solid #3498db;
         border-left-color: #3498db;
+        text-decoration: none;
     }
     .sider-link i {
         margin-right: 15px;
         width: 20px;
         text-align: center;
-        font-size: 18px;
+        font-size: 40px;
+        margin-right: 40px;
+        display: inline-block;
     }
+    
     .sider-link span {
         font-size: 16px;
     }
@@ -112,6 +117,10 @@ style.
 
         nav.sider-nav
             ul.sider-menu
+                li.sider-menu-item
+                    a.sider-link(href=`/doctor/dashboard`)
+                        i.fas.fa-chart-area
+                        span Tổng quan
                 li.sider-menu-item
                     a.sider-link(href=`/doctor/schedule`)
                         i.fas.fa-tachometer-alt

@@ -2,7 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/filterStatus.pug
 include ../../mixins/alert.pug
 include ../../mixins/mixin-title.pug
-  
+include ../../mixins/pagination.pug
 block main
   div(class="mainWrapper")
 
@@ -65,7 +65,7 @@ block main
           tbody
             each item,index in listUser
               tr
-                td #{index+1}
+                td #{((currentPage - 1) * limit) + index + 1}
                 td #{item.AccountID}
                 td
                   img(src=item.Avatar alt="Avatar" )
@@ -112,6 +112,20 @@ block main
                     id=item.AccountID
                     ) 
                     <i class="fa-solid fa-trash"></i> 
+      .modal#confirm-modal(role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true")
+        .modal-dialog.modal-dialog-centered
+          .modal-content
+            .modal-header
+              h5.modal-title#confirmModalLabel Xác thực
+              button.close(type="button" data-dismiss="modal" aria-label="Close")
+                span(aria-hidden="true") &times;
+            .modal-body
+              p Bạn có chắc chắn muốn khóa tài khoản này không?
+            .modal-footer
+              button.btn.btn-secondary(type="button" id="cancel-lock-account" data-dismiss="modal") Hủy
+              button.btn.btn-danger(type="button" id="confirm-lock-account") Khóa tài khoản
+      +pagination(totalPages,currentPage)
+      //- button.btn.btn-primary(type="button" data-toggle="modal" data-target="#confirm-modal") Mở Modal
 
       
     
@@ -136,8 +150,6 @@ block main
 
         .col-7.div-information
           .information
+  script(src="/admin/js/pagination.general.js") 
 
-  script.
-    var listUser = !{JSON.stringify(listUser)};
-    
 

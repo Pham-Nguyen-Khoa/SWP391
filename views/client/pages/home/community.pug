@@ -1,29 +1,87 @@
 extends ../../layouts/default.pug
 
 block main
-    .block-footer(style="height: 140vh") 
-        img(src=SettingGeneral.BannerCommunity, alt="Contact 1" style="height: 600px; object-fit: cover; width: 100%; border-bottom-left-radius: 200px;border-bottom-right-radius: 200px")
-        h1.news-title Cộng Đồng #{SettingGeneral.WebsiteName}
-        .content
-            h2 Giới thiệu
-            p Chào mừng bạn đến với Cộng Đồng KOI DOCTORS! Đây là nơi dành cho tất cả những người yêu thích cá Koi, từ những người mới bắt đầu cho đến những người đã có kinh nghiệm lâu năm. Chúng tôi cung cấp một nền tảng để chia sẻ kiến thức, kinh nghiệm và đam mê về việc chăm sóc cá Koi.
-
-            h2 Chủ Đề Thảo Luận
-            ul
-                li Kỹ Thuật Chăm Sóc: Thảo luận về cách chăm sóc cá Koi hàng ngày, từ việc cho ăn đến việc làm sạch hồ cá.
-                li Thiết Kế Hồ Cá: Những ý tưởng và mẹo về thiết kế hồ cá Koi để tạo môi trường sống lý tưởng cho chúng.
-                li Sức Khỏe & Bệnh Tật: Hướng dẫn nhận diện và điều trị các bệnh thường gặp ở cá Koi.
-                li Thức Ăn & Dinh Dưỡng: Thông tin về các loại thức ăn và chế độ dinh dưỡng phù hợp cho cá Koi.
-                li Giao Lưu & Sự Kiện: Thông tin về các sự kiện, cuộc thi và buổi giao lưu dành cho những người yêu thích cá Koi.
-
-            h2 Tài Nguyên Hữu Ích
-            ul
-                li Hướng Dẫn Cơ Bản
-                li Video Hướng Dẫn
-                li Cửa Hàng Đồ Dùng Cá KOI
-
-            h2 Cộng Đồng Trực Tuyến
-            ul
-                li Diễn Đàn: Tham gia các chủ đề thảo luận, đặt câu hỏi và chia sẻ kinh nghiệm của bạn.
-                li Nhóm Facebook: Kết nối với các thành viên qua nhóm Facebook để trao đổi nhanh chóng và dễ dàng.
-                li Trang Web: Truy cập trang web của chúng tôi để đọc bài viết, hướng dẫn chi tiết và cập nhật các tin tức mới nhất.    
+    head 
+       link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+    .block-footer(style="height: 270vh; background-color: #f0f8ff") 
+        img(src="/images/Koi-community.png", alt="Contact 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1.community-title(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 4rem;  color: white; font-family: 'Oswald', sans-serif;") Cộng Đồng Koi Healthy
+        .btn-home(style="position: absolute; bottom: 500px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Cộng đồng Koi Healthy
+        .content-section(style="text-align: center; padding: 50px; ")
+        h2(style="font-family: 'Oswald', sans-serif; font-size: 2.5rem; color: #333; max-width: 650px; margin: 0 auto; margin-bottom: 20px ") Chào mừng đến với Cộng Đồng Koi Healthy
+        p(style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 0 auto; text-align: center;") Nơi có nhiều bài báo có kinh nghiệm, trải nghiệm và chia sẽ đến từ nhiều thành viên trong đó có những người nổi tiếng trong các cộng đồng cá Koi có mặt tại đây. Hi vọng mọi người tham gia tích cực để có một cộng đồng tốt đẹp và lành mạnh    
+        .container-fluid.community-container
+            .row
+                .col-md-3.news-box                 
+                    img(src="/images/community-new1.jpg", alt="News 1" style="width: 100%; border-radius: 10px; margin: 10px;") 
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan                       
+                    h3 10 tips cần thiết dành cho sức khỏe của cá Koi
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.
+                    a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;") Xem Thêm →
+                .col-md-3.news-box 
+                    img(src="/images/community-new2.jpg", alt="News 2" style="width: 100%; border-radius: 10px; margin: 10px;") 
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan   
+                    h3 Cách chọn đúng loại thức ăn cho những chú cá Koi của bạn
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.
+                    a.payment-btn(href="https://sanvuonadong.vn/thuc-an-ca-koi.html" style="height:40px;") Xem Thêm →     
+                .col-md-3.news-box  
+                    img(src="/images/community-new3.jpg", alt="News 3" style="width: 100%; border-radius: 10px; margin: 10px;")
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan   
+                    h3 Sự quan trọng trong việc kiểm tra sức khỏe của cá Koi
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.
+                    a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/" style="height:40px;") Xem Thêm →
+                .col-md-3.news-box                 
+                    img(src="/images/community-new4.jpg", alt="News 1" style="width: 100%; border-radius: 10px; margin: 10px;") 
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan                       
+                    h3 Sự quan trọng của thay đổi khí hậu đổi với loài cá Koi
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.
+                    a.payment-btn(href="https://koiscape.vn/vao-mua-mua-thoi-tiet-giao-mua-phai-cham-soc-ho-ca-koi-nhu-nao-la-dung/#:~:text=H%E1%BB%93%20c%C3%A1%20Koi%20ngo%C3%A0i%20tr%E1%BB%9Di%20lu%C3%B4n%20b%E1%BB%8B%20%E1%BA%A3nh,kh%C3%B4ng%20kh%C3%AD%2C%20%C4%91%E1%BA%A5t%E2%80%A6%20ch%E1%BA%A3y%20tr%C6%B0c%20ti%E1%BA%BFp%20xu%E1%BB%91ng%20h%E1%BB%93." style="height:40px;") Xem Thêm →
+                .col-md-3.news-box 
+                    img(src="/images/community-new5.jpg", alt="News 2" style="width: 100%; border-radius: 10px; margin: 10px;") 
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan   
+                    h3 Tổng quan về các loại cá Koi
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis.
+                    a.payment-btn(href="https://sanvuontrucxinh.com/ca-koi#:~:text=C%C3%B3%208%20lo%E1%BA%A1i%20nh%C3%B3m%20c%C3%A1%20Koi%20ch%C3%ADnh%20%C4%91%C6%B0%E1%BB%A3c,tr%C6%B0ng%20cho%20qu%E1%BB%91c%20k%E1%BB%B3%20c%E1%BB%A7a%20Nh%E1%BA%ADt%20B%E1%BA%A3n%20%29" style="height:40px;") Xem Thêm →     
+                .col-md-3.news-box  
+                    img(src="/images/community-new6.jpg", alt="News 3" style="width: 100%; border-radius: 10px; margin: 10px;")
+                    .info-community-news
+                        .category Care
+                        .date 05 Jan   
+                    h3 Môi trường sống cần thiết dành cho cá Koi
+                    p Lorem ipsum dolor sit amet, cont enim ad minim veniam quis.
+                    a.payment-btn(href="https://zenkoifarm.vn/moi-truong-song-cua-ca-koi/#:~:text=%C4%90%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n%20t%E1%BB%91t%2C%20gi%E1%BB%AF%20%C4%91%C6%B0%E1%BB%A3c,l%C3%BD%20t%C6%B0%E1%BB%9Fng%20l%C3%A0%20n%C6%B0%E1%BB%9Bc%20m%C6%B0a%20ho%E1%BA%B7c%20n%C6%B0%E1%BB%9Bc%20ng%E1%BA%A7m." style="height:40px;") Xem Thêm →    
+            .row(style="text-align: center; margin-top: 30px;")
+                h1(style="width: 100%;") Những thành viên là chuyên gia nổi tiếng về cá Koi đều có mặt tại đây
+                .col-md-4.profile-card
+                    .card-profile
+                        img(src="/images/profile1.jpg", alt="Profile 1")
+                        h3 Minh Lăng
+                        p Chuyên gia về cá Koi với hơn 10 năm kinh nghiệm.
+                        a.payment-btn(href="https://www.youtube.com/@langcoitv1989" style="height:40px;")
+                            span Xem Thêm
+                .col-md-4.profile-card
+                    .card-profile
+                        img(src="/images/profile2.jpg", alt="Profile 2")
+                        h3 Ngô Thắng
+                        p Nhà nghiên cứu về môi trường sống của cá Koi.
+                        a.payment-btn(href="https://www.youtube.com/@ThangNgoReal" style="height:40px;") 
+                            span Xem Thêm
+                .col-md-4.profile-card
+                    .card-profile
+                        img(src="/images/profile3.jpg", alt="Profile 3")
+                        h3 Phạm Dũng
+                        p Chuyên gia dinh dưỡng cho cá Koi.
+                        a.payment-btn(href="https://www.youtube.com/@phamdungyoutuber" style="height:40px;")
+                            span Xem Thêm    

@@ -9,6 +9,7 @@ const authMiddleware = require("../../middleware/client/auth.middleware");
 const settingMiddleware = require("../../middleware/client/setting.middleware");
 module.exports = (app) => {
   app.use(settingMiddleware.SettingMiddleware);
+  app.use("/",middleware.userInfo , homeRoute);
   app.use("/koi",middleware.userInfo , homeRoute);
   app.use("/auth", userRoute);
   app.use("/auth/password/", forgotpPasswordRoute);

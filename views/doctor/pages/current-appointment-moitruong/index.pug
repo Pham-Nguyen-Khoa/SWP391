@@ -22,10 +22,10 @@ block append main
 
 block main
   +title("Đơn Hiện Tại")
-  .block-sider(style="width:90%;margin-left:180px;")
+  .block-sider(style="width:90%;margin-left:150px;")
     if currentAppointment
       .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin: 60px 200px 80px ; background-color: #f7fbff")
-        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
+        .card-header(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
         .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
           .row 
               .col-7(style="padding-right: 100px;")
@@ -54,9 +54,6 @@ block main
                   p.lead
                   b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Trạng thái
                   b :  Đang thực hiện
-                  //- p.lead
-                  //- b(style=" min-width: 180px; display: inline-block; font-weight: bold;") ◉ Mô tả của khách hàng
-                  //- p(style="background-color: #b7cfd587; padding: 10px; border-radius: 20px;")   #{currentAppointment.HealthKoi}
                   
                   p.lead
               .col-5  
@@ -72,9 +69,9 @@ block main
           input(type="hidden" name="appointmentId" value=currentAppointment.AppointmentID)
           
           .pond-records
-            .pond-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 30px; background-color: #f7fbff;")
-              .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
-                span(style=" font-weight: bold;  color: black  ; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng hồ 1
+            .pond-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none; margin-bottom: 100px; background: linear-gradient(to top, rgb(189, 210, 220) 0%, rgba(147, 191, 228, 0.86) 100%);")
+              .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
+                span(style="font-weight: bold; color: #ffffff; padding: 12px 20px; border-radius: 8px; background: linear-gradient(4deg, #107bd0, #249ab6c4);     box-shadow: 1px 4px 8px 0px rgb(38 36 36); display: inline-block; text-transform: uppercase; letter-spacing: 1px; font-size: 1.2em;") Ghi nhận tình trạng hồ 1
               .card-body
                 .form-group
                   label(for="problem") Vấn đề
@@ -85,7 +82,7 @@ block main
                 .form-group
                   label(for="description") Mô tả chi tiết
                   textarea.form-control(name="Description" rows="3")
-              .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;") Chỉ số hồ cá 1
+              .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px;") Chỉ số hồ cá 1
               .card-body
                 .row
                   .col-md-4
@@ -123,9 +120,16 @@ block main
                       label(for="nitrate") Nitrate (mg/L)
                       input.form-control(type="number" name="Nitrate" step="0.01")
           .text-center.mt-4
-            a.btn.btn-lg#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` style="background-color: #4294b1c7; color: black; padding: 10px;") <i class="fa-solid fa-capsules"></i> Kê đơn thuốc
-            //- button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black; padding: 10px;") Cập nhật và Hoàn thành
-          button.btn.btn-lg(type="button" id="addPondBtn" style="background-color: #2dde29c7; color: black; padding: 10px;") <i class="fa-solid fa-plus"></i> Thêm hồ cá
+            a.btn.btn-lg.payment-btn#prescribeMedicationBtn.mr-5(href=`/doctor/current-appointment/prescribe-medication` ) 
+              i.fa-solid.fa-capsules
+              span Kê đơn thuốc
+            </a>
+          button.btn.btn-lg.payment-btn(type="button" id="addPondBtn" )
+            i.fa-solid.fa-plus
+            span  Thêm hồ cá
+          //- a.btn.btn-lg#addFishBtn(href="/doctor/current-appointment/add-fish" class="payment-btn") 
+          //-   i.fa-solid.fa-plus(style="margin-right: 8px;")
+          //-   span  Thêm cá
 
     else
       .alert.alert-info.text-center
@@ -177,14 +181,9 @@ block main
       const deleteButton = document.createElement('button');
       deleteButton.type = 'button';
       deleteButton.innerText = 'Xóa hồ';
-      deleteButton.className = 'delete-button';
+      deleteButton.className = 'payment-btn';
       deleteButton.style.position = 'absolute';
       deleteButton.style.right = '3%';
-      deleteButton.style.borderRadius = '5px';
-      deleteButton.style.width = '100px';
-      deleteButton.style.backgroundColor = '#eb7b7b';
-      deleteButton.style.border = '2px solid #9fbfc5';
-      deleteButton.style.cursor = 'pointer';
       deleteButton.onclick = function() {
         newPondRecord.remove();
         pondCount--;

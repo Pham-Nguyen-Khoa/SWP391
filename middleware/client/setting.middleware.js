@@ -8,7 +8,6 @@ module.exports.SettingMiddleware = async (req, res, next) =>{
             SettingID: 1,
         },
     });
-    console.log(setting)
     res.locals.SettingGeneral = setting;
   next();
 };

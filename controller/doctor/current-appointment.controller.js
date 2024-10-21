@@ -368,8 +368,6 @@ module.exports.paymentPost = async(req, res) => {
   //   req.flash("error", "Vui lòng cập nhật thông tin thuốc trước khi thanh toán  ");
   //   return res.redirect("back")
   // }
-
-  
 }
 
 
@@ -381,6 +379,7 @@ module.exports.addFish = async(req, res) => {
       pageTitle: "Trang Thêm Cá",
   })
 }
+
 
 
 
@@ -440,11 +439,9 @@ module.exports.paymentFishPost = async(req, res) => {
 }
 
 
-
-
 // [Get] /doctor/current-appointment/payment-fish
 module.exports.paymentFish = async(req, res) => {
-
+  
   const currentAppointment = await Appointment.findOne({
       raw: true,
       where: {
@@ -485,8 +482,6 @@ module.exports.paymentFish = async(req, res) => {
     })
   }
 }
-
-
 
 // [Post] /doctor/current-appointment/healthyFish
 module.exports.healthyFishPost = async(req, res) => {
@@ -565,7 +560,6 @@ module.exports.healthyFishPost = async(req, res) => {
       Total: req.body.totalFee,
       Status: "Đã thanh toán"
     })
-
     const appointment = await Appointment.findOne({
       where: {
           VetID: res.locals.user.VetID,
@@ -604,14 +598,11 @@ await Appointment.update({
     req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
     res.redirect("/doctor/appointment")
   } catch (error) {
+    console.log(error)
     req.flash("error", "Có lỗi xảy ra khi hoàn thành công việc. Vui lòng thử lại.");
     res.redirect("back")
   }
 }
-
-
-
-
 
 // [POST] /doctor/current-appointment/payment-fish-center
 module.exports.paymentFishCenterPost = async(req, res) => {

@@ -19,6 +19,7 @@ module.exports.login = async (req, res) => {
 module.exports.loginPost = async (req, res) => {
   const password = md5(req.body.Password);
   const email = req.body.Email;
+
   const user = await Account1.findOne({
     where: {
       Email: email,
@@ -52,7 +53,7 @@ module.exports.loginPost = async (req, res) => {
   } else if (user.RoleID == "RL0001") {
     res.redirect("/admin/account");
   } else if (user.RoleID == "RL0002") {
-    res.redirect("/doctor/appointment");
+    res.redirect("/doctor/dashboard");
   } else if (user.RoleID == "RL0003") {
     res.redirect("/staff/appointment");
   }

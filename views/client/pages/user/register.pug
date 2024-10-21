@@ -7,7 +7,7 @@ block main
 
     .container-fluid 
         .row(style="height: 100vh;")
-            .col-7.left-column 
+            .col-7.left-column(style="padding: 0 ;")
                 img.login-img(src="/images/Login.png" alt="Login image")
             .col-5.right-column(style="padding: 0 0 0 50px;")
                 .right-container(style="margin-top:30px;") 
@@ -18,32 +18,32 @@ block main
                              form(action="/auth/register" method="post")
                                 .form-group
                                     label(for="Email") Email
-                                    input#email.form-control.register-element(type="Email" name="Email" required)
+                                    input#email.form-control.register-element(type="Email" name="Email" required autocomplete="new-email")
                                 .form-group
                                     label(for="FullName") Họ & Tên
-                                    input#name.form-control.register-element(type="text" name="FullName" required)
+                                    input#name.form-control.register-element(type="text" name="FullName" required autocomplete="new-name")
                                 .form-group
                                     label(for="PhoneNumber") Số Điện Thoại
-                                    input#phone.form-control.register-element(type="tel" name="PhoneNumber" required)
+                                    input#phone.form-control.register-element(type="tel" name="PhoneNumber" required autocomplete="new-phone")
                                 .form-group
                                     label(for="Address") Địa Chỉ
-                                    input#address.form-control.register-element(type="text" name="Address" required)
+                                    input#address.form-control.register-element(type="text" name="Address" required autocomplete="new-address")
                                 .form-group
                                     label(for="Gender") Giới Tính
-                                    select#gender.form-control.register-element(name="Gender" required)
+                                    select#gender.form-control.register-element(name="Gender" required autocomplete="new-gender")
                                         option(value="Nam") Nam
                                         option(value="Nữ") Nữ
                                 .form-group
                                     label(for="Birthday") Ngày Sinh
-                                    input#dob.form-control.register-element(type="date" name="Birthday" required)
+                                    input#dob.form-control.register-element(type="date" name="Birthday" required autocomplete="new-dob")
                                 .form-group
                                     label(for="Password") Mật khẩu
-                                    input#password.form-control.register-element(type="password" name="Password" required)
+                                    input#password.form-control.register-element(type="password" name="Password" required autocomplete="new-password")
                                 .form-group
                                     label(for="confirm_password") Xác nhận Mật khẩu
-                                    input#confirm_password.form-control.register-element(type="password" name="confirm_password" required)
+                                    input#confirm_password.form-control.register-element(type="password" name="confirm_password" autocomplete="new-password"  required)
                                 .form-group.text-center
                                 .submit-register
                                     //- button( type="submit" class = "btn register-button") Tiếp tục  
-                                    button.btn.login-button(type="submit" style="margin-top: 40px;") Đăng ký
+                                    button.btn.register-button(type="submit" class="btn-primary" style="margin-top: 40px;") Đăng ký
 

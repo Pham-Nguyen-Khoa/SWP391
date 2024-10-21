@@ -1,8 +1,11 @@
 extends ../../layouts/default.pug
+include ../../mixins/chatAi.pug
 
 block main
     .header-bar.mb-5(style="background-color: #353636; padding: 18px; text-align: center; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;")
             h3(style="color: white; font-weight: bold; font-style: italic; font-size: 32px; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); letter-spacing: 1px;") Đặt Lịch Hẹn
+    //- pre 
+    //-     | #{JSON.stringify(listDoctor)}
     div.background_appointment
         div(class="box_appointment")
             form(action="/koi/appointment" method="post").form_appointment
@@ -13,10 +16,11 @@ block main
                     input#name(type="text" name="FullName" placeholder="Nhập họ và tên" value=userInfo.FullName)
                     label(for="phone") Số Điện Thoại
                     input#phone(type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" pattern="[0-9]*" inputmode="numeric" required value=userInfo.PhoneNumber)
-                    
+                    label(for="address" id = "label-address" style="display: none") Địa chỉ
+                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="service") Chọn dịch vụ
                     div
-                        select#service(name="service" class="service_appointment" required)
+                        select#service(name="service" class="service_appointment" requir    ed)
                             option(value selected disabled) Chọn Dịch Vụ
                             each  service in listService
                                 option(value=service.Name) • #{service.Name}
@@ -25,8 +29,8 @@ block main
                         option( selected disabled) Chọn Nơi Khám
                         option(value="nha") • Tại nhà
                         option(value="center") • Tại trung tâm
-                    label(for="address" id = "label-address" style="display: none") Địa chỉ
-                    input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
+                    //- label(for="address" id = "label-address" style="display: none") Địa chỉ
+                    //- input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="select_doctor" ) Chọn Bác Sĩ
                     select(id="select_doctor" name="doctor" required)
                         option(value selected, disabled) Chọn Bác Sĩ
@@ -47,10 +51,9 @@ block main
                 .right-section
                     .doctor-info
                     .priceService#priceService(style="visibility: hidden; height: 120px; background-color: rgb(94 179 211 / 44%); border-radius: 20px; padding: 15px 30px 30px; text-align: center; width: 400px; margin: 60px 0px 100px 138px; border: 2px solid #413d3dbf; box-shadow: 0px 0px 17px 2px #00000080;")
-                        //- h1(style="font-size: 24px; font-weight: bold; color: #333;") Số tiền ước tính: 
-                        //- span(style="font-size: 28px; font-weight: bold; color: #dd9917; margin-left: 10px;padding-bottom: 8px;") 500.000đ
             .button-appointment.mt-5(style="display: flex; justify-content: center;")
-                button.confirm-btn(type="submit") Đặt lịch hẹn
+                button.confirm-btn.payment-btn(type="submit" style="background: linear-gradient(135deg, #5488bf, #5b96d5); box-shadow: 0px 0px 0 0") 
+                    span Đặt lịch hẹn
             .confirm-appointment 
                 h2.text-center.mb-4 Xác Nhận Đặt Lịch 
                 p Trước khi xác nhận lịch hẹn, vui lòng kiểm tra: 
@@ -62,11 +65,6 @@ block main
                 button(id="confirm-cancle-appointment") Hủy
             .paid-appointment 
                 div.content-paid-appointment 
-                    //- img(src="data:image/png;base64,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", alt="")
-                    //- h1 Mã QR thanh toán tự động 
-                    //- p Số tiền: 2.000.000đ 
-                    //- p Nội dung (bắt buộc): <span>TIME10017</span>
-                    //- p Người thụ hưởng: PHẠM NGUYÊN KHOA 
                 div.waiting-paid-appointment
                     p Đang chờ thanh toán 
                     <span id="countdown">10:00</span>
@@ -87,11 +85,28 @@ block main
                 p#modalMessage
                 button#closeModalMessage(type="button") Đóng
 
+        #modalDistance.modal-distance(style="display: none;")
+            .modal-distance-content
+                .modal-icon
+                    i.fas.fa-map-marker-alt
+                h2 Xin lỗi quý khách
+                p Chúng tôi rất tiếc phải thông báo rằng địa chỉ của quý khách nằm ngoài phạm vi phục vụ của chúng tôi.
+                p Khoảng cách quá xa khiến chúng tôi không thể đảm bảo chất lượng dịch vụ tốt nhất cho quý khách.
+                p Chúng tôi chân thành xin lỗi vì sự bất tiện này và hy vọng sẽ có cơ hội phục vụ quý khách trong tương lai.
+                .text-center
+                    button.modal-distance-button(type="button" id="closeModalDistance") Đóng
+        
+
+        button#openModalDistance(type="button") Mở Modal
+        +chatAi()
                     
                             
 
-            script.
-                var listService = !{JSON.stringify(listService)};
-                var doctorSchedules = !{JSON.stringify(doctorSchedules)};
-                var listAccount = !{JSON.stringify(listAccount)};
-                var listDoctor = !{JSON.stringify(listDoctor)};
+        script.
+            var listService = !{JSON.stringify(listService)};
+            var doctorSchedules = !{JSON.stringify(doctorSchedules)};
+            var listAccount = !{JSON.stringify(listAccount)};
+            var listDoctor = !{JSON.stringify(listDoctor)};
+            const settingGeneral = !{JSON.stringify(SettingGeneral)};
+
+
