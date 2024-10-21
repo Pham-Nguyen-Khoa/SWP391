@@ -604,3 +604,63 @@ await Appointment.update({
   }
 }
 
+// [POST] /doctor/current-appointment/payment-fish-center
+module.exports.paymentFishCenterPost = async(req, res) => {
+  const formData = req.body;
+      const MedicineData = JSON.parse(formData.selectedMedications);
+      const informationData = JSON.parse(formData.previousPageData);
+      const fishCount = informationData.length;
+      console.log(MedicineData)
+      console.log(informationData)
+      console.log(fishCount)
+      for(let i = 0 ; i < fishCount ; i++){
+        const fish = informationData[i];
+        const PrescriptionID = await generateUserId("prescription", "PrescriptID", "PRES");
+        await Prescription.create({
+            PrescriptID: PrescriptionID,
+            Time: new Date(),
+        })
+    
+    
+  
+          const KoiID = await generateUserId("koiprofile", "KoiID", "KOI");
+          await KoiProfile.create({
+            KoiID: KoiID,
+            PrescriptID: PrescriptionID,
+            Avatar: fish.Avatar,
+            Problem: fish.Problem,
+            Solution: fish.Solution,
+            Description: fish.Description,
+            Type: fish.Type,
+            Weight: fish.Weight,
+            Height: fish.Height,
+            HealthStatus: fish.HealthStatus,  
+            Gender: fish.Gender   
+          });
+        const pondMedications = MedicineData.find(med => med.fish === i + 1).medications;
+        for (const medicineId of pondMedications) {
+          await Prescription_Medicine.create({
+            PrescriptID: PrescriptionID,
+            MedicineID: medicineId.medicineId,
+            Quantity: medicineId.quantity,
+            MorningUse: medicineId.morning,
+            AfternoonUse: medicineId.noon,
+            EveningUse: medicineId.evening,
+          });
+        }
+      const appointment = await Appointment.findOne({
+          where: {
+              VetID: res.locals.user.VetID,
+              Process: "Process"
+          }
+      });
+
+        await KoiRecord.create({
+          AppointmentID: appointment.AppointmentID,
+          KoiID: KoiID
+      });
+
+      }
+      req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
+      res.redirect("/doctor/appointment")
+}
