@@ -44,8 +44,11 @@ block main
                         img.mb-4(src=SettingGeneral.ImageServiceHealthy  alt="Dịch vụ 1" style="width: 100%; height:100%; object-fit: cover; border-radius: 20px;")
                         .overlay
                             p.mx-3 Chúng tôi cung cấp dịch vụ khám bệnh chuyên sâu dành cho cá Koi, giúp phát hiện sớm các vấn đề về sức khỏe và đảm bảo cá Koi của bạn luôn trong tình trạng tốt nhất. Đội ngũ bác sĩ giàu kinh nghiệm sẽ kiểm tra tổng quát, phát hiện bệnh lý và đề xuất các phương pháp điều trị hiệu quả nhất.  
-                            a.btn.btn-info(href="/koi/checkUp", style="border: none; background-color: transparent; color: white;") 
-                                i.fa.fa-chevron-right(style="font-size: 24px;") 
+                            button.cta(href='/koi/checkUp')
+                                span Tìm hiểu thêm
+                                svg(width="15px", height="10px", viewBox="0 0 13 10")
+                                    path(d="M1,5 L11,5")
+                                    polyline(points="8 1 12 5 8 9")
                 .col-md-4
                     .service-title
                     h3.text-center.font-weight-bold(style="height: 75px;") Tư Vấn Cải Thiện Môi Trường Hồ 
@@ -54,8 +57,11 @@ block main
                         img.mb-4(src=SettingGeneral.ImageServicePond alt="Dịch vụ 2" style="width: 100%; height:100%; object-fit: cover; border-radius: 20px;")
                         .overlay
                             p.mx-3 Trường sống lý tưởng là yếu tố quan trọng đối với sức khỏe của cá Koi. Chúng tôi cung cấp dịch vụ tư vấn để đánh giá và cải thiện chất lượng nước, thiết kế hồ nuôi phù hợp và điều chỉnh các yếu tố môi trường để cá Koi của bạn phát triển khoẻ mạnh.         
-                            a.btn.btn-info(href="/koi/envConsult", style="border: none; background-color: transparent; color: white;") 
-                                i.fa.fa-chevron-right(style="font-size: 24px;") 
+                            button.cta(href='/koi/envConsult')
+                                span Tìm hiểu thêm
+                                svg(width="15px", height="10px", viewBox="0 0 13 10")
+                                    path(d="M1,5 L11,5")
+                                    polyline(points="8 1 12 5 8 9")
                 .col-md-4
                     .service-title
                     h3.text-center.font-weight-bold(style="height: 75px;") Tư Vấn Trực Tuyến
@@ -64,8 +70,11 @@ block main
                         img.mb-4(src=SettingGeneral.ImageServiceOnline  alt="Dịch vụ 3" style="width: 100%; height:100%; object-fit: cover; border-radius: 20px;") 
                         .overlay
                             p.mx-3 Dịch vụ tư vấn trực tuyến của chúng tôi mang đến sự tiện lợi cho bạn, giúp bạn nhận được sự hỗ trợ từ các bác sĩ thú y mọi lúc mọi nơi. Chỉ cần đặt lịch hẹn, bạn sẽ nhận được lời khuyên chuyên môn và các giải pháp nhanh chóng cho những vấn đề liên quan đến sức khỏe của cá Koi.
-                            a.btn.btn-info(href="/koi/onlConsult", style="border: none; background-color: transparent; color: white;") 
-                                i.fa.fa-chevron-right(style="font-size: 24px;") 
+                            button.cta(href='/koi/onlConsult')
+                                span Tìm hiểu thêm
+                                svg(width="15px", height="10px", viewBox="0 0 13 10")
+                                    path(d="M1,5 L11,5")
+                                    polyline(points="8 1 12 5 8 9") 
         section.review.pt-4.pb-4(style=" background-image: linear-gradient(38.73deg, rgb(5 69 95 / 51%) 0%, rgba(201, 32, 184, 0) 50%), linear-gradient(353deg, rgb(8 31 78 / 23%) 50%, rgb(33 176 239 / 35%) 100%);")
             .reviews-container
                 h3.intro-title.text-center.mb-5 Đánh Giá Của Khách Hàng
