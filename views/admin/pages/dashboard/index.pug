@@ -12,8 +12,28 @@ block main
         button#rating Đánh giá
         div(style="width: 1300px")   
             canvas#test
-        button#month Theo tháng
-        button#date Theo ngày   
+
+        .chart-controls
+            .radio-group
+                label Time:
+                input#time-month(type="radio" name="time" value="month" checked)
+                label(for="time-month") Month
+                input#time-day(type="radio" name="time" value="day")
+                label(for="time-day") Day
+
+            .radio-group
+                label Unit:
+                input#unit-amount(type="radio" name="unit" value="amount" checked)
+                label(for="unit-amount") Amount
+                input#unit-orders(type="radio" name="unit" value="orders")
+                label(for="unit-orders") Orders
+
+            .radio-group
+                label Kind:
+                input#kind-total(type="radio" name="kind" value="total" checked)
+                label(for="kind-total") Total
+                input#kind-separate(type="radio" name="kind" value="separate")
+                label(for="kind-separate") Separate Service   
 
     script(type="module", src="/admin/js/chart.js")
     script(src="https://cdn.jsdelivr.net/npm/chart.js")

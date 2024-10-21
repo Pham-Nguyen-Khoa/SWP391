@@ -107,10 +107,30 @@ fetch("/admin/dashboard/testAPI")
         console.error("Chart is not initialized yet.");
       }
     }
+    function updateChart() {
+      const time = document.querySelector('input[name="time"]:checked').value;
+      const unit = document.querySelector('input[name="unit"]:checked').value;
+      const kind = document.querySelector('input[name="kind"]:checked').value;
+    
+      console.log(time);
+      console.log(unit);
+      console.log(kind);
+      console.log('Hi');
+
+      // Use these values to update your chart
+      // For example:
+      // chart.updateOptions({
+      //   xaxis: { type: time === 'month' ? 'category' : 'datetime' },
+      //   yaxis: { title: { text: unit === 'amount' ? 'Amount ($)' : 'Number of Orders' } },
+      //   // ... other chart updates based on the selected options
+      // });
+    }
 
     // Gán sự kiện cho các nút
-    document.getElementById('date').addEventListener('click', updateFinanceDate);
-    document.getElementById('month').addEventListener('click', updateFinanceMonth);
-
+    // document.getElementById('date').addEventListener('click', updateFinanceDate);
+    // document.getElementById('month').addEventListener('click', updateFinanceMonth);
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('change', updateChart);
+    });
   })
   .catch(error => console.error('Error fetching data:', error));
