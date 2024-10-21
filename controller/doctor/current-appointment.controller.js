@@ -598,7 +598,9 @@ await Appointment.update({
     req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
     res.redirect("/doctor/appointment")
   } catch (error) {
+    console.log(error)
     req.flash("error", "Có lỗi xảy ra khi hoàn thành công việc. Vui lòng thử lại.");
     res.redirect("back")
   }
 }
+
