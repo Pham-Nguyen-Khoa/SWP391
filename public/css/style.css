@@ -1394,7 +1394,7 @@ header {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 10%;
     transform: translateY(-50%);
     text-align: center;
@@ -1521,7 +1521,7 @@ header {
 }
 
 .table-my-appointment thead {
-    background-color: #5aaeba;
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: white;
     font-weight: bold;
     text-align: center;
