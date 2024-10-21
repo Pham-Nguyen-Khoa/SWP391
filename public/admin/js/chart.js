@@ -5,6 +5,7 @@ fetch("/admin/dashboard/testAPI")
     const { servicesByDay, servicesByMonth, totalByDay, totalByMonth } = data;
 
     let chart;
+    const currentMonthValue = new Date().getMonth() + 1;
 
     const months = [
       'Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5',
@@ -23,7 +24,7 @@ fetch("/admin/dashboard/testAPI")
           data: servicesByMonth['DV0001']?.totalAmount , // Chọn doanh thu
           borderColor: '#FF0000',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
-        },
+          },
         {
           label: 'Cải thiện hồ cá',
           data: servicesByMonth['DV0002']?.totalAmount, // Chọn doanh thu
@@ -35,7 +36,7 @@ fetch("/admin/dashboard/testAPI")
           data: servicesByMonth['DV0003']?.totalAmount , // Chọn doanh thu
           borderColor: '#00FF00',
           backgroundColor: 'rgba(0, 255, 0, 0.5)',
-        }
+        },
       ]
     };
     
@@ -53,7 +54,7 @@ fetch("/admin/dashboard/testAPI")
             display: true,
             text: 'Bảng thống kê doanh thu từng dịch vụ'
           }
-        }
+        },
       },
     };
 
@@ -71,24 +72,25 @@ fetch("/admin/dashboard/testAPI")
           datasets: [
             {
               label: 'Khám sức khỏe',
-              data: servicesByDay['DV0001']?.totalAmount || [], // Chọn doanh thu theo ngày
+              data: servicesByDay['DV0001']?.totalAmount , // Chọn doanh thu theo ngày
               borderColor: '#FF0000',
               backgroundColor: 'rgba(255, 0, 0, 0.5)',
             },
             {
               label: 'Cải thiện hồ cá',
-              data: servicesByDay['DV0002']?.totalAmount || [], // Chọn doanh thu theo ngày
+              data: servicesByDay['DV0002']?.totalAmount , // Chọn doanh thu theo ngày
               borderColor: '#0000FF',
               backgroundColor: 'rgba(0, 0, 255, 0.5)',
             },
             {
               label: 'Tư vấn online',
-              data: servicesByDay['DV0003']?.totalAmount || [], // Chọn doanh thu theo ngày
+              data: servicesByDay['DV0003']?.totalAmount , // Chọn doanh thu theo ngày
               borderColor: '#00FF00',
               backgroundColor: 'rgba(0, 255, 0, 0.5)',
             }
           ]
         };
+        chart.options.plugins.title.text = `Bảng thống kê doanh thu của dịch vụ tháng ${currentMonthValue}`;
         chart.update();
       } else {
         console.error("Chart is not initialized yet.");
@@ -99,29 +101,7 @@ fetch("/admin/dashboard/testAPI")
     // Hàm cập nhật biểu đồ theo tháng
     function updateFinanceMonth() {
       if (chart) {
-        chart.config.data = {
-          labels: months,
-          datasets:[
-            {
-              label: 'Khám sức khỏe',
-              data: servicesByMonth['DV0001']?.totalAmount , // Chọn doanh thu
-              borderColor: '#FF0000',
-              backgroundColor: 'rgba(255, 0, 0, 0.5)',
-            },
-            {
-              label: 'Cải thiện hồ cá',
-              data: servicesByMonth['DV0002']?.totalAmount, // Chọn doanh thu
-              borderColor: '#0000FF',
-              backgroundColor: 'rgba(0, 0, 255, 0.5)',
-            },
-            {
-              label: 'Tư vấn online',
-              data: servicesByMonth['DV0003']?.totalAmount , // Chọn doanh thu
-              borderColor: '#00FF00',
-              backgroundColor: 'rgba(0, 255, 0, 0.5)',
-            }
-          ]
-        };
+        chart.config.data = info;
         chart.update();
       } else {
         console.error("Chart is not initialized yet.");
