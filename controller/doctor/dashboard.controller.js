@@ -65,7 +65,16 @@ module.exports.index = async (req, res) => {
       const date = new Date(feedback.Date);
       feedback.FormattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   });
+    
+    let appointmentDataMonthCount = new Array(12).fill(0); 
+    appointmentsTotal.forEach(appointment => {
+        const date = new Date(appointment.Date);
+        const month = date.getMonth(); 
 
+        if(month >= 0 && month < 12){
+        appointmentDataMonthCount[month] += 1; 
+        }
+    });
 
     res.render("doctor/pages/dashboard/index",{
         pageTitle: "Trang tổng quan ",
