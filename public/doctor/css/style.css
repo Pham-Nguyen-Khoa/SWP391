@@ -1636,3 +1636,38 @@ label[for^="medicationSelect"]:hover {
 #feedbackModal .modal-content {
     animation: fadeIn 0.5s ease-out;
 }
+
+/* Table mini */
+.table-mini {
+    width: 100%; /* Chiều rộng 100% */
+    border-collapse: collapse; /* Gộp các đường viền */
+    font-size: 14px; /* Kích thước chữ nhỏ hơn */
+    background-color: #f8f9fa; /* Màu nền nhẹ cho bảng */
+    border-radius: 8px; /* Bo góc cho bảng */
+    overflow: hidden; /* Ẩn viền ngoài */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
+}
+
+.table-mini th, .table-mini td {
+    border: 1px solid #ddd; /* Đường viền nhẹ cho các ô */
+    padding: 10px; /* Khoảng cách bên trong ô */
+    text-align: left; /* Căn trái cho văn bản */
+}
+
+.table-mini th {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Màu nền gradient cho tiêu đề */
+    color: #ffffff; /* Màu chữ cho tiêu đề */
+    font-weight: bold; /* Chữ đậm cho tiêu đề */
+}
+
+.table-mini tr:hover {
+    background-color: #e0f7fa; /* Màu nền khi di chuột qua hàng */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+.table-mini .header {
+    font-size: 18px; /* Kích thước chữ cho tiêu đề */
+    font-weight: bold; /* Chữ đậm cho tiêu đề */
+    text-align: center; /* Căn giữa cho tiêu đề */
+    padding: 15px; /* Khoảng cách cho tiêu đề */
+}

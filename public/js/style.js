@@ -1120,4 +1120,39 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
   }
 });
 
+//Back to top
+const backToTopBtn = document.getElementById('backToTop');
+if(backToTopBtn) {
+  const rollToTop = () => {
+    if(document.body.scrollTop>1500 || document.documentElement.scrollTop>1500) {
+      backToTopBtn.style.display = "block"
+    } else {
+      backToTopBtn.style.display = "none"
+    }
+  }
+  window.onscroll = rollToTop;
+  backToTopBtn.addEventListener("click",() => {
+    window.scrollTo({top:0, behavior: "smooth"})
+  })
+}
+
+// const backToTopBtn = document.getElementById('backToTop');
+// if(backToTopBtn) {
+//   const rollToTop = () => {
+//     if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+//       backToTopBtn.style.display = "block";
+//     } else {
+//       backToTopBtn.style.display = "none";
+//     }
+//   }
+  
+//   // Gán hàm cho sự kiện scroll
+//   window.onscroll = rollToTop;
+  
+//   // Xử lý khi nhấn vào nút back-to-top
+//   backToTopBtn.addEventListener("click", () => {
+//     window.scrollTo({top: 0, behavior: "smooth"});
+//   });
+// }
+
 

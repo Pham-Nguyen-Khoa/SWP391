@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/back-to-top.pug
 
 block main
     head
@@ -72,3 +73,4 @@ block main
                             img(src="/images/icon-service4.png", alt="Step 4" style="width: 100%; height: 200px;")
                             h3 Thanh toán
                             p Hoàn tất thanh toán bằng VNPAY với dịch vụ tư vấn online, và thanh toán bằng tiền mặt tại trung tâm hoặc tại nhà
+            +backToTop() 
