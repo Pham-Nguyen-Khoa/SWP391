@@ -437,3 +437,48 @@ module.exports.paymentFishPost = async(req, res) => {
   // })
   res.redirect('/doctor/current-appointment/payment-fish');
 }
+
+
+// [Get] /doctor/current-appointment/payment-fish
+module.exports.paymentFish = async(req, res) => {
+  
+  const currentAppointment = await Appointment.findOne({
+      raw: true,
+      where: {
+          VetID: res.locals.user.VetID,
+          Process: "Process"
+      }
+  })
+  console.log(currentAppointment)
+  const service = await Service.findOne({
+      raw: true,
+      where: {
+          ServiceID: currentAppointment.ServiceID
+      }
+  })
+  console.log(service)
+  console.log(req.session.paymentData)
+  const paymentData = req.session.paymentData;
+  if(service.ServiceID == "DV0001"){
+    
+    if(!paymentData){
+      req.flash('error', 'Không có dữ liệu thanh toán. Vui lòng thử lại.');
+    }
+    const totalFee = paymentData.totalServiceFee;
+    const serviceDetails = paymentData.serviceDetails.map(detail => ({
+      description: detail.description,
+      amount: formatCurrency(detail.amount)
+    }));
+    console.log(serviceDetails)
+    const objectPayment = {
+      totalFee: formatCurrency(totalFee),
+      serviceDetails: serviceDetails
+    }
+    console.log(objectPayment)
+     res.render("doctor/pages/current-appointment-healthy/payment-fish",{
+      pageTitle: "Trang Thanh Toán",
+      objectPayment: objectPayment,
+      currentAppointment: currentAppointment
+    })
+  }
+}
