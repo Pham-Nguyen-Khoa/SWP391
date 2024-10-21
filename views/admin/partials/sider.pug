@@ -67,9 +67,46 @@ style.
         font-size: 14px;
         color: #bdc3c7;
     }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        background-color: #34495e;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100%;
+        border-radius: 10px;    
+    }
+    .dropdown-menu li {
+        padding: 12px 16px;
+    }
+    .dropdown-menu li:hover {
+        background-color: #2c3e50;
+    }
+    .dropdown-menu a {
+        color: #ecf0f1;
+        text-decoration: none;
+        display: block;
+    }
+    .show {
+        display: block;
+    }
 .sider 
     .admin-sider
         .sider-header
+            .dropdown
+                img#avatarImg(src=user.Avatar, alt="" srcset="" style="border-radius: 40px;width: 200px;height: 200px;object-fit: cover;  margin: 20px; cursor: pointer;")
+                ul#dropdownMenu.dropdown-menu
+                    li
+                        a(href="/admin/my-account") Tài khoản
+                    li
+                        a(onclick="window.location.href='/admin/my-account/edit'" style="cursor: pointer; color: white;") Chỉnh sửa
             h2.sider-title Quản trị viên
         nav.sider-nav
             ul.sider-menu
@@ -93,5 +130,30 @@ style.
                     a.sider-link(href=`${prefixAdmin}/chat`)
                         i.fas.fa-comments.fa-3x.me-3(style="font-size: 40px;    margin-right: 40px;display: inline-block;")
                         span Chat 
+script.
+    document.addEventListener('DOMContentLoaded', function() {
+        const avatarImg = document.getElementById('avatarImg');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        let isDropdownOpen = false;
 
+        avatarImg.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (!isDropdownOpen) {
+                dropdownMenu.classList.add('show');
+                isDropdownOpen = true;
+            } else {
+                dropdownMenu.classList.remove('show');
+                isDropdownOpen = false;
+            }
+        });
 
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('#avatarImg')) {
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                    isDropdownOpen = false;
+                }
+            }
+        });
+    });

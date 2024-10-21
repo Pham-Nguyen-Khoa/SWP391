@@ -1,6 +1,83 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main
+    +alert-success("5000")
+    +alert-error('5000')
+    .container(style="margin-top: 100px;")
+        h1.text-center.mb-4.page-title #{pageTitle}
+        .main-body.personal-info-container
+            .card.mb-3
+                .card-body
+                    form(
+                        action=`/staff/my-account/edit?_method=PATCH`,
+                        method="post"
+                        enctype="multipart/form-data"
+                    )  
+                        .row
+                            .col-md-6
+                                .form-group
+                                    label(for="FullName") Họ và Tên *
+                                    input.form-control.custom-input(type="text", id="FullName", name="FullName", required, value=user.FullName)
+                            .col-md-6
+                                .form-group
+                                    label(for="Email") Email *
+                                    input.form-control.custom-input(type="text", id="Email", name="Email", value=user.Email, required)
+                            .col-md-6
+                                .form-group
+                                    label(for="Address") Địa chỉ
+                                    input.form-control.custom-input(type="text", id="Address", name="Address", required, value=user.Address)
+                            .col-md-6
+                                .form-group
+                                    label(for="Password") Password *
+                                    input.form-control.custom-input(type="password", id="Password", name="Password", placeholder="Nhập vào thay đổi mật khẩu mới")
+                            .col-md-6
+                                .form-group
+                                    label(for="PhoneNumber") Số điện thoại
+                                    input.form-control.custom-input(type="number", id="PhoneNumber", name="PhoneNumber", value=user.PhoneNumber, required)
+                            .col-md-6
+                                .form-group
+                                    label(for="Birthday") Ngày sinh
+                                    input.form-control.custom-input(type="date", id="Birthday", name="Birthday", value=user.Birthday)
+                        .row
+                            .col-md-6
+                                .form-group
+                                    label(for="Gender") Giới tính
+                                    .select-wrapper
+                                        select.form-control.custom-input(name="Gender", id="Gender")
+                                            option(value="", disabled, selected) --- Lựa chọn ---
+                                            option(value="Nam", selected=(user.Gender === "Nam")) Nam
+                                            option(value="Nữ", selected=(user.Gender === "Nữ")) Nữ
+                            .col-md-6
+                                .form-group(upload-image)
+                                    label(for="Avatar") Hình ảnh
+                                    input(type="file", id="Avatar", name="Avatar", class="form-control-file", upload-image-input)
+                                    img(src=user.Avatar, upload-image-preview, class="upload-preview")
+                        .row.mt-3
+                            .col-md-6
+                                .form-group
+                                    button.button(type="button", onclick="window.location.href='/staff/my-account'")
+                                        .button-box
+                                            span.button-elem
+                                                svg(viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg")
+                                                    path(d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z")
+                                            span.button-elem
+                                                svg(viewBox="0 0 46 40")
+                                                    path(d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z")
+                                        |
+                            .col-md-6
+                                .form-group
+                                    button(type="submit", class="button-update")
+                                        svg(
+                                            xmlns="http://www.w3.org/2000/svg",
+                                            width="16",
+                                            height="16",
+                                            fill="currentColor",
+                                            class="bi bi-arrow-repeat",
+                                            viewBox="0 0 16 16"
+                                        )
+                                            path(d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z")
+                                            path(fill-rule="evenodd", d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z")
+                                        | Cập nhật
 
     // CSS từ view/admin
     style.
