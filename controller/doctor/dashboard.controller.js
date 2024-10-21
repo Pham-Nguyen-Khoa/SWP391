@@ -32,7 +32,21 @@ module.exports.index = async (req, res) => {
     const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
     const queryAppointmentToday = `SELECT * FROM appointment join customer c on appointment.CustomerID = c.CustomerID join account1 a on c.AccountID = a.AccountID where VetID = '${res.locals.user.VetID}'  AND Date = '${formattedDate}' And Process != 'Pending'`;
     const [appointmentsToday] = await Sequelize.query(queryAppointmentToday);
-
+    let queryAllFeedBack = `SELECT * from appointment a join feedback f on a.AppointmentID = f.AppointmentID join customer c on a.CustomerID = c.CustomerID where a.VetID = '${res.locals.user.VetID}'`
+    const [feedbacks] = await Sequelize.query(queryAllFeedBack);
+    const countFeedback = feedbacks.length;
+    const star5 = feedbacks.filter(feedback => feedback.Star == 5).length;
+    const star4 = feedbacks.filter(feedback => feedback.Star == 4).length;
+    const star3 = feedbacks.filter(feedback => feedback.Star == 3).length;
+    const star2 = feedbacks.filter(feedback => feedback.Star == 2).length;
+    const star1 = feedbacks.filter(feedback => feedback.Star == 1).length;
+    const star = {
+        star5: star5,
+        star4: star4,
+        star3: star3,   
+        star2: star2,
+        star1: star1
+    }
    
     let limit = 2;
     appointmentsToday.sort((a, b) => {
