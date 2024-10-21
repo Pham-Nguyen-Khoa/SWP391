@@ -58,7 +58,7 @@ module.exports.index = async (req, res) => {
       JOIN feedback f ON a.AppointmentID = f.AppointmentID 
       JOIN customer c ON a.CustomerID = c.CustomerID
       WHERE a.VetID = '${res.locals.user.VetID}'
-      ORDER BY a.Date DESC, f.FeedbackID DESCLIMIT ${limit}
+      ORDER BY a.Date DESC, f.FeedbackID DESC LIMIT ${limit}
     `;
     const [feedbacksNew] = await Sequelize.query(queryFeedBack);
     feedbacks.forEach(feedback => {
