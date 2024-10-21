@@ -449,20 +449,271 @@ module.exports.assignVet = async (req, res) => {
       },
     });
     const formatDateAppointment = formatDate(appointment.Date);
+    
     if(appointment.ServiceID == "DV0003"){
+        const emailTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch thành công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thông báo đặt lịch thành công</h1>
+        <p>Xin chào quý khách,</p>
+        <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+        <div class="details">
+            <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+            <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+            <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+        </div>
+        <p>Vào thời gian hẹn, vui lòng truy cập đường link Google Meet dưới đây để được bác sĩ tư vấn:</p>
+        <a href="${doctorInfo.GoogleMeet}" class="button">Tham gia cuộc hẹn</a>
+        <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+        <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+    </div>
+</body>
+</html>
+`;
         NodeMailer.sendMail(
             `${email[0].Email}`,
             "Thông báo đặt lịch thành công",
-            "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
-            "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
         );
     }else if(appointment.ServiceID == "DV0002"){
+        const emailTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch thành công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thông báo đặt lịch thành công</h1>
+        <p>Xin chào quý khách,</p>
+        <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+        <div class="details">
+            <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+            <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+            <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+        </div>
+        <p>Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!</p>
+        <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+        <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+    </div>
+</body>
+</html>
+`;
+        console.log("gửi mail");
+        console.log(email[0].Email);
+        console.log(emailTemplate);
       NodeMailer.sendMail(
         `${email[0].Email}`,
       "Thông báo đặt lịch thành công",
-      "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
-       "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!" 
+    //   "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+    //    "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!" 
+    emailTemplate
       );
+    }else if(appointment.ServiceID == "DV0001" && appointment.Address != null){
+        const emailTemplate = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Đặt lịch thành công</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                h1 {
+                    color: #4CAF50;
+                }
+                .details {
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #4CAF50;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Thông báo đặt lịch thành công</h1>
+                <p>Xin chào quý khách,</p>
+                <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+                <div class="details">
+                    <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+                    <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+                    <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+                </div>
+                <p>Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!</p>
+                <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+                <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+            </div>
+        </body>
+        </html>
+        `;
+        NodeMailer.sendMail(
+            `${email[0].Email}`,
+            "Thông báo đặt lịch thành công",
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+        );
+    }else if(appointment.ServiceID == "DV0001" && appointment.Address == null){
+        const emailTemplate = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Đặt lịch thành công</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                h1 {
+                    color: #4CAF50;
+                }
+                .details {
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #4CAF50;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Thông báo đặt lịch thành công</h1>
+                <p>Xin chào quý khách,</p>
+                <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+                <div class="details">
+                    <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+                    <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+                    <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+                </div>
+                <p>Vào thời gian hẹn, Bạn hãy đến trung tâm để bác sĩ khám cá nhé!</p>
+                <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+                <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+            </div>
+        </body>
+        </html>
+        `;
+        NodeMailer.sendMail(
+            `${email[0].Email}`,
+            "Thông báo đặt lịch thành công",
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+        );
     }
     
     req.flash("success", "Đã gán bác sĩ và cập nhật lịch thành công!");
