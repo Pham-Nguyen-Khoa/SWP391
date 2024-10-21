@@ -169,4 +169,31 @@ if (filterByDay) {
   });
 }
 
-
+const filterByYear = document.getElementById("filterByYear");
+if (filterByYear) {
+  let yearArray = [];
+  const yearCurrent = new Date().getFullYear();
+  console.log(yearCurrent);
+  for (let i = 5; i >= 0; i--) {
+    yearArray.push(yearCurrent - i);
+  }
+  console.log(yearArray);
+  let appointmentDataYearCount = new Array(6).fill(0);
+  appointmentData.forEach((appointment, index) => {
+    const date = new Date(appointment.Date);
+    const year = date.getFullYear();
+    const yearIndex = yearCurrent - year + 5;
+    if (year >= yearCurrent - 5 && year <= yearCurrent) {
+      appointmentDataYearCount[yearIndex] += 1;
+    }
+  });
+  console.log(appointmentDataYearCount);
+  filterByYear.addEventListener("click", function () {
+    filterByYear.classList.add("active");
+    filterByMonth.classList.remove("active");
+    filterByDay.classList.remove("active");
+    appointmentLineChart.destroy();
+    updateChart(yearArray, appointmentDataYearCount);
+    appointmentLineChart.update();
+  });
+}
