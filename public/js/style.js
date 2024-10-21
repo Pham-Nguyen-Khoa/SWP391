@@ -805,17 +805,17 @@ document.addEventListener("DOMContentLoaded", () => {
           })
           .then(data => {
               if (data && data.routes && data.routes.length > 0) {
-                   distanceAuto = data.routes[0].distance; // Khoảng cách tính bằng mét
+                   distanceAuto = data.routes[0].distance;
                    distanceAutoCustomer = (distanceAuto / 1000).toFixed(2);
                    if (distanceAutoCustomer > 50) {
                     const modalDistance = document.getElementById("modalDistance");
-                  modalDistance.style.display = "block"; // Hiển thị modal
+                  modalDistance.style.display = "block"; 
                   console.log("Neronmen")
                   console.log(document.getElementById("closeModalDistance"))
                   confirmAppointment.style.display = "none";
                   document.getElementById("closeModalDistance").addEventListener("click", () => {
                       // window.location.reload();
-                      modalDistance.style.display = "none"; // Hiển thị modal
+                      modalDistance.style.display = "none"; 
                       
                   });
                     return;

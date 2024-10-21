@@ -230,7 +230,7 @@
 
 /* Header Styling */
 .table-container table th {
-    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+    background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -240,7 +240,7 @@
 
 /* Date Row Styling */
 .table-container table th.date-header {
-    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+    background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);
 }
 
 /* Table Cell Styling */
@@ -253,7 +253,7 @@
 
 /* Doctor Card Styling */
 .table-container table td .doctor-card {
-    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+    background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);
     border: 1px solid #B2EBF2;
     border-radius: 12px;
     padding: 10px;
@@ -278,7 +278,7 @@
     color: #555;
 }
 .table-container table td:nth-child(1){
-    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+    background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -504,7 +504,7 @@
     text-align: center;
 }
 #table-appointment thead tr th{
-    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+    background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);
     text-align: center;
 }
 
@@ -560,7 +560,7 @@
 
 
 .css-active {
-    background-color:#5aaeba !important; /* Màu vàng */
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%) !important; /* Màu vàng */
     color: #000 !important; /* Màu chữ đen */
     border-color: #5aaeba !important;
 }
@@ -930,3 +930,74 @@
     transform: scaleX(1);
 }
 
+
+
+/* Chữ hình thức thanh toán */
+.payment-method-heading {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .payment-method-heading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 4px;
+    width: 50px;
+    background-color: #3498db;
+    border-radius: 2px;
+  }
+  
+  .payment-method-heading::before {
+    content: '\f09d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    margin-right: 10px;
+    color: #3498db;
+  }
+
+/* End Chữ hình thức thanh toán */
+
+
+
+
+/* Hình thức thanh toán */
+
+.btn-group-toggle .btn {
+    transition: all 0.3s ease;
+    border: 2px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    padding: 10px 20px;
+  }
+  
+  .btn-group-toggle .btn:hover {
+    background-color: #e6f2ff;
+  }
+  
+  .btn-group-toggle .btn.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-group-toggle .btn i {
+    font-size: 1.2em;
+    margin-right: 8px;
+  }
+  
+  .btn-group-toggle .btn input[type="radio"] {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+  }
+
+
+/* End hình thức thanh toán */

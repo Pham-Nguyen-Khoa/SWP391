@@ -24,7 +24,9 @@ block main
 
         .text-center.mt-4
           if(currentAppointmentFish.Address == null)
-              button.btn.btn-lg.mr-5( id="payCenter" style="background-color: #4294b1c7; color: black; padding: 10px;") Hoàn tất
+              button.btn.btn-lg.mr-5.payment-btn( id="payCenter" ) 
+                i.fas.fa-check-circle
+                span Hoàn tất
           else
             button.btn.btn-lg.mr-5.payment-btn(type="submit")
               i.fas.fa-credit-card

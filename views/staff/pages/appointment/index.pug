@@ -21,14 +21,14 @@ block main
       .btn-custom-outline:focus,
       .btn-custom-outline:hover {
         color: #ffffff !important;
-        background-color: #21a0b3 !important;
+            background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%) !important;
         border-color: #21a0b3 !important;
       }
   //- pre
   //-     code= JSON.stringify(listAppointment, null, 2)
-  .block-sider(style="width:90%;margin-left:180px;")   
+  .block-sider(style="width:90%;margin-left:140px;")   
     .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);") Bộ lọc 
+      .card-header(style="background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);") Bộ lọc 
       .card-body 
         .row 
           .col-6#filter-buttons
@@ -117,7 +117,7 @@ block main
     else     
      
       table.table#table-appointment
-        thead.custom-thead(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);")
+        thead.custom-thead(style="background: linear-gradient(135deg, #6aafd3 0%, #8bafce 100%);")
             tr
                 th Mã đơn hàng
                 th Tên khách hàng
@@ -137,25 +137,25 @@ block main
                     td  
                         h1 #{appointment.VetID}
                         if(appointment.Process == "Pending" && appointment.VetID == null)  
-                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
+                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=pending` class="btn btn-warning status-btn payment-btn" style="min-width: 120px;height: 41px;width: 180px;     background: linear-gradient(135deg, #b1cc12, #a8e42bf2);") Chờ xác nhận
                       
                         //- if(appointment.Process == "Pending" && appointment.VetID == null)  
                         //-     a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning status-btn" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted" )
-                            span(class="btn btn-primary status-btn" style="min-width: 140px;" ) Tiếp nhận
+                            span(class="btn btn-primary status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #252dbf, #2e29d6);   " ) Tiếp nhận
                         else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" && appointment.AdressAppointment != null)
-                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                            span(class="btn btn-primary status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") Sẵn sàng
                         //-test
                         else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment == null)
-                            a(href=`/koi` class="btn btn-primary status-btn" style="min-width: 120px;") Sẵn sàng
+                            a(href=`/koi` class="btn btn-primary status-btn payment-btn" style="min-width: 120px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") Sẵn sàng
                         
                         
                         else if(appointment.Process == "Process")
-                            span(class="btn btn-dark status-btn" style="min-width: 140px;") Tiếp nhận
+                            span(class="btn btn-dark status-btn payment-btn" style="min-width: 140px;height: 41px;width: 180px;    background: linear-gradient(135deg, #252dbf, #2e29d6);") Tiếp nhận
                         else if(appointment.Process == "Cancelled")
                             span(class="btn btn-danger status-btn" style="min-width: 140px;" ) Hủy bỏ 
                         else if(appointment.Process == "Successed")
-                            span(class="btn btn-success status-btn" style="min-width: 140px;") Thành công 
+                            span(class="btn btn-success status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                     td 
                         if(appointment.VetID == null)
                             form(action=`/staff/appointment/load-vets/${appointment.AppointmentID}` method="GET")
@@ -173,9 +173,9 @@ block main
                                       style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" 
                                   ) Gán Bác Sĩ
                     td 
-                        a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
+                        a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info payment-btn" style="    padding: 10px 0 10px 10px;    width: 50px;") 
                           i(class="fa-solid fa-receipt")
-                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2") 
+                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 payment-btn" style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;") 
                           i(class="fa fa-trash " aria-hidden="true") 
                           
               else 
@@ -186,29 +186,29 @@ block main
                     td #{appointment.DateFormat}
                     td  
                         if(appointment.Process == "Pending")  
-                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
+                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning payment-btn" style="min-width: 120px;height: 41px;width: 167px;     background: linear-gradient(135deg, #b1cc12, #a8e42bf2);") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
-                            span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
+                            span(class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #252dbf, #2e29d6);") Tiếp nhận
                         else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" )
-                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                            span(class="btn btn-primary status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") Sẵn sàng
                         else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment != null)
-                            span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
+                            span(class="btn btn-primary status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") Sẵn sàng
                         //-test
                         else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment == null)
-                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=process` class="btn btn-primary status-btn" style="min-width: 120px;") Sẵn sàng
+                            a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=process` class="btn btn-primary status-btn payment-btn" style="min-width: 120px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") Sẵn sàng
                         else if(appointment.Process == "Process")
-                            span(class="btn btn-dark" style="min-width: 140px;") Đang thực hiện
+                            span(class="btn btn-dark payment-btn" style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") Đang thực hiện
                         else if(appointment.Process == "Cancelled")
                             span(class="btn btn-danger" style="min-width: 140px;" ) Hủy bỏ 
                         else if(appointment.Process == "Successed")
-                            span(class="btn btn-success" style="min-width: 140px;") Thành công 
+                            span(class="btn btn-success payment-btn" style="min-width: 140px;height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                     td 
                         span(style="background-color: #5AAEBA; color: black; min-width: 200px;" class="btn " ) #{appointment.NameVet}
                       
                     td 
-                        a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
+                        a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info payment-btn" style="    padding: 10px 0 10px 10px;    width: 50px;") 
                           i(class="fa-solid fa-receipt")
-                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 button-delete") 
+                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;" class="btn btn-danger payment-btn ml-2 button-delete") 
                           i(class="fa fa-trash " aria-hidden="true") 
 
 
