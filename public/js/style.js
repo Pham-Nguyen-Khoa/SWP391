@@ -761,8 +761,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // formAppointment.submit();
       } else {
         const addressInput = document.getElementById("address").value
+        const locationInput = document.getElementById("location").value
+        const serviceSelected = document.getElementById("service").value
+        console.log(locationInput)
         let distanceAutoCustomer= 0;
-        if(addressInput != null){
+        if((serviceSelected === "Cải Thiện Môi Trường") || (locationInput === "nha" && serviceSelected === "Khám Sức Khỏe")){
+          console.log("Chạy vô rồi nè")
           const originAddress = settingGeneral.Address
           const destinationAddress = addressInput;
           console.log(destinationAddress);
@@ -820,16 +824,21 @@ document.addEventListener("DOMContentLoaded", () => {
                   });
                     return;
                 }
-                  const formAppointment = document.querySelector(".form_appointment");
+                const formAppointment = document.querySelector(".form_appointment");
                 formAppointment.submit();
+                
               } else {
                   console.log('Không tìm thấy lộ trình hoặc dữ liệu không hợp lệ.');
               }
           })
           .catch(error => console.error('Error:', error));
+        }else{
+          const formAppointment = document.querySelector(".form_appointment");
+          formAppointment.submit();
+          console.log("----------")
+          console.log(distanceAutoCustomer)
         }
-        console.log("----------")
-        console.log(distanceAutoCustomer)
+       
        
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
