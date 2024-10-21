@@ -230,7 +230,7 @@
 
 /* Header Styling */
 .table-container table th {
-    background-color: #54abb8f5; 
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -240,7 +240,7 @@
 
 /* Date Row Styling */
 .table-container table th.date-header {
-    background-color: #54abb8f5; 
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
 }
 
 /* Table Cell Styling */
@@ -253,7 +253,7 @@
 
 /* Doctor Card Styling */
 .table-container table td .doctor-card {
-    background-color: #54abb8f5; 
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     border: 1px solid #B2EBF2;
     border-radius: 12px;
     padding: 10px;
@@ -278,7 +278,7 @@
     color: #555;
 }
 .table-container table td:nth-child(1){
-    background-color: #54abb8f5; 
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: #FFF; 
     font-size: 16px;
     font-weight: bold;
@@ -315,7 +315,7 @@
 
 
 .form-horizontal {
-    background-color: #a0d1d9f5;
+    background: linear-gradient(135deg, #70b5d9cf 0%, #599ad2ba 100%);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 5px -5px 10px rgb(20 19 19 / 42%);
@@ -330,7 +330,7 @@
 }
 .select-shift{
     font-size: 20px;
-    background-color: #5bb3c1f5;
+    background: linear-gradient(135deg, #70b5d9cf 0%, #599ad2ba 100%);
     border-radius: 20px;
     border: 1px dashed;
     padding: 20px;
@@ -341,7 +341,7 @@
     height: 51px;
     border: 2px solid black;
     border-radius: 20px;
-    background-color: #65c6d2;
+    background: linear-gradient(135deg, #70b5d9cf 0%, #599ad2ba 100%);
     color: black;
     font-size: 20px;
     font-weight: bold;
@@ -433,9 +433,7 @@
     color: #333;
 }
 
-span {
-    color: #aaa;
-}
+
 
 .button-container {
     text-align: center;
@@ -489,7 +487,7 @@ span {
     text-align: center;
     margin: 50px auto 30px;
     width: 70%;
-    background-color: #5aaeba;
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     border-radius: 32px;
     color: white;
     font-weight: bold;
@@ -506,6 +504,7 @@ span {
     text-align: center;
 }
 #table-appointment thead tr th{
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     text-align: center;
 }
 
@@ -535,7 +534,7 @@ span {
 }
 
 .table-appointment-detail th {
-    background-color: #5aaeba; /* Màu nền cho tiêu đề */
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: #FFF; /* Màu chữ cho tiêu đề */
 }
 
@@ -829,11 +828,9 @@ span {
 
 
 .chat .inner-image img{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: auto;
     object-fit: contain;
-    background: #cdc7c7;
-    padding: 10px;
     margin: 0 5px 5px 0;
     border-radius: 5px;
     border: 1px solid grey
@@ -844,4 +841,92 @@ span {
     text-align: right;
 }
 
+
+
+
+
+
+
+/* Các nút button */
+
+
+.payment-btn {
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    height: auto;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0px 4px 8px 0px rgb(38 36 36);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s;
+}
+
+.payment-btn:hover {
+    color: white;
+    /* background: linear-gradient(135deg, #003d82, #0056b3); */
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
+    transform: translateY(-2px);
+}
+
+.payment-btn:hover:before {
+    left: 100%;
+}
+
+.payment-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 86, 179, 0.4);
+}
+
+.payment-btn i {
+    margin-right: 12px;
+    font-size: 1.3em;
+    transition: transform 0.3s ease;
+}
+
+.payment-btn:hover i {
+    transform: rotate(15deg);
+}
+
+.payment-btn span {
+    font-weight: 600;
+    position: relative;
+}
+
+.payment-btn span:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.payment-btn:hover span:after {
+    transform: scaleX(1);
+}
 

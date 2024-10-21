@@ -54,9 +54,9 @@ block main
     }
 
   +title("Thêm Cá Mới")
-  .block-sider(style="width:90%;margin-left:180px;")
-    .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;background-color: #f7fbff;")
-      .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
+  .block-sider(style="width:90%;margin-left:160px;")
+    .fish-record(style="position: relative; box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;background: linear-gradient(#bdd2dc 0%, #93bfe4db 100%);")
+      .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.7em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; position: relative;") 
         span(style="font-weight: bold; color: black; padding: 10px; border-radius: 5px;") Ghi nhận tình trạng cá mới
       form#fishForm
         .card-body
@@ -75,7 +75,7 @@ block main
           .form-group
             label(for="Description") Mô tả chi tiết
             textarea.form-control(name="Description" id="Description" rows="3" required)
-        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px;") Thông Tin Cá Koi
+        .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px;") Thông Tin Cá Koi
         .card-body
           .row
             .col-md-4
@@ -107,9 +107,9 @@ block main
                   option(value="average") Trung bình
                   option(value="poor") Kém
           .text-center.mt-4
-            button.btn-submit(type="submit") 
+            button.btn-submit.payment-btn(type="submit") 
               i.fa-solid.fa-save
-              |  Lưu thông tin
+              span Lưu thông tin
 
   script.
     // Logout

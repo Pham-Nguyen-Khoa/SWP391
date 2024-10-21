@@ -4,7 +4,7 @@ block main
    
     +alert-success("5000")
     +alert-error('5000')
-    div.sortSchedule(style="width:90%;margin-left:180px;")
+    div.sortSchedule(style="width:90%;margin-left:150px;")
         form(action="/staff/schedules" method="get" class="form-inline my-3 form-choose-week")
             .form-group
                 label(for="weekOffset" class="mr-2") Chọn tuần:
@@ -81,7 +81,8 @@ block main
                             .form-check-inline
                                 input(type='checkbox' name='shifts' id='shift-15-17' value='15h-17h' class='form-check-input')
                                 label(for='shift-15-17' class='form-check-label') 15h-17h
-                button(type='submit' class='button-add-shift') Thêm lịch
+                button.payment-btn(type='submit' class='button-add-shift') 
+                    span Thêm lịch
 
             script.
                 var listDoctor = !{JSON.stringify(listDoctor)};

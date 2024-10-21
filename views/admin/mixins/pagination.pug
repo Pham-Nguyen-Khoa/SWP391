@@ -1,0 +1,14 @@
+mixin pagination(totalPages,currentPage)
+    .pagination
+        if totalPages > 1
+            if currentPage > 1
+                button#prev-page.btn.btn-secondary Trước
+            - for (var i = 1; i <= totalPages; i++)
+                if i === currentPage
+                    button.btn.btn-primary.btnPage #{i}
+                else
+                    button.btn.btn-secondary.btnPage #{i}
+            if currentPage < totalPages
+                button#next-page.btn.btn-secondary Sau
+        else if totalPages === 1
+            //- button.btn.btn-primary 1

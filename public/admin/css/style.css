@@ -824,15 +824,14 @@ span {
 
 
 .chat .inner-image img{
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: auto;
     object-fit: contain;
-    background: #cdc7c7;
-    padding: 10px;
     margin: 0 5px 5px 0;
     border-radius: 5px;
     border: 1px solid grey
 }
+
 
 .chat .inner-outgoing .inner-image{
     margin-left: auto;
@@ -954,4 +953,95 @@ span {
 .btn-search:hover {
     background-color: #0056b3; /* Hover background color */
     transform: scale(1.05); /* Scale effect on hover */
+}
+
+
+
+
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+
+
+/* Modal confirm block account */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Màu đen với độ mờ 70% */
+    transition: opacity 0.3s ease; /* Hiệu ứng chuyển động */
+}
+
+.modal-content {
+    border-radius: 10px; /* Bo tròn các góc */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Đổ bóng cho modal */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Hiệu ứng chuyển động */
+    background-color: #ffffff; /* Màu nền cho modal */
+}
+
+.modal-header {
+    background-color: #007bff; /* Màu nền cho header */
+    color: #ffffff; /* Màu chữ cho header */
+    border-bottom: 1px solid #dee2e6; /* Đường viền dưới header */
+}
+
+.modal-footer {
+    border-top: 1px solid #dee2e6; /* Đường viền trên footer */
+}
+
+
+
+
+/* Detail Appointment */
+
+
+.order-details{
+    background-color: #dde9edba;
+    padding: 50px;
+    border: 2px solid #c5bdbd;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+
+.table-appointment-detail{
+    margin-bottom: 50px;
+    border: 2px solid #2e2b2b;
+}
+
+.table-appointment-detail th, 
+.table-appointment-detail td {
+    padding: 10px; /* Thêm khoảng cách bên trong ô */
+    text-align: left; /* Căn trái cho nội dung */
+    text-align: center;
+    border: 1px solid #6f7478d1; /* Viền màu đen */
+}
+
+.table-appointment-detail th {
+    background-color: #5aaeba; /* Màu nền cho tiêu đề */
+    color: #FFF; /* Màu chữ cho tiêu đề */
+}
+
+.order-details img{
+    width: 218px;
+    height: 234px;
+    object-fit: cover;
+    border: 2px solid #00000094;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+
+.btn-detail-back{
+    margin: 0 auto;
+    display: block;
+    width: 192px;
+    border-radius: 29px;
+    height: 53px;
+    font-size: 20px;
+    background-color: #5aaeba;
+    color: white;
 }

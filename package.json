@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "type": "module",
     "start": "nodemon --inspect index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --experimental-modules"
   },
   "author": "",
   "license": "ISC",
@@ -38,6 +39,8 @@
     "tinymce": "^7.3.0"
   },
   "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.7"
   }
 }

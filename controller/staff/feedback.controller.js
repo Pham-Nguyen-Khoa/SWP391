@@ -21,6 +21,11 @@ function formatDate(date) {
 module.exports.index = async (req, res) => {
     const page = req.query.page || 1;
     const limit = 5;
+    if(page < 1){
+        req.flash("error", "Trang không tồn tại");
+        res.redirect("/staff/feedback");
+        return;
+    }
     let skip = (page-1)*limit;
     let quertFeedBack =`Select * from feedback fb Join account1 ac on ac.AccountID = fb.AccountID Join customer cs on cs.AccountID = ac.AccountID `
     let queryTotalFeedback = `

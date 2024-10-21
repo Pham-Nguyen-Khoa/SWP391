@@ -1,23 +1,73 @@
 
 //Change-Status
 const buttonsChangeStatus = document.querySelectorAll("[button-change-status]");
-const formChangeStatus = document.querySelector("#form-change-status");
+
 if (buttonsChangeStatus.length > 0) {
+  const formChangeStatus = document.querySelector("#form-change-status");
+  const confirmModal = document.querySelector("#confirm-modal");
+  const confirmLockAccount = document.querySelector("#confirm-lock-account");
+  const cancelLockAccount = document.querySelector("#cancel-lock-account");
   buttonsChangeStatus.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      const newConfirmLockAccount = confirmLockAccount.cloneNode(true);
+      confirmLockAccount.replaceWith(newConfirmLockAccount);
+      const newCancelLockAccount = cancelLockAccount.cloneNode(true);
+      cancelLockAccount.replaceWith(newCancelLockAccount);
       const statusCurrent = button.getAttribute("data-status");
       const statusChange = statusCurrent == "Kích hoạt" ? "inactive" : "active";
-      console.log(statusChange)
-      console.log(statusCurrent)
-      const id = button.getAttribute("id");
-      const path = formChangeStatus.getAttribute("path");
-      const action = path + `${statusChange}/${id}?_method=PATCH`;
-      formChangeStatus.action = action;
-      console.log(formChangeStatus.action)
-      formChangeStatus.submit();
+      if(statusCurrent == "Kích hoạt"){
+        confirmModal.querySelector(".modal-body").textContent = "Bạn có chắc chắn muốn khóa tài khoản này không?";
+        confirmModal.style.display = "block";
+
+        console.log(confirmLockAccount)
+        console.log(cancelLockAccount)
+        newCancelLockAccount.addEventListener("click", (e) => {
+          console.log("click cancel")
+         e.stopPropagation(); 
+          confirmModal.style.display = "none";
+        });
+        newConfirmLockAccount.addEventListener("click", () => {
+          const id = button.getAttribute("id");
+          const path = formChangeStatus.getAttribute("path");
+          const action = path + `${statusChange}/${id}?_method=PATCH`;
+          formChangeStatus.action = action;
+          formChangeStatus.submit();
+        });
+      
+        
+      }else{
+        console.log("click unlock")
+        newConfirmLockAccount.setAttribute("id", "confirm-unlock-account");
+        newCancelLockAccount.setAttribute("id", "cancel-unlock-account");
+        newConfirmLockAccount.textContent = "Mở khóa tài khoản";
+        newConfirmLockAccount.classList.remove("btn-danger");
+        newConfirmLockAccount.classList.add("btn-success");
+        newCancelLockAccount.textContent = "Hủy";
+        confirmModal.querySelector(".modal-body").textContent = "Bạn có chắc chắn muốn mở khóa tài khoản này không?";
+        confirmModal.style.display = "block";
+        const confirmUnlockAccount = document.querySelector("#confirm-unlock-account");
+        const cancelUnlockAccount = document.querySelector("#cancel-unlock-account");
+        confirmUnlockAccount.addEventListener("click", () => {
+          e.stopPropagation(); 
+          const id = button.getAttribute("id");
+          const path = formChangeStatus.getAttribute("path");
+          const action = path + `${statusChange}/${id}?_method=PATCH`;
+          formChangeStatus.action = action;
+          formChangeStatus.submit();
+          return;
+        });
+        cancelUnlockAccount.addEventListener("click", (e) => {
+          e.stopPropagation(); 
+          confirmModal.style.display = "none";
+          return;
+        });
+
+      }
     });
   });
 }
+
 // End Change-Status
 
 // Upload Image

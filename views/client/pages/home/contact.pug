@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug
-
+include ../../mixins/chatAi.pug
 block main
     head
         link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
@@ -34,3 +34,5 @@ block main
                     p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn. Trong buổi kiểm tra, các bác sĩ sẽ quan sát kỹ lưỡng các dấu hiệu bên ngoài như màu sắc da, vây và hành vi của cá.
                     h5.text-center.card-contact-price Giá :  1.500.000 VNĐ phí dịch vụ + 200.000 VNĐ/Cá 
                     button(class="btn-contact-price" onclick="window.location.href='/koi/appointment'") Đặt lịch hẹn
+
+    +chatAi()

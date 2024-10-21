@@ -14,12 +14,12 @@ block append main
 
 
 block main
-  .title-appointment-online(style="margin-left: 87px;")
+  .title-appointment-online(style="margin-left: 40px;")
     +title("Đơn Hiện Tại")
-  .block-sider(style="width:100%;margin-left:45px;")
+  .block-sider(style="width:100%;margin-left:60px;")
     if currentAppointment
       .card(style="box-shadow: 0px 1px 15px 4px rgb(0 0 0 / 30%); border-radius: 8px; border: none;     margin: 60px 200px 80px ; background-color: #f7fbff")
-        .card-header(style="background-color: #C7E3ED; font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
+        .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); font-weight: bold; font-size: 1.3em; padding: 15px; border-top-left-radius: 8px; border-top-right-radius: 8px; text-align: center;") Thông tin lịch hẹn
         .card-body(style="padding: 20px; font-size: 20px ;padding: 20px 69px")   
           .row 
               .col-7
@@ -54,8 +54,10 @@ block main
                   br
                   img(src=`${user.Avatar}` style="width: 250px; height: 250px; object-fit: cover; border-radius: 20px; margin: 30px 0 0 0;")   
       .text-center.mt-4
-          button.btn.btn-lg(type="submit" style="background-color: #4294b1c7; color: black;  width: 259px;    border: 2px solid #0000008c;border-radius: 15px;font-weight: bold;  padding: 10px;" onclick=`window.location.href='/doctor/appointment/change-process/${currentAppointment.AppointmentID}/success'`) Hoàn thành 
+          button.btn.btn-lg.payment-btn(type="submit"  onclick=`window.location.href='/doctor/appointment/change-process/${currentAppointment.AppointmentID}/success'`) 
+            i.fas.fa-check.mr-2
+            span Hoàn thành 
         
     else
-      .alert.alert-info.text-center
+      .alert.alert-info.text-center(style="margin: 0 93px;")
         h2 Hiện tại không có đơn đang xử lý.

@@ -28,7 +28,7 @@ block main
   //-     code= JSON.stringify(listAppointment, null, 2)
   .block-sider(style="width:90%;margin-left:180px;")   
     .card.mb-3(style="margin: 0 50px 50px;")
-      .card-header(style="background-color: #86d0dbf5 ;") Bộ lọc 
+      .card-header(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);") Bộ lọc 
       .card-body 
         .row 
           .col-6#filter-buttons
@@ -69,12 +69,6 @@ block main
                 class=`btn btn-sm ml-1 btn-custom-outline  `
                 button-filter
               ) Hủy bỏ (#{listAppointmentOrigin.filter(a => a.Process === 'Cancelled').length})
-            //- form#filterForm(action="/staff/appointment" method="GET")
-            //-   .search(style="margin: 50px 0;")
-            //-     .form-group
-            //-       label(for="searchName") Tìm kiếm
-            //-       input(type= "text" class="form-control" id="searchName" name="searchName" placeholder="Nhập tên khách hàng" value=searchName style="font-size: 18px;padding: 10px;border-radius: 5px;border: 2px solid grey;height: 40px;")
-            //-       button.btn(type="submit" style="background-color: #21a0b3; color: white; display: none") Tìm
               
           .col-6
             form#filterForm(action="/staff/appointment" method="GET")
@@ -97,7 +91,8 @@ block main
                 select.form-control(id="sortOrder" name="sort" value=sort)
                   option(value="asc") Tăng dần
                   option(value="desc") Giảm dần
-              button.btn(type="submit" style="background-color: #21a0b3; color: white;") Áp dụng
+              button.btn.payment-btn(type="submit" style="background-color: #21a0b3;   height: 40px;width: 100px;") 
+                  span Áp dụng
     if listAppointment.length === 0
       if filterType === 'date'
         p.alert.alert-info(style="text-align: center; margin: 20px; font-size: 1.5em; font-weight: bold;") Không có đơn hẹn nào trong ngày #{dateFormat}.
@@ -122,7 +117,7 @@ block main
     else     
      
       table.table#table-appointment
-        thead.custom-thead(style="background-color: #5AAEBA;")
+        thead.custom-thead(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);")
             tr
                 th Mã đơn hàng
                 th Tên khách hàng
@@ -167,11 +162,16 @@ block main
                                 input(type="hidden" name="date" value=appointment.Date)
                                 input(type="hidden" name="time" value=appointment.Shift)
                                 input(type="hidden" name="specialization" value=appointment.Name)
-                                button.btn(
-                                    type="submit"
-                                    style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;"
-                                ) Gán Bác Sĩ
-                        
+                                if(appointment.Process == "Pending" )
+                                  button.btn(
+                                      type="submit"
+                                      style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" disabled
+                                  ) Gán Bác Sĩ
+                                else
+                                  button.btn(
+                                      type="submit"
+                                      style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" 
+                                  ) Gán Bác Sĩ
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info") 
                           i(class="fa-solid fa-receipt")
@@ -189,8 +189,6 @@ block main
                             a(href=`/staff/appointment/change-process/${appointment.AppointmentID}?process=accepted` class="btn btn-warning" style="min-width: 120px;") Chờ xác nhận
                         else if(appointment.Process == "Accepted")
                             span(class="btn btn-primary" style="min-width: 140px;") Tiếp nhận
-                        //- else if(appointment.Process == "Ready")
-                        //-     span(class="btn btn-primary" style="min-width: 140px;") Sẵn sàng
                         else if(appointment.Process == "Ready" && appointment.Name != "Khám Sức Khỏe" )
                             span(class="btn btn-primary status-btn" style="min-width: 140px;") Sẵn sàng
                         else if(appointment.Process == "Ready" && appointment.Name == "Khám Sức Khỏe" && appointment.AdressAppointment != null)
@@ -213,13 +211,6 @@ block main
                         a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 button-delete") 
                           i(class="fa fa-trash " aria-hidden="true") 
 
-    //- div#deleteModal.modal(style="top: 50%;    position: fixed;margin: 0 auto;width: 350px;    display: none;")
-    //-   div.modal-content
-    //-     span.close-button &times;
-    //-     h1 hello
-    //-     p Bạn có muốn hủy lịch hẹn này không?
-    //-     button.btn.btn-danger#confirmDelete Xác nhận
-    //-     button.btn.btn-secondary#cancelDelete Hủy
 
     script.
       document.addEventListener('DOMContentLoaded', function() {

@@ -6,25 +6,23 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     +title("Thanh Toán")
-    .block-sider(style="width:90%;margin-left:180px;")
-        .card.shadow(style="width:70%;margin: 0 auto;")
-            .card-body(style="background-color: #d0f2f7ba;border:2px solid #4294b1c7")
-            h2.card-title.text-center.mb-4.mt-4 Vui lòng nhập khoảng cách di chuyển 
-            .row(style="margin: 0 auto")
+    .block-sider(style="width:90%;margin-left:140px;")
+        .card.shadow(style="width:90%;margin: 0 auto; background: linear-gradient(to top, #afcddb 0%, #538ebfa8 100%);")
+            .card-body(style="background: linear-gradient(to top, #3aa8dc 0%, #5ba1dbdb 100%);")
+            h2.card-title.text-center.mb-4.mt-4.distance-input-title
+                span Vui lòng nhập khoảng cách di chuyển
+            .row.justify-content-center.align-items-center.mt-4
                 .col-auto
-                        //- input.form-control(type="number" id="distance" style="width: 200px; display: inline-block;" min="1" value="1")
-                        //- button(id="auto-distance" class="btn btn-primary" style="display: inline-block;") 
-                        //-     i.fa.fa-calculator(style="margin-right: 5px;")  
-                            
-                        .d-flex.align-items-start(style="border: 2px solid black; position: relative; ")
-                            input.form-control(type="number" id="distance" style="width: 200px; display: inline-block; border-radius:0   ;  height: 39px;" min="1" value="1")
-                            button(id="auto-distance"  style="display: inline-block; height: 39px;     width: 50px;    background-color: #e92c46d9; cursor: pointer") 
-                                i.fa.fa-calculator(style="margin-right: 5px;")  
-                            b(style="    position: absolute;    left: 53%;top: 10%; font-size: 22px;") km
-                                    
+                    .input-group
+                        input.form-control#distance(type="number" min="1" value="1" style="width: 120px; border-radius: 5px 0 0 5px;")
+                        .input-group-append
+                            button#auto-distance.btn.btn-danger(type="button" style="border-radius: 0;")
+                                i.fa.fa-calculator
+                        .input-group-append
+                            span.input-group-text(style="border-radius: 0 5px 5px 0;") km
                 .col-auto
-                    button(name=cal-distance id="cal-distance" class="btn btn-primary" style="display: inline-block;") Cập nhật
-            h2.card-title.text-center.mb-4.mt-4 Xác nhận thanh toán
+                    button.payment-btn#cal-distance.btn.btn-primary(type="button" style="box-shadow: 0;") Cập nhật
+            
             form#formTotal(action="/doctor/current-appointment/healthyFish", method="POST")(style="padding: 20px;")
                 input#previousPageData(type="hidden", name="previousPageData")
                 input#selectedMedications(type="hidden", name="selectedMedications")
@@ -33,12 +31,7 @@ block main
                 input#totalFeeHidden(type="hidden" name="totalFee" )
                 input#distanceHidden(type="hidden" name="distance" )
                 .form-group.mb-4
-                    h3.form-label Chi tiết thanh toán:
-                    //- ul.list-group.shadow-sm
-                    //-   each detail in objectPayment.serviceDetails
-                    //-     li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light #{detail.description}: #{detail.amount} VND
-                    //- h5.card-title Tổng phí dịch vụ
-                    //- p.card-text #{objectPayment.totalFee} VND
+                    h3.form-label.payment-details-heading Chi tiết thanh toán:
                     ul.list-group.shadow-sm.ul-payment
                         each detail in objectPayment.serviceDetails
                             li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light
@@ -47,9 +40,8 @@ block main
                         li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light.liToltalFee
                             b.font-weight-bold.h4.mb-0 Tổng cộng:
                             h3#totalFee.badge.badge-success.badge-pill.h5.mb-0(style="font-size: 18px;")  #{objectPayment.totalFee} VNĐ
-                    //-     input#totalFee(type="hidden", name="totalFee" value=objectPayment.totalFee)
                 .form-group.mb-4
-                    h2.form-label.d-block.text-center.mb-4 Hình thức thanh toán:
+                    h2.form-label.d-block.text-center.mb-4.payment-method-heading Hình thức thanh toán
                     .btn-group.btn-group-toggle.w-100(data-toggle="buttons")
                         label.btn.btn-outline-primary.w-50
                             input#cashPayment(type="radio", name="paymentMethod", value="cash", required)
@@ -61,15 +53,15 @@ block main
                             | Chuyển khoản
 
                 .text-center.mt-4
-                    button.btn.btn-primary.btn-lg.px-5(type="submit" id="submitAll")
+                    button.btn.btn-primary.btn-lg.px-5.payment-btn.mr-4(type="submit" id="submitAll")
                         i.fas.fa-check.mr-2
                         | Hoàn tất đơn
-                    a.ml-5.btn.btn-lg(href="/doctor/current-appointment/prescribe-medication-fish" style="background-color: #4294b1c7; color: black; padding: 10px;") Quay lại
-
+                    
+                   
+                    a.btn.btn-lg(href="/doctor/current-appointment/prescribe-medication-fish" class="payment-btn") 
+                        i.fas.fa-arrow-left
+                        span Quay lại
             script.
-                //-     console.log("hello")
-                //-     const currentAppointmentJson = !{JSON.stringify(currentAppointment)};
-                //- console.log(currentAppointmentJson.Address);
                   document.addEventListener('DOMContentLoaded', function() {
                     
                     const previousPageData = localStorage.getItem(`appointmentHealthyData`);
@@ -115,7 +107,6 @@ block main
                 const initialTotalFee = totalFeeOrigin;
                 const totalFeeHidden = document.getElementById('totalFeeHidden');
                     const distanceHidden = document.getElementById('distanceHidden');
-                    console.log(calBtn);
                 calBtn.addEventListener("click",() => {
                     const ulPay = document.querySelector(".ul-payment");
                    
@@ -123,18 +114,9 @@ block main
                     const checkNewLiExist = document.querySelector("#distanceLi");
                     let distance = inputDistance.value
                     distanceHidden.value = distance;
-                    //- let distanceFee = 0;
-                    //- if(distance <= 10 &&  distance >=1 ){
-                    //-     distanceFee = 100000
-                    //- }else if( distance > 10 && distance <= 20){
-                    //-     distanceFee = 200000
-                    //- }else{
-                    //-     distanceFee = 300000
-                    //- }
 
                     const baseFee = 100000; // Phí cơ bản cho 10km
                     const additionalFee = Math.ceil(distance / 10) * baseFee; 
-                    console.log(additionalFee)
                     const formattedFee = additionalFee.toLocaleString('it-IT'); 
 
                     if(checkNewLiExist){
@@ -146,7 +128,6 @@ block main
                         textTotalFee.textContent = totalFormat + " VNĐ"
                         totalFeeHidden.value = distanceOrigin + initialTotalFee;
                     }else{
-                         console.log(inputDistance.value)
                     const newLi = document.createElement("li");
                     newLi.className = "list-group-item d-flex justify-content-between align-items-center bg-light ";
                     newLi.id ="distanceLi"
@@ -171,12 +152,10 @@ block main
                                 const autoDistanceBtn = document.querySelector("#auto-distance");
                 var  distanceAuto = 0;
                 const currentAppointmentJson = !{JSON.stringify(currentAppointment)};
-                console.log(currentAppointmentJson.Address);
                 autoDistanceBtn.addEventListener("click",() => {
                 const settingGeneral = !{JSON.stringify(SettingGeneral)}; 
                     const originAddress = settingGeneral.Address
                     const destinationAddress = currentAppointmentJson.Address;
-                    console.log(destinationAddress);
                     
                     Promise.all([
                         fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(originAddress)}&key=5f86e5613fca4318a89493ef1f4053da`),
@@ -217,8 +196,6 @@ block main
                     .then(data => {
                         if (data && data.routes && data.routes.length > 0) {
                              distanceAuto = data.routes[0].distance; // Khoảng cách tính bằng mét
-                             console.log(distanceAuto);
-                             console.log(`Khoảng cách: ${(distanceAuto / 1000).toFixed(2)} km`); // Chuyển đổi sang km
                              inputDistance.value = (distanceAuto / 1000).toFixed(2);
                         } else {
                             console.log('Không tìm thấy lộ trình hoặc dữ liệu không hợp lệ.');
