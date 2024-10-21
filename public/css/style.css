@@ -1797,68 +1797,6 @@ header {
     box-shadow: 0px 0px 9px 4px #4296b6;
   }
 
-  /* Css Contact */
-
-  .card.contact-card{
-    border-radius: 15px;
-    background-color: #c2dfe594;
-    height: 900px;
-    border: 3px solid #6ea6ca;
-    border-radius: 30px;
-  }
-
-  .card-contact-title {
-    padding-top: 10px;
-    font-size: 30px;
-    color: #234d7d;
-    margin: 20px;
-    font-size: 1.7rem;
-    font-family: 'Oswald', sans-serif;
-  }
-
-  .card-contact-content {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #1f1e1e9d;
-    font-family: 'Arial', sans-serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);    
-    padding: 10px;
-    min-height: 10rem;
-  }
-
-.card-contact-price {
-    font-weight: bold;
-    font-size: 20px;
-    color: #333;
-    padding: 10px;
-}
-
-.btn-contact-price {
-    width: 27%;
-    margin: 0 auto;
-    border-radius: 26px;
-    background-color: #a51a1a;
-    color: #fff;
-    font-weight: bold;
-    font-size: 15px;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    text-transform: uppercase;
-    margin-top: 6px;
-    height: 56px;
-}
-
-.btn-contact-price:hover {
-    background-color: #d75858;
-    color: #fff; 
-}
-
-.card-body-contact {
-    text-align: center;
-    padding: 30px;
-}
-
  /* Css about us */
 
  @keyframes bounce {
@@ -2853,4 +2791,80 @@ header {
 
 .payment-btn:hover span:after {
     transform: scaleX(1);
+}
+
+CSS CONTACT
+
+.contact-card {
+    border-radius: 30px; 
+    text-align: center; 
+    margin: 20px; 
+    
+}
+
+.contact-card :hover{
+    background-color: #6f9ff65f;
+    border-radius: 15px;
+    box-shadow: 0 5px 10px rgb(0, 0, 0);    
+    transition-duration: 1s;
+    transition: 1s;
+    
+}
+
+.card-body-contact {
+    padding-bottom: 20px;
+   border-radius: 70px;
+}
+
+.card-contact-title {
+    font-size: 1.7rem; 
+    margin: 10px 0; 
+    padding-top: 20px;
+}
+
+.card-contact-content {
+    font-size: 1.3rem; 
+    color: #000000; 
+    min-height: 9rem;
+    padding: 20px;
+}
+
+
+.card-contact-price {
+    font-weight: bold; 
+    min-height: 4rem;
+    
+}
+
+.card-contact-price:hover,.card-contact-content:hover,.card-contact-title:hover{
+    background-color: none;
+    border-radius: none;
+    box-shadow: none;
+    transition: 1000s;
+}
+
+.btn-contact-price {
+    background-color: #6ea6ca; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+}
+
+.btn-contact-price:hover{
+    background-color: #b62c2cc6;
+    border-radius: none;
+    box-shadow: 0 5px 10px rgb(0, 0, 0); 
+    transition: 0.6s;
+}
+
+.contact-card h3 {
+    font-size: 2rem; 
+    font-family: 'Oswald', sans-serif;
+}
+
+.card-intro:hover{
+    background-color: #b1d5f881; 
+    transition: 0.7s;
 }

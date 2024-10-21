@@ -3,14 +3,14 @@ include ../../mixins/chatAi.pug
 block main
     head
         link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
-    .block-footer(style="height: 230vh; background-image: url('/images/background.png');")
+    .block-footer(style="height: 200vh; background-color: #f0f8ff")
         img(src="/images/banner-service.jpg", alt="Contact 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
         h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Các dịch vụ tại #{SettingGeneral.WebsiteName}
-        .btn-home(style="position: absolute; bottom: 370px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+        .btn-home(style="position: absolute; bottom: 450px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
             a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
             p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Các dịch vụ tại Koi Healthy
-        .container-fluid
-            .row(style="padding: 40px;")    
+        .container-fluid(style="margin-top: 10px;")
+            .row(style="padding: 40px; text-align:center;")    
                 .col-md-4
                     .card.contact-card
                         .card-body-contact
