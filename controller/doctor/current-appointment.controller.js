@@ -482,3 +482,123 @@ module.exports.paymentFish = async(req, res) => {
     })
   }
 }
+
+// [Post] /doctor/current-appointment/healthyFish
+module.exports.healthyFishPost = async(req, res) => {
+  console.log(req.body)
+  try {
+    const formData = req.body;
+    const MedicineData = JSON.parse(formData.selectedMedications);
+    const informationData = JSON.parse(formData.previousPageData);
+    const paymentData = req.body.paymentMethod;
+    const fishCount = informationData.length;
+    console.log(fishCount)
+    console.log("------------------------------------");
+    console.log(informationData);
+    console.log("------------------------------------");
+    console.log(MedicineData)
+    const KoiIDs = [];
+    console.log(informationData.length)
+    for(let i = 0 ; i < informationData.length ; i++){
+      const fish = informationData[i];
+      // console.log(pond)
+      // console.log(pond)
+      // console.log("-----------------------------------------")
+      // const pondRecordID = await generateUserId("pondrecord", "PondRecordID", "PR");
+      // pondRecordIDs.push(pondRecordID);
+      // await PondRecord.create({
+      //     PondRecordID: pondRecordID,
+      //     Problem: pond.Problem,
+      //     Solution: pond.Solution,
+      //     Description: pond.Description
+      // })
+      const PrescriptionID = await generateUserId("prescription", "PrescriptID", "PRES");
+      await Prescription.create({
+          PrescriptID: PrescriptionID,
+          Time: new Date(),
+      })
+  
+  
+
+        const KoiID = await generateUserId("koiprofile", "KoiID", "KOI");
+        KoiIDs.push(KoiID);
+        await KoiProfile.create({
+          KoiID: KoiID,
+          PrescriptID: PrescriptionID,
+          Avatar: fish.Avatar,
+          Problem: fish.Problem,
+          Solution: fish.Solution,
+          Description: fish.Description,
+          Type: fish.Type,
+          Weight: fish.Weight,
+          Height: fish.Height,
+          HealthStatus: fish.HealthStatus,  
+          Gender: fish.Gender   
+        });
+      const pondMedications = MedicineData.find(med => med.fish === i + 1).medications;
+      for (const medicineId of pondMedications) {
+        await Prescription_Medicine.create({
+          PrescriptID: PrescriptionID,
+          MedicineID: medicineId.medicineId,
+          Quantity: medicineId.quantity,
+          MorningUse: medicineId.morning,
+          AfternoonUse: medicineId.noon,
+          EveningUse: medicineId.evening,
+        });
+      }
+    }
+
+  
+  
+    const billID = await generateUserId("bill", "BillID", "BILL");
+    const method = paymentData == "cash" ? "Tiền mặt" : "Thanh toán online";
+    // const totalString = req.body.totalFee;
+    // const totalDouble = parseFloat(totalString.replace(/\./g, ''));
+    await Bill.create({
+      BillID: billID,
+      Method: method,
+      Total: req.body.totalFee,
+      Status: "Đã thanh toán"
+    })
+    const appointment = await Appointment.findOne({
+      where: {
+          VetID: res.locals.user.VetID,
+          Process: "Process"
+      }
+  });
+
+  for (const KoiID of KoiIDs) {
+    await KoiRecord.create({
+        AppointmentID: appointment.AppointmentID,
+        KoiID: KoiID
+    });
+}
+await Appointment.update({
+  Process: "Successed",
+  StatusPaid: "Đã thanh toán",
+  BillID: billID,
+  Distance: req.body.distance
+},{
+  where: {
+      VetID: res.locals.user.VetID,
+      Process: "Process"
+  }
+});
+  //   await Appointment.update({
+  //     Process: "Successed",
+  //     PondRecordID: pondRecordID,
+  //     StatusPaid: "Đã thanh toán",
+  //     BillID: billID
+  //   },{
+  //       where: {
+  //           VetID: res.locals.user.VetID,
+  //           Process: "Process"
+  //       }
+  //   })
+    req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
+    res.redirect("/doctor/appointment")
+  } catch (error) {
+    req.flash("error", "Có lỗi xảy ra khi hoàn thành công việc. Vui lòng thử lại.");
+    res.redirect("back")
+  }
+}
