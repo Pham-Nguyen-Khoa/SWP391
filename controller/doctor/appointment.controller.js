@@ -188,8 +188,17 @@ function formatDate(dateString) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`;
 }
-function formatPrice(amount) {
-  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+// function formatPrice(amount) {
+//   return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ";
+// }
+
+function formatPrice(price) {
+  const [integerPart, decimalPart] = price.toString().split('.');
+  const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const formattedPrice = decimalPart
+    ? `${formattedInteger},${decimalPart}`
+    : formattedInteger;
+  return `${formattedPrice}đ`;
 }
 // // [Get] /doctor/appointment/detail/:AppointmentID
 // module.exports.detail = async (req, res) => {
