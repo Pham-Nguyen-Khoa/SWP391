@@ -7,13 +7,12 @@ block main
     +alert-error('5000')
     +title("Thanh Toán")
     .block-sider(style="width:90%;margin-left:100px;")
-        .card.shadow(style="width:80%;margin: 0 auto;")
-            .card-body(style="background-color: #d0f2f7ba;border:2px solid #4294b1c7")
-            h2.card-title.text-center.mb-4.mt-4 Xác nhận thanh toán
-            form#formTotal(action=`/staff/appointment/paymentCenter/${appointmentID}`, method="POST")(style="padding: 20px;")
+        .card.shadow(style="width:80%;margin: 0 auto; background: linear-gradient(to top, #afcddb 0%, #538ebfa8 100%);")
+            .card-body(style="background: linear-gradient(to top, #3aa8dc 0%, #5ba1dbdb 100%);border:2px solid #4294b1c7")
+            
+            form#formTotal.mt-5(action=`/staff/appointment/paymentCenter/${appointmentID}`, method="POST")(style="padding: 20px;")
                 input(type="hidden" name="objectPayment" value =objectPayment)
                 .form-group.mb-4
-                    h3.form-label Chi tiết thanh toán:
                     ul.list-group.shadow-sm.ul-payment
                         each detail in objectPayment.serviceDetailsFormat
                             li.list-group-item.d-flex.justify-content-between.align-items-center.bg-light
@@ -24,7 +23,7 @@ block main
                             h3#totalFee.badge.badge-success.badge-pill.h5.mb-0(style="font-size: 18px;")  #{objectPayment.totalServiceFeeFormat} VNĐ
                     //-     input#totalFee(type="hidden", name="totalFee" value=objectPayment.totalFee)
                 .form-group.mb-4
-                    h2.form-label.d-block.text-center.mb-4 Hình thức thanh toán:
+                    h2.form-label.d-block.text-center.mb-4.payment-method-heading Hình thức thanh toán:
                     .btn-group.btn-group-toggle.w-100(data-toggle="buttons")
                         label.btn.btn-outline-primary.w-50
                             input#cashPayment(type="radio", name="paymentMethod", value="cash", required)
@@ -36,10 +35,11 @@ block main
                             | Chuyển khoản
 
                 .text-center.mt-4
-                    button.btn.btn-primary.btn-lg.px-5(type="submit" id="submitAll")
+                    button.btn.btn-primary.btn-lg.px-5.payment-btn(type="submit" id="submitAll")
                         i.fas.fa-check.mr-2
                         | Hoàn tất đơn
 
+                
 
 
                 

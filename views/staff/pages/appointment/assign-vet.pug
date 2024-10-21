@@ -6,39 +6,37 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     +title("Gán Bác Sĩ Cho Lịch Hẹn")
-    .block-sider(style="width:90%;margin-left:180px;")
+    .block-sider(style="width:90%;margin-left:95px;")
         .container.mt-4
             .card.mb-4.bg-light
                 .card-body.text-center
-                    h1.card-title(style="color: #5aaeba;") Thông tin lịch hẹn
+                    h1.card-title(style="color: #4070c6;") Thông tin lịch hẹn
                     p.card-text(style="font-size: 23px;")
                         strong Ngày: 
-                        span.text-info #{dataFormat}
+                        span(style="color: #4070c6;") #{dataFormat}
                     p.card-text(style="font-size: 23px;")
                         strong Giờ: 
-                        span.text-info #{time}
+                        span(style="color: #4070c6;") #{time}
             
             .row
                 each vet in availableVets
                     .col-lg-4.col-md-6.mb-4
                         .card.h-100.shadow-sm
-                            .card-header.text-white(style="background-color: #5aaeba;")
+                            .card-header.text-white(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);")
                                 h5.card-title.mb-0.text-center= vet.FullName
                             img.card-img-top(src=vet.Avatar, alt=vet.FullName style="height: 200px; object-fit: cover;")
-                            .card-body
-                                h4.card-subtitle.mb-2.text-muted.text-center ID Bác sĩ: #{vet.VetID}
-                                
-                                h5.mt-3.mb-3.text-center(style="color: #5aaeba;") Lịch làm việc ngày #{dataFormat}:
+                            .card-body                              
+                                h5.mt-3.mb-3.text-center(style="color:  linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);") Lịch làm việc ngày #{dataFormat}:
                                 ul.list-group.list-group-flush
                                     each shift in vetShifts[vet.VetID]
                                         li.list-group-item.d-flex.justify-content-between.align-items-center(class=`${shift.shift === time ? 'active css-active' : ''}`)
                                             b= shift.shift
                                             if shift.isAvailable
-                                                b.badge.bg-success.fs-6.px-3.py-2 Trống
+                                                b(style="background: linear-gradient(3deg, #2ab613 0%, #1ad337 100%);").badge.bg-success.fs-6.px-3.py-2 Trống
                                             else
-                                                b.badge.bg-danger.fs-6.px-3.py-2 Đã đặt
+                                                b(style="background: linear-gradient(3deg, #cf3443 0%, #bd5460 100%);").badge.bg-danger.fs-6.px-3.py-2 Đã đặt
                                 
                             .card-footer.bg-white.border-top-0
-                                a.btn.btn-primary.btn-block.w-100(href=`/staff/appointment/assign/${appointmentID}/${vet.VetID}` style="background-color: #5aaeba;") 
+                                a.btn.btn-primary.btn-block.w-100.payment-btn(href=`/staff/appointment/assign/${appointmentID}/${vet.VetID}` style="background-color: #5aaeba;") 
                                     i.fas.fa-user-md.me-2
-                                    | Chọn bác sĩ này
+                                    span  Chọn bác sĩ này
