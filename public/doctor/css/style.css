@@ -1240,3 +1240,107 @@ label[for^="medicationSelect"]:hover {
     background-clip: text;
     color: transparent;
   }
+
+  /* Dashboard Doctor */
+
+.dashboard-doctor{
+    margin: 3% 3% 0 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.dashboard-doctor .card{
+
+    min-height: 200px;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    background-color: #b6b4de75;
+}
+.dashboard-doctor i {
+    color: #0067ff;
+    font-size: 70px;
+}
+
+.dashboard-doctor .card-content h2{
+    font-weight: bold;
+}
+
+
+/* Phần giữa dashboard */
+ /* .dashboard-doctor-chart{
+    background-color: #bfb7b754;
+ } */
+ .dashboard-doctor-chart .card{
+    min-height: 600px;
+    padding: 20px;
+ }
+
+
+.dashboard-doctor .card-content p:first-of-type {
+    font-weight: 800;
+    color: #0067ff;
+    font-size: 39px;
+}
+
+
+.dashboard-doctor-chart-content{
+    margin-top: 20px;
+}
+.dashboard-doctor-chart-content .appointment-content{
+    height: 400px;
+    padding: 20px;
+}
+/* .dashboard-doctor-chart-content .appointment-today{
+    background-color:  #b6b4de75;
+} */
+
+.dashboard-doctor-chart-content .appointment-today strong{
+    font-size: 30px;
+    font-weight: bold;
+    color: #0067ff;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+
+.appointment-today .appointment-box{
+    margin-top: 20px;
+}
+
+.dashboard-doctor-chart-content .appointment-today table{
+    width: 100%;
+    font-size: 20px;
+    color: black;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.dashboard-doctor-chart-content .appointment-today table thead tr{
+    text-align: center;
+}
+.dashboard-doctor-chart-content .appointment-today table tbody tr td{
+    padding-left: 43px;
+    color: #0067ff;
+    font-weight: 800;
+}
+
+.dashboard-doctor-chart-content .appointment-today table tbody tr{
+    margin-bottom: 20px;
+}
+
+.dashboard-doctor-chart-content .appointment-today table tbody b{
+    background-color: #788cd866;
+    color: #0067ff;
+    padding: 8px;
+}
+
+
+.dashboard-doctor-chart-content .appointment-today table tbody img{
+    width: 64px;
+    height: 66px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+}
+
+.dashboard-doctor-chart-content .appointment-today table thead th{
+    font-weight: 600;
+}
