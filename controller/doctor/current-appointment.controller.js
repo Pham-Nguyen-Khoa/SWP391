@@ -381,3 +381,59 @@ module.exports.addFish = async(req, res) => {
 }
 
 
+
+
+// [Post] /doctor/current-appointment/payment-fish
+module.exports.paymentFishPost = async(req, res) => {
+  console.log(req.body)
+  const informationData = JSON.parse(req.body.previousPageData);
+  // console.log("-----------------------------------------");
+  // console.log(informationData[0]);
+
+  // console.log("-----------------------------------------");
+  const appointment = await Appointment.findOne({
+    raw: true,
+    where: {
+      VetID: res.locals.user.VetID,
+      Process: "Process"
+    }
+  })
+  let totalServiceFee = 1500000;
+  let serviceDetails =[
+    {description: "Dịch vụ khám sức khỏe", amount: 1500000}
+  ]
+  // if(appointment.Address != null){
+  //   totalServiceFee += 100000;
+  //   serviceDetails.push({ description: `Phí di chuyển`, amount: 100000 });
+  // }
+  informationData.forEach((pond, index) => {
+    const volume = parseFloat(pond.Volume);
+    if (index > 0) {
+      totalServiceFee += 200000; 
+      serviceDetails.push({ description: `Phí khám thêm cá ${index + 1}`, amount: 200000 });
+    }
+    // if (volume >= 1000 && volume <= 1200) {
+    //   totalServiceFee += 200000;
+    //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
+    // } else if (volume > 1200 && volume <= 1500) {
+    //   totalServiceFee += 400000;
+    //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
+    // } else if (volume > 1500) {
+    //   totalServiceFee += 600000;
+    //   serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
+    // }
+    req.session.paymentData = {
+      totalServiceFee,
+      serviceDetails,
+    };
+   
+  });
+  // console.log(req.session.paymentData)
+  req.session.save();
+  // console.log(req.body)
+  // res.render("doctor/pages/current-appointment-moitruong/payment",{
+  //     pageTitle: "Trang Thanh Toán",
+  //     objectPayment: objectPayment
+  // })
+  res.redirect('/doctor/current-appointment/payment-fish');
+}
