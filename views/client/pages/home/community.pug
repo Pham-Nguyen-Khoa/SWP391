@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/back-to-top.pug
 
 block main
     head 
@@ -84,4 +85,6 @@ block main
                         h3 Phạm Dũng
                         p Chuyên gia dinh dưỡng cho cá Koi.
                         a.payment-btn(href="https://www.youtube.com/@phamdungyoutuber" style="height:40px;" target="_blank")
-                            span Xem Thêm    
+                            span Xem Thêm   
+
+        +backToTop() 
