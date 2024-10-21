@@ -4,65 +4,6 @@ include ../../mixins/alert.pug
 block main
     +alert-error('Không tìm thấy thông tin người dùng.')
 
-    .container-my-account
-        h2.personal-header Thông tin cá nhân
 
-        .avatar-container
-            if (user.Avatar)
-                img(src=user.Avatar class="avatar-img")
-            else
-                img(src="https://via.placeholder.com/150" class="avatar-img placeholder")
 
-        .info-container
-            .info-row
-                .label Họ tên:
-                .value 
-                    if (user.FullName)
-                        | #{user.FullName}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Email:
-                .value 
-                    if (user.Email)
-                        | #{user.Email}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Số điện thoại:
-                .value 
-                    if (user.PhoneNumber)
-                        | #{user.PhoneNumber}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Địa chỉ:
-                .value 
-                    if (user.Address)
-                        | #{user.Address}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Giới tính:
-                .value 
-                    if (user.Gender)
-                        | #{user.Gender}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Ngày sinh:
-                .value 
-                    if (user.Birthday)
-                        | #{user.Birthday}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Vai trò:
-                .value 
-                    if (role.RoleName)
-                        | #{role.RoleName}
-                    else
-                        span Chưa cập nhật
 
-        .button-container
-            a(href=`${prefixAdmin}/my-account/edit` class="edit-btn") Chỉnh sửa

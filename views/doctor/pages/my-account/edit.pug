@@ -8,65 +8,6 @@ block main
     .container(style="margin-top: 100px;")
         h1.text-center.mb-4.page-title #{pageTitle}
         .main-body.personal-info-container
-            .row.gutters-sm
-                .col-md-8.offset-md-2
-                    .card.mb-3
-                        .card-body
-                            form(
-                                action=`/doctor/my-account/edit?_method=PATCH`,
-                                method="post"
-                                enctype="multipart/form-data"
-                            )
-                                .row
-                                    .col-md-6
-                                        .form-group
-                                            label(for="FullName") Họ và Tên *
-                                            input.form-control.custom-input(type="text", id="FullName", name="FullName", required, value=user.FullName)
-                                        .form-group
-                                            label(for="Email") Email *
-                                            input.form-control.custom-input(type="text", id="Email", name="Email", value=user.Email, required, disabled)
-                                        .form-group
-                                            label(for="Description") Thành tựu
-                                            input.form-control.custom-input(type="text", id="Description", name="Description", value=user.Description)
-                                        .form-group
-                                            label(for="GoogleMeet") Link Google Meet
-                                            input.form-control.custom-input(type="link", id="GoogleMeet", name="GoogleMeet", value=user.GoogleMeet)
-                                    .col-md-6
-                                        .form-group
-                                            label(for="Address") Địa chỉ
-                                            input.form-control.custom-input(type="text", id="Address", name="Address", required, value=user.Address)
-                                        .form-group
-                                            label(for="Password") Password *
-                                            input.form-control.custom-input(type="password", id="Password", name="Password", placeholder="Nhập vào thay đổi mật khẩu mới")
-                                        .form-group
-                                            label(for="PhoneNumber") Số điện thoại
-                                            input.form-control.custom-input(type="number", id="PhoneNumber", name="PhoneNumber", value=user.PhoneNumber, required)
-                                        .form-group
-                                            label(for="Birthday") Ngày sinh
-                                            input.form-control.custom-input(type="date", id="Birthday", name="Birthday", value=user.Birthday)
-                                .row
-                                    .col-md-6
-                                        .form-group
-                                            label(for="Gender") Giới tính
-                                            .select-wrapper
-                                                select.form-control.custom-input(name="Gender", id="Gender")
-                                                    option(value="", disabled, selected) --- Lựa chọn ---
-                                                    option(value="Nam", selected=(user.Gender === "Nam")) Nam
-                                                    option(value="Nữ", selected=(user.Gender === "Nữ")) Nữ
-                                    .col-md-6
-                                        .form-group(upload-image)
-                                            label(for="Avatar") Hình ảnh
-                                            input(type="file", id="Avatar", name="Avatar", class="form-control-file", upload-image-input)
-                                            small.form-text.text-muted Chỉ chọn file nếu bạn muốn thay đổi ảnh đại diện
-                                            img(src=user.Avatar, upload-image-preview, class="upload-preview")
-                                .row.mt-3
-                                    .col-md-6
-                                        .form-group
-                                            a.btn.btn-secondary.btn-block(href="/doctor/my-account") Quay lại
-                                    .col-md-6
-                                        .form-group
-                                            button.btn.btn-primary.btn-block(type="submit") Cập nhật 
-                                    
                                     
 
     style.
@@ -77,6 +18,7 @@ block main
         }
         .card-body {
             padding: 2.5rem;
+            padding: 2.5rem; // Giảm kích thước padding
         }
         .rounded-circle {
             border: 6px solid #f0f0f0;

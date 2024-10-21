@@ -5,64 +5,96 @@ block main
     +alert-error('Không tìm thấy thông tin người dùng.')
 
     .container-my-account
-        h2.personal-header Thông tin cá nhân
 
-        .avatar-container
-            if (user.Avatar)
-                img(src=user.Avatar class="avatar-img")
-            else
-                img(src="https://via.placeholder.com/150" class="avatar-img placeholder")
 
-        .info-container
-            .info-row
-                .label Họ tên:
-                .value 
-                    if (user.FullName)
-                        | #{user.FullName}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Email:
-                .value 
-                    if (user.Email)
-                        | #{user.Email}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Số điện thoại:
-                .value 
-                    if (user.PhoneNumber)
-                        | #{user.PhoneNumber}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Địa chỉ:
-                .value 
-                    if (user.Address)
-                        | #{user.Address}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Giới tính:
-                .value 
-                    if (user.Gender)
-                        | #{user.Gender}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Ngày sinh:
-                .value 
-                    if (user.Birthday)
-                        | #{user.Birthday}
-                    else
-                        span Chưa cập nhật
-            .info-row
-                .label Vai trò:
-                .value 
-                    if (role.RoleName)
-                        | #{role.RoleName}
-                    else
-                        span Chưa cập nhật
+    // CSS styles
+    style.
+        .container-my-account {
+            max-width: 76%;
+            margin: 47px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 10px white;
+            border: 2px solid white;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3), 0 16px 48px rgba(0,0,0,0.25);
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+        .card-body {
+            padding: 2.5rem;
+        }
+        .rounded-circle {
+            border: 6px solid #f0f0f0;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .btn-lg {
+            padding: 0.85rem 1.7rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .page-title {
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            padding: 20px;
+            background-color: rgba(240, 240, 240, 0.6);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            font-weight: bold;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+        .text-secondary {
+            font-weight: 600;
+        }
+        .personal-info-container {
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background-color: rgba(248, 249, 250, 0.6);
+        }
+        .Btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 130px;
+            height: 40px;
+            border: none;
+            padding: 0px 20px;
+            background-color: black;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px black;
+            transition-duration: 0.3s;
+            margin: 20px 0px -25px 0px;
+        }
 
-        .button-container
-            a(href=`/staff/my-account/edit` class="edit-btn") Chỉnh sửa
+        .svg {
+            width: 13px;
+            position: absolute;
+            right: 0;
+            margin-right: 20px;
+            fill: white;
+            transition-duration: 0.3s;
+        }
+
+        .Btn:hover {
+            color: transparent;
+        }
+
+        .Btn:hover svg {
+            right: 43%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            transition-duration: 0.3s;
+        }
+
+        .Btn:active {
+            transform: translate(3px, 3px);
+            transition-duration: 0.3s;
+            box-shadow: 2px 2px 0px white;
+        }
