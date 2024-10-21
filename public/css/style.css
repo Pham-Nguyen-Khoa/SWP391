@@ -2595,5 +2595,262 @@ header {
     }
 }
 
+/* CSS checkup */
+
+.menu-banner-checkup{
+    display: flex;
+    justify-content:space-between; 
+    padding:50px;
+}
+
+.menu-service{
+    text-align: center;   
+    background: linear-gradient(#6291d2a2, #497a9dcf);
+    border-radius: 15px;
+    width: 260px;
+    padding: 20px; 
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
+    height:400px;
+}
+
+.checkup-service{
+    padding: 15px 0;
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.service-menu{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: 'Oswald', sans-serif;
+    display: block;
+    text-decoration: none;
+    padding: 15px 0;
+    transition: 0.5s;
+}
+
+.service-menu:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #bd2222;
+    border-radius: 15px;
+}
+
+.banner-checkup h3{
+    left: 480px;
+    font-size: 3rem;
+    position: absolute;
+    color: white; 
+}
+
+.banner-checkup p{
+    position: absolute;
+    font-size: 1.5rem;
+    color: white; 
+    bottom: -80px;
+    left: 50px;
+}
 
 
+
+.body-checkup h1 {
+    font-size: 2.5em; 
+    color: #333; 
+    font-weight: 700; 
+    margin-bottom: 20px;
+    padding: 50px;
+    text-align: center; 
+    font-family: 'Oswald', sans-serif;
+}
+
+.service-checkup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.service-checkup h2 {
+    font-size: 2.5rem;
+    color: #555; 
+    min-height: 3rem;
+    text-align: center;
+}
+
+.service-checkup li{
+    font-size: 1.5rem;
+    padding: 10px 0;
+    font-family: 'Oswald', sans-serif;
+    color: #1a4091e0
+}
+
+.card-intro{
+    background: linear-gradient(to top, #91aecb, #f2f8ff);
+}
+
+.card-intro:nth-child(2), .card-intro:nth-child(3), .card-intro:nth-child(4){
+    border-left: 1px solid black;
+}
+
+/* CSS Community */
+
+.community-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.news-box {
+    left: 10%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 30%;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-box .date,
+.news-box .category {
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    width: 30%;
+    font-family: 'Oswald', sans-serif;
+}
+
+.news-box .date{
+    background-color: #484848;
+}
+
+.news-box .category{
+    background-color: #00d36f;;
+}
+
+.news-box h3 {
+    min-height: 6rem;
+    font-size: 1.5rem;
+    margin: 10px 0;
+    font-family: 'Oswald', sans-serif;
+    min-height: 4rem;
+}
+
+.news-box p {
+    margin: 10px 0;
+    font-family: 'Oswald', sans-serif;
+    min-height: 6rem;
+}
+
+.info-community-news{
+    display: flex; 
+    justify-content: space-between;
+}
+
+.news-box img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+}
+
+.card-profile {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center; /* Căn giữa nội dung */
+    margin: 10px; /* Khoảng cách giữa các card */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-profile img{
+    width: 70%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(72, 71, 71, 0.303);
+    object-fit: cover;
+    box-shadow: 4px 4px 15px 3px rgb(0 0 0 / 47%);
+}
+
+.payment-btn {
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    
+    color: white;
+    padding: 14px 28px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    height: auto;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    box-shadow: 0px 4px 8px 0px rgb(38 36 36);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.6s;
+}
+
+.payment-btn:hover {
+    color: white;
+    /* background: linear-gradient(135deg, #003d82, #0056b3); */
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
+    transform: translateY(-2px);
+}
+
+.payment-btn:hover:before {
+    left: 100%;
+}
+
+.payment-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(0, 86, 179, 0.4);
+}
+
+.payment-btn i {
+    margin-right: 12px;
+    font-size: 1.3em;
+    transition: transform 0.3s ease;
+}
+
+.payment-btn:hover i {
+    transform: rotate(15deg);
+}
+
+.payment-btn span {
+    font-weight: 600;
+    position: relative;
+}
+
+.payment-btn span:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.payment-btn:hover span:after {
+    transform: scaleX(1);
+}
