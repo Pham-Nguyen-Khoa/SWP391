@@ -368,9 +368,16 @@ module.exports.paymentPost = async(req, res) => {
   //   req.flash("error", "Vui lòng cập nhật thông tin thuốc trước khi thanh toán  ");
   //   return res.redirect("back")
   // }
-
-  
 }
 
+
+
+// [Get] /doctor/current-appointment/add-fish
+module.exports.addFish = async(req, res) => {
+
+  res.render("doctor/pages/current-appointment-healthy/add-fish",{
+      pageTitle: "Trang Thêm Cá",
+  })
+}
 
 
