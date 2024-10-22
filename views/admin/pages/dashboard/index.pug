@@ -99,6 +99,13 @@ block main
             margin-bottom: 20px;
         }
         }
+        .dashboard-card-content .revenue {
+        color: #28a745;  /* màu xanh lá cho doanh thu */
+        }
+
+        .dashboard-card-content .orders {
+        color: #007bff;  /* màu xanh dương cho số đơn */
+        }
     +alert-success("5000")
     +alert-error('5000')
     
@@ -146,7 +153,28 @@ block main
                         canvas#test
                     .chart-controls
 
-
+            .row.justify-content-center.mt-4
+                .col-md-4
+                    .dashboard-card
+                    .dashboard-card-body
+                        .dashboard-card-content
+                        h2 Khám sức khỏe
+                        p#healthCheckRevenue
+                        p#healthCheckOrders
+                .col-md-4
+                    .dashboard-card
+                    .dashboard-card-body
+                        .dashboard-card-content
+                        h2 Cải thiện hộ cá
+                        p#sterilizationRevenue
+                        p#sterilizationOrders
+                .col-md-4
+                    .dashboard-card
+                    .dashboard-card-body
+                        .dashboard-card-content
+                        h2 Tư vấn online
+                        p#onlineConsultationRevenue
+                        p#onlineConsultationOrders
                 
 
 
@@ -154,16 +182,32 @@ block main
 
     script(type="module", src="/admin/js/chart.js")
     script.
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
         const data = !{JSON.stringify(data)};
-
         const currentMonth = new Date().getMonth();
+
+        // Tổng số doanh thu và đơn hàng
         const totalAmount = data.totalByMonth.totalAmount[currentMonth];
-        document.getElementById('totalAmount').textContent = totalAmount;
         const totalOrders = data.totalByMonth.totalOrders[currentMonth];
+        document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
         document.getElementById('totalOrders').textContent = totalOrders;
+
+        // Thông tin cho từng dịch vụ
+        const services = ['DV0001', 'DV0002', 'DV0003'];
+        const serviceNames = {
+            DV0001: 'Khám sức khỏe',
+            DV0002: 'Cắt thiến hộ cá',
+            DV0003: 'Tư vấn online'
+        };
+
+        services.forEach(service => {
+            const revenue = data.servicesByMonth[service].totalAmount[currentMonth];
+            const orders = data.servicesByMonth[service].totalOrders[currentMonth];
+            
+            document.getElementById(`${service}Revenue`).textContent = `Doanh thu: ${formatCurrency(revenue)}`;
+            document.getElementById(`${service}Orders`).textContent = `Số đơn: ${orders}`;
+        });
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
-
-
-        //- button#finance Doanh thu
-        //- button#rating Đánh giá
-
