@@ -2610,7 +2610,7 @@ header {
     width: 260px;
     padding: 20px; 
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-    height:400px;
+    max-height:100%;
 }
 
 .checkup-service{
@@ -2628,7 +2628,8 @@ header {
     font-family: 'Oswald', sans-serif;
     display: block;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
+    margin-bottom: 5px;
     transition: 0.5s;
 }
 
@@ -2636,7 +2637,7 @@ header {
     text-decoration: none;
     color: white;
     background-color: #bd2222;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .banner-checkup h3{
@@ -2947,3 +2948,4 @@ header {
   .cta:focus, .cta:active {
     outline: none;
 }
+
