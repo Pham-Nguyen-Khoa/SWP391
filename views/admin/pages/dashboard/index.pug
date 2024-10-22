@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 
 block main
     style.
-        .block-sider {
+        .dashboard-block-sider {
         background-color: #f8f9fa;
         padding: 20px;
         border-radius: 10px;
@@ -14,7 +14,7 @@ block main
         margin-bottom: 30px;
         }
 
-        .card {
+        .dashboard-card {
         background-color: #ffffff;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -22,40 +22,40 @@ block main
         margin-bottom: 20px;
         }
 
-        .card:hover {
+        .dashboard-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        .card-body {
+        .dashboard-card-body {
         padding: 20px;
         display: flex;
         align-items: center;
         }
 
-        .card-content {
+        .dashboard-card-content {
         margin-left: 15px;
         }
 
-        .card-content h2 {
+        .dashboard-card-content h2 {
         font-size: 16px;
         color: #6c757d;
         margin-bottom: 5px;
         }
 
-        .card-content p {
+        .dashboard-card-content p {
         font-size: 24px;
         font-weight: bold;
         color: #007bff;
         margin: 0;
         }
 
-        .fas {
+        .dashboard-icon {
         font-size: 36px;
         color: #007bff;
         }
 
-        .radio-group {
+        .dashboard-radio-group {
         background-color: #ffffff;
         padding: 15px;
         border-radius: 8px;
@@ -63,18 +63,18 @@ block main
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        .radio-group label:first-child {
+        .dashboard-radio-group label:first-child {
         display: block;
         margin-bottom: 10px;
         font-weight: bold;
         color: #495057;
         }
 
-        .radio-group input[type="radio"] {
+        .dashboard-radio-group input[type="radio"] {
         margin-right: 5px;
         }
 
-        .radio-group label {
+        .dashboard-radio-group label {
         margin-right: 15px;
         color: #6c757d;
         }
@@ -91,7 +91,7 @@ block main
         }
 
         @media (max-width: 768px) {
-        .block-sider {
+        .dashboard-block-sider {
             margin-left: 0 !important;
         }
         .col-md-6, .col-md-3, .col-md-9 {
@@ -102,40 +102,40 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     
-    .block-sider(style="margin-left:180px;")
+    .dashboard-block-sider(style="margin-left:180px;")
         .dashboard-vet
             .dashboard-vet-header.row.mb-5
                 .col-md-6
-                    .card
-                        .card-body.d-flex.align-items-center
+                    .dashboard-card
+                        .dashboard-card-body.d-flex.align-items-center
                             i.fas.fa-users.text-4xl.text-blue-500.mr-4
-                            .card-content
+                            .dashboard-card-content
                                 h2 Tổng số doanh thu 
                                 p#totalAmount
                             
                 .col-md-6
-                    .card
-                        .card-body.d-flex.align-items-center
+                    .dashboard-card
+                        .dashboard-card-body.d-flex.align-items-center
                             i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
-                            .card-content   
+                            .dashboard-card-content   
                                 h2 Tổng số đơn
                                 p#totalOrders
                 .col-md-3
-                    .radio-group
+                    .dashboard-radio-group
                         label Time:
                         input#time-month(type="radio" name="time" value="month" checked)
                         label(for="time-month") Month
                         input#time-day(type="radio" name="time" value="day")
                         label(for="time-day") Day
 
-                    .radio-group
+                    .dashboard-radio-group
                         label Unit:
                         input#unit-amount(type="radio" name="unit" value="amount" checked)
                         label(for="unit-amount") Amount
                         input#unit-orders(type="radio" name="unit" value="orders")
                         label(for="unit-orders") Orders
 
-                    .radio-group
+                    .dashboard-radio-group
                         label Kind:
                         input#kind-total(type="radio" name="kind" value="total" checked)
                         label(for="kind-total") Total
@@ -166,3 +166,4 @@ block main
 
         //- button#finance Doanh thu
         //- button#rating Đánh giá
+
