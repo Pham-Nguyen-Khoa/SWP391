@@ -10,8 +10,7 @@ module.exports.index = async (req, res) => {
     const queryFinance = `SELECT 
     DATE(appointment.Date) AS date,  
     appointment.ServiceID,                         
-    SUM(bill.Total) AS total_amount, 
-    COUNT(bill.BillID) AS total_orders
+    bill.Total
 FROM 
     bill
 JOIN 
@@ -20,8 +19,6 @@ WHERE
     YEAR(appointment.Date) = YEAR(CURDATE()) AND
     MONTH(appointment.Date) = MONTH(CURDATE()) AND
     bill.Status = 'Đã thanh toán'
-GROUP BY 
-    date, appointment.ServiceID
 ORDER BY
     date ASC, appointment.ServiceID;`;
 
@@ -40,7 +37,7 @@ ORDER BY
                 const billDate = new Date(bill.date);
                 if (billDate <= currentDate) {
                     const dayOfMonth = billDate.getDate() - 1;
-                    totalAmount[dayOfMonth] += bill.total_amount;
+                    totalAmount[dayOfMonth] += bill.Total;
                     totalOrders[dayOfMonth] += 1; // Đếm số đơn hàng
                 }
             }
@@ -60,7 +57,7 @@ ORDER BY
             if (bill.ServiceID === ServiceID) {
                 const billMonth = new Date(bill.date).getMonth();
                 if (billMonth <= currentMonth) {
-                    totalAmount[billMonth] += bill.total_amount;
+                    totalAmount[billMonth] += bill.Total;
                     totalOrders[billMonth] += 1; // Đếm số đơn hàng
                 }
             }
@@ -86,7 +83,7 @@ ORDER BY
             const billDate = new Date(bill.date);
             if (billDate.getFullYear() === currentYear && billDate.getMonth() === currentMonth) {
                 const dayOfMonth = billDate.getDate() - 1;
-                totalAmount[dayOfMonth] += bill.total_amount;
+                totalAmount[dayOfMonth] += bill.Total;
                 totalOrders[dayOfMonth] += 1;
             }
         });
@@ -104,7 +101,7 @@ ORDER BY
         listBills.forEach(bill => {
             const billMonth = new Date(bill.date).getMonth();
             if (billMonth <= currentMonth) {
-                totalAmount[billMonth] += bill.total_amount;
+                totalAmount[billMonth] += bill.Total;
                 totalOrders[billMonth] += 1;
             }
         });
