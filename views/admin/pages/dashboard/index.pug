@@ -106,6 +106,56 @@ block main
         .dashboard-card-content .orders {
         color: #007bff;  /* màu xanh dương cho số đơn */
         }
+
+        /* CSS mới cho phần dịch vụ */
+        .service-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .service-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .service-info p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .service-revenue {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .service-orders {
+            color: #007bff;
+            font-weight: bold;
+        }
+
     +alert-success("5000")
     +alert-error('5000')
     
@@ -153,32 +203,56 @@ block main
                         canvas#test
                     .chart-controls
 
-            .row.justify-content-center.mt-4
-                .col-md-4
-                    .dashboard-card
-                    .dashboard-card-body
-                        .dashboard-card-content
-                        h2 Khám sức khỏe
-                        p#healthCheckRevenue
-                        p#healthCheckOrders
-                .col-md-4
-                    .dashboard-card
-                    .dashboard-card-body
-                        .dashboard-card-content
-                        h2 Cải thiện hộ cá
-                        p#sterilizationRevenue
-                        p#sterilizationOrders
-                .col-md-4
-                    .dashboard-card
-                    .dashboard-card-body
-                        .dashboard-card-content
-                        h2 Tư vấn online
-                        p#onlineConsultationRevenue
-                        p#onlineConsultationOrders
-                
+            //- .row.justify-content-center.mt-4
+            //-     .col-md-4
+            //-         .dashboard-card
+            //-         .dashboard-card-body
+            //-             .dashboard-card-content
+            //-             h2 Khám sức khỏe
+            //-             p#healthCheckRevenue
+            //-             p#healthCheckOrders
+            //-     .col-md-4
+            //-         .dashboard-card
+            //-         .dashboard-card-body
+            //-             .dashboard-card-content
+            //-             h2 Cải thiện hộ cá
+            //-             p#sterilizationRevenue
+            //-             p#sterilizationOrders
+            //-     .col-md-4
+            //-         .dashboard-card
+            //-         .dashboard-card-body
+            //-             .dashboard-card-content
+            //-             h2 Tư vấn online
+            //-             p#onlineConsultationRevenue
+            //-             p#onlineConsultationOrders
 
+            .service-cards
+                .service-card
+                    h2 Khám sức khỏe
+                    .service-info
+                        p Doanh thu:
+                        p#healthCheckRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#healthCheckOrders.service-orders
 
+                .service-card
+                    h2 Cải thiện hộ cá
+                    .service-info
+                        p Doanh thu:
+                        p#sterilizationRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#sterilizationOrders.service-orders
 
+                .service-card
+                    h2 Tư vấn online
+                    .service-info
+                        p Doanh thu:
+                        p#onlineConsultationRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#onlineConsultationOrders.service-orders
 
     script(type="module", src="/admin/js/chart.js")
     script.
@@ -198,16 +272,19 @@ block main
         // Thông tin cho từng dịch vụ
         const services = ['DV0001', 'DV0002', 'DV0003'];
         const serviceNames = {
-            DV0001: 'Khám sức khỏe',
-            DV0002: 'Cắt thiến hộ cá',
-            DV0003: 'Tư vấn online'
+            DV0001: 'healthCheck',
+            DV0002: 'sterilization',
+            DV0003: 'onlineConsultation'
         };
 
         services.forEach(service => {
             const revenue = data.servicesByMonth[service].totalAmount[currentMonth];
             const orders = data.servicesByMonth[service].totalOrders[currentMonth];
-            
-            document.getElementById(`${service}Revenue`).textContent = `Doanh thu: ${formatCurrency(revenue)}`;
-            document.getElementById(`${service}Orders`).textContent = `Số đơn: ${orders}`;
+            console.log(revenue);
+            console.log(revenue);
+
+            const serviceName = serviceNames[service];
+            document.getElementById(`${serviceName}Revenue`).textContent = `${formatCurrency(revenue)}`;
+            document.getElementById(`${serviceName}Orders`).textContent = `${orders}`;
         });
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
