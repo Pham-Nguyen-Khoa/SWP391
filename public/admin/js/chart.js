@@ -1,8 +1,8 @@
-fetch("/admin/dashboard/testAPI")
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    const { servicesByDay, servicesByMonth, totalByDay, totalByMonth } = data;
+// fetch("/admin/dashboard/testAPI")
+//   .then((response) => response.json())
+//   .then((data) => {
+//     console.log(data);
+//     const { servicesByDay, servicesByMonth, totalByDay, totalByMonth } = data;
 
     let chart;
     const currentMonthValue = new Date().getMonth() + 1;
@@ -21,7 +21,7 @@ fetch("/admin/dashboard/testAPI")
       "Tháng 11",
       "Tháng 12",
     ];
-
+    
     const days = Array.from({ length: 31 }, (_, i) => `Ngày ${i + 1}`);
 
     // Cấu hình biểu đồ ban đầu theo tháng
@@ -30,7 +30,7 @@ fetch("/admin/dashboard/testAPI")
       datasets: [
         {
           label: "Tổng doanh thu",
-          data: totalByMonth.totalAmount,
+          data: data.totalByMonth.totalAmount,
           borderColor: "#FF0000",
           backgroundColor: "rgba(255, 0, 0, 0.5)",
         },
@@ -60,48 +60,6 @@ fetch("/admin/dashboard/testAPI")
     }
     chart = new Chart(canvas, config);
 
-    // Hàm cập nhật biểu đồ theo ngày
-    // function updateFinanceDate() {
-    //   if (chart) {
-    //     chart.config.data = {
-    //       labels: days.slice(0, totalByDay.length), // Chỉ lấy ngày có dữ liệu
-    //       datasets: [
-    //         {
-    //           label: 'Khám sức khỏe',
-    //           data: servicesByDay['DV0001']?.totalAmount , // Chọn doanh thu theo ngày
-    //           borderColor: '#FF0000',
-    //           backgroundColor: 'rgba(255, 0, 0, 0.5)',
-    //         },
-    //         {
-    //           label: 'Cải thiện hồ cá',
-    //           data: servicesByDay['DV0002']?.totalAmount , // Chọn doanh thu theo ngày
-    //           borderColor: '#0000FF',
-    //           backgroundColor: 'rgba(0, 0, 255, 0.5)',
-    //         },
-    //         {
-    //           label: 'Tư vấn online',
-    //           data: servicesByDay['DV0003']?.totalAmount , // Chọn doanh thu theo ngày
-    //           borderColor: '#00FF00',
-    //           backgroundColor: 'rgba(0, 255, 0, 0.5)',
-    //         }
-    //       ]
-    //     };
-    //     chart.options.plugins.title.text = `Bảng thống kê doanh thu của dịch vụ tháng ${currentMonthValue}`;
-    //     chart.update();
-    //   } else {
-    //     console.error("Chart is not initialized yet.");
-    //   }
-    // }
-
-    // Hàm cập nhật biểu đồ theo tháng
-    // function updateFinanceMonth() {
-    //   if (chart) {
-    //     chart.config.data = info;
-    //     chart.update();
-    //   } else {
-    //     console.error("Chart is not initialized yet.");
-    //   }
-    // }
     function updateChart() {
       const time = document.querySelector('input[name="time"]:checked').value;
       const unit = document.querySelector('input[name="unit"]:checked').value;
@@ -116,7 +74,7 @@ fetch("/admin/dashboard/testAPI")
             labels: months,
             datasets: [{
               label: "Tổng doanh thu",
-              data: totalByMonth.totalAmount,
+              data: data.totalByMonth.totalAmount,
               borderColor: "#FF0000",
               backgroundColor: "rgba(255, 0, 0, 0.5)",
             }],
@@ -130,19 +88,19 @@ fetch("/admin/dashboard/testAPI")
             datasets: [
               {
                 label: "Khám sức khỏe",
-                data: servicesByMonth["DV0001"].totalAmount,
+                data: data.servicesByMonth["DV0001"].totalAmount,
                 borderColor: "#FF0000",
                 backgroundColor: "rgba(255, 0, 0, 0.5)",
               },
               {
                 label: "Cải thiện hồ cá",
-                data: servicesByMonth["DV0002"].totalAmount,
+                data: data.servicesByMonth["DV0002"].totalAmount,
                 borderColor: "#0000FF",
                 backgroundColor: "rgba(0, 0, 255, 0.5)",
               },
               {
                 label: "Tư vấn online",
-                data: servicesByMonth["DV0003"].totalAmount,
+                data: data.servicesByMonth["DV0003"].totalAmount,
                 borderColor: "#00FF00",
                 backgroundColor: "rgba(0, 255, 0, 0.5)",
               },
@@ -156,7 +114,7 @@ fetch("/admin/dashboard/testAPI")
             labels: months,
             datasets: [{
               label: "Tổng số đơn hàng",
-              data: totalByMonth.totalOrders,
+              data: data.totalByMonth.totalOrders,
               borderColor: "#FF0000",
               backgroundColor: "rgba(255, 0, 0, 0.5)",
             }],
@@ -170,19 +128,19 @@ fetch("/admin/dashboard/testAPI")
             datasets: [
               {
                 label: "Khám sức khỏe",
-                data: servicesByMonth["DV0001"].totalOrders,
+                data: data.servicesByMonth["DV0001"].totalOrders,
                 borderColor: "#FF0000",
                 backgroundColor: "rgba(255, 0, 0, 0.5)",
               },
               {
                 label: "Cải thiện hồ cá",
-                data: servicesByMonth["DV0002"].totalOrders,
+                data: data.servicesByMonth["DV0002"].totalOrders,
                 borderColor: "#0000FF",
                 backgroundColor: "rgba(0, 0, 255, 0.5)",
               },
               {
                 label: "Tư vấn online",
-                data: servicesByMonth["DV0003"].totalOrders,
+                data: data.servicesByMonth["DV0003"].totalOrders,
                 borderColor: "#00FF00",
                 backgroundColor: "rgba(0, 255, 0, 0.5)",
               },
@@ -196,7 +154,7 @@ fetch("/admin/dashboard/testAPI")
             labels: days,
             datasets: [{
               label: "Tổng doanh thu hàng ngày",
-              data: totalByDay.totalAmount,
+              data: data.totalByDay.totalAmount,
               borderColor: "#FF0000",
               backgroundColor: "rgba(255, 0, 0, 0.5)",
             }],
@@ -210,19 +168,19 @@ fetch("/admin/dashboard/testAPI")
             datasets: [
               {
                 label: "Khám sức khỏe",
-                data: servicesByDay["DV0001"].totalAmount,
+                data: data.servicesByDay["DV0001"].totalAmount,
                 borderColor: "#FF0000",
                 backgroundColor: "rgba(255, 0, 0, 0.5)",
               },
               {
                 label: "Cải thiện hồ cá",
-                data: servicesByDay["DV0002"].totalAmount,
+                data: data.servicesByDay["DV0002"].totalAmount,
                 borderColor: "#0000FF",
                 backgroundColor: "rgba(0, 0, 255, 0.5)",
               },
               {
                 label: "Tư vấn online",
-                data: servicesByDay["DV0003"].totalAmount,
+                data: data.servicesByDay["DV0003"].totalAmount,
                 borderColor: "#00FF00",
                 backgroundColor: "rgba(0, 255, 0, 0.5)",
               },
@@ -236,7 +194,7 @@ fetch("/admin/dashboard/testAPI")
             labels: days,
             datasets: [{
               label: "Tổng số đơn hàng hàng ngày",
-              data: totalByDay.totalOrders,
+              data: data.totalByDay.totalOrders,
               borderColor: "#FF0000",
               backgroundColor: "rgba(255, 0, 0, 0.5)",
             }],
@@ -250,19 +208,19 @@ fetch("/admin/dashboard/testAPI")
             datasets: [
               {
                 label: "Khám sức khỏe",
-                data: servicesByDay["DV0001"].totalOrders,
+                data: data.servicesByDay["DV0001"].totalOrders,
                 borderColor: "#FF0000",
                 backgroundColor: "rgba(255, 0, 0, 0.5)",
               },
               {
                 label: "Cải thiện hồ cá",
-                data: servicesByDay["DV0002"].totalOrders,
+                data: data.servicesByDay["DV0002"].totalOrders,
                 borderColor: "#0000FF",
                 backgroundColor: "rgba(0, 0, 255, 0.5)",
               },
               {
                 label: "Tư vấn online",
-                data: servicesByDay["DV0003"].totalOrders,
+                data: data.servicesByDay["DV0003"].totalOrders,
                 borderColor: "#00FF00",
                 backgroundColor: "rgba(0, 255, 0, 0.5)",
               },
@@ -277,11 +235,8 @@ fetch("/admin/dashboard/testAPI")
       }
     }
 
-    // Gán sự kiện cho các nút
-    // document.getElementById('date').addEventListener('click', updateFinanceDate);
-    // document.getElementById('month').addEventListener('click', updateFinanceMonth);
     document.querySelectorAll('input[type="radio"]').forEach((radio) => {
       radio.addEventListener("change", updateChart);
     });
-  })
-  .catch((error) => console.error("Error fetching data:", error));
+  // })
+  // .catch((error) => console.error("Error fetching data:", error));

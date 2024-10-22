@@ -2,39 +2,167 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug  
 
 block main
+    style.
+        .block-sider {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-vet-header {
+        margin-bottom: 30px;
+        }
+
+        .card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+        }
+
+        .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-body {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        }
+
+        .card-content {
+        margin-left: 15px;
+        }
+
+        .card-content h2 {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 5px;
+        }
+
+        .card-content p {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+        margin: 0;
+        }
+
+        .fas {
+        font-size: 36px;
+        color: #007bff;
+        }
+
+        .radio-group {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .radio-group label:first-child {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #495057;
+        }
+
+        .radio-group input[type="radio"] {
+        margin-right: 5px;
+        }
+
+        .radio-group label {
+        margin-right: 15px;
+        color: #6c757d;
+        }
+
+        canvas#test {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-controls {
+        margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+        .block-sider {
+            margin-left: 0 !important;
+        }
+        .col-md-6, .col-md-3, .col-md-9 {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        }
     +alert-success("5000")
     +alert-error('5000')
-
+    
     .block-sider(style="margin-left:180px;")
-        h1 #{pageTitle}
-        h1 #{user.FullName}
-        button#finance Doanh thu
-        button#rating Đánh giá
-        div(style="width: 1300px")   
-            canvas#test
+        .dashboard-vet
+            .dashboard-vet-header.row.mb-5
+                .col-md-6
+                    .card
+                        .card-body.d-flex.align-items-center
+                            i.fas.fa-users.text-4xl.text-blue-500.mr-4
+                            .card-content
+                                h2 Tổng số doanh thu 
+                                p#totalAmount
+                            
+                .col-md-6
+                    .card
+                        .card-body.d-flex.align-items-center
+                            i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
+                            .card-content   
+                                h2 Tổng số đơn
+                                p#totalOrders
+                .col-md-3
+                    .radio-group
+                        label Time:
+                        input#time-month(type="radio" name="time" value="month" checked)
+                        label(for="time-month") Month
+                        input#time-day(type="radio" name="time" value="day")
+                        label(for="time-day") Day
 
-        .chart-controls
-            .radio-group
-                label Time:
-                input#time-month(type="radio" name="time" value="month" checked)
-                label(for="time-month") Month
-                input#time-day(type="radio" name="time" value="day")
-                label(for="time-day") Day
+                    .radio-group
+                        label Unit:
+                        input#unit-amount(type="radio" name="unit" value="amount" checked)
+                        label(for="unit-amount") Amount
+                        input#unit-orders(type="radio" name="unit" value="orders")
+                        label(for="unit-orders") Orders
 
-            .radio-group
-                label Unit:
-                input#unit-amount(type="radio" name="unit" value="amount" checked)
-                label(for="unit-amount") Amount
-                input#unit-orders(type="radio" name="unit" value="orders")
-                label(for="unit-orders") Orders
+                    .radio-group
+                        label Kind:
+                        input#kind-total(type="radio" name="kind" value="total" checked)
+                        label(for="kind-total") Total
+                        input#kind-separate(type="radio" name="kind" value="separate")
+                        label(for="kind-separate") Separate Service   
+                .col-md-9
+                    div 
+                        canvas#test
+                    .chart-controls
 
-            .radio-group
-                label Kind:
-                input#kind-total(type="radio" name="kind" value="total" checked)
-                label(for="kind-total") Total
-                input#kind-separate(type="radio" name="kind" value="separate")
-                label(for="kind-separate") Separate Service   
+
+                
+
+
+
 
     script(type="module", src="/admin/js/chart.js")
+    script.
+        const data = !{JSON.stringify(data)};
+
+        const currentMonth = new Date().getMonth();
+        const totalAmount = data.totalByMonth.totalAmount[currentMonth];
+        document.getElementById('totalAmount').textContent = totalAmount;
+        const totalOrders = data.totalByMonth.totalOrders[currentMonth];
+        document.getElementById('totalOrders').textContent = totalOrders;
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
 
+
+        //- button#finance Doanh thu
+        //- button#rating Đánh giá
