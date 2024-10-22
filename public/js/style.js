@@ -1096,7 +1096,7 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
       messageInput.value = '';
       const typingIndicator = document.createElement('div');
       typingIndicator.className = 'typing-indicator';
-      typingIndicator.textContent = 'AI đang trả lời...';
+      typingIndicator.textContent = ' Đang trả lời...';
       messagesContainer.appendChild(typingIndicator);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
