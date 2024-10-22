@@ -761,8 +761,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // formAppointment.submit();
       } else {
         const addressInput = document.getElementById("address").value
+        const locationInput = document.getElementById("location").value
+        const serviceSelected = document.getElementById("service").value
+        console.log(locationInput)
         let distanceAutoCustomer= 0;
-        if(addressInput != null){
+        if((serviceSelected === "Cải Thiện Môi Trường") || (locationInput === "nha" && serviceSelected === "Khám Sức Khỏe")){
+          console.log("Chạy vô rồi nè")
           const originAddress = settingGeneral.Address
           const destinationAddress = addressInput;
           console.log(destinationAddress);
@@ -820,16 +824,21 @@ document.addEventListener("DOMContentLoaded", () => {
                   });
                     return;
                 }
-                  const formAppointment = document.querySelector(".form_appointment");
+                const formAppointment = document.querySelector(".form_appointment");
                 formAppointment.submit();
+                
               } else {
                   console.log('Không tìm thấy lộ trình hoặc dữ liệu không hợp lệ.');
               }
           })
           .catch(error => console.error('Error:', error));
+        }else{
+          const formAppointment = document.querySelector(".form_appointment");
+          formAppointment.submit();
+          console.log("----------")
+          console.log(distanceAutoCustomer)
         }
-        console.log("----------")
-        console.log(distanceAutoCustomer)
+       
        
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
@@ -1087,7 +1096,7 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
       messageInput.value = '';
       const typingIndicator = document.createElement('div');
       typingIndicator.className = 'typing-indicator';
-      typingIndicator.textContent = 'AI đang trả lời...';
+      typingIndicator.textContent = ' Đang trả lời...';
       messagesContainer.appendChild(typingIndicator);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
@@ -1110,5 +1119,40 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 });
+
+//Back to top
+const backToTopBtn = document.getElementById('backToTop');
+if(backToTopBtn) {
+  const rollToTop = () => {
+    if(document.body.scrollTop>1500 || document.documentElement.scrollTop>1500) {
+      backToTopBtn.style.display = "block"
+    } else {
+      backToTopBtn.style.display = "none"
+    }
+  }
+  window.onscroll = rollToTop;
+  backToTopBtn.addEventListener("click",() => {
+    window.scrollTo({top:0, behavior: "smooth"})
+  })
+}
+
+// const backToTopBtn = document.getElementById('backToTop');
+// if(backToTopBtn) {
+//   const rollToTop = () => {
+//     if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+//       backToTopBtn.style.display = "block";
+//     } else {
+//       backToTopBtn.style.display = "none";
+//     }
+//   }
+  
+//   // Gán hàm cho sự kiện scroll
+//   window.onscroll = rollToTop;
+  
+//   // Xử lý khi nhấn vào nút back-to-top
+//   backToTopBtn.addEventListener("click", () => {
+//     window.scrollTo({top: 0, behavior: "smooth"});
+//   });
+// }
 
 

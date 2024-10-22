@@ -40,16 +40,16 @@ block main
                                     span #{appoinmentInfo.Shift}
                      .col-4(style="    margin-top: 20px;")
                            if(appoinmentInfo.Process == "Pending")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
                            if(appoinmentInfo.Process == "Ready")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
                            if(appoinmentInfo.Process == "Accepted")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
                            if(appoinmentInfo.Process == "Progress")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
                               
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành 
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành 
                               if feedBack && feedBack.Content
                                  i.fa.fa-star.ml-3#feedbackBtn(style="font-size: 32px; cursor: pointer; color: #d9bd21") 
                                 

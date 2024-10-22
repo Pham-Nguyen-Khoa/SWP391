@@ -1394,7 +1394,7 @@ header {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 10%;
     transform: translateY(-50%);
     text-align: center;
@@ -1521,7 +1521,7 @@ header {
 }
 
 .table-my-appointment thead {
-    background-color: #5aaeba;
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: white;
     font-weight: bold;
     text-align: center;
@@ -2853,4 +2853,97 @@ header {
 
 .payment-btn:hover span:after {
     transform: scaleX(1);
+}
+
+/* From Uiverse.io by alexmaracinaru */ 
+.cta {
+    position: relative;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #b1dae7;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+  }
+  
+  .cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #234567;
+  }
+  
+  .cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #234567;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover:before {
+    width: 100%;
+    background: #b1dae7;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active {
+    transform: scale(0.95);
+  }
+  
+  /* From Uiverse.io by vinodjangid07 */ 
+.back-to-top {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 1px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: fixed;
+    left: 50%;
+    z-index: 999;
+    bottom: 40px;
+    display: none;
+  }
+  
+  .svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+  }
+  
+  .svgIcon path {
+    fill: white;
+  }
+  
+  .cta:focus, .cta:active {
+    outline: none;
 }
