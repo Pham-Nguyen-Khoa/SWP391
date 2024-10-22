@@ -129,31 +129,40 @@ block main
         }
 
         .service-card h2 {
-            font-size: 18px;
+            font-size: 24px;  // Tăng từ 18px
             color: #333;
-            margin-bottom: 15px;
+            margin-bottom: 20px;  // Tăng khoảng cách dưới tiêu đề
             text-align: center;
+            font-weight: bold;  // Làm đậm tiêu đề
         }
 
         .service-info {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 15px;  // Tăng khoảng cách giữa các dòng
+            align-items: center;  // Căn giữa theo chiều dọc
         }
 
         .service-info p {
             margin: 0;
-            font-size: 14px;
+            font-size: 18px;  // Tăng từ 14px
+        }
+
+        .service-revenue, .service-orders {
+            font-size: 20px;  // Tăng cỡ chữ cho số liệu
+            font-weight: bold;
         }
 
         .service-revenue {
             color: #28a745;
-            font-weight: bold;
         }
 
         .service-orders {
             color: #007bff;
-            font-weight: bold;
+        }
+
+        .service-card {
+            padding: 25px;  // Thêm padding cho card để tăng khoảng trống
         }
 
     +alert-success("5000")
