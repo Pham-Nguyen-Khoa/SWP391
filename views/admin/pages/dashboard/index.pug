@@ -2,39 +2,276 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug  
 
 block main
+    style.
+        .dashboard-block-sider {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-vet-header {
+        margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        margin-bottom: 20px;
+        }
+
+        .dashboard-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .dashboard-card-body {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        }
+
+        .dashboard-card-content {
+        margin-left: 15px;
+        }
+
+        .dashboard-card-content h2 {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 5px;
+        }
+
+        .dashboard-card-content p {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+        margin: 0;
+        }
+
+        .dashboard-icon {
+        font-size: 36px;
+        color: #007bff;
+        }
+
+        .dashboard-radio-group {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-radio-group label:first-child {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #495057;
+        }
+
+        .dashboard-radio-group input[type="radio"] {
+        margin-right: 5px;
+        }
+
+        .dashboard-radio-group label {
+        margin-right: 15px;
+        color: #6c757d;
+        }
+
+        canvas#test {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-controls {
+        margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+        .dashboard-block-sider {
+            margin-left: 0 !important;
+        }
+        .col-md-6, .col-md-3, .col-md-9 {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        }
+        .dashboard-card-content .revenue {
+        color: #28a745;  /* màu xanh lá cho doanh thu */
+        }
+
+        .dashboard-card-content .orders {
+        color: #007bff;  /* màu xanh dương cho số đơn */
+        }
+
+        /* CSS mới cho phần dịch vụ */
+        .service-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 30%;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card h2 {
+            font-size: 24px;  // Tăng từ 18px
+            color: #333;
+            margin-bottom: 20px;  // Tăng khoảng cách dưới tiêu đề
+            text-align: center;
+            font-weight: bold;  // Làm đậm tiêu đề
+        }
+
+        .service-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;  // Tăng khoảng cách giữa các dòng
+            align-items: center;  // Căn giữa theo chiều dọc
+        }
+
+        .service-info p {
+            margin: 0;
+            font-size: 18px;  // Tăng từ 14px
+        }
+
+        .service-revenue, .service-orders {
+            font-size: 20px;  // Tăng cỡ chữ cho số liệu
+            font-weight: bold;
+        }
+
+        .service-revenue {
+            color: #28a745;
+        }
+
+        .service-orders {
+            color: #007bff;
+        }
+
+        .service-card {
+            padding: 25px;  // Thêm padding cho card để tăng khoảng trống
+        }
+
     +alert-success("5000")
     +alert-error('5000')
+    
+    .dashboard-block-sider(style="margin-left:180px;")
+        .dashboard-vet
+            .dashboard-vet-header.row.mb-5
+                .col-md-6
+                    .dashboard-card
+                        .dashboard-card-body.d-flex.align-items-center
+                            i.fas.fa-users.text-4xl.text-blue-500.mr-4
+                            .dashboard-card-content
+                                h2 Tổng số doanh thu 
+                                p#totalAmount
+                            
+                .col-md-6
+                    .dashboard-card
+                        .dashboard-card-body.d-flex.align-items-center
+                            i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
+                            .dashboard-card-content   
+                                h2 Tổng số đơn
+                                p#totalOrders
+                .col-md-3
+                    .dashboard-radio-group
+                        label Thời gian:
+                        input#time-month(type="radio" name="time" value="month" checked)
+                        label(for="time-month") Tháng
+                        input#time-day(type="radio" name="time" value="day")
+                        label(for="time-day") Ngày
 
-    .block-sider(style="margin-left:180px;")
-        h1 #{pageTitle}
-        h1 #{user.FullName}
-        button#finance Doanh thu
-        button#rating Đánh giá
-        div(style="width: 1300px")   
-            canvas#test
+                    .dashboard-radio-group
+                        label Đơn vị:
+                        input#unit-amount(type="radio" name="unit" value="amount" checked)
+                        label(for="unit-amount") Doanh thu
+                        input#unit-orders(type="radio" name="unit" value="orders")
+                        label(for="unit-orders") Đơn hàng
 
-        .chart-controls
-            .radio-group
-                label Time:
-                input#time-month(type="radio" name="time" value="month" checked)
-                label(for="time-month") Month
-                input#time-day(type="radio" name="time" value="day")
-                label(for="time-day") Day
+                    .dashboard-radio-group
+                        label Loại:
+                        input#kind-total(type="radio" name="kind" value="total" checked)
+                        label(for="kind-total") Tổng cộng
+                        input#kind-separate(type="radio" name="kind" value="separate")
+                        label(for="kind-separate") Từng dịch vụ  
+                .col-md-9
+                    div 
+                        canvas#test
+                    .chart-controls
 
-            .radio-group
-                label Unit:
-                input#unit-amount(type="radio" name="unit" value="amount" checked)
-                label(for="unit-amount") Amount
-                input#unit-orders(type="radio" name="unit" value="orders")
-                label(for="unit-orders") Orders
 
-            .radio-group
-                label Kind:
-                input#kind-total(type="radio" name="kind" value="total" checked)
-                label(for="kind-total") Total
-                input#kind-separate(type="radio" name="kind" value="separate")
-                label(for="kind-separate") Separate Service   
+            .service-cards
+                .service-card
+                    h2 Khám sức khỏe
+                    .service-info
+                        p Doanh thu:
+                        p#healthCheckRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#healthCheckOrders.service-orders
+
+                .service-card
+                    h2 Cải thiện hộ cá
+                    .service-info
+                        p Doanh thu:
+                        p#sterilizationRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#sterilizationOrders.service-orders
+
+                .service-card
+                    h2 Tư vấn online
+                    .service-info
+                        p Doanh thu:
+                        p#onlineConsultationRevenue.service-revenue
+                    .service-info
+                        p Số đơn:
+                        p#onlineConsultationOrders.service-orders
 
     script(type="module", src="/admin/js/chart.js")
-    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script.
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
 
+        const data = !{JSON.stringify(data)};
+        const currentMonth = new Date().getMonth();
+
+        // Tổng số doanh thu và đơn hàng
+        const totalAmount = data.totalByMonth.totalAmount[currentMonth];
+        const totalOrders = data.totalByMonth.totalOrders[currentMonth];
+        document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
+        document.getElementById('totalOrders').textContent = totalOrders;
+
+        // Thông tin cho từng dịch vụ
+        const services = ['DV0001', 'DV0002', 'DV0003'];
+        const serviceNames = {
+            DV0001: 'healthCheck',
+            DV0002: 'sterilization',
+            DV0003: 'onlineConsultation'
+        };
+
+        services.forEach(service => {
+            const revenue = data.servicesByMonth[service].totalAmount[currentMonth];
+            const orders = data.servicesByMonth[service].totalOrders[currentMonth];
+            console.log(revenue);
+            console.log(revenue);
+
+            const serviceName = serviceNames[service];
+            document.getElementById(`${serviceName}Revenue`).textContent = `${formatCurrency(revenue)}`;
+            document.getElementById(`${serviceName}Orders`).textContent = `${orders}`;
+        });
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")

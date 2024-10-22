@@ -7,17 +7,7 @@ const Bill = require("../../models/bill.model");
 // [Get] /admin/dashboard
 module.exports.index = async (req, res) => {
 
-    
-    res.render("admin/pages/dashboard/index",{
-        pageTitle: "Trang tổng quan ",
-    })
-  }
-  
-  // [get ] /admin/dashboard/testAPI
-  module.exports.testAPI = async (req, res) =>  {
-
-
-const queryFinance = `SELECT 
+    const queryFinance = `SELECT 
     DATE(appointment.Date) AS date,  
     appointment.ServiceID,                         
     SUM(bill.Total) AS total_amount, 
@@ -123,8 +113,7 @@ ORDER BY
         return { totalAmount, totalOrders };
     };
     
-    
-    res.json({
+    const data = {
         servicesByDay: {
             DV0001: {
                 totalAmount: ListServiceDate(listBill[0], 'DV0001').totalAmount,
@@ -153,19 +142,18 @@ ORDER BY
                 totalOrders: ListServiceMonth(listBill[0], 'DV0003').totalOrders
             }
         },
-        
         totalByDay: {
-            totalAmount: TotalDate(listBill[0]).totalAmount, 
+            totalAmount: TotalDate(listBill[0]).totalAmount,
             totalOrders: TotalDate(listBill[0]).totalOrders
-
-        }, 
+        },
         totalByMonth: {
-            totalAmount: TotalMonth(listBill[0]).totalAmount, 
+            totalAmount: TotalMonth(listBill[0]).totalAmount,
             totalOrders: TotalMonth(listBill[0]).totalOrders
-
         }
-    });
-    
-    
-    
+    };
+    res.render("admin/pages/dashboard/index",{
+        pageTitle: "Trang tổng quan ",
+        data: data 
+    })
   }
+  
