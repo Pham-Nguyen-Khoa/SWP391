@@ -19,6 +19,22 @@ const Service = sequelize.define('Service', {
   Description: {
       type: DataTypes.STRING(500),
       allowNull: false
+  },
+  Thumbnail: {
+      type: DataTypes.TEXT,
+      allowNull: false
+  },
+  Status: {
+      type: DataTypes.STRING(20),
+      allowNull: true
+  },
+  AddMore: {
+    type: DataTypes.DOUBLE,
+    allowNull: true
+  },
+  FeeShip: {
+    type: DataTypes.DOUBLE,
+    allowNull: true
   }
 }, {
   tableName: 'service',
