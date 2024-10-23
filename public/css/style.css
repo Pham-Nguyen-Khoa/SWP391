@@ -144,25 +144,21 @@ ul.dropdown-menu {
     margin-left: 1rem;
     font-size: 0.8rem;
     font-size: 20px;
-    /* Slightly smaller font for login/register */
 }
 
 ul.dropdown-menu a.dropdown-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #000;
    font-size: 1.25rem;
 }
 
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
     color: #4475B9  ;
-    /* Change color on hover if needed */
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: transparent; /* Hoặc màu bạn muốn */
+    background-color: transparent;
 }
 
 .services-list {
@@ -179,7 +175,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .services-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .about-us-list {
@@ -188,15 +184,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .about-us-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #fff;
-    /* Ensure proper text color */
 }
 
 .about-us-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .info-list {
@@ -591,9 +584,9 @@ background-color: #cac0c05c; */
 
 .box_appointment {
     background-color: #b2d9e6ba;
-    padding: 80px 100px 50px 100px;
+    padding: 30px 100px 50px 100px;
     border: 5px solid #96b6c5;
-    border-radius: 80px;
+    border-radius: 40px;
     font-size: 20px;
     margin: 60px 200px;
     box-shadow: 0px 0px 17px 12px #8cb3cecf;
@@ -2610,7 +2603,7 @@ header {
     width: 260px;
     padding: 20px; 
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-    height:400px;
+    max-height:100%;
 }
 
 .checkup-service{
@@ -2628,7 +2621,8 @@ header {
     font-family: 'Oswald', sans-serif;
     display: block;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
+    margin-bottom: 5px;
     transition: 0.5s;
 }
 
@@ -2636,7 +2630,7 @@ header {
     text-decoration: none;
     color: white;
     background-color: #bd2222;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .banner-checkup h3{
@@ -2913,7 +2907,6 @@ header {
     transform: scale(0.95);
   }
   
-  /* From Uiverse.io by vinodjangid07 */ 
 .back-to-top {
     width: 50px;
     height: 50px;
@@ -2946,4 +2939,28 @@ header {
   
   .cta:focus, .cta:active {
     outline: none;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.login-element {
+    padding-left: 35px;
+}
+
+.register-element {
+    padding-left: 35px;
+}
+
+.otp-element {
+    padding-left: 35px;
 }
