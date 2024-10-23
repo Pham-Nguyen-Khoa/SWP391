@@ -17,12 +17,6 @@ block main
             if(appoinmentInfo.Name == "Tư Vấn Online")
                     span(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1200px;") Đã thanh toán
             else 
-                    if(payCenter == "thanh toán")
-                        .payInCenter(style="margin-left: 200px;display: inline;")
-                            a(href=`/staff/appointment/paymentCenter/${appoinmentInfo.AppointmentID}` class="btn btn-pay-center " style="margin-right: 70px;") 
-                                i.fas.fa-money-bill-wave Thanh toán 
-                            span(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; ") #{appoinmentInfo.StatusPaid}
-                    else
                         span(style="background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 1200px;") #{appoinmentInfo.StatusPaid}
             p ______________________________________________________________
             

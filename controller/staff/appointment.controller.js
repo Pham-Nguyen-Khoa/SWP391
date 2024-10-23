@@ -193,13 +193,19 @@ module.exports.detail =  async (req, res) => {
     }
     console.log(payCenter)
     if(appoinmentInfo.ServiceID == "DV0001" && appoinmentInfo.StatusPaid =="Đã thanh toán" && appoinmentInfo.BillID != null && appoinmentInfo.Process =="Successed"){
-        let totalServiceFee = 1500000;
+        const service = await Service.findOne({
+            raw: true,
+            where: {
+              ServiceID: appoinmentInfo.ServiceID
+            }
+          })
+        let totalServiceFee = service.Price;
         let serviceDetails =[
-          {description: "Dịch vụ khám sức khỏe", amount: 1500000}
+          {description: "Dịch vụ khám sức khỏe", amount: service.Price}
         ]
         if(appoinmentInfo.Distance){
             const distance = appoinmentInfo.Distance;
-          const baseFee = 100000; // Phí cơ bản cho 10km
+          const baseFee = service.FeeShip; // Phí cơ bản cho 10km
           const additionalFee = Math.ceil(distance / 10) * baseFee; 
           serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
           if(appoinmentInfo.Address != null){
@@ -218,8 +224,8 @@ module.exports.detail =  async (req, res) => {
         })
         fishCount.forEach((fish,index) => {
             if(index > 0){
-                totalServiceFee += 200000
-                serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: 200000});
+                totalServiceFee += service.AddMore
+                serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: service.AddMore});
             }
         })
         const serviceDetailsFormat = serviceDetails.map(service => ({
@@ -258,13 +264,19 @@ module.exports.detail =  async (req, res) => {
               PondRecordID: pondRecordIDs
             }
           })
-          let totalServiceFee = 1000000;
+          const service = await Service.findOne({
+            raw: true,
+            where: {
+              ServiceID: appoinmentInfo.ServiceID
+            }
+          })
+          let totalServiceFee = service.Price;
           let serviceDetails = [
-            { description: "Dịch vụ cải thiện môi trường", amount: 1000000 }
+            { description: "Dịch vụ cải thiện môi trường", amount: service.Price }
         ];
         if(appoinmentInfo.Distance){
           const distance = appoinmentInfo.Distance;
-        const baseFee = 100000; // Phí cơ bản cho 10km
+        const baseFee = service.FeeShip; // Phí cơ bản cho 10km
         const additionalFee = Math.ceil(distance / 10) * baseFee; 
         serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
         if(appoinmentInfo.Address != null){
@@ -276,20 +288,23 @@ module.exports.detail =  async (req, res) => {
         pondProfiles.forEach((pond, index) => {
           const volume = parseFloat(pond.Volume);
           if (index > 0) {
-              totalServiceFee += 200000; 
-              serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: 200000 });
+              totalServiceFee += service.AddMore; 
+              serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: service.AddMore });
           }
-          if (volume >= 1000 && volume <= 1200) {
-              totalServiceFee += 200000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
-          } else if (volume > 1200 && volume <= 1500) {
-              totalServiceFee += 400000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
-          } else if (volume > 1500) {
-              totalServiceFee += 600000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
-              }
-          });
+            if (volume >= 1000 && volume <= 2000) {
+                totalServiceFee += 200000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 2000L)`, amount: 200000 });
+            } else if (volume > 2000 && volume <= 5000) {
+                totalServiceFee += 400000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (2000L - 5000L)`, amount: 400000 });
+            }else if (volume > 5000 && volume <= 10000) {
+            totalServiceFee += 600000;
+            serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (5000L - 10000L)`, amount: 600000 });
+        } else if (volume > 10000) {
+                totalServiceFee += 800000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>10000L)`, amount: 800000 });
+                }
+            });
           const objectPayment = {
             totalFee: formatCurrency(totalServiceFee),
             serviceDetails: serviceDetails.map(detail => ({
@@ -770,9 +785,21 @@ module.exports.paymentCenter =  async (req, res) => {
     //         AppointmentID: appointmentID
     //     }
     // })
-    let totalServiceFee = 1500000;
+    const appointment = await Appointment.findOne({
+      raw: true,
+      where: {
+        AppointmentID: appointmentID
+      }
+    })
+    const service = await Service.findOne({
+      raw: true,
+      where: {
+        ServiceID: appointment.ServiceID
+      }
+    })
+    let totalServiceFee = service.Price;
     let serviceDetails =[
-      {description: "Dịch vụ khám sức khỏe", amount: 1500000}
+      {description: "Dịch vụ khám sức khỏe", amount: service.Price}
     ]
    
 
@@ -785,8 +812,8 @@ module.exports.paymentCenter =  async (req, res) => {
     })
     fishCount.forEach((fish,index) => {
         if(index > 0){
-            totalServiceFee += 200000
-            serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: 200000});
+            totalServiceFee += service.AddMore
+            serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: service.AddMore});
         }
     })
     const serviceDetailsFormat = serviceDetails.map(service => ({

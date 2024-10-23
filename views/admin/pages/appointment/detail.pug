@@ -20,13 +20,7 @@ block main
             if(appoinmentInfo.Name == "Tư Vấn Online")
                     span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") Đã thanh toán
             else 
-                    if(payCenter == "thanh toán")
-                        .payInCenter(style="margin-left: 200px;display: inline;")
-                            a(href=`/staff/appointment/paymentCenter/${appoinmentInfo.AppointmentID}` class="btn btn-pay-center " style="margin-right: 70px;") 
-                                i.fas.fa-money-bill-wave Thanh toán 
-                            span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; ") #{appoinmentInfo.StatusPaid}
-                    else
-                        span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") #{appoinmentInfo.StatusPaid}
+                    span(style="background-color: #5aaeba; color: white; font-size: 20px; padding: 10px; border-radius: 20px; margin-left: 550px;") #{appoinmentInfo.StatusPaid}
             p ______________________________________________________________
             
             h2(style="font-weight: 900; text-decoration: underline; margin: 10px 0 10px 0") Thông tin lịch hẹn
