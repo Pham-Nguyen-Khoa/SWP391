@@ -31,6 +31,9 @@ function formatPrice(amount) {
 module.exports.index = async (req, res) => {
   const listService = await Service.findAll({
     raw: true,
+    where: {
+      Status: "active"
+    }
   });
   queryFilter = `
       SELECT account1.*, 

@@ -1,0 +1,137 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+block main
+        +alert-success("5000")
+        +alert-error('5000')
+        +title("Dịch vụ khám sức khỏe cá")
+        style.
+           .page-title {
+                    text-align: center;
+                    margin-bottom: 40px;
+                }
+
+                .gradient-text {
+                    font-size: 2.5rem;
+                    font-weight: 700;
+                    background: linear-gradient(45deg, #00B4DB, #0083B0);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    margin-bottom: 30px;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+                }
+
+                .edit-service-form {
+                    max-width: 80%;
+                    margin: 0 auto;
+                    padding: 30px;
+                        background: linear-gradient(to bottom right, #acc5e6, #91bfeb);
+                    border-radius: 15px;
+                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);    
+                }
+
+                .form-group {
+                    margin-bottom: 25px;
+                }
+
+                .form-group label {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                    color: #2c3e50;
+                    font-size: 1.1rem;
+                }
+
+                .form-group label i {
+                    margin-right: 10px;
+                    color: #00B4DB;
+                }
+
+                .form-group input,
+                .form-group textarea {
+                    width: 100%;
+                    padding: 12px 15px;
+                    border: 2px solid #e0e0e0;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    transition: all 0.3s ease;
+                    background: white;
+                }
+
+                .form-group input:focus,
+                .form-group textarea:focus {
+                    border-color: #00B4DB;
+                    box-shadow: 0 0 10px rgba(0,180,219,0.2);
+                    transform: translateY(-2px);
+                }
+
+                .form-group textarea {
+                    resize: vertical;
+                    min-height: 120px;
+                }
+
+                .form-actions {
+                    text-align: center;
+                    margin-top: 35px;
+                }
+                .input-group-text {
+                    border-radius: 0 10px 10px 0;
+                    border: none;
+                    padding: 0 20px;
+                    font-size: 1.1rem;
+                    background: linear-gradient(135deg, #0396FF, #0D47A1) !important;
+                }
+                .custom-input {
+                    border: 2px solid #e0e0e0;
+                    border-radius: 10px 0 0 10px;
+                    font-size: 1.1rem;
+                    padding: 12px 20px;
+                    transition: all 0.3s ease;
+                }
+                
+                .custom-input:focus {
+                    border-color: #0396FF;
+                    box-shadow: 0 0 0 0.2rem rgba(3, 150, 255, 0.25);
+                }
+
+            
+
+                @media (max-width: 768px) {
+                    .edit-service-form {
+                        margin: 20px;
+                        padding: 20px;
+                    }
+                    
+                    .gradient-text {
+                        font-size: 2rem;
+                    }
+                }
+        .block-sider(style="margin-left:180px; margin-right:50px")
+            form.edit-service-form(action=`/admin/service/editFish/${service.ServiceID}` method="post")
+                .form-group
+                    label(for="service-price") 
+                        i.fas.fa-coins
+                        span Giá tiền dịch vụ:
+                    .input-group.input-group-lg.mt-2
+                        input#service-price.custom-input.form-control(type="number" placeholder="Nhập giá tiền dịch vụ" min="1" name="Price" value=service.Price required)
+                        span.input-group-text.bg-primary.text-white.fw-bold VNĐ
+                .form-group
+                    label(for="service-description")
+                        i.fas.fa-info-circle
+                        span Mô tả:
+                    textarea#service-description(placeholder="Nhập mô tả dịch vụ" rows="4" name="Description" required) #{service.Description}
+                .form-group
+                    label(for="additional-fish-price")
+                        i.fas.fa-fish
+                        span Giá tiền thêm cá:
+                    .input-group.input-group-lg.mt-2
+                        input#additional-fish-price.custom-input.form-control(type="number" placeholder="Nhập giá tiền thêm cá" min="1" name="AddMore" value=service.AddMore required)
+                        span.input-group-text.bg-primary.text-white.fw-bold VNĐ
+                .form-actions
+                    button.payment-btn(type="submit")
+                        i.fas.fa-save
+                        span Cập nhật
+

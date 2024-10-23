@@ -7,6 +7,7 @@ const db = require("../../config/database");
 const Setting = require("../../models/setting.model");
 const { setIframe } = require("../../helpers/setIframe");
 const verifyEmailHelper = require("../../helpers/checkMail");
+const Service = require("../../models/service.model");
 
 // [Get] /admin/setting/general
 module.exports.settingGeneral = (req, res) => {
@@ -58,6 +59,34 @@ const test = setIframe(req.body.mapEmbed)
         updatedData[field] = req.body[field][0];
       }
     });
+
+    if(req.body.ImageServiceOnline){
+      await Service.update({
+        Thumbnail: req.body.ImageServiceOnline[0]
+      }, {
+        where: {
+          ServiceID: "DV0003"
+        }
+      })
+    }
+    if(req.body.ImageServiceHealthy){
+      await Service.update({
+        Thumbnail: req.body.ImageServiceHealthy[0]
+      }, {
+        where: {
+          ServiceID: "DV0001"
+        }
+      })
+    }
+    if(req.body.ImageServicePond){
+      await Service.update({
+        Thumbnail: req.body.ImageServicePond[0]
+      }, {
+        where: {
+          ServiceID: "DV0002"
+        }
+      })
+    }
 
     if (settingData) {
       await Setting.update(updatedData, {

@@ -220,6 +220,9 @@ if (selectService) {
       const Service = listService.find((service) => service.Name === selectService.value);
       const priceService = Service.Price;
       const priceFormat = formatCurrency(priceService);
+      if(Service.ServiceID == "DV0001" || Service.ServiceID == "DV0002"){
+        priceAddMoreFormat = formatCurrency(Service.AddMore);
+      }
       if(selectService.value =="Tư Vấn Online"){
         priceServiceElement.innerHTML=`
       <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
@@ -229,7 +232,7 @@ if (selectService) {
         priceServiceElement.innerHTML=`
         <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
         <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
-        <p style="font-size: 24px; font-weight: bold; color: #333;">(200K/Hồ)</p>
+        <p style="font-size: 24px; font-weight: bold; color: #333;">(${priceAddMoreFormat}/Hồ)</p>
         `
       }else{
         
@@ -239,7 +242,7 @@ if (selectService) {
         priceServiceElement.innerHTML=`
         <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
         <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
-        <p style="font-size: 24px; font-weight: bold; color: #333;">(200k/Cá)</p>
+        <p style="font-size: 24px; font-weight: bold; color: #333;">(${priceAddMoreFormat}/Cá)</p>
         `
       }
       
@@ -710,8 +713,8 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmSuccessAppointment.addEventListener("click", () => {
       if (selectService.value == "Tư Vấn Online") {
         const Service = listService.find((service) => service.Name === selectService.value);
-        // const priceService = Service.Price;
-        const priceService = 10000
+        const priceService = Service.Price;
+        // const priceService = 10000
         const priceFormat = formatCurrency(priceService);
         const generateRandomText = generateRandomString(6);
         let QR = `https://img.vietqr.io/image/${MY_BANK.BANK_ID}-${MY_BANK.ACCOUNT_NO}-qr_only.png?amount=${priceService}&addInfo=${generateRandomText}`;
@@ -1096,7 +1099,7 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
       messageInput.value = '';
       const typingIndicator = document.createElement('div');
       typingIndicator.className = 'typing-indicator';
-      typingIndicator.textContent = 'AI đang trả lời...';
+      typingIndicator.textContent = ' Đang trả lời...';
       messagesContainer.appendChild(typingIndicator);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 

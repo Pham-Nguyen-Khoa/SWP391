@@ -1,0 +1,100 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    style.
+        .bg-gradient-blue {
+            background: linear-gradient(135deg, #0396FF 0%, #0D47A1 100%);
+        }
+        
+        .custom-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            margin: 100px 31%;
+            background: linear-gradient(45deg, #bfdff1, #c2d8f18c);
+            margin: 100px 27%;
+        }
+        
+        .custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .shipping-icon i {
+            background: linear-gradient(135deg, #0396FF, #0D47A1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .custom-input {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px 0 0 10px;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-input:focus {
+            border-color: #0396FF;
+            box-shadow: 0 0 0 0.2rem rgba(3, 150, 255, 0.25);
+        }
+        
+        .input-group-text {
+            border-radius: 0 10px 10px 0;
+            border: none;
+            padding: 0 20px;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #0396FF, #0D47A1) !important;
+        }
+        
+        .custom-button {
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0396FF, #0D47A1);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(3, 150, 255, 0.4);
+        }
+        
+        .custom-button:active {
+            transform: translateY(0);
+        }
+    +title("Cập nhật phí vận chuyển")
+
+    .card.custom-card
+        .card-body.p-4
+            .shipping-icon.text-center.mb-4
+                i.fas.fa-truck.fa-3x.text-primary
+            
+            form(action="/admin/service/fee-ship", method="POST")
+                .form-group.mb-4
+                    label.h6.text-primary.fw-bold.d-flex.align-items-center
+                        i.fas.fa-money-bill-wave.me-2
+                        | Phí vận chuyển (VNĐ)
+                    .input-group.input-group-lg.mt-2
+                        input.form-control.custom-input(
+                            type="number"
+                            name="shippingFee"
+                            placeholder="Nhập phí vận chuyển"
+                            min="0"
+                            step="1000"
+                            value=service.FeeShip
+                            required
+                        )
+                        span.input-group-text.bg-primary.text-white.fw-bold VNĐ
+                
+                .text-center.mt-4
+                    button.btn.btn-primary.btn-lg.payment-btn(type="submit")
+                        i.fas.fa-check-circle.me-2
+                        span Cập nhật
+

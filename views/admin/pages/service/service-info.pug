@@ -1,0 +1,28 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+block main
+        +alert-success("5000")
+        +alert-error('5000')
+        +title("Dịch vụ")
+    
+        .block-sider(style="margin-left:180px; margin-right:50px")
+            .service
+                each service in listService
+                    .service-box
+                        img(src=service.Thumbnail, alt=service.Name, style="width:100%; border-radius: 5px;") 
+                        h3.mb-4= service.Name
+                        .d-flex
+                            a.payment-btn.mr-2(href=`/admin/service/edit/${service.ServiceID}` style="width: 233px;")
+                                i.fa.fa-edit
+                                span Chỉnh sửa  
+                            if service.Status == "active"
+                                a.payment-btn(style="background: linear-gradient(135deg, #e8004c, #ce2364);width: 233px; " href=`/admin/service/stop/${service.ServiceID}`) 
+                                    i.fa.fa-times
+                                    span Ngừng dịch vụ
+                            else
+                                a.payment-btn(style="background: linear-gradient(135deg, #16d61a, #2eaa59);width: 233px; " href=`/admin/service/start/${service.ServiceID}`) 
+                                    i.fa.fa-check
+                                    span Mở dịch vụ
+
+                
