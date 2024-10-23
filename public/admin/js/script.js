@@ -168,6 +168,13 @@ const btnRepair = document.querySelector(".repair");
 const information = document.querySelector(".information");
 // const btnSave = document.querySelector(".save");
 // const btnReset = document.querySelector(".reset-password");
+const btnsShowModal = document.querySelectorAll("#btn-show-modal");
+btnsShowModal.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const accountID = btn.getAttribute("AccountID");
+    showInfoModal(accountID);
+  })
+})
 let account = null;
 function showInfoModal(id) {
   // console.log(listUser)
