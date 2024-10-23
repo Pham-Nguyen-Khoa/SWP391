@@ -2914,7 +2914,6 @@ header {
     transform: scale(0.95);
   }
   
-  /* From Uiverse.io by vinodjangid07 */ 
 .back-to-top {
     width: 50px;
     height: 50px;
@@ -2949,3 +2948,18 @@ header {
     outline: none;
 }
 
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.login-element {
+    padding-left: 35px;
+}
