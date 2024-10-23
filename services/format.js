@@ -52,7 +52,7 @@ function formatDate(dateString) {
     startOfWeek.setDate(
       startOfWeek.getDate() - startOfWeek.getDay() + 1 + offset * 7
     ); 
-
+  }
 
   module.exports = { formatDate, formatPrice , formatCurrency , generateUserId,shiftToNumber,getDaysOfWeek};
 

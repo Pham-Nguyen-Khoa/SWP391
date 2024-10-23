@@ -144,25 +144,21 @@ ul.dropdown-menu {
     margin-left: 1rem;
     font-size: 0.8rem;
     font-size: 20px;
-    /* Slightly smaller font for login/register */
 }
 
 ul.dropdown-menu a.dropdown-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #000;
    font-size: 1.25rem;
 }
 
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
     color: #4475B9  ;
-    /* Change color on hover if needed */
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: transparent; /* Hoặc màu bạn muốn */
+    background-color: transparent;
 }
 
 .services-list {
@@ -179,7 +175,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .services-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .about-us-list {
@@ -188,15 +184,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .about-us-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #fff;
-    /* Ensure proper text color */
 }
 
 .about-us-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .info-list {
