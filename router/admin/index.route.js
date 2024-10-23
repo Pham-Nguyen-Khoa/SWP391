@@ -8,6 +8,7 @@ const chatRoute = require("./chat.route");
 const feedBackRoute = require("./feedback.route");
 const appointmentRoute = require("./appointment.route");
 const serviceRoute = require("./service.route");
+
 module.exports = (app) => {
   const PATH_ADMIN = systemConfig.prefixAdmin;
   app.use(authMiddleware.requireAuth);

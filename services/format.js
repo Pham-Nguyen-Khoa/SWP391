@@ -56,5 +56,3 @@ function formatDate(dateString) {
 
   module.exports = { formatDate, formatPrice , formatCurrency , generateUserId,shiftToNumber,getDaysOfWeek};
 
-
-
