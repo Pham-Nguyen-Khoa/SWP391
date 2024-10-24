@@ -1910,9 +1910,10 @@ header {
     z-index: 1001;
 }
 /* CSS NEWS */
+/* CSS NEWS */
 .news-title {
-    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
-    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    font-size: 3rem; /* Kích thước chữ có thể điều chỉnh */
     color: #333; /* Màu chữ có thể điều chỉnh */
     text-align: center; /* Căn giữa tiêu đề */
     margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
@@ -1920,7 +1921,7 @@ header {
 
 .news-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between ;
     align-items: center;
     margin: 20px 40px;
 }
@@ -1935,17 +1936,24 @@ header {
 .card-news {
     flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
     margin: 15px; /* Khoảng cách giữa các thẻ */
-    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    max-width: 100%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
     border-radius: 10px; /* Bo góc cho thẻ */
     background-color: #e7e7e7; /* Màu nền cho thẻ */
     padding: 20px; /* Khoảng cách bên trong thẻ */
+    
+}
+
+.card-news:hover{
+    background-color: #79b0e4bd;
+    transition: 1s;
+    box-shadow: 0 5px 10px rgb(0, 0, 0);
 }
 
 
 .card-news h3 {
-    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
-    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    font-family: 'Oswald', sans-serif; 
+    color: #234d7d; 
     min-height: 4rem;
     font-size: 1.5rem;
 }
@@ -1953,17 +1961,19 @@ header {
 .card-news p {
     color: #666; /* Màu chữ cho nội dung */
     padding: 10px;
-    
+    min-height: 5rem;
 }
 
 .card-news a {
     color: #065cb8; /* Màu chữ cho liên kết */
     text-decoration: none; /* Bỏ gạch chân */   
-    
+    font-size: 2rem;
 }
 
 .card-news a:hover {
     text-decoration: underline; /* Gạch chân khi hover */
+    color: #e82a2ad1;
+    transition: 1s;
 }
 
 .card-news{
@@ -2964,3 +2974,4 @@ header {
 .otp-element {
     padding-left: 35px;
 }
+
