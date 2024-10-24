@@ -1,5 +1,6 @@
 extends ../../layouts/default.pug
 include ../../mixins/chatAi.pug
+include ../../mixins/back-to-top.pug
 block main
     
 
@@ -66,6 +67,7 @@ block main
                         p(style="color: #555; font-size: 1.1em;") Chuyên gia gen và lai tạo cá Koi
 
         +chatAi()
+        +backToTop() 
 
         // Thay đổi phần horizontal-scroll
         section.horizontal-scroll(style="padding: 40px 0; overflow: hidden;")
@@ -196,6 +198,8 @@ block main
             console.log('Page loaded, starting smooth scroll');
             smoothScroll();
         });
+
+        
 
         
        

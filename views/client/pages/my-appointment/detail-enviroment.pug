@@ -40,15 +40,15 @@ block main
                                     span #{appoinmentInfo.Shift}
                      .col-4(style="    margin-top: 20px;")
                            if(appoinmentInfo.Process == "Pending")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
                            if(appoinmentInfo.Process == "Ready")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
                            if(appoinmentInfo.Process == "Accepted")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
                            if(appoinmentInfo.Process == "Process")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
-                              span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã hoàn thành
                               if feedBack && feedBack.Content
                                  i.fa.fa-star.ml-3#feedbackBtn(style="font-size: 32px; cursor: pointer; color: #d9bd21") 
                               else 
@@ -97,10 +97,13 @@ block main
                               a(href=appoinmentInfo.GoogleMeet style=" text-decoration: underline; color: #1695cf;") #{appoinmentInfo.GoogleMeet}
                            else 
                             if(appoinmentInfo.Process == "Successed")
-                                .additional-links.mb-3(style="margin-left: 200px;")
-                                    a.btn.btn-info.mr-2(href=`/koi/my-appointment/detail/prescription/${appoinmentInfo.AppointmentID}`) Chi tiết đơn thuốc
-                                    a.btn.btn-info.mr-2(href=`/koi/my-appointment/detail/pond/${appoinmentInfo.AppointmentID}`) Chi tiết thông số hồ
-                                    a.btn.btn-info(href=`/koi/my-appointment/detail/advice/${appoinmentInfo.AppointmentID}`) Tình trạng hồ
+                                .additional-links.mb-3(style="margin-left: 0px;")
+                                    a.btn.btn-info.mr-2.payment-btn(href=`/koi/my-appointment/detail/prescription/${appoinmentInfo.AppointmentID}`) 
+                                       span Chi tiết đơn thuốc
+                                    a.btn.btn-info.mr-2.payment-btn(href=`/koi/my-appointment/detail/pond/${appoinmentInfo.AppointmentID}` ) 
+                                       span Chi tiết thông số hồ
+                                    a.btn.btn-info.payment-btn(href=`/koi/my-appointment/detail/advice/${appoinmentInfo.AppointmentID}` style="margin: 20px 0 0 165px") 
+                                       span Tình trạng hồ
                             .thank-you-heart 
                               p Koi Vet xin cảm ơn 
                               .heart 

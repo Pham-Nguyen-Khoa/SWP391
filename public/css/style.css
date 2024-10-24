@@ -144,25 +144,21 @@ ul.dropdown-menu {
     margin-left: 1rem;
     font-size: 0.8rem;
     font-size: 20px;
-    /* Slightly smaller font for login/register */
 }
 
 ul.dropdown-menu a.dropdown-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #000;
    font-size: 1.25rem;
 }
 
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
     color: #4475B9  ;
-    /* Change color on hover if needed */
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: transparent; /* Hoặc màu bạn muốn */
+    background-color: transparent;
 }
 
 .services-list {
@@ -179,7 +175,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .services-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .about-us-list {
@@ -188,15 +184,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .about-us-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #fff;
-    /* Ensure proper text color */
 }
 
 .about-us-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .info-list {
@@ -591,9 +584,9 @@ background-color: #cac0c05c; */
 
 .box_appointment {
     background-color: #b2d9e6ba;
-    padding: 80px 100px 50px 100px;
+    padding: 30px 100px 50px 100px;
     border: 5px solid #96b6c5;
-    border-radius: 80px;
+    border-radius: 40px;
     font-size: 20px;
     margin: 60px 200px;
     box-shadow: 0px 0px 17px 12px #8cb3cecf;
@@ -1394,7 +1387,7 @@ header {
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%;
+    top: 60%;
     right: 10%;
     transform: translateY(-50%);
     text-align: center;
@@ -1521,7 +1514,7 @@ header {
 }
 
 .table-my-appointment thead {
-    background-color: #5aaeba;
+    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
     color: white;
     font-weight: bold;
     text-align: center;
@@ -2610,7 +2603,7 @@ header {
     width: 260px;
     padding: 20px; 
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-    height:400px;
+    max-height:100%;
 }
 
 .checkup-service{
@@ -2628,7 +2621,8 @@ header {
     font-family: 'Oswald', sans-serif;
     display: block;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
+    margin-bottom: 5px;
     transition: 0.5s;
 }
 
@@ -2636,7 +2630,7 @@ header {
     text-decoration: none;
     color: white;
     background-color: #bd2222;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .banner-checkup h3{
@@ -2853,4 +2847,120 @@ header {
 
 .payment-btn:hover span:after {
     transform: scaleX(1);
+}
+
+/* From Uiverse.io by alexmaracinaru */ 
+.cta {
+    position: relative;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #b1dae7;
+    width: 45px;
+    height: 45px;
+    transition: all 0.3s ease;
+  }
+  
+  .cta span {
+    position: relative;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #234567;
+  }
+  
+  .cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #234567;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+  }
+  
+  .cta:hover:before {
+    width: 100%;
+    background: #b1dae7;
+  }
+  
+  .cta:hover svg {
+    transform: translateX(0);
+  }
+  
+  .cta:active {
+    transform: scale(0.95);
+  }
+  
+.back-to-top {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 1px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: fixed;
+    left: 50%;
+    z-index: 999;
+    bottom: 40px;
+    display: none;
+  }
+  
+  .svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+  }
+  
+  .svgIcon path {
+    fill: white;
+  }
+  
+  .cta:focus, .cta:active {
+    outline: none;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.login-element {
+    padding-left: 35px;
+}
+
+.register-element {
+    padding-left: 35px;
+}
+
+.otp-element {
+    padding-left: 35px;
 }

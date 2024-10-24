@@ -14,6 +14,7 @@ const route = require("./router/client/index.route")
 const routeAdmin = require("./router/admin/index.route")
 const routeDoctor = require("./router/doctor/index.route")
 const routeStaff = require("./router/staff/index.route")
+const routeApi = require("./router/api/index.route")
 
 // Cấu hình body-parser với giới hạn lớn
 app.use(bodyParser.json({ limit: '50mb' })); // Giới hạn cho JSON
@@ -60,11 +61,12 @@ global.io = io;
 
 
 // Router
-
+routeApi(app);
 route(app);
 routeAdmin(app);
 routeDoctor(app); 
 routeStaff(app);
+
 app.get("*" ,  (req, res) => {
   res.render("client/pages/errors/404",{
     pageTitle: "Trang không tồn tại",

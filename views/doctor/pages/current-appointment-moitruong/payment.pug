@@ -16,7 +16,7 @@ block main
             .row.justify-content-center.align-items-center.mt-4
                     .col-auto
                         .input-group
-                            input.form-control#distance(type="number" min="1" value="1" style="width: 120px; border-radius: 5px 0 0 5px;")
+                            input.form-control#distance(type="number" min="1" oninput="if(this.value < 0) this.value = Math.abs(this.value)" value="1" style="width: 120px; border-radius: 5px 0 0 5px;")
                             .input-group-append
                                 button#auto-distance.btn.btn-danger(type="button" style="border-radius: 0;")
                                     i.fa.fa-calculator
@@ -64,7 +64,7 @@ block main
                
 
             script.
-                   
+                   const service = !{JSON.stringify(service)};
                   document.addEventListener('DOMContentLoaded', function() {
                     
                     const previousPageData = localStorage.getItem(`appointmentData`);
@@ -133,7 +133,7 @@ block main
                     //-     distanceFee = 300000
                     //- }
 
-                    const baseFee = 100000; // Phí cơ bản cho 10km
+                    const baseFee = service.FeeShip; // Phí cơ bản cho 10km
                     const additionalFee = Math.ceil(distance / 10) * baseFee; 
                     console.log(additionalFee)
                     const formattedFee = additionalFee.toLocaleString('it-IT'); 

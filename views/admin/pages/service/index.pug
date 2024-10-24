@@ -1,0 +1,77 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+include ../../mixins/mixin-title.pug
+
+block main
+    +alert-success("5000")
+    +alert-error('5000')
+    +title("Quản lý Dịch vụ")
+
+    style.
+        .card {
+            width: 90%;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: linear-gradient(164deg, #6b8390 0%, #4e606f 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .setting-item {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            padding: 1.5rem;
+            border-radius: 12px;
+                background: white;
+            border: 1px solid #eee;
+        }
+        .setting-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            background-color: #b5d5f8;
+            text-decoration: none;
+            border-color: #538dcb;
+        }
+        .icon-wrapper {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 50%;
+            margin-right: 1rem;
+        }
+        .setting-item h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .setting-item p {
+            color: #666;
+        }
+        
+    .block-sider.container-fluid.py-4(style="margin-left:150px; margin-right:50px")
+        .card.mb-4
+            .card-header
+            .card-body
+                .row
+                    .col-md-6.mb-4
+                        a.setting-item(href="/admin/service/service-info")
+                            .d-flex.align-items-center
+                                .icon-wrapper
+                                    i.fas.fa-store.fa-2x.text-primary
+                                div
+                                    h5 Quản lý Dịch vụ 
+                                    p.mb-0 Thiết lập thông tin dịch vụ cửa hàng
+                    .col-md-6.mb-4
+                        a.setting-item(href="/admin/service/fee-ship")
+                            .d-flex.align-items-center
+                                .icon-wrapper
+                                    i.fas.fa-truck.fa-2x.text-primary
+                                div
+                                    h5 Phí Vận chuyển
+                                    p.mb-0 Cấu hình phí vận chuyển và khu vực

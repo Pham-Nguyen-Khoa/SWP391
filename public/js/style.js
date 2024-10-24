@@ -220,6 +220,9 @@ if (selectService) {
       const Service = listService.find((service) => service.Name === selectService.value);
       const priceService = Service.Price;
       const priceFormat = formatCurrency(priceService);
+      if(Service.ServiceID == "DV0001" || Service.ServiceID == "DV0002"){
+        priceAddMoreFormat = formatCurrency(Service.AddMore);
+      }
       if(selectService.value =="Tư Vấn Online"){
         priceServiceElement.innerHTML=`
       <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
@@ -229,7 +232,7 @@ if (selectService) {
         priceServiceElement.innerHTML=`
         <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
         <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
-        <p style="font-size: 24px; font-weight: bold; color: #333;">(200K/Hồ)</p>
+        <p style="font-size: 24px; font-weight: bold; color: #333;">(${priceAddMoreFormat}/Hồ)</p>
         `
       }else{
         
@@ -239,7 +242,7 @@ if (selectService) {
         priceServiceElement.innerHTML=`
         <h1 style="font-size: 24px; font-weight: bold; color: #333; display: inline-block;">Tiền dịch vụ:</h1>
         <span style="font-size: 28px; font-weight: bold; color: #cba510; margin-left: 10px;padding-bottom: 8px;">${priceFormat}</span>
-        <p style="font-size: 24px; font-weight: bold; color: #333;">(200k/Cá)</p>
+        <p style="font-size: 24px; font-weight: bold; color: #333;">(${priceAddMoreFormat}/Cá)</p>
         `
       }
       
@@ -710,8 +713,8 @@ document.addEventListener("DOMContentLoaded", () => {
     confirmSuccessAppointment.addEventListener("click", () => {
       if (selectService.value == "Tư Vấn Online") {
         const Service = listService.find((service) => service.Name === selectService.value);
-        // const priceService = Service.Price;
-        const priceService = 10000
+        const priceService = Service.Price;
+        // const priceService = 10000
         const priceFormat = formatCurrency(priceService);
         const generateRandomText = generateRandomString(6);
         let QR = `https://img.vietqr.io/image/${MY_BANK.BANK_ID}-${MY_BANK.ACCOUNT_NO}-qr_only.png?amount=${priceService}&addInfo=${generateRandomText}`;
@@ -761,8 +764,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // formAppointment.submit();
       } else {
         const addressInput = document.getElementById("address").value
+        const locationInput = document.getElementById("location").value
+        const serviceSelected = document.getElementById("service").value
+        console.log(locationInput)
         let distanceAutoCustomer= 0;
-        if(addressInput != null){
+        if((serviceSelected === "Cải Thiện Môi Trường") || (locationInput === "nha" && serviceSelected === "Khám Sức Khỏe")){
+          console.log("Chạy vô rồi nè")
           const originAddress = settingGeneral.Address
           const destinationAddress = addressInput;
           console.log(destinationAddress);
@@ -820,16 +827,21 @@ document.addEventListener("DOMContentLoaded", () => {
                   });
                     return;
                 }
-                  const formAppointment = document.querySelector(".form_appointment");
+                const formAppointment = document.querySelector(".form_appointment");
                 formAppointment.submit();
+                
               } else {
                   console.log('Không tìm thấy lộ trình hoặc dữ liệu không hợp lệ.');
               }
           })
           .catch(error => console.error('Error:', error));
+        }else{
+          const formAppointment = document.querySelector(".form_appointment");
+          formAppointment.submit();
+          console.log("----------")
+          console.log(distanceAutoCustomer)
         }
-        console.log("----------")
-        console.log(distanceAutoCustomer)
+       
        
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
@@ -1087,7 +1099,7 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
       messageInput.value = '';
       const typingIndicator = document.createElement('div');
       typingIndicator.className = 'typing-indicator';
-      typingIndicator.textContent = 'AI đang trả lời...';
+      typingIndicator.textContent = ' Đang trả lời...';
       messagesContainer.appendChild(typingIndicator);
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
@@ -1110,5 +1122,21 @@ chăm sóc cá Koi chuyên nghiệp và toàn diện, bao gồm: \n
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
   }
 });
+
+//Back to top
+const backToTopBtn = document.getElementById('backToTop');
+if(backToTopBtn) {
+  const rollToTop = () => {
+    if(document.body.scrollTop>1500 || document.documentElement.scrollTop>1500) {
+      backToTopBtn.style.display = "block"
+    } else {
+      backToTopBtn.style.display = "none"
+    }
+  }
+  window.onscroll = rollToTop;
+  backToTopBtn.addEventListener("click",() => {
+    window.scrollTo({top:0, behavior: "smooth"})
+  })
+}
 
 

@@ -7,21 +7,10 @@ const Bill = require("../../models/bill.model");
 // [Get] /admin/dashboard
 module.exports.index = async (req, res) => {
 
-    
-    res.render("admin/pages/dashboard/index",{
-        pageTitle: "Trang tổng quan ",
-    })
-  }
-  
-  // [get ] /admin/dashboard/testAPI
-  module.exports.testAPI = async (req, res) =>  {
-
-
-const queryFinance = `SELECT 
+    const queryFinance = `SELECT 
     DATE(appointment.Date) AS date,  
     appointment.ServiceID,                         
-    SUM(bill.Total) AS total_amount, 
-    COUNT(bill.BillID) AS total_orders
+    bill.Total
 FROM 
     bill
 JOIN 
@@ -30,8 +19,6 @@ WHERE
     YEAR(appointment.Date) = YEAR(CURDATE()) AND
     MONTH(appointment.Date) = MONTH(CURDATE()) AND
     bill.Status = 'Đã thanh toán'
-GROUP BY 
-    date, appointment.ServiceID
 ORDER BY
     date ASC, appointment.ServiceID;`;
 
@@ -50,7 +37,7 @@ ORDER BY
                 const billDate = new Date(bill.date);
                 if (billDate <= currentDate) {
                     const dayOfMonth = billDate.getDate() - 1;
-                    totalAmount[dayOfMonth] += bill.total_amount;
+                    totalAmount[dayOfMonth] += bill.Total;
                     totalOrders[dayOfMonth] += 1; // Đếm số đơn hàng
                 }
             }
@@ -70,7 +57,7 @@ ORDER BY
             if (bill.ServiceID === ServiceID) {
                 const billMonth = new Date(bill.date).getMonth();
                 if (billMonth <= currentMonth) {
-                    totalAmount[billMonth] += bill.total_amount;
+                    totalAmount[billMonth] += bill.Total;
                     totalOrders[billMonth] += 1; // Đếm số đơn hàng
                 }
             }
@@ -96,7 +83,7 @@ ORDER BY
             const billDate = new Date(bill.date);
             if (billDate.getFullYear() === currentYear && billDate.getMonth() === currentMonth) {
                 const dayOfMonth = billDate.getDate() - 1;
-                totalAmount[dayOfMonth] += bill.total_amount;
+                totalAmount[dayOfMonth] += bill.Total;
                 totalOrders[dayOfMonth] += 1;
             }
         });
@@ -114,7 +101,7 @@ ORDER BY
         listBills.forEach(bill => {
             const billMonth = new Date(bill.date).getMonth();
             if (billMonth <= currentMonth) {
-                totalAmount[billMonth] += bill.total_amount;
+                totalAmount[billMonth] += bill.Total;
                 totalOrders[billMonth] += 1;
             }
         });
@@ -123,8 +110,7 @@ ORDER BY
         return { totalAmount, totalOrders };
     };
     
-    
-    res.json({
+    const data = {
         servicesByDay: {
             DV0001: {
                 totalAmount: ListServiceDate(listBill[0], 'DV0001').totalAmount,
@@ -153,19 +139,18 @@ ORDER BY
                 totalOrders: ListServiceMonth(listBill[0], 'DV0003').totalOrders
             }
         },
-        
         totalByDay: {
-            totalAmount: TotalDate(listBill[0]).totalAmount, 
+            totalAmount: TotalDate(listBill[0]).totalAmount,
             totalOrders: TotalDate(listBill[0]).totalOrders
-
-        }, 
+        },
         totalByMonth: {
-            totalAmount: TotalMonth(listBill[0]).totalAmount, 
+            totalAmount: TotalMonth(listBill[0]).totalAmount,
             totalOrders: TotalMonth(listBill[0]).totalOrders
-
         }
-    });
-    
-    
-    
+    };
+    res.render("admin/pages/dashboard/index",{
+        pageTitle: "Trang tổng quan ",
+        data: data 
+    })
   }
+  

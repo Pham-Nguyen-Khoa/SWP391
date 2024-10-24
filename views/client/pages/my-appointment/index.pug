@@ -37,9 +37,9 @@ block main
                     .col-md-3.col-sm-6
                         .form-group
                             label &nbsp;
-                            button.btn.btn-primary.btn-block(type="submit") 
+                            button.btn.btn-primary.btn-block.payment-btn(type="submit") 
                                 i.fas.fa-filter.mr-2
-                                | Lọc
+                                span Lọc
         .container-table 
             table.table.table-striped.table-bordered.table-my-appointment
                 thead 
@@ -100,7 +100,9 @@ block main
                                     td 
                                         p.process Bị Hủy 
                                 td 
-                                    a(href=`/koi/my-appointment/detail/${item.AppointmentID}` value=`/koi/my-appointment/detail/${item.AppointmentID}` button-delete class="btn btn-info") Chi tiết 
+                                    a.payment-btn(href=`/koi/my-appointment/detail/${item.AppointmentID}` value=`/koi/my-appointment/detail/${item.AppointmentID}` button-delete class="btn btn-info" style="width: 150px;height: 40px; background: linear-gradient(to bottom, #8dd8d7, #007bff);") 
+                                        i.fas.fa-info-circle.mr-2
+                                        span Chi tiết 
             +pagination(totalPages, currentPage, "/koi/my-appointment")  
         script(src="/admin/js/pagination.general.js") 
         script(src="https://code.jquery.com/jquery-3.6.0.min.js")

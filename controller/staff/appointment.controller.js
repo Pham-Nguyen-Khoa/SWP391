@@ -193,13 +193,19 @@ module.exports.detail =  async (req, res) => {
     }
     console.log(payCenter)
     if(appoinmentInfo.ServiceID == "DV0001" && appoinmentInfo.StatusPaid =="Đã thanh toán" && appoinmentInfo.BillID != null && appoinmentInfo.Process =="Successed"){
-        let totalServiceFee = 1500000;
+        const service = await Service.findOne({
+            raw: true,
+            where: {
+              ServiceID: appoinmentInfo.ServiceID
+            }
+          })
+        let totalServiceFee = service.Price;
         let serviceDetails =[
-          {description: "Dịch vụ khám sức khỏe", amount: 1500000}
+          {description: "Dịch vụ khám sức khỏe", amount: service.Price}
         ]
         if(appoinmentInfo.Distance){
             const distance = appoinmentInfo.Distance;
-          const baseFee = 100000; // Phí cơ bản cho 10km
+          const baseFee = service.FeeShip; // Phí cơ bản cho 10km
           const additionalFee = Math.ceil(distance / 10) * baseFee; 
           serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
           if(appoinmentInfo.Address != null){
@@ -218,8 +224,8 @@ module.exports.detail =  async (req, res) => {
         })
         fishCount.forEach((fish,index) => {
             if(index > 0){
-                totalServiceFee += 200000
-                serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: 200000});
+                totalServiceFee += service.AddMore
+                serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: service.AddMore});
             }
         })
         const serviceDetailsFormat = serviceDetails.map(service => ({
@@ -258,13 +264,19 @@ module.exports.detail =  async (req, res) => {
               PondRecordID: pondRecordIDs
             }
           })
-          let totalServiceFee = 1000000;
+          const service = await Service.findOne({
+            raw: true,
+            where: {
+              ServiceID: appoinmentInfo.ServiceID
+            }
+          })
+          let totalServiceFee = service.Price;
           let serviceDetails = [
-            { description: "Dịch vụ cải thiện môi trường", amount: 1000000 }
+            { description: "Dịch vụ cải thiện môi trường", amount: service.Price }
         ];
         if(appoinmentInfo.Distance){
           const distance = appoinmentInfo.Distance;
-        const baseFee = 100000; // Phí cơ bản cho 10km
+        const baseFee = service.FeeShip; // Phí cơ bản cho 10km
         const additionalFee = Math.ceil(distance / 10) * baseFee; 
         serviceDetails.push({ description: `Phí di chuyển`, amount: additionalFee });  
         if(appoinmentInfo.Address != null){
@@ -276,20 +288,23 @@ module.exports.detail =  async (req, res) => {
         pondProfiles.forEach((pond, index) => {
           const volume = parseFloat(pond.Volume);
           if (index > 0) {
-              totalServiceFee += 200000; 
-              serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: 200000 });
+              totalServiceFee += service.AddMore; 
+              serviceDetails.push({ description: `Phí khám thêm hồ ${index + 1}`, amount: service.AddMore });
           }
-          if (volume >= 1000 && volume <= 1200) {
-              totalServiceFee += 200000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 1200L)`, amount: 200000 });
-          } else if (volume > 1200 && volume <= 1500) {
-              totalServiceFee += 400000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1200L - 1500L)`, amount: 400000 });
-          } else if (volume > 1500) {
-              totalServiceFee += 600000;
-              serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>1500L)`, amount: 600000 });
-              }
-          });
+            if (volume >= 1000 && volume <= 2000) {
+                totalServiceFee += 200000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (1000L - 2000L)`, amount: 200000 });
+            } else if (volume > 2000 && volume <= 5000) {
+                totalServiceFee += 400000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (2000L - 5000L)`, amount: 400000 });
+            }else if (volume > 5000 && volume <= 10000) {
+            totalServiceFee += 600000;
+            serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (5000L - 10000L)`, amount: 600000 });
+        } else if (volume > 10000) {
+                totalServiceFee += 800000;
+                serviceDetails.push({ description: `Phí dịch vụ cho hồ ${index + 1} (>10000L)`, amount: 800000 });
+                }
+            });
           const objectPayment = {
             totalFee: formatCurrency(totalServiceFee),
             serviceDetails: serviceDetails.map(detail => ({
@@ -449,20 +464,271 @@ module.exports.assignVet = async (req, res) => {
       },
     });
     const formatDateAppointment = formatDate(appointment.Date);
+    
     if(appointment.ServiceID == "DV0003"){
+        const emailTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch thành công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thông báo đặt lịch thành công</h1>
+        <p>Xin chào quý khách,</p>
+        <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+        <div class="details">
+            <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+            <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+            <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+        </div>
+        <p>Vào thời gian hẹn, vui lòng truy cập đường link Google Meet dưới đây để được bác sĩ tư vấn:</p>
+        <a href="${doctorInfo.GoogleMeet}" class="button">Tham gia cuộc hẹn</a>
+        <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+        <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+    </div>
+</body>
+</html>
+`;
         NodeMailer.sendMail(
             `${email[0].Email}`,
             "Thông báo đặt lịch thành công",
-            "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
-            "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
         );
     }else if(appointment.ServiceID == "DV0002"){
+        const emailTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đặt lịch thành công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        .details {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thông báo đặt lịch thành công</h1>
+        <p>Xin chào quý khách,</p>
+        <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+        <div class="details">
+            <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+            <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+            <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+        </div>
+        <p>Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!</p>
+        <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+        <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+    </div>
+</body>
+</html>
+`;
+        console.log("gửi mail");
+        console.log(email[0].Email);
+        console.log(emailTemplate);
       NodeMailer.sendMail(
         `${email[0].Email}`,
       "Thông báo đặt lịch thành công",
-      "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
-       "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!" 
+    //   "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+    //    "Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!" 
+    emailTemplate
       );
+    }else if(appointment.ServiceID == "DV0001" && appointment.Address != null){
+        const emailTemplate = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Đặt lịch thành công</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                h1 {
+                    color: #4CAF50;
+                }
+                .details {
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #4CAF50;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Thông báo đặt lịch thành công</h1>
+                <p>Xin chào quý khách,</p>
+                <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+                <div class="details">
+                    <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+                    <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+                    <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+                </div>
+                <p>Vào thời gian hẹn, bác sĩ sẽ đến địa chỉ của bạn để làm việc. Bạn hãy lưu ý nhé!</p>
+                <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+                <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+            </div>
+        </body>
+        </html>
+        `;
+        NodeMailer.sendMail(
+            `${email[0].Email}`,
+            "Thông báo đặt lịch thành công",
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+        );
+    }else if(appointment.ServiceID == "DV0001" && appointment.Address == null){
+        const emailTemplate = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Đặt lịch thành công</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                .container {
+                    max-width: 600px;
+                    margin: 0 auto;
+                    padding: 20px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                h1 {
+                    color: #4CAF50;
+                }
+                .details {
+                    background-color: #f9f9f9;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+                .button {
+                    display: inline-block;
+                    padding: 10px 20px;
+                    background-color: #4CAF50;
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <h1>Thông báo đặt lịch thành công</h1>
+                <p>Xin chào quý khách,</p>
+                <p>Chúng tôi xin thông báo rằng bạn đã đặt lịch thành công với thông tin như sau:</p>
+                <div class="details">
+                    <p><strong>Bác sĩ:</strong> ${doctorInfo.FullName}</p>
+                    <p><strong>Ngày hẹn:</strong> ${formatDateAppointment}</p>
+                    <p><strong>Thời gian:</strong> ${appointment.Shift}</p>
+                </div>
+                <p>Vào thời gian hẹn, Bạn hãy đến trung tâm để bác sĩ khám cá nhé!</p>
+                <p>Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi.</p>
+                <p>Trân trọng,<br>Đội ngũ chăm sóc khách hàng</p>
+            </div>
+        </body>
+        </html>
+        `;
+        NodeMailer.sendMail(
+            `${email[0].Email}`,
+            "Thông báo đặt lịch thành công",
+            emailTemplate
+            // "Bạn đã đặt lịch thành công với bác sĩ " + doctorInfo.FullName + " vào ngày " + formatDateAppointment + " vào lúc " + appointment.Shift + ". " +
+            // "Vào thời gian hẹn khách hàng hãy vào đường link Google Meet này để được bác sĩ tư vấn nhé: " + doctorInfo.GoogleMeet
+        );
     }
     
     req.flash("success", "Đã gán bác sĩ và cập nhật lịch thành công!");
@@ -519,9 +785,21 @@ module.exports.paymentCenter =  async (req, res) => {
     //         AppointmentID: appointmentID
     //     }
     // })
-    let totalServiceFee = 1500000;
+    const appointment = await Appointment.findOne({
+      raw: true,
+      where: {
+        AppointmentID: appointmentID
+      }
+    })
+    const service = await Service.findOne({
+      raw: true,
+      where: {
+        ServiceID: appointment.ServiceID
+      }
+    })
+    let totalServiceFee = service.Price;
     let serviceDetails =[
-      {description: "Dịch vụ khám sức khỏe", amount: 1500000}
+      {description: "Dịch vụ khám sức khỏe", amount: service.Price}
     ]
    
 
@@ -534,8 +812,8 @@ module.exports.paymentCenter =  async (req, res) => {
     })
     fishCount.forEach((fish,index) => {
         if(index > 0){
-            totalServiceFee += 200000
-            serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: 200000});
+            totalServiceFee += service.AddMore
+            serviceDetails.push({description: `Phí khám thêm cá ${index + 1}`,amount: service.AddMore});
         }
     })
     const serviceDetailsFormat = serviceDetails.map(service => ({

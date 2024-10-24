@@ -6,44 +6,59 @@ block main
     +alert-error("5000")
 
     .container-fluid 
-        .row(style="height: 100vh;")
+        .row(style="height: 100vh; font-size: 1.25rem")
             .col-7.left-column(style="padding: 0 ;")
                 img.login-img(src="/images/Login.png" alt="Login image")
             .col-5.right-column(style="padding: 0 0 0 50px;")
                 .right-container(style="margin-top:30px;") 
-                    .card.shadow-sm(style="border-radius: 40px; margin-right: 100px;")
-                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 30px; border-top-right-radius: 30px; height: 120px")
+                    .card.shadow-sm(style="border-radius: 10px; margin-right: 100px;")
+                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 10px; border-top-right-radius: 10px; height: 100px")
                             h2.card-title.text-center.mb-4(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng ký
-                        .card-body(style="padding: 2rem;")  
+                        .card-body(style="padding: 1.25rem 1.25rem 0 1.25rem;")  
                              form(action="/auth/register" method="post")
-                                .form-group
+                                .form-group.mb-2
                                     label(for="Email") Email
-                                    input#email.form-control.register-element(type="Email" name="Email" required autocomplete="new-email")
-                                .form-group
+                                    .input-wrapper
+                                        i.fas.fa-envelope.input-icon
+                                        input#email.form-control.register-element(type="Email" name="Email" required autocomplete="new-email")
+                                .form-group.mb-2
                                     label(for="FullName") Họ & Tên
-                                    input#name.form-control.register-element(type="text" name="FullName" required autocomplete="new-name")
-                                .form-group
+                                    .input-wrapper
+                                        i.fas.fa-user.input-icon
+                                        input#name.form-control.register-element(type="text" name="FullName" required autocomplete="new-name")
+                                .form-group.mb-2
                                     label(for="PhoneNumber") Số Điện Thoại
-                                    input#phone.form-control.register-element(type="tel" name="PhoneNumber" required autocomplete="new-phone")
-                                .form-group
+                                    .input-wrapper
+                                        i.fas.fa-phone.input-icon
+                                        input#phone.form-control.register-element(type="tel" name="PhoneNumber" required autocomplete="new-phone")
+                                .form-group.mb-2
                                     label(for="Address") Địa Chỉ
-                                    input#address.form-control.register-element(type="text" name="Address" required autocomplete="new-address")
-                                .form-group
+                                    .input-wrapper
+                                        i.fas.fa-home.input-icon
+                                        input#address.form-control.register-element(type="text" name="Address" required autocomplete="new-address")
+                                .form-group.mb-2
                                     label(for="Gender") Giới Tính
-                                    select#gender.form-control.register-element(name="Gender" required autocomplete="new-gender")
-                                        option(value="Nam") Nam
-                                        option(value="Nữ") Nữ
-                                .form-group
+                                    .input-wrapper
+                                        select#gender.form-control.register-element.m-0(name="Gender" required autocomplete="new-gender")
+                                            option(value="Nam") Nam
+                                            option(value="Nữ") Nữ
+                                .form-group.mb-2
                                     label(for="Birthday") Ngày Sinh
-                                    input#dob.form-control.register-element(type="date" name="Birthday" required autocomplete="new-dob")
-                                .form-group
+                                    .input-wrapper
+                                        input#dob.form-control.register-element(type="date" name="Birthday" required autocomplete="new-dob")
+                                .form-group.mb-2
                                     label(for="Password") Mật khẩu
-                                    input#password.form-control.register-element(type="password" name="Password" required autocomplete="new-password")
-                                .form-group
+                                    .input-wrapper
+                                        i.fas.fa-lock.input-icon
+                                        input#password.form-control.register-element(type="password" name="Password" required autocomplete="new-password")
+                                .form-group.mb-2
                                     label(for="confirm_password") Xác nhận Mật khẩu
-                                    input#confirm_password.form-control.register-element(type="password" name="confirm_password" autocomplete="new-password"  required)
+                                    .input-wrapper
+                                        i.fas.fa-lock.input-icon
+                                        input#confirm_password.form-control.register-element(type="password" name="confirm_password" autocomplete="new-password" required)
                                 .form-group.text-center
                                 .submit-register
-                                    //- button( type="submit" class = "btn register-button") Tiếp tục  
-                                    button.btn.register-button(type="submit" class="btn-primary" style="margin-top: 40px;") Đăng ký
-
+                                    button.btn.register-button(type="submit" class="btn-primary" style="margin-top: 10px;") Đăng ký
+                                .login-link.pt-3(style="display: flex; justify-content: center; ")
+                                    p Bạn đã có tài khoản?
+                                    a.register.ml-3(href="/auth/login") Đăng nhập

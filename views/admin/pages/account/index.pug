@@ -102,7 +102,7 @@ block main
                       i(class="fas fa-ban" style="font-size: 22px;") 
                       
                 td(row-action)
-                  a(class="btn btn-primary btn-sm ml-1 custom-info-button" href="javascript:;" onclick=`showInfoModal('${item.AccountID}')`)
+                  a(class="btn btn-primary btn-sm ml-1 custom-info-button" href="javascript:;" id="btn-show-modal" AccountID=`${item.AccountID}`)
                     i(class="fa-solid fa-receipt") 
                   a(class="btn btn-warning btn-sm ml-1 custom-edit-button" href=`${prefixAdmin}/account/edit/${item.AccountID}`)
                     i(class="fa-solid fa-pen-to-square") 
@@ -151,5 +151,7 @@ block main
         .col-7.div-information
           .information
   script(src="/admin/js/pagination.general.js") 
+  script. 
+    const listUser = !{JSON.stringify(listUser)}
 
 
