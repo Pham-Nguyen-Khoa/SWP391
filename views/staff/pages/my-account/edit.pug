@@ -18,23 +18,18 @@ block main
                                 .form-group
                                     label(for="FullName") Họ và Tên *
                                     input.form-control.custom-input(type="text", id="FullName", name="FullName", required, value=user.FullName)
-                            .col-md-6
                                 .form-group
                                     label(for="Email") Email *
-                                    input.form-control.custom-input(type="text", id="Email", name="Email", value=user.Email, required)
                             .col-md-6
                                 .form-group
                                     label(for="Address") Địa chỉ
                                     input.form-control.custom-input(type="text", id="Address", name="Address", required, value=user.Address)
-                            .col-md-6
                                 .form-group
                                     label(for="Password") Password *
                                     input.form-control.custom-input(type="password", id="Password", name="Password", placeholder="Nhập vào thay đổi mật khẩu mới")
-                            .col-md-6
                                 .form-group
                                     label(for="PhoneNumber") Số điện thoại
                                     input.form-control.custom-input(type="number", id="PhoneNumber", name="PhoneNumber", value=user.PhoneNumber, required)
-                            .col-md-6
                                 .form-group
                                     label(for="Birthday") Ngày sinh
                                     input.form-control.custom-input(type="date", id="Birthday", name="Birthday", value=user.Birthday)
