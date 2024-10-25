@@ -3,12 +3,13 @@ include ../../mixins/chatAi.pug
 block main
     head
         link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
-        link(href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", rel="stylesheet")
-    .block-footer(style="height: 200vh")
-        .header-bar.mb-5(style="background-color: #353636; padding: 18px; text-align: center; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;")
-            h3(style="color: white; font-weight: bold; font-style: italic; font-size: 32px; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); letter-spacing: 1px;") Các dịch vụ tại #{SettingGeneral.WebsiteName}
-        .container-fluid
-            
+    .block-footer(style="height: 230vh; background-image: url('/images/background.png');")
+        img(src="/images/banner-service.jpg", alt="Contact 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Các dịch vụ tại #{SettingGeneral.WebsiteName}
+        .btn-home(style="position: absolute; bottom: 450px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Các dịch vụ tại Koi Healthy
+        .container-fluid          
             .row(style="padding: 40px;")    
                 .col-md-6
                     .card.contact-card
