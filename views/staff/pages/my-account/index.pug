@@ -55,6 +55,18 @@ block main
                             hr
                             .row
                                 .col-sm-3
+                                    h6.mb-0 Link Google Meet
+                                .col-sm-9.text-secondary
+                                    | #{user.GoogleMeet || 'Chưa cập nhật'}
+                            hr
+                            .row
+                                .col-sm-3
+                                    h6.mb-0 Thành tựu
+                                .col-sm-9.text-secondary
+                                    | #{user.Description || 'Chưa cập nhật'}
+                            hr
+                            .row
+                                .col-sm-3
                                     h6.mb-0 Ngày sinh
                                 .col-sm-9.text-secondary
                                     | #{user.Birthday || 'Chưa cập nhật'}
