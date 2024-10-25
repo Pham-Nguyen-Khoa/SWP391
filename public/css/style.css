@@ -1964,18 +1964,6 @@ header {
     min-height: 5rem;
 }
 
-.card-news a {
-    color: #065cb8; /* Màu chữ cho liên kết */
-    text-decoration: none; /* Bỏ gạch chân */   
-    font-size: 2rem;
-}
-
-.card-news a:hover {
-    text-decoration: underline; /* Gạch chân khi hover */
-    color: #e82a2ad1;
-    transition: 1s;
-}
-
 .card-news{
     padding: 40px;
 }
