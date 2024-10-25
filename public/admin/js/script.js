@@ -463,11 +463,60 @@ if (formEmailConfig) {
 
 
 
+const listStopBtn = document.querySelectorAll('.stop-btn');
+if(listStopBtn){
+  const modalConfirmStop = document.querySelector("#modalDistance");
+  const closeModal = document.querySelector("#closeModal");
+  const confirmModal = document.querySelector("#confirmStop");
+  const formStop = document.querySelector("#formStop");
+  listStopBtn.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const serviceID = btn.getAttribute("serviceID");
+      console.log(serviceID)  
+        modalConfirmStop.style.display = "block"; 
+        closeModal.addEventListener("click", () => {
+          modalConfirmStop.style.display = "none";
+        })
+        confirmModal.addEventListener("click", () => {
+          formStop.action += serviceID;
+          console.log(formStop.action)
+          formStop.submit();
+          
+        })
+    });
+  });
+}
 
 
+const listStartBtn = document.querySelectorAll(".start-btn");
+if(listStartBtn){
+  const formStart = document.querySelector("#formStart");
+  const modalConfirmStart = document.querySelector("#modalDistance");
+  const pElement = modalConfirmStart.querySelector("p");
+  const iElemet = modalConfirmStart.querySelector("i");
+  const closeModal = document.querySelector("#closeModal");
+  const confirmModal = document.querySelector("#confirmStop");
+  const modalIcon = document.querySelector(".modal-icon");
+  listStartBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      pElement.textContent = "Bạn có chắn chắn muốn mở dịch vụ này không?";
+      iElemet.classList.remove("fa-exclamation-triangle");
+      iElemet.classList.add("fa-check-circle");
+      modalIcon.style.color = "#07b857"
+      e.preventDefault();
+      const serviceID = btn.getAttribute("serviceID");
+      modalConfirmStart.style.display = "block"; 
+      closeModal.addEventListener("click", () => {
+        modalConfirmStart.style.display = "none";
+      })
+      confirmModal.addEventListener("click", () => {
+        formStart.action += serviceID;
+        formStart.submit();
+      })
+    })
+  })
+}
 
-  // const listBillsfdfd = JSON.stringify(listBills);
-  // const listBillsJS = JSON.parse(listBillsfdfd);
-  // console.log(listBillsJS);
   
 
