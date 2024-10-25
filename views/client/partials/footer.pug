@@ -1,28 +1,28 @@
 footer.footer.sticky-bottom 
     .footer-container(style="margin: 0 30px;")
         .row
-            .map.mr-5.ml-5
-                #mapEmbed
-                    != SettingGeneral.MapEmbed  
             .footer-content(style="display: flex; justify-content: center; align-items: center;")
+                .map.mr-5.ml-5
+                    #mapEmbed
+                        != SettingGeneral.MapEmbed  
                 .service-footer(style="max-width: 300px;").mr-5
                     h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;") Dịch vụ
                     ul.services-list(style="font-size: 18px;")
                         li.services-item 
-                            a(class = "services-item-link" href = '') ◉ Tư vấn và cải thiện hồ 
+                            a(class = "services-item-link" href = '/koi/envConsult') ◉ Tư vấn và cải thiện hồ 
                         li.services-item 
-                            a(class = "services-item-link" href = '') ◉ Khám bệnh 
+                            a(class = "services-item-link" href = '/koi/checkUp') ◉ Khám bệnh 
                         li.services-item 
-                            a(class = "services-item-link" href = '') ◉ Tư vấn online
+                            a(class = "services-item-link" href = '/koi/onlConsult') ◉ Tư vấn online
                 .about-footer(style="max-width: 300px;").mr-5
                     h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Thông tin
                     ul.about-us-list(style="font-size: 18px;")
                         li.about-us-item 
-                            a(class = "about-us-item-link" href =  '') ◉ Về chúng tôi
+                            a(class = "about-us-item-link" href = '/koi/aboutUs') ◉ Về chúng tôi
                         li.about-us-item 
-                            a(class = "about-us-item-link" href =  '') ◉ Cộng đồng
+                            a(class = "about-us-item-link" href = '/koi/community') ◉ Cộng đồng
                         li.about-us-item 
-                            a(class = "about-us-item-link" href =  '') ◉ Chính sách 
+                            a(class = "about-us-item-link" href = '/koi/news') ◉ Tin tức 
 
                 .contact-footer(style="max-width: 300px;").mr-5
                     h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Liên hệ

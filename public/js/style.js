@@ -1139,23 +1139,28 @@ if(backToTopBtn) {
   })
 }
 
-// const backToTopBtn = document.getElementById('backToTop');
-// if(backToTopBtn) {
-//   const rollToTop = () => {
-//     if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-//       backToTopBtn.style.display = "block";
-//     } else {
-//       backToTopBtn.style.display = "none";
-//     }
-//   }
-  
-//   // Gán hàm cho sự kiện scroll
-//   window.onscroll = rollToTop;
-  
-//   // Xử lý khi nhấn vào nút back-to-top
-//   backToTopBtn.addEventListener("click", () => {
-//     window.scrollTo({top: 0, behavior: "smooth"});
-//   });
+
+// const editAvatar = document.querySelector(".edit-avatar")
+// if(editAvatar) {
+//   editAvatar.addEventListener("click",() => {
+    
+//   })
 // }
+
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          document.querySelector('.avatar').src = e.target.result;
+          const saveAvatar = document.querySelector('.save-avatar');
+          saveAvatar.classList.remove('d-none');
+
+      }
+      reader.readAsDataURL(file);
+  }
+}
+
+
 
 

@@ -1,17 +1,16 @@
 extends ../../layouts/default.pug
 include ../../mixins/chatAi.pug
 
-block main
-    .header-bar.mb-5(style="background-color: #353636; padding: 18px; text-align: center; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;")
-            h3(style="color: white; font-weight: bold; font-style: italic; font-size: 32px; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); letter-spacing: 1px;") Đặt Lịch Hẹn
+block main      
     //- pre 
     //-     | #{JSON.stringify(listDoctor)}
     div.background_appointment
-        div(class="box_appointment")
+        .box_appointment
+            h3.pb-3(style="color: #272D3C; font-weight: bold; font-size: 2.25rem; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); letter-spacing: 1px;") Đặt Lịch Hẹn
             form(action="/koi/appointment" method="post").form_appointment
                 // Left Section
                 div.left-section(style="width: 500px")
-                     
+                    
                     label(for="name") Họ và Tên
                     input#name(type="text" name="FullName" placeholder="Nhập họ và tên" value=userInfo.FullName)
                     label(for="phone") Số Điện Thoại
@@ -51,8 +50,8 @@ block main
                 .right-section
                     .doctor-info
                     .priceService#priceService(style="visibility: hidden; height: 120px; background-color: rgb(94 179 211 / 44%); border-radius: 20px; padding: 15px 30px 30px; text-align: center; width: 400px; margin: 60px 0px 100px 138px; border: 2px solid #413d3dbf; box-shadow: 0px 0px 17px 2px #00000080;")
-            .button-appointment.mt-5(style="display: flex; justify-content: center;")
-                button.confirm-btn.payment-btn(type="submit" style="background: linear-gradient(135deg, #5488bf, #5b96d5); box-shadow: 0px 0px 0 0") 
+            .button-appointment.mt-4(style="display: flex; justify-content: center;")
+                button.confirm-btn.payment-btn(type="submit" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf); box-shadow: 0px 0px 0 0") 
                     span Đặt lịch hẹn
             .confirm-appointment 
                 h2.text-center.mb-4 Xác Nhận Đặt Lịch 
@@ -97,7 +96,7 @@ block main
                     button.modal-distance-button(type="button" id="closeModalDistance") Đóng
         
 
-        button#openModalDistance(type="button") Mở Modal
+
         +chatAi()
                     
                             

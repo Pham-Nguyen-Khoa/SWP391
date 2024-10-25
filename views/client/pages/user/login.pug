@@ -6,22 +6,26 @@ block main
     +alert-error("5000")
 
     .container-fluid 
-        .row(style="height: 100%;")
+        .row(style="height: 100%; font-size: 1.25rem")
             .col-7.left-column.p-0 
                 img.login-img(src="/images/Login.png" alt="Login image")
-            .col-5.right-column(style="padding-top: 150px;")
-                .right-container.mt-7 
+            .col-5.right-column
+                .right-container.mt-7(style="position: relative; top: 25%") 
                     .card.shadow-sm(style="border-radius: 40px; margin-right: 100px;")
-                        .card-header(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 20px; border-top-right-radius: 20px;")
+                        .card-header.p-2(style="background: linear-gradient(to right, #2e87b2, #86d1e7e3); border-top-left-radius: 20px; border-top-right-radius: 20px;")
                             h2.card-title.text-center.mb-3(style="background: linear-gradient(#121313, #5c5f60e3); color: transparent; -webkit-background-clip: text; font-size: 40px;") Đăng nhập
                         .card-body
                             form(action="/auth/login" class="login-form" method="post")
                                 .form-group
                                     label(for="Email") Email
-                                    input#email.form-control.login-element(type="email" name="Email" required)
+                                    .input-wrapper
+                                        i.fas.fa-envelope.input-icon
+                                        input#email.form-control.login-element(type="email" name="Email" required)
                                 .form-group
                                     label(for="Password") Password
-                                    input#password.form-control.login-element(type="password" name="Password" required)
+                                    .input-wrapper
+                                        i.fas.fa-lock.input-icon
+                                        input#password.form-control.login-element(type="password" name="Password" required)
                                 .form-group.utilities
                                     .remember-utilities
                                         input(type="checkbox" name="RememberMe") 
@@ -30,3 +34,6 @@ block main
                                         a.text-decoration-none(href="/auth/password/forgot") Quên mật khẩu? 
                                 .submit-login(style="display: flex; justify-content: center;")
                                         button.btn.login-button(type="javascript:") Đăng nhập
+                                .register-link.pt-3(style="display: flex; justify-content: center; ")
+                                    p Bạn chưa có tài khoản?
+                                    a.register.ml-3(href="/auth/register") Đăng ký
