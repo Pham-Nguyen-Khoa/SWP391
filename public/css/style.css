@@ -1853,7 +1853,6 @@ header {
 }
 
  /* Css about us */
-
  @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -1872,6 +1871,7 @@ header {
     animation: bounce 0.5s ease infinite;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+ 
  .scroll-container::-webkit-scrollbar {
     display: none;
 }
