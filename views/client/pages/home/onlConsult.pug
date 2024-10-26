@@ -1,0 +1,13 @@
+extends ../../layouts/default.pug
+include ../../mixins/back-to-top.pug
+
+block main
+    head
+        link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+        .block-footer(style="height: 100%; background-color: #f0f8ff;")
+            .menu-banner-checkup
+                .menu-service
+                    h2.checkup-service Dịch Vụ
+                    a.service-menu(href="/koi/envConsult") Tư vấn cải thiện hồ cá 
+                    a.service-menu(href="/koi/checkUp") Khám bệnh
+                    a.service-menu(href="/koi/onlConsult") Tư vấn online
