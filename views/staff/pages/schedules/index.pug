@@ -31,16 +31,16 @@ block main
                                 td.text-center
                                     .doctor-container.row
                                         each schedule in schedules
-                                                each shift in schedule.shifts
-                                                    if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
-                                                        .doctor-info.col
-                                                            if shift.AppointmentID == null
-                                                                img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
-                                                            else 
-                                                                img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover ; border: 3px solid red;box-shadow: 1px 1px 4px 9px #e26868;    margin-bottom: 10px; " class="img-thumbnail doctor-avatar img-sm")
-                                                            .doctor-details
-                                                                p.mb-0 #{schedule.account.FullName}
-                                                                p.text-muted.mb-0 #{schedule.account.Specialization}
+                                            each shift in schedule.shifts
+                                                if shift.Shift === slot && new Date(schedule.Time).toDateString() === new Date(day.date).toDateString()
+                                                    .doctor-info.col
+                                                        if shift.AppointmentID == null
+                                                            img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover" class="img-thumbnail doctor-avatar img-sm")
+                                                        else 
+                                                            img(src=`${schedule.account.Avatar}` alt=`${schedule.account.FullName}` style="width: 80px; height: 80px; object-fit: cover ; border: 3px solid red;box-shadow: 1px 1px 4px 9px #e26868;    margin-bottom: 10px; " class="img-thumbnail doctor-avatar img-sm")
+                                                        .doctor-details
+                                                            p.mb-0 #{schedule.account.FullName}
+                                                            p.text-muted.mb-0 #{schedule.account.Specialization}
         .mt-4
             form(action='/staff/schedules/add' method='POST' class='form-horizontal')
                 .form-group.row

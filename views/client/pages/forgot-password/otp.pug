@@ -45,3 +45,8 @@ block main
                                             type="submit"
                                             class="form-control btn btn-primary btn-block"
                                         ) Xác nhận OTP
+                        if resetOtp
+                            form(action="/auth/password/forgot" method="post")
+                                input(type="hidden" name="email" value=email)
+                                button.payment-btn.btn.btn-primary.btn-lg(type="submit" style="border-radius: 5px; background-color: #007bff; border: none; padding: 0.5rem; width: 150px; margin: 20px 35%; display: block;") Gửi lại OTP
+                        
