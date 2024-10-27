@@ -44,7 +44,13 @@ require('dotenv').config();
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 //Flash
 app.use(cookieParser('keyboard cat'));
-app.use(session({ cookie: { maxAge: 60000 }}));
+// app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(session({
+  secret: 'your-secret-key', // Thay 'your-secret-key' bằng một chuỗi bí mật của bạn
+  resave: false, // Không lưu lại phiên phiên làm việc nếu không có sự thay đổi
+  saveUninitialized: false, // Không lưu phiên chưa khởi tạo
+  cookie: { maxAge: 60000 } // Thời gian sống của cookie
+}));
 app.use(flash()); 
 
 app.set('views', `${__dirname}/views`)
