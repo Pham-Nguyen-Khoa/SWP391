@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database"); // Database
+const generate = require("../helpers/generate");
 // const { UPDATE } = require("sequelize/lib/query-types");
 const Account1 = sequelize.define('Account1', {
     AccountID: {
@@ -16,8 +17,8 @@ const Account1 = sequelize.define('Account1', {
         allowNull: false
     },
     Token: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.STRING(36),
+      defaultValue: generate.generateRandomString(20),
       allowNull: false,
     },
     RoleID: {
