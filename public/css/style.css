@@ -2970,8 +2970,6 @@ header {
 
 
 
-
-
 /* user-menu */
 .user-menu-container {
     position: relative;
@@ -3008,6 +3006,5 @@ header {
 .user-menu a:hover {
     background-color: #f5f5f5;
 }
-
 
 
