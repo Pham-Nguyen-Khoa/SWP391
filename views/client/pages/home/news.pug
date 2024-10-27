@@ -3,29 +3,77 @@ extends ../../layouts/default.pug
 block main
     head
         link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
-        link(href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", rel="stylesheet")
-    .block-footer(style="height: 140vh")
-        img(src="/images/koinews.png", alt="Contact 1" style="height: 600px; object-fit: cover; width: 100%; border-bottom-left-radius: 200px;border-bottom-right-radius: 200px")
-        h1.news-title Tin Tức Nổi Bật
-
+    .block-footer(style="height: 250vh; background-color: #f0f8ff")
+        img(src="/images/koinews.png", alt="news 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Tin Tức Nổi Bật
+        .btn-home(style="position: absolute; bottom: 450px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Tin Tức
         .news-container
             .row.card-news-box
-                .col-md-4.card-news 
-                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
-                    p April 12, 2024
-                    h3 Information About Patients' Rights And Responsibilities
-                    p Section 1. PATIENTS' RIGHTS Right to be medical examination and treatment...
-                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
-                .col-md-4.card-news 
-                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
-                    p August 16, 2022
-                    h3 Pre-Pregnant Examination Package
-                    p Pregnant is the most important occasion in a Koi's life...
-                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
-                .col-md-4.card-news 
-                    img(src="/images/news1.png", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
-                    p August 16, 2022
-                    h3 General Health Check-Up Packages At Koi...
-                    p General health checkup packages from basic to advanced...
-                    a(href="#") <i class="fa-solid fa-right-to-bracket"></i>
-                
+                .col-md-4
+                    .card-news 
+                        img(src="/images/community-new5.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p April 12, 2024
+                        h3 Cá Koi mini nhiều màu sắc cho bể thủy sinh phổ biến
+                        p Hướng dẫn phối màu cá koi cho hợp với bể thủy sinh trong nhà 
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+
+                .col-md-4
+                    .card-news 
+                        img(src="/images/community-new1.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p August 16, 2022
+                        h3 Nhận biết dòng cá Koi
+                        p Chi tiết về các loại cá Koi mà bạn cần biết
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+                .col-md-4
+                    .card-news 
+                        img(src="/images/community-new3.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p August 16, 2022
+                        h3 Điều trị bệnh tróc vẩy - xù vẩy ở cá Koi
+                        p Nguyên nhân và cách điều trị bệnh tróc vẩy - xù vẩy ở cá Koi
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+                .col-md-4   
+                    .card-news 
+                        img(src="/images/community-new2.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p April 12, 2024
+                        h3 Kỹ thuật nuôi cá Koi nhanh lớn, màu siêu đẹp.
+                        p Hướng dẫn nuôi cá Koi đến từ các chuyên gia
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+                .col-md-4   
+                    .card-news 
+                        img(src="/images/community-new4.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p August 16, 2022
+                        h3 26 loại cá Koi đẹp và đắt nhất thế giới
+                        p Chiêm ngưỡng của những loại cá Koi đẹp và đắt nhất trên thế giới
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+                .col-md-4
+                    .card-news 
+                        img(src="/images/community-new6.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; border: 3px solid black;")
+                        p August 16, 2022
+                        h3 Cẩn trọng các hồ cá Koi, cá cảnh ngoài trời khi bão về 
+                        p Chăm sóc cá Koi khi mùa bão đến 
+                        a.payment-btn(href="https://koixinh.com/2021/04/15/qua-trinh-phat-trien-cua-ca-koi/#:~:text=Nh%E1%BB%AFng%20l%C6%B0u%20%C3%BD%20%C4%91%E1%BB%83%20c%C3%A1%20Koi%20ph%C3%A1t%20tri%E1%BB%83n,S%E1%BB%AD%20d%E1%BB%A5ng%20c%C3%A1c%20s%E1%BA%A3n%20ph%E1%BA%A9m%20h%E1%BB%97%20tr%E1%BB%A3%20" style="height:40px;" target="_blank") Xem Thêm →
+        .container-fluid(style="padding: 40px;")
+                h2(style="text-align: center; font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 50px;") Hướng dẫn dùng dịch vụ của chúng tôi
+                .row
+                    .col-md-3.card-intro
+                        h3 01
+                        img(src="/images/icon-service2.png", alt="Step 1" style="width: 100%; height: 200px;")
+                        h3 Cung cấp thông tin về cá cho chúng tôi
+                        p Bạn chỉ cần viết mô tả các triệu chứng mà cá koi mắc phải và chúng tôi sẽ xem xét rồi đưa ra cách giải quyết phù hợp nhất
+                    .col-md-3.card-intro
+                        h3 02
+                        img(src="/images/icon-service3.png", alt="Step 2" style="width: 100%; height: 200px;")
+                        h3 Chọn dịch vụ mà bạn muốn sử dụng
+                        p Chọn 1 trong 3 loại dịch vụ mà bạn thấy phù hợp với mô tả triệu chứng của cá 
+                    .col-md-3.card-intro
+                        h3 03
+                        img(src="/images/icon-service3.png", alt="Step 3" style="width: 100%; height: 200px;")
+                        h3 Chọn bác sĩ và khung giờ mà bạn muốn
+                        p Chọn bác sĩ và khung giờ khám bệnh - TẠI NHÀ hoặc TẠI TRUNG TÂM
+                    .col-md-3.card-intro
+                        h3 04
+                        img(src="/images/icon-service4.png", alt="Step 4" style="width: 100%; height: 200px;")
+                        h3 Thanh toán
+                        p Hoàn tất thanh toán bằng VNPAY với dịch vụ tư vấn online, và thanh toán bằng tiền mặt tại trung tâm hoặc tại nhà         

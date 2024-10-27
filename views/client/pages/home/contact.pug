@@ -3,36 +3,59 @@ include ../../mixins/chatAi.pug
 block main
     head
         link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
-        link(href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", rel="stylesheet")
-    .block-footer(style="height: 200vh")
-        .header-bar.mb-5(style="background-color: #353636; padding: 18px; text-align: center; border-bottom-left-radius: 80px; border-bottom-right-radius: 80px;")
-            h3(style="color: white; font-weight: bold; font-style: italic; font-size: 32px; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.7); letter-spacing: 1px;") Các dịch vụ tại #{SettingGeneral.WebsiteName}
+    .block-footer(style="height: 210vh; background-image: url('/images/background.png');")
+        img(src="/images/banner-service.jpg", alt="Contact 1" style="height: 550px; object-fit: cover; width: 100%; filter: grayscale(0.7);")
+        h1(style="position: absolute; top: 47%; left: 5%; transform: translateY(-80%); text-align: left; font-weight: Bold; font-size: 3.5rem;  color: white; font-family: 'Oswald', sans-serif;") Các dịch vụ tại #{SettingGeneral.WebsiteName}
+        .btn-home(style="position: absolute; bottom: 450px; left: 6%; transform: translateY(50%); display: flex; justify-content: center;")
+            a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
+            p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Các dịch vụ tại Koi Healthy
         .container-fluid
-            
             .row(style="padding: 40px;")    
-                .col-md-6
+                .col-md-4
                     .card.contact-card
                         .card-body-contact
-                            img(src=SettingGeneral.ImageServiceOnline, alt="Contact 1" style="height: 400px; object-fit: cover; width: 81%; border-radius: 20px; border: 3px solid black;")
-                            h3.text-center.card-contact-title Tư vấn về sức khỏe của cá Koi
-                            p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn cho các khách hàng đang tìm kiếm hướng dẫn và hỗ trợ trong các trường hợp liên quan đến cá Koi. Chung tôi sẵn sàng giúp đỡ thông qua các buổi hướng dẫn trực tuyến về kỹ thuật chuẩn đoán đén từ các bác sĩ của trung tâm. Xin lưu ý, chúng tôi không thể đưa ra kế hoạch xử lý cụ thể trừ khi bạn đã có buổi kiểm tra trực tiếp với đội ngũ chuyên gia của chúng tôi trong vòng một năm qua.
-                            h5.text-center.card-contact-price Giá : 500.000 VNĐ
-                            button(class="btn-contact-price" onclick="window.location.href='/koi/appointment'" style="margin-top: 6px;") Đặt lịch hẹn
-                .col-md-6
+                            img(src="/images/contact1.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; min-height:5rem;")
+                            h3.card-contact-title Tư vấn về sức khỏe của cá Koi
+                            p.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn cho các khách hàng đang tìm kiếm hướng dẫn và hỗ trợ trong các trường hợp liên quan đến cá Koi.
+                            h5.card-contact-price Giá : 500.000 VNĐ
+                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
+                .col-md-4
                     .card.contact-card
                         .card-body-contact
-                            img(src=SettingGeneral.ImageServicePond, alt="Contact 1" style="height: 400px; object-fit: cover; width: 81%; border-radius: 20px; border: 3px solid black;")
-                            h3.text-center.card-contact-title Cải thiện môi trường hồ cá
-                            p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn trực tiếp về cải thiện môi trường sống cho tất cả các chủ nuôi cá cảnh. Xin lưu ý, chúng tôi không thể đưa ra kế hoạch xử lý cụ thể trừ khi bạn đã có buổi kiểm tra trực tiếp với đội ngũ chuyên gia của chúng tôi trong vòng một năm qua. Trong buổi tư vấn này, chúng tôi sẽ hướng dẫn quý khách cách cải thiện chất lượng nước, nhiệt độ, ánh sáng, và hệ sinh thái trong hồ cá của bạn.
-                            h5.text-center.card-contact-price Giá :  1.000.000 VNĐ phí dịch vụ +  200.000 VNĐ/Hồ 
-                            button(class="btn-contact-price" onclick="window.location.href='/koi/appointment'" ) Đặt lịch hẹn   
-            //- .col-md-6(style="margin-left: 300px; margin-top: 30px;")
-            .card.contact-card(style="margin: 0 500px;border: 3px solid #6ea6ca;border-radius: 30px;height: 930px;")
-                .card-body-contact
-                    img(src=SettingGeneral.ImageServiceHealthy, alt="Contact 1" style="height: 400px; object-fit: cover; width: 81%; border-radius: 20px;  border: 3px solid black;")
-                    h3.text-center.card-contact-title Khám sức khỏe cho cá Koi
-                    p.text-center.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn. Trong buổi kiểm tra, các bác sĩ sẽ quan sát kỹ lưỡng các dấu hiệu bên ngoài như màu sắc da, vây và hành vi của cá.
-                    h5.text-center.card-contact-price Giá :  1.500.000 VNĐ phí dịch vụ + 200.000 VNĐ/Cá 
-                    button(class="btn-contact-price" onclick="window.location.href='/koi/appointment'") Đặt lịch hẹn
-
+                            img(src="/images/contact2.jpg", alt="Contact 2" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
+                            h3.card-contact-title Cải thiện môi trường hồ cá
+                            p.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn trực tiếp về cải thiện môi trường sống cho tất cả các chủ nuôi cá cảnh.
+                            h5.card-contact-price Giá : 1.000.000 VNĐ phí dịch vụ + 200.000 VNĐ/Hồ 
+                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn  
+                .col-md-4
+                    .card.contact-card
+                        .card-body-contact
+                            img(src="/images/contact3.jpg", alt="Contact 3" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
+                            h3.card-contact-title Khám sức khỏe cho cá Koi
+                            p.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn.
+                            h5.card-contact-price Giá : 1.500.000 VNĐ phí dịch vụ + 200.000 VNĐ/Cá 
+                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
+        .container-fluid(style="padding: 40px;")
+                h2(style="text-align: center; font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 50px;") Hướng dẫn dùng dịch vụ của chúng tôi
+                .row
+                    .col-md-3.card-intro
+                        h3 01
+                        img(src="/images/icon-service2.png", alt="Step 1" style="width: 100%; height: 200px;")
+                        h3 Cung cấp thông tin về cá cho chúng tôi
+                        p Bạn chỉ cần viết mô tả các triệu chứng mà cá koi mắc phải và chúng tôi sẽ xem xét rồi đưa ra cách giải quyết phù hợp nhất
+                    .col-md-3.card-intro
+                        h3 02
+                        img(src="/images/icon-service3.png", alt="Step 2" style="width: 100%; height: 200px;")
+                        h3 Chọn dịch vụ mà bạn muốn sử dụng
+                        p Chọn 1 trong 3 loại dịch vụ mà bạn thấy phù hợp với mô tả triệu chứng của cá 
+                    .col-md-3.card-intro
+                        h3 03
+                        img(src="/images/icon-service3.png", alt="Step 3" style="width: 100%; height: 200px;")
+                        h3 Chọn bác sĩ và khung giờ mà bạn muốn
+                        p Chọn bác sĩ và khung giờ khám bệnh - TẠI NHÀ hoặc TẠI TRUNG TÂM
+                    .col-md-3.card-intro
+                        h3 04
+                        img(src="/images/icon-service4.png", alt="Step 4" style="width: 100%; height: 200px;")
+                        h3 Thanh toán
+                        p Hoàn tất thanh toán bằng VNPAY với dịch vụ tư vấn online, và thanh toán bằng tiền mặt tại trung tâm hoặc tại nhà
     +chatAi()
