@@ -253,8 +253,8 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 }
 .banner{
-    border-bottom-left-radius: 180px;
-    border-bottom-right-radius: 180px;
+    /* border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px; */
     border: 2px solid #000000;
     background-image: url('/images/KoiBanner.jpg');
     background-position: center;
