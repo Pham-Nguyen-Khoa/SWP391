@@ -13,11 +13,11 @@ block main
                     a.service-menu(href="/koi/onlConsult") Tư vấn online              
                 .banner-checkup(style="flex: 1; display: flex; justify-content: center; align-items: center; padding:0px;")
                     img(src="/images/banner-service.jpg", alt="Hình ảnh thú cưng", style="position: relative; width: 90%; height: 500px; border-radius:15px;")
-                    h3 Chào mừng đến với dịch vụ tư vấn online 
+                    h3 Chào mừng đến với dịch vụ khám bệnh  
                         p Trang Chủ / Các dịch vụ  
-                            a(href="#", style="color:#b9daf8; text-decoration:none;") / Tư vấn cải thiện hồ cá
+                            a(href="/koi/checkUp", style="color:#b9daf8; text-decoration:none;") / Khám bệnh
             .body-checkup              
-                h1 Dịch vụ Tư Vấn Online nơi sẽ giúp bạn giải đáp những thắc mắc của bạn khi bạn không thể đến trung tâm để tiến hành điều trị vật lí 
+                p Dịch vụ Khám bệnh là nơi sẽ giúp bạn giải quyết những vấn đề về cá Koi của bạn khi bạn cảm thấy cá có dấu hiệu bất thường
             .service-checkup
                 .col-md-5
                     ol.process-steps(style="list-style-type: none; padding: 0")
@@ -50,6 +50,9 @@ block main
                         li Tránh các sự cố không mong muốn : Quá trình nuôi cá Koi được đội ngũ bác sĩ chuyên gia trợ giúp và bạn sẽ đạt được nhiều kinh nghiệm và kiến thức trong việc nuôi dưỡng những chú cá Koi trong mái nhà của bạn
                 .col-md-7
                     img(src="/images/banner6.png", alt="Hình ảnh thú cưng", style="width: 100%; height: 500px; border-radius:15px;")
+            .call-action.mt-5(style="display: flex; align-items: center; justify-content: center; padding-bottom:30px;")
+
+                button(class="btn btn-appointment" onclick="window.location.href='/koi/appointment'" style="width:15%; height:60px" ) Đặt lịch hẹn
             .container-fluid(style="padding: 40px;")
                     h2(style="text-align: center; font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 50px;") Hướng dẫn dùng dịch vụ của chúng tôi
                     .row

@@ -1,45 +1,78 @@
 extends ../../layouts/default.pug
 
 block main
+    head 
+        link(href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap", rel="stylesheet")
+        .block-footer(style="height: 100%; background-color: #f0f8ff;")
+                .menu-banner-checkup
+                    .menu-service
+                        h2.checkup-service Dịch Vụ
+                        a.service-menu(href="/koi/envConsult") Tư vấn cải thiện hồ cá 
+                        a.service-menu(href="/koi/checkUp") Khám bệnh
+                        a.service-menu(href="/koi/onlConsult") Tư vấn online              
+                    .banner-checkup(style="flex: 1; display: flex; justify-content: center; align-items: center; padding:0px;")
+                        img(src="/images/Koi-community.png", alt="Hình ảnh thú cưng", style="position: relative; width: 90%; height: 500px; border-radius:15px;")
+                        h3 Chào mừng đến với dịch vụ tư vấn cải thiện hồ cá  
+                            p Trang Chủ / Các dịch vụ  
+                                a(href="#", style="color:#b9daf8; text-decoration:none;") / Tư vấn cải thiện hồ cá
+                .body-checkup              
+                    p Dịch vụ cải thiện hồ cá Koi của chúng tôi giúp tối ưu hóa môi trường sống cho cá Koi, mang đến không gian lý tưởng để cá phát triển khỏe mạnh và toàn diện. Chúng tôi tập trung vào việc cải thiện chất lượng nước nhằm tạo ra một hệ sinh thái cân bằng, bền vững cho hồ cá Koi của bạn.          
+                .service-checkup
+                    .col-md-5
+                        ol.process-steps(style="list-style-type: none; padding: 0")
+                            <i class="fa-solid fa-fish-fins fa-5x" style="display:flex; justify-content:center; padding-bottom:20px"></i>
+                            h2 Quy trình tư vấn và cải thiện hồ cá Koi
+                            li - Bước 1: Khảo sát hồ cá Koi và đánh giá hiện trạng nước và cấu trúc hồ.
+                            li - Bước 2: Phân tích các thông số và lập kế hoạch cải thiện.
+                            li - Bước 3: Thực hiện các biện pháp cải thiện môi trường hồ theo kế hoạch đã tư vấn, đảm bảo chất lượng nước và môi trường sinh thái.
+                            li - Bước 4: Kiểm tra lại và theo dõi tình trạng hồ cá Koi sau khi thực hiện cải thiện, cung cấp hướng dẫn duy trì môi trường hồ trong tương lai.
+                    .col-md-7
+                        img(src="/images/community-new4.jpg", alt="Dich vu tu van", style="width: 100%; height: 500px; border-radius:15px;")           
+                .service-checkup(style="padding-top:60px;")
+                    .col-md-7
+                        img(src="/images/doctor.avif", alt="Dich vu tu van", style="width: 100%; height: 500px; border-radius:15px;")
+                    .col-md-5
+                        ol.process-steps(style="list-style-type: none; padding: 0")
+                            <i class="fa-solid fa-handshake fa-5x" style="display:flex; justify-content:center; padding-bottom:20px"></i>
+                            h2 Cam kết của chúng tôi
+                            li Đảm bảo chất lượng môi trường nước đạt tiêu chuẩn tốt nhất cho sự phát triển của cá Koi.
+                            li Tư vấn và thực hiện giải pháp cá nhân hóa theo nhu cầu và đặc điểm riêng của từng hồ cá.
+                            li Hỗ trợ khách hàng trước, trong và sau quá trình cải thiện hồ.
+                            li Bảo hành kết quả cải thiện môi trường hồ trong thời gian dài.
+                            li Với sự phục vụ của những chuyên gia có kinh nghiệm, chúng tôi cam kết đem đến cho bạn những giải pháp tốt nhất và hiệu quả nhất.
+                .service-checkup(style="padding-top:60px;")
+                    .col-md-5
+                        ol.process-steps(style="list-style-type: none; padding: 0")
+                            <i class="fa-solid fa-heart fa-5x" style="display:flex; justify-content:center; padding-bottom:20px"></i>
+                            h2 Lợi ích khi sử dụng dịch vụ
+                            li Chăm sóc chuyên nghiệp: Đội ngũ chuyên gia có kinh nghiệm nhiều năm trong lĩnh vực chăm sóc và nuôi dưỡng cá Koi.
+                            li Bảo vệ sức khỏe cá Koi: Môi trường nước trong lành giúp cá Koi phát triển khỏe mạnh, tránh các bệnh lý thường gặp.
+                            li Giảm chi phí bảo trì: Bằng cách duy trì môi trường ổn định, bạn có thể tiết kiệm chi phí sửa chữa hồ hoặc xử lý các sự cố không mong muốn.
+                    .col-md-7
+                        img(src="/images/Koibanner5.png", alt="Dich vu tu van", style="width: 100%; height: 500px; border-radius:15px;")
+                .call-action.mt-5(style="display: flex; align-items: center; justify-content: center; padding-bottom:30px;")
 
-    .container-fluid 
-        .banner-service-container 
-            img.banner-service-image(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
-            .overlay-service 
-                h1 Tư vấn và cải thiện hồ   
-        .content.mt-5.px-5(style="border-radius: 5px; background-color: #E7E7E7;")
-            .overview.mt-5.mb-5.text-center   
-                h4 Dịch vụ cải thiện hồ cá Koi của chúng tôi giúp tối ưu hóa môi trường sống cho cá Koi, mang đến không gian lý tưởng để cá phát triển khỏe mạnh và toàn diện. Chúng tôi tập trung vào việc cải thiện chất lượng nước nhằm tạo ra một hệ sinh thái cân bằng, bền vững cho hồ cá Koi của bạn.
-            .row.process
-                .col-md-7(style="display: flex; align-items: center; justify-content: center;")
-                    ol.process-steps(style="list-style-type: none; padding: 0")
-                        h2 Quy trình tư vấn và cải thiện hồ cá Koi
-                        li Bước 1: Khảo sát hồ cá Koi và đánh giá hiện trạng nước và cấu trúc hồ.
-                        li Bước 2: Phân tích các thông số và lập kế hoạch cải thiện.
-                        li Bước 3: Thực hiện các biện pháp cải thiện môi trường hồ theo kế hoạch đã tư vấn, đảm bảo chất lượng nước và môi trường sinh thái.
-                        li Bước 4: Kiểm tra lại và theo dõi tình trạng hồ cá Koi sau khi thực hiện cải thiện, cung cấp hướng dẫn duy trì môi trường hồ trong tương lai.
-                .col-md-5
-                    img.process-img(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
-            .row.commit.pt-5
-                .col-md-5
-                    img.process-img(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
-                .col-md-7(style="display: flex; align-items: center; justify-content: center;")
-                    ul.commitments(style="list-style-type: none; padding: 0")
-                        h2 Cam kết của chúng tôi
-                        li Đảm bảo chất lượng môi trường nước đạt tiêu chuẩn tốt nhất cho sự phát triển của cá Koi.
-                        li Tư vấn và thực hiện giải pháp cá nhân hóa theo nhu cầu và đặc điểm riêng của từng hồ cá.
-                        li Hỗ trợ khách hàng trước, trong và sau quá trình cải thiện hồ.
-                        li Bảo hành kết quả cải thiện môi trường hồ trong thời gian dài.
-                    //p Với sự phục vụ của những chuyên gia có kinh nghiệm, chúng tôi cam kết đem đến cho bạn những giải pháp tốt nhất và hiệu quả nhất.
-            .row.benefit.pt-5
-                .col-md-7(style="display: flex; align-items: center; justify-content: center;")
-                    ul.benefits(style="list-style-type: none; padding: 0")
-                        h2 Lợi ích khi sử dụng dịch vụ
-                        li Chăm sóc chuyên nghiệp: Đội ngũ chuyên gia có kinh nghiệm nhiều năm trong lĩnh vực chăm sóc và nuôi dưỡng cá Koi.
-                        li Bảo vệ sức khỏe cá Koi: Môi trường nước trong lành giúp cá Koi phát triển khỏe mạnh, tránh các bệnh lý thường gặp.
-                        li Giảm chi phí bảo trì: Bằng cách duy trì môi trường ổn định, bạn có thể tiết kiệm chi phí sửa chữa hồ hoặc xử lý các sự cố không mong muốn.
-                .col-md-5
-                    img.process-img(style ="width: 100%;" src="/images/dummyBanner.jpg" alt="Anh dich vu ho ca")
-            .call-action.mt-5(style="display: flex; align-items: center; justify-content: center;")
-
-                button(class="btn btn-appointment" onclick="window.location.href='/koi/appointment'" ) Đặt lịch hẹn
+                    button(class="btn btn-appointment" onclick="window.location.href='/koi/appointment'" style="width:15%; height:60px" ) Đặt lịch hẹn
+                .container-fluid(style="padding: 40px;")
+                        h2(style="text-align: center; font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 50px;") Hướng dẫn dùng dịch vụ của chúng tôi
+                        .row
+                            .col-md-3.card-intro
+                                h3 01
+                                img(src="/images/icon-service2.png", alt="Step 1" style="width: 100%; height: 200px;")
+                                h3 Cung cấp thông tin về cá cho chúng tôi
+                                p Bạn chỉ cần viết mô tả các triệu chứng mà cá koi mắc phải và chúng tôi sẽ xem xét rồi đưa ra cách giải quyết phù hợp nhất
+                            .col-md-3.card-intro
+                                h3 02
+                                img(src="/images/icon-service3.png", alt="Step 2" style="width: 100%; height: 200px;")
+                                h3 Chọn dịch vụ mà bạn muốn sử dụng
+                                p Chọn 1 trong 3 loại dịch vụ mà bạn thấy phù hợp với mô tả triệu chứng của cá 
+                            .col-md-3.card-intro
+                                h3 03
+                                img(src="/images/icon-service3.png", alt="Step 3" style="width: 100%; height: 200px;")
+                                h3 Chọn bác sĩ và khung giờ mà bạn muốn
+                                p Chọn bác sĩ và khung giờ khám bệnh - TẠI NHÀ hoặc TẠI TRUNG TÂM
+                            .col-md-3.card-intro
+                                h3 04
+                                img(src="/images/icon-service4.png", alt="Step 4" style="width: 100%; height: 200px;")
+                                h3 Thanh toán
+                                p Hoàn tất thanh toán bằng VNPAY với dịch vụ tư vấn online, và thanh toán bằng tiền mặt tại trung tâm hoặc tại nhà 
