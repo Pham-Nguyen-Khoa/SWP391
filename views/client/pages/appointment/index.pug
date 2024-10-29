@@ -4,7 +4,6 @@ include ../../mixins/chatAi.pug
 block main      
     //- pre 
     //-     | #{JSON.stringify(listDoctor)}
-    div.background_appointment
     div.background_appointment(style="text-align: center; padding: 50px;")
         h1(style="font-size: 3rem; font-weight: bold;") Chào mừng đến với trung tâm chăm sóc cá KOI của chúng tôi!
         p(style="font-size: 1.25rem; margin-bottom: 30px;") Chúng tôi mong muốn được lắng nghe từ bạn. Vui lòng điền vào mẫu dưới đây để bắt đầu.
@@ -22,7 +21,6 @@ block main
                     input#address(type="text" name="address" placeholder="Nhập địa chỉ" style="display: none" required value=userInfo.Address)
                     label(for="service") Chọn dịch vụ
                     div
-                        select#service(name="service" class="service_appointment" requir    ed)
                         select#service(name="service" class="service_appointment" required)
                             option(value selected disabled) Chọn Dịch Vụ
                             each  service in listService
@@ -100,7 +98,7 @@ block main
                     button.modal-distance-button(type="button" id="closeModalDistance") Đóng
         
 
-        button#openModalDistance(type="button") Mở Modal
+        
         +chatAi()
                     
                             
@@ -112,4 +110,4 @@ block main
             var listDoctor = !{JSON.stringify(listDoctor)};
             const settingGeneral = !{JSON.stringify(SettingGeneral)};
 
-
+        
