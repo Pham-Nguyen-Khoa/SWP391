@@ -41,10 +41,17 @@ block main
                      .col-4(style="    margin-top: 20px;")
                            if(appoinmentInfo.Process == "Pending")
                               span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Chờ duyệt
+                              button.payment-btn.ml-5#button-cancel(style="background: linear-gradient(135deg, #c52528e0, #d70c0c); height: 40px;width: 40px; padding-left: 10px;    padding-left: 36px;")
+                                 i.fa.fa-times.mr-2
                            if(appoinmentInfo.Process == "Ready")
                               span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
+                              button.payment-btn.ml-5#button-cancel(style="background: linear-gradient(135deg, #c52528e0, #d70c0c); height: 40px;width: 40px; padding-left: 10px;    padding-left: 36px;")
+                                 i.fa.fa-times.mr-2
                            if(appoinmentInfo.Process == "Accepted")
-                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
+                              span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã tiếp nhận
+                              button.payment-btn.ml-5#button-cancel(style="background: linear-gradient(135deg, #c52528e0, #d70c0c); height: 40px;width: 40px; padding-left: 10px;    padding-left: 36px;")
+                                 i.fa.fa-times.mr-2
+                                 
                            if(appoinmentInfo.Process == "Process")
                               span(style=" background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
@@ -55,8 +62,32 @@ block main
                                  i.fa.fa-star.ml-3#feedbackBtn(style="font-size: 32px; cursor: pointer;") 
                            if(appoinmentInfo.Process == "Cancled")
                               span(style="    background-color: #21A0B3; color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bị Hủy
-                  
-                        
+                  #modalDistance.modal-distance(style="display: none;")
+                     .modal-distance-content
+                        .modal-icon
+                           i.fas.fa-exclamation-triangle
+                           h2 Xác thực
+                           p Bạn có chắn chắn  muốn xóa lịch hẹn này không?
+                     
+                        .modal-footer-confirm
+                           button.btn.btn-secondary.payment-btn.mr-4#closeModal(type='button' data-dismiss='modal' style="background: linear-gradient(135deg, #66616b, #53575b);") 
+                              i.fa.fa-times
+                              span Hủy
+                           button#submitModal.btn.btn-danger.payment-btn(type='submit') 
+                              i.fa.fa-check
+                              span Xác nhận  
+                  #notificationModal.modal-distance(style="display: none;")
+                     .modal-distance-content
+                        .modal-icon
+                           i.fas.fa-exclamation-circle
+                           h2 Thông báo
+                           p Bạn chỉ có thể hủy lịch hẹn trước 2 ngày!
+                     
+                        .modal-footer-confirm
+                           button.btn.btn-secondary.payment-btn#closeNotificationModal(type='button' style="background: linear-gradient(135deg, #66616b, #53575b);") 
+                              i.fa.fa-times
+                              span Đóng                  
+                  form#form-cancel(action=`/koi/my-appointment/cancel/${appoinmentInfo.AppointmentID}`  hidden method="post")
                   table.table.table-striped.mt-5.table-my-appointment
                      thead 
                         if(appoinmentInfo.Process == "Successed")
@@ -85,12 +116,30 @@ block main
                   .information-doctor
                      .row 
                         .col-6 
-                           h2 Bác sĩ thực hiện 
-                           b ◉ #{appoinmentInfo.VetFullName}
-                           br
-                           b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
-                           br
-                           img(src=appoinmentInfo.VetAvatar, alt="")
+                           if(appoinmentInfo.VetFullName)
+                              h2 Bác sĩ thực hiện 
+                              b ◉ #{appoinmentInfo.VetFullName}
+                              br
+                              b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
+                              br
+                              img(src=appoinmentInfo.VetAvatar, alt="")
+                           else 
+                              h2 
+                              b 
+                              br
+                              b 
+                              br
+                              br 
+                              br
+                              br
+                              br
+                              br
+                              br
+                              br 
+                              br
+                              br
+                              br
+                              
                         .col-6 
                            if(appoinmentInfo.Name == "Tư Vấn Online")
                               p(style="margin: 0; font-size: 23px;font-weight: 700;") ◉ Link Google Meet: 
@@ -143,5 +192,45 @@ block main
 
             script.
                  const feedBack = !{JSON.stringify(feedBack)};
+                 const appoinmentInfo = !{JSON.stringify(appoinmentInfo)};
+                 const formCancel = document.querySelector("#form-cancel");
+                 const buttonCancel = document.querySelector("#button-cancel");
+                 const modalDistance = document.querySelector("#modalDistance");
+                 const notificationModal = document.querySelector("#notificationModal");
+                 const closeNotificationModal = document.querySelector("#closeNotificationModal");
+                 buttonCancel.addEventListener("click",()=>{
+                   const dateParts = appoinmentInfo.Date.split("-");
+                     console.log(dateParts);
+                     const appointmentDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                     const currentDate = new Date();
+                     
+                     
+                     appointmentDate.setHours(0, 0, 0, 0);
+                     currentDate.setHours(0, 0, 0, 0);
+                     
+                     
+                     const diffTime = appointmentDate.getTime() - currentDate.getTime();
+                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                     
+                     if (diffDays < 2) {
+                        notificationModal.style.display = "block";
+                        return;
+                     }
+                  const cancleModal = document.querySelector("#closeModal");
+                  const submitModal = document.querySelector("#submitModal");
+                    modalDistance.style.display = "block";
+                    cancleModal.addEventListener("click",()=>{
+                      modalDistance.style.display = "none";
+                    })
+                    submitModal.addEventListener("click",()=>{
+                      formCancel.submit();
+                    })
+                 })
+                  if (closeNotificationModal) {
+                     closeNotificationModal.addEventListener("click", () => {
+                        notificationModal.style.display = "none";
+                     });
+                  }
+                 console.log(formCancel);
             script(src="/js/feedback.js") 
             

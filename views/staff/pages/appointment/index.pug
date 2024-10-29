@@ -153,7 +153,8 @@ block main
                         else if(appointment.Process == "Process")
                             span(class="btn btn-dark status-btn payment-btn" style="min-width: 140px;height: 41px;width: 180px;    background: linear-gradient(135deg, #252dbf, #2e29d6);") Tiếp nhận
                         else if(appointment.Process == "Cancelled")
-                            span(class="btn btn-danger status-btn" style="min-width: 140px;" ) Hủy bỏ 
+                            span(class="btn btn-danger status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #d71441, #c71927);" ) 
+                              span Hủy bỏ 
                         else if(appointment.Process == "Successed")
                             span(class="btn btn-success status-btn payment-btn" style="min-width: 140px; height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                     td 
@@ -162,7 +163,7 @@ block main
                                 input(type="hidden" name="date" value=appointment.Date)
                                 input(type="hidden" name="time" value=appointment.Shift)
                                 input(type="hidden" name="specialization" value=appointment.Name)
-                                if(appointment.Process == "Pending" )
+                                if(appointment.Process == "Pending" || appointment.Process == "Cancelled")
                                   button.btn(
                                       type="submit"
                                       style="background-color: #c8d6d8; color: black; border: 1px solid black; box-shadow: 0px 0px 16px 9px #0e81dd;font-weight: 700;" disabled
@@ -175,8 +176,9 @@ block main
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info payment-btn" style="    padding: 10px 0 10px 10px;    width: 50px;") 
                           i(class="fa-solid fa-receipt")
-                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` class="btn btn-danger ml-2 payment-btn" style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;") 
-                          i(class="fa fa-trash " aria-hidden="true") 
+                        if(appointment.Process == "Pending"  )
+                          a(href=`javascript:` button-delete =`${appointment.AppointmentID}`  class="btn btn-danger ml-2 button-delete payment-btn" style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;") 
+                            i(class="fa fa-trash " aria-hidden="true") 
                           
               else 
                 tr 
@@ -199,7 +201,8 @@ block main
                         else if(appointment.Process == "Process")
                             span(class="btn btn-dark payment-btn" style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") Đang thực hiện
                         else if(appointment.Process == "Cancelled")
-                            span(class="btn btn-danger" style="min-width: 140px;" ) Hủy bỏ 
+                            span(class="btn btn-danger payment-btn" style="min-width: 140px; height: 41px;width: 180px;     background: linear-gradient(135deg, #d71441, #c71927);" ) 
+                              span Hủy bỏ 
                         else if(appointment.Process == "Successed")
                             span(class="btn btn-success payment-btn" style="min-width: 140px;height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                     td 
@@ -208,11 +211,58 @@ block main
                     td 
                         a(href=`/staff/appointment/detail/${appointment.AppointmentID}` class="btn btn-info payment-btn" style="    padding: 10px 0 10px 10px;    width: 50px;") 
                           i(class="fa-solid fa-receipt")
-                        a(href=`/staff/appointment/delete/${appointment.AppointmentID}` button-delete =`/staff/appointment/delete/${appointment.AppointmentID}` style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;" class="btn btn-danger payment-btn ml-2 button-delete") 
-                          i(class="fa fa-trash " aria-hidden="true") 
-
+                        if(appointment.Process == "Pending"  )
+                          a(href=`javascript: ` button-delete =`${appointment.AppointmentID}` style="    padding: 10px 0 10px 10px;     background: linear-gradient(135deg, #bf253e, #d02666);    width: 50px;" class="btn btn-danger payment-btn ml-2 button-delete") 
+                            i(class="fa fa-trash " aria-hidden="true") 
+        #modalDistance.modal-distance(style="display: none;")
+          .modal-distance-content
+              .modal-icon
+                  i.fas.fa-exclamation-triangle
+              h2 Xác thực
+              p Bạn có chắn chắn  muốn xóa lịch hẹn này không?
+              
+              .modal-footer-confirm
+                  button.btn.btn-secondary.payment-btn.mr-4#closeModal(type='button' data-dismiss='modal' style="background: linear-gradient(135deg, #66616b, #53575b);") 
+                      i.fa.fa-times
+                      span Hủy
+                  button#submitModal.btn.btn-danger.payment-btn(type='button') 
+                      i.fa.fa-check
+                      span Xác nhận
 
     script.
+        
+        const listButtonsDelete = document.querySelectorAll(".button-delete");
+        const modalDelete = document.getElementById("modalDistance");
+       
+        listButtonsDelete.forEach(button => {
+          button.addEventListener("click",(e) => {
+            if(modalDelete){
+              const cancleModal = document.getElementById("closeModal");
+              const submitModal = document.getElementById("submitModal"); 
+            e.preventDefault();
+            modalDelete.style.display = "block";
+            cancleModal.addEventListener("click",() => {
+              modalDelete.style.display = "none";
+            })
+            submitModal.addEventListener("click",() => {
+              const appointmentID = button.getAttribute("button-delete");
+              console.log(appointmentID)
+              window.location.href= `/staff/appointment/delete/${appointmentID}`;
+            })
+            }
+           
+
+            
+          })
+        })
+
+
+
+
+
+
+
+
       document.addEventListener('DOMContentLoaded', function() {
         const filterButtons = document.getElementById('filter-buttons');
         const currentUrl = new URL(window.location.href);
@@ -236,23 +286,5 @@ block main
         
 
     
-        const buttonDelete = document.querySelectorAll(".button-delete")
-        const deleteModal = document.getElementById("deleteModal")
-        const confirmDelete = document.getElementById("confirmDelete")
-        const cancelDelete = document.getElementById("cancelDelete")
-        console.log(buttonDelete  )
-        buttonDelete.forEach(item => {
-            item.addEventListener("click", function(e){
-                e.preventDefault()
-                const url = new URL(window.location.href)
-                console.log(url.pathname);
-                const buttonDeleteValue = item.getAttribute("button-delete");
-                console.log(buttonDeleteValue)
-                deleteModal.style.display = 'block'
-                const check = confirm("Bạn có muốn hủy lịch hẹn này không?")
-                if(check){
-                    window.location.href = buttonDeleteValue
-                }   
-            })
-        })
+      
 
