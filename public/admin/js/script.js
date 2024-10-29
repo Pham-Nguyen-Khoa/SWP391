@@ -186,34 +186,6 @@ function showInfoModal(id) {
   account = listUser.find((user) => user.AccountID === id);
   imageModal.src = account.Avatar;
   information.innerHTML = `
-    <p><b>ID:</b> ${account.AccountID}</p>
-    <p><b>Họ và Tên:</b> ${account.FullName}</p>
-    <p><b>Gender:</b> ${account.Gender}</p>
-     <p><b>Vai trò:</b> ${
-       account.RoleID == "RL0001"
-         ? "Admin"
-         : account.RoleID == "RL0002"
-         ? "Vet"
-         : account.RoleID == "RL0003"
-         ? "Staff"
-         : account.RoleID == "RL0004"
-         ? "Customer"
-         : account.RoleID
-     }</p>
-    ${
-      account.RoleID == "RL0002" ? `
-        <p><b>Chuyên ngành:</b> ${account.Specialization}</p>
-        <p><b>Thành tựu:</b> ${account.Description}</p>
-        <p><b>Link Google Meet:</b> ${account.GoogleMeet}</p>
-      ` :""
-    }
-    <p><b>Số điện thoại:</b> ${account.PhoneNumber}</p>
-    <p><b>Địa chỉ:</b> ${account.Address}</p>
-    <p><b>Birthday:</b> ${account.Birthday}</p>
-    <p><b>Trạng thái:</b> ${
-      account.Status == "Kích hoạt" ? "Kích hoạt" : "Bị khóa"
-    }</p>
-  `;
   modalInfo.style.display = "block";
   mainWrapper.classList.add("blur");
   // btnSave.style.display = "none";
