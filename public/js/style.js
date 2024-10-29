@@ -1140,3 +1140,27 @@ if(backToTopBtn) {
 }
 
 
+// const editAvatar = document.querySelector(".edit-avatar")
+// if(editAvatar) {
+//   editAvatar.addEventListener("click",() => {
+    
+//   })
+// }
+
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          document.querySelector('.avatar').src = e.target.result;
+          const saveAvatar = document.querySelector('.save-avatar');
+          saveAvatar.classList.remove('d-none');
+
+      }
+      reader.readAsDataURL(file);
+  }
+}
+
+
+
+

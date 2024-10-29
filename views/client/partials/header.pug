@@ -25,8 +25,16 @@ header
         li.nav-item
           button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
         if(userInfo)
-            a(class='nav-link' href='/koi/my-appointment') 
-              img(src="/images/logoUser.png" alt="User" style="margin-left: 20px;width: 40px; height: 40px;object-fit: contain;")
+            //- a(class='nav-link' href='/koi/my-appointment') 
+            .user-menu-container 
+              if userInfo.Avatar
+                img(src=userInfo.Avatar, alt="Avatar" style="margin-left: 20px;width: 80px; height: 80px;object-fit: contain; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);")
+              else
+                img(src="/images/logoUser.png" alt="User" style="margin-left: 20px;width: 40px; height: 40px;object-fit: contain; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);")
+              .user-menu 
+                  a(href="/koi/my-appointment") Hồ sơ lịch hẹn
+                  a(href="/profile") Thông tin cá nhân
+                  a(href="/auth/logout") Đăng xuất
             a(class='nav-link' href='/auth/logout') Đăng xuất
 
         else
