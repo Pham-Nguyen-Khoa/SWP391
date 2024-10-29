@@ -5,6 +5,9 @@ block main
     //- pre 
     //-     | #{JSON.stringify(listDoctor)}
     div.background_appointment
+    div.background_appointment(style="text-align: center; padding: 50px;")
+        h1(style="font-size: 3rem; font-weight: bold;") Chào mừng đến với trung tâm chăm sóc cá KOI của chúng tôi!
+        p(style="font-size: 1.25rem; margin-bottom: 30px;") Chúng tôi mong muốn được lắng nghe từ bạn. Vui lòng điền vào mẫu dưới đây để bắt đầu.
         .box_appointment
             h3.pb-3(style="color: #272D3C; font-weight: bold; font-size: 2.25rem; text-align: center; text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); letter-spacing: 1px;") Đặt Lịch Hẹn
             form(action="/koi/appointment" method="post").form_appointment
@@ -20,6 +23,7 @@ block main
                     label(for="service") Chọn dịch vụ
                     div
                         select#service(name="service" class="service_appointment" requir    ed)
+                        select#service(name="service" class="service_appointment" required)
                             option(value selected disabled) Chọn Dịch Vụ
                             each  service in listService
                                 option(value=service.Name) • #{service.Name}
