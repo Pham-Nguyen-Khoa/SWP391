@@ -44,7 +44,7 @@ block main
                            if(appoinmentInfo.Process == "Ready")
                               span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Sẵn Sàng
                            if(appoinmentInfo.Process == "Accepted")
-                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Bác sĩ đã tiếp nhận
+                              span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đã tiếp nhận
                            if(appoinmentInfo.Process == "Progress")
                               span(style="    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%); color: #fffbfb; font-size: 20px; padding: 18px; border-radius: 20px; margin-left: 150px;") Đang thực hiện
                            if(appoinmentInfo.Process == "Successed")
@@ -69,15 +69,17 @@ block main
                            tr 
                               td.text-center.align-middle #{appoinmentInfo.Name}
                               td.text-center.align-middle #{appoinmentInfo.PriceFormat}
+                  
                   .information-doctor
                      .row 
                         .col-6 
-                           h2 Bác sĩ thực hiện 
-                           b ◉ #{appoinmentInfo.VetFullName}
-                           br
-                           b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
-                           br
-                           img(src=appoinmentInfo.VetAvatar, alt="")
+                           if(appoinmentInfo.VetFullName)
+                              h2 Bác sĩ thực hiện 
+                              b ◉ #{appoinmentInfo.VetFullName}
+                              br
+                              b ◉ Chuyên ngành: #{appoinmentInfo.Specialization}
+                              br
+                              img(src=appoinmentInfo.VetAvatar, alt="")
                         .col-6 
                            if(appoinmentInfo.Name == "Tư Vấn Online")
                               p(style="margin: 0; font-size: 23px;font-weight: 700;") ◉ Link Google Meet: 

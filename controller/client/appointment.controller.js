@@ -55,6 +55,7 @@ module.exports.index = async (req, res) => {
       ORDER BY account1.AccountID ASC
   `;
   const [listAccount] = await Sequelize.query(queryFilter);
+  console.log(listAccount)
   // const listAccount = await Account.findAll({
   //   raw: true,
   //   where: {
@@ -84,6 +85,7 @@ module.exports.index = async (req, res) => {
     }
     doctorSchedules[doctorID][workDay].push(shift);
   });
+  console.log(doctorSchedules)
   const listDoctor = await Vet.findAll({
     raw: true,
   });
