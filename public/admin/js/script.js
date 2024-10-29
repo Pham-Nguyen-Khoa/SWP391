@@ -186,6 +186,185 @@ function showInfoModal(id) {
   account = listUser.find((user) => user.AccountID === id);
   imageModal.src = account.Avatar;
   information.innerHTML = `
+    <head>
+      <style>
+      
+        .account-info {
+          max-height: 650px;
+          padding: 25px;
+          max-width: 850px;
+          margin: 0 auto;
+          animation: slideIn 0.3s ease-out;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .info-row {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          
+          border-radius: 8px;
+          transition: all 0.3s ease;
+         
+        }
+
+        .info-row:hover {
+          background: #f0f2f5;
+          transform: translateX(5px);
+        }
+
+        .label {
+          font-weight: 600;
+          min-width: 180px;
+          color: #344767;
+          font-size: 0.95rem;
+          position: relative;
+          padding-right: 20px;
+        }
+
+        .label::after {
+          
+          position: absolute;
+          right: 8px;
+          color: #6c757d;
+        }
+
+        .value {
+          flex: 1;
+          color: #495057;
+          font-size: 0.95rem;
+          padding-left: 20px;
+          border-left: 2px solid #dee2e6;
+          line-height: 1.5;
+        }
+
+        .value.active, .value.inactive {
+          font-weight: 500;
+          padding-left: 30px;
+          position: relative;
+        }
+
+        .value.active {
+          color: #198754;
+        }
+
+        .value.inactive {
+          color: #dc3545;
+        }
+
+        .value.active::before, .value.inactive::before {
+          content: '•';
+          position: absolute;
+          left: 12px;
+          font-size: 1.5rem;
+          line-height: 0.8;
+        }
+
+        .value.active::before {
+          color: #198754;
+        }
+
+        .value.inactive::before {
+          color: #dc3545;
+        }
+
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateY(-15px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        #modal_info {
+            display: none;
+            width: 1150px;
+            height: auto;
+            background-color: #6b809d78;
+            border: 2px solid black;
+            border-radius: 10px;
+            position: fixed;
+            z-index: 9999;
+            margin: 0 25%;
+            padding: 40px;
+            left: 6%;
+            top: 14%;
+        }
+        .div-information {
+          background-color: #f8f9fc;
+          border: 2px solid black;
+          border-radius: 10px;
+          font-style: italic;
+          font-weight: 600;
+        }
+        .repair {
+          font-weight: 800;
+          border-radius: 20px;
+          width: 183px;
+          background-color: #9CCDBC;
+          color: #131212;
+          margin: 300px 18px 0px 85px;
+          font-size: 16px;
+          height: 60px;
+          cursor: pointer;
+        }
+        .box-image {
+          margin: 0px 18px 0px 28px;
+          width: 300px;
+          height: 300px;
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .box-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+          cursor: pointer;
+        }
+        .box-image img:hover {
+          transform: scale(1.1);
+        }
+      </style>
+    </head>
+    <body>
+   
+    <div class="account-info">
+      <h1 style="text-align: center; margin-bottom: 30px; color: #344767;">Thông tin tài khoản</h1>
+      
+      <p class="info-row"><span class="label">ID</span> <span class="value">${account.AccountID}</span></p>
+      <p class="info-row"><span class="label">Họ và Tên</span> <span class="value">${account.FullName}</span></p>
+      <p class="info-row"><span class="label">Gender</span> <span class="value">${account.Gender}</span></p>
+      <p class="info-row"><span class="label">Vai trò</span> <span class="value">${
+        account.RoleID == "RL0001"
+          ? "Admin"
+          : account.RoleID == "RL0002"
+          ? "Vet" 
+          : account.RoleID == "RL0003"
+          ? "Staff"
+          : account.RoleID == "RL0004"
+          ? "Customer"
+          : account.RoleID
+      }</span></p>
+      ${
+        account.RoleID == "RL0002" ? `
+          <p class="info-row"><span class="label">Chuyên ngành</span> <span class="value">${account.Specialization}</span></p>
+          <p class="info-row"><span class="label">Thành tựu</span> <span class="value">${account.Description}</span></p>
+          <p class="info-row"><span class="label">Link Google Meet</span> <span class="value">${account.GoogleMeet}</span></p>
+        ` : ""
+      }
+      <p class="info-row"><span class="label">Số điện thoại</span> <span class="value">${account.PhoneNumber}</span></p>
+      <p class="info-row"><span class="label">Địa chỉ</span> <span class="value">${account.Address}</span></p>
+      <p class="info-row"><span class="label">Birthday</span> <span class="value">${account.Birthday}</span></p>
+      <p class="info-row"><span class="label">Trạng thái</span> <span class="value ${account.Status == "Kích hoạt" ? "active" : "inactive"}">${
+        account.Status == "Kích hoạt" ? "Kích hoạt" : "Bị khóa"
+      }</span></p>
+    </div>
+`;
   modalInfo.style.display = "block";
   mainWrapper.classList.add("blur");
   // btnSave.style.display = "none";
