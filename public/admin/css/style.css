@@ -209,6 +209,8 @@
 
 /* Upload File image */
 .upload-preview{
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     margin-top: 15px;
     border: 1px solid #ddd;

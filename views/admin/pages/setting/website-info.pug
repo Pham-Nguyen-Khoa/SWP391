@@ -6,12 +6,221 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     style.
-        .bg-gradient-primary {
-            background: linear-gradient(45deg, #4e73df, #224abe);
+        // Theme colors
+        :root {
+            --primary: #2563eb;  // Xanh dương đậm
+            --primary-light: #3b82f6;  // Xanh dương nhạt
+            --primary-dark: #1d4ed8;   // Xanh dương tối
+            --secondary: #0ea5e9;      // Xanh biển
+            --accent: #06b6d4;         // Xanh ngọc
+            
+            // Màu bổ trợ
+            --success: #059669;
+            --warning: #eab308;
+            --danger: #dc2626;
+            
+            // Màu nền và text
+            --bg-light: #f0f9ff;
+            --bg-white: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            
+            // Gradients
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --secondary-gradient: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
         }
-        .bg-gradient-danger {
-            background: linear-gradient(45deg, #e74a3b, #be2617);
+
+        // Card styles update
+        .card {
+            background: var(--bg-white);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
         }
+        .card-header {
+            background: var(--primary-gradient);
+            padding: 1rem 2rem;
+        }
+        .card-header h2 {
+            color: var(--bg-white);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        // Button styles update
+        .btn-website-info {
+            background: var(--bg-white);
+            color: var(--primary);
+            border: 2px solid transparent;
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        .btn-website-info:hover {
+            background: var(--primary);
+            color: var(--bg-white);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        // Form elements update
+        .input-group {
+            background: var(--bg-light);
+            border-radius: 12px;
+        }
+        .input-group-text {
+            background: var(--bg-light);
+            color: var(--primary);
+            border: none;
+        }
+        .form-control {
+            background: var(--bg-light);
+            border: none;
+            color: var(--text-primary);
+        }
+        .form-control:focus {
+            background: var(--bg-white);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        // Label styles
+        label {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        label i {
+            color: var(--primary);
+        }
+
+        // Image upload styles
+        .upload-preview {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-top: 5px;
+            border: 1px dashed var(--primary-light);
+            padding: 2px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group[upload-image] {
+            margin-bottom: 10px;
+            padding: 6px;
+            background: var(--bg-light);
+            border-radius: 6px;
+            height: auto;
+            text-align: center;
+        }
+
+        .form-group[upload-image] label {
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-control-file {
+            font-size: 0.75rem;
+            padding: 2px 0;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+       
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            border-radius: 26px;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        // Hover effects
+        .input-group:hover {
+            background: var(--bg-white);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+        }
+
+        // Animation
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-header {
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 70px;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h2 {
+            color: var(--bg-white);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+       
+        @media (max-width: 768px) {
+            .card {
+                border-radius: 20px;
+            }
+            .card::before {
+                border-radius: 22px;
+            }
+        }
+
+     
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+      
+        .col-md-4 {
+            margin-bottom: 10px;
+            padding-left: 5px;
+            padding-right: 5px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .col-md-4 {
+                flex: 0 0 33.333333%;
+                max-width: 33.333333%;
+            }
+        }
+
+        // Thêm container cho các ảnh
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -5px;
+        }
+
     .mixin-title
             h1.mb-0
                 i.fas.fa-globe.mr-3
@@ -140,7 +349,7 @@ block main
                                             class="form-group"
                                         upload-image
                                         )
-                                        label(for="BannerCommunity" class="font-weight-bold") Banner Trang Cộng Đồng
+                                        label(for="BannerCommunity" class="font-weight-bold") Banner Trang Cng Đồng
                                         input(
                                             type="file" 
                                             id="BannerCommunity" 
@@ -233,7 +442,7 @@ block main
 
                 // Edit Website Info 
                     const formWebsiteInfo = document.querySelector("#form-website-info");
-                    const btnWebsiteInfo = document.querySelector(".btn-website-info");
+                    const btnWebsiteInfo = document.querySelector(".payment-btn");
                     if (formWebsiteInfo) {
                     btnWebsiteInfo.addEventListener("click", (e) => {
                         e.preventDefault();

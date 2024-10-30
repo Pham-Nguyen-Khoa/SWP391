@@ -6,68 +6,101 @@ block main
     +alert-success("5000")
     +alert-error('5000')
     style.
-        .bg-gradient-blue {
-            background: linear-gradient(135deg, #0396FF 0%, #0D47A1 100%);
-        }
-        
-        .custom-card {
-            border: 1px solid #e0e0e0;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            margin: 100px 31%;
-            background: linear-gradient(45deg, #bfdff1, #c2d8f18c);
-            margin: 100px 27%;
-        }
-        
-        .custom-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-        
-        .shipping-icon i {
-            background: linear-gradient(135deg, #0396FF, #0D47A1);
+        .gradient-text {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 50px;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.2);
         }
-        
-        .custom-input {
-            border: 2px solid #e0e0e0;
-            border-radius: 10px 0 0 10px;
-            font-size: 1.1rem;
-            padding: 12px 20px;
+
+        .custom-card {
+            max-width: 1200px;
+            margin: 50px 115px 0px 300px;
+            padding: 60px 70px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .form-group {
+            margin-bottom: 45px;
+            position: relative;
             transition: all 0.3s ease;
         }
-        
-        .custom-input:focus {
-            border-color: #0396FF;
-            box-shadow: 0 0 0 0.2rem rgba(3, 150, 255, 0.25);
-        }
-        
-        .input-group-text {
-            border-radius: 0 10px 10px 0;
-            border: none;
-            padding: 0 20px;
-            font-size: 1.1rem;
-            background: linear-gradient(135deg, #0396FF, #0D47A1) !important;
-        }
-        
-        .custom-button {
-            padding: 12px 40px;
-            border-radius: 50px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #0396FF, #0D47A1);
-            border: none;
-            transition: all 0.3s ease;
-        }
-        
-        .custom-button:hover {
+
+        .form-group:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(3, 150, 255, 0.4);
         }
-        
-        .custom-button:active {
-            transform: translateY(0);
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 1.3rem;
+        }
+
+        .custom-input {
+            border: 3px solid #e0e0e0;
+            border-radius: 20px 0 0 20px;
+            font-size: 1.3rem;
+            padding: 20px 25px;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .custom-input:focus {
+            border-color: #2193b0;
+            box-shadow: 0 0 15px rgba(33, 147, 176, 0.2);
+        }
+
+        .input-group-text {
+            border-radius: 0 20px 20px 0;
+            border: none;
+            padding: 0 40px;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%) !important;
+            color: white;
+            font-weight: 600;
+        }
+
+        .payments-btn {
+            padding: 20px 50px;
+            border-radius: 60px;
+            font-size: 1.3rem;
+            background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%) !important;
+            border: none;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(33, 147, 176, 0.2);
+        }
+
+        .payments-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(33, 147, 176, 0.3);
+        }
+
+        .shipping-icon i {
+            background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .custom-card {
+                margin: 25px;
+                padding: 25px;
+            }
         }
     +title("Cập nhật phí vận chuyển")
 
@@ -80,7 +113,7 @@ block main
                 .form-group.mb-4
                     label.h6.text-primary.fw-bold.d-flex.align-items-center
                         i.fas.fa-money-bill-wave.me-2
-                        | Phí vận chuyển (VNĐ)
+                        | Phí di chuyển (VNĐ)
                     .input-group.input-group-lg.mt-2
                         input.form-control.custom-input(
                             type="number"
