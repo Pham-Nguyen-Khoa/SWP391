@@ -186,7 +186,111 @@ function showInfoModal(id) {
   account = listUser.find((user) => user.AccountID === id);
   imageModal.src = account.Avatar;
   information.innerHTML = `
+    <style>
+      .account-info {
+        max-height: 650px;
+        padding: 20px;
+        max-width: 850px;
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 -5px 20px rgba(0, 50, 100, 0.08);
+      }
+
+      .info-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        padding: 5px 10px;
+        border-radius: 8px;
+      }
+
+      .label {
+        font-weight: 600;
+        min-width: 150px;
+        color: #344767;
+        font-size: 0.9rem;
+        padding-right: 15px;
+      }
+
+      .value {
+        flex: 1;
+        color: #495057;
+        font-size: 0.9rem;
+        padding-left: 15px;
+        border-left: 1px solid #dee2e6;
+      }
+
+      .value.active {
+        color: #198754;
+        font-weight: 500;
+      }
+
+      .value.inactive {
+        color: #dc3545;
+        font-weight: 500;
+      }
+
+      #modal_info {
+        display: none;
+        width: 1150px;
+        height: auto;
+        background-color: rgba(255, 255, 255, 0.95);
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        position: fixed;
+        z-index: 9999;
+        margin: 0 25%;
+        padding: 30px;
+        left: 6%;
+        top: 14%;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      }
+
+      .box-image {
+        margin: 30px 18px 50px 28px;
+        width: 300px;
+        height: 300px;
+        border-radius: 40px;
+        overflow: hidden;
+      }
+
+      .box-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .repair {
+        font-weight: 600;
+        border-radius: 8px;
+        width: 183px;
+        background-color: #9CCDBC;
+        color: #131212;
+        margin: 20px 18px 0px 85px;
+        font-size: 16px;
+        height: 45px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .repair:hover {
+        background-color: #7fb3a1;
+      }
+      .div-information {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 2px solid white;
+        border-radius: 10px;
+        font-style: italic;
+        font-weight: 600;
+        padding: 15px;
+      }
+    </style>
+
     <div class="account-info">
+      <h1 style="text-align: center; margin-bottom: 20px; color: #344767; font-size: 1.5rem;">Thông tin tài khoản</h1>
       
       <p class="info-row"><span class="label">ID</span> <span class="value">${account.AccountID}</span></p>
       <p class="info-row"><span class="label">Họ và Tên</span> <span class="value">${account.FullName}</span></p>
