@@ -897,36 +897,35 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
 
 
 
-const marquee = document.querySelector('.marquee');
-let index = 0;
+if (window.location.pathname === '/koi') {
+  const marquee = document.querySelector('.marquee');
+  let index = 0;
 
-function scrollText() {
-  const lines = marquee.querySelectorAll('p');
-  lines.forEach((line, i) => {
-    line.style.display = i === index ? 'block' : 'none';
-  });
-  index = (index + 1) % lines.length;
-}
+  function scrollText() {
+    const lines = marquee.querySelectorAll('p');
+    lines.forEach((line, i) => {
+      line.style.display = i === index ? 'block' : 'none';
+    });
+    index = (index + 1) % lines.length;
+  }
 
-setInterval(scrollText, 5000); 
+  setInterval(scrollText, 5000);
 
-console.log("Neronmen")
-function initializeSlider() {
-  const slide = document.querySelector('.review-slide');
-  const groups = document.querySelectorAll('.review-group');
-  if(slide && groups){
+  function initializeSlider() {
+    const slide = document.querySelector('.review-slide');
+    const groups = document.querySelectorAll('.review-group');
+    if (slide && groups) {
       let currentIndex = 0;
       function nextSlide() {
         currentIndex = (currentIndex + 1) % groups.length;
         slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+      setInterval(nextSlide, 4000);
     }
-  
-    setInterval(nextSlide,4000);
-  
   }
-}
 
-document.addEventListener('DOMContentLoaded', initializeSlider);
+  document.addEventListener('DOMContentLoaded', initializeSlider);
+}
 
 
 
@@ -1164,3 +1163,47 @@ function previewImage(event) {
 
 
 
+
+
+
+const notifications =   document.querySelectorAll('.notification-item');
+console.log(notifications)
+if(notifications){
+  notifications.forEach(item => {
+    item.addEventListener("click",() => {
+        const appointmentID = item.querySelector("#notification-id").value;
+        const notificationID = item.querySelector("#notification-url").value;
+        fetch(`/koi/api/update-notification`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ notificationID: notificationID })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if(data.success) {
+            window.location.href = `/koi/my-appointment/detail/${appointmentID}`;
+          }
+        })
+    })
+  })
+}
+
+const markAllRead = document.querySelector(".mark-all-read");
+if(markAllRead) {
+  markAllRead.addEventListener("click",() => {
+      fetch(`/koi/api/mark-all-read`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.success) {
+          window.location.reload();
+        }
+      })
+  })
+}
