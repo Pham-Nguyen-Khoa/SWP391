@@ -12,6 +12,7 @@ const Bill = require("../../models/bill.model");
 const Appointment_PondRecord = require("../../models/appointment_pondrecord.model");
 const PondRecord = require("../../models/pondRecord.model");
 const PondProfile = require("../../models/pondProfile.model");
+const Notification = require("../../models/notification.model");
 
 
 // [Get] /staff/appointment
@@ -343,6 +344,27 @@ module.exports.changeProcess =  async (req, res) => {
                         AppointmentID: appointmentID
                     }
                 })
+                const notificationID = await generateUserId("notification","notificationID","NO");
+                const appoinmentData = await Appointment.findOne({
+                    raw: true,
+                    where: {
+                        appointmentID: appointmentID
+                    }
+                })
+                let serviceNotification ;
+                if(appoinmentData.ServiceID =="DV0001"){
+                    serviceNotification = "Khám sức khỏe";
+                }else if(appoinmentData.ServiceID =="DV0002"){
+                    serviceNotification = "Cải thiện môi trường hồ";
+                }
+                appoinmentData.Date = formatDate(appoinmentData.Date)
+                const newNotification = await Notification.create({
+                    notificationID: notificationID,
+                    CustomerID: appoinmentData.CustomerID,
+                    AppointmentID: appointmentID,
+                    Message: `Lịch hẹn ${serviceNotification} ngày ${appoinmentData.Date} của bạn đã được tiếp nhận`,
+                  
+                  });
             }else if(process == "accepted"){
                 await Appointment.update({
                     Process: "Ready"
@@ -351,6 +373,27 @@ module.exports.changeProcess =  async (req, res) => {
                         AppointmentID: appointmentID
                     }
                 })
+                const notificationID = await generateUserId("notification","notificationID","NO");
+                const appoinmentData = await Appointment.findOne({
+                    raw: true,
+                    where: {
+                        appointmentID: appointmentID
+                    }
+                })
+                let serviceNotification ;
+                if(appoinmentData.ServiceID =="DV0001"){
+                    serviceNotification = "Khám sức khỏe";
+                }else if(appoinmentData.ServiceID =="DV0002"){
+                    serviceNotification = "Cải thiện môi trường hồ";
+                }
+                appoinmentData.Date = formatDate(appoinmentData.Date)
+                const newNotification = await Notification.create({
+                    notificationID: notificationID,
+                    CustomerID: appoinmentData.CustomerID,
+                    AppointmentID: appointmentID,
+                    Message: `Lịch hẹn ${serviceNotification} ngày ${appoinmentData.Date} của bạn đã được tiếp nhận`,
+                  
+                  });
             }else if(process == "process"){
                 await Appointment.update({
                     Process: "Process"
@@ -887,9 +930,31 @@ module.exports.paymentCenterPost =  async (req, res) => {
             AppointmentID: appointmentID
         }
     })
-   
-
+    const notificationID = await generateUserId("notification","notificationID","NO");
+    const appoinmentData = await Appointment.findOne({
+        raw: true,
+        where: {
+            appointmentID: appointmentID
+        }
+    })
+    let serviceNotification ;
+    if(appoinmentData.ServiceID =="DV0001"){
+        serviceNotification = "Khám sức khỏe";
+    }else if(appoinmentData.ServiceID =="DV0002"){
+        serviceNotification = "Cải thiện môi trường hồ";
+    }
+    appoinmentData.Date = formatDate(appoinmentData.Date)
+    const newNotification = await Notification.create({
+        notificationID: notificationID,
+        CustomerID: appoinmentData.CustomerID,
+        AppointmentID: appointmentID,
+        Message: `Lịch hẹn ${serviceNotification} ngày ${appoinmentData.Date} của bạn đã hoàn tất`,
+      
+      });
     req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
     res.redirect("/staff/appointment")
 }
  
+
+
+

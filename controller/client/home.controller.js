@@ -10,6 +10,7 @@ const Feedback = require("../../models/feedback.model");
 const axios = require('axios');
 const { GoogleGenerativeAI } = require("@google/generative-ai")
 const checkEmailHelper = require("../../helpers/checkMail");
+const Notification = require("../../models/notification.model");
 
 
 // [GET] localhost:/koi
@@ -176,3 +177,27 @@ module.exports.chat = async (req, res) => {
     });
   }
 };
+
+
+// [POST] localhost:/koi/api/update-notification
+module.exports.updateNotification = async (req, res) => {
+  const notificationID = req.body.notificationID;
+  const updateNotification = await Notification.update({isRead: 1}, {where: {notificationID: notificationID}})
+  if(updateNotification) {
+    res.json({success: true})
+  } else {
+    res.json({success: false})
+  }
+}
+
+// [POST] localhost:/koi/api/mark-all-read
+module.exports.markAllRead = async (req, res) => {
+  const customerID = res.locals.userInfo.CustomerID;
+  const updateNotification = await Notification.update({isRead: 1}, {where: {CustomerID : customerID}})
+  if(updateNotification) {
+    res.json({success: true})
+  } else {
+    res.json({success: false})
+  }
+}
+

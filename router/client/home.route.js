@@ -9,11 +9,12 @@ const authMiddleware = require("../../middleware/client/auth.middleware");
 
 
 router.get("/", controller.index);
-router.get("/profile", authMiddleware.requireAuth, controller.profile);
+router.get("/profile", controller.profile);
 router.post("/profile/save-avatar", upload.single("Avatar"), uploadMiddleware.upload, controller.saveAvatar);
-router.get("/profile/edit", authMiddleware.requireAuth, controller.editProfile);
+router.get("/profile/edit", controller.editProfile);
 router.post("/profile/edit", validation.editProfilePost, controller.editProfilePost);
-
+router.post("/api/update-notification", controller.updateNotification);
+router.post("/api/mark-all-read", controller.markAllRead);
 router.get("/contact", controller.contact);
 
 router.get("/aboutUs", controller.aboutUs);
