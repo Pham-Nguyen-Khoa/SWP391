@@ -99,13 +99,17 @@ block main
                       td #{appointment.DateFormat}
                       td  
                           if(appointment.Process == "Ready" && appointment.ServiceID == "DV0003")
-                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  Sẵn sàng
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") 
+                                span  Sẵn sàng
                           if(appointment.Process == "Ready" && appointment.ServiceID != "DV0003")
-                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  Sẵn sàng
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  
+                                span Sẵn sàng
                           else if(appointment.Process == "Process")
-                              span(class="btn btn-dark payment-btn"  style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") Đang thực hiện 
+                              span(class="btn btn-dark payment-btn"  style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") 
+                                span Đang thực hiện 
                           else if(appointment.Process == "Cancelled")
-                              span(class="btn btn-danger") Hủy bỏ
+                              span(class="btn btn-danger payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #c71b39, #cb192a);") 
+                                span Hủy bỏ
                           else if(appointment.Process == "Successed")
                               span(class="btn btn-success payment-btn" style="min-width: 140px;height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                       td 

@@ -745,32 +745,49 @@ module.exports.assignVet = async (req, res) => {
 
 // [Get] /staff/appointment/delete/:AppointmentID
 module.exports.delete =  async (req, res) => {
-   try {
-    const appointmentID = req.params.AppointmentID  ;
-   console.log(appointmentID)
-   
-   await ShiftDetail.update({
-    AppointmentID: null
-},{
-    where:{
-        AppointmentID: appointmentID
-    }
-})
-
-
-    await Appointment.destroy({
-        
-        where:{
-            AppointmentID: appointmentID
+    try {
+        const appointmentID = req.params.AppointmentID  ;
+    const appointmentInfo = await Appointment.findOne({
+        raw: true,
+        where: {
+            appointmentID: appointmentID
         }
     })
-   
-    req.flash("success", "Đã xóa lịch hẹn thành công!");
-    res.redirect("back");
-   } catch (error) {
-    req.flash("error", "Có lỗi xảy ra khi xóa lịch hẹn. Vui lòng thử lại.");
-    res.redirect("back");
-   }
+    console.log(appointmentInfo)
+    if(appointmentInfo.VetID != null){
+        await ShiftDetail.update({
+            AppointmentID: null
+        },{
+            where: {
+                AppointmentID: appointmentID
+            }
+        })
+        await Appointment.update({
+            Process: "Cancelled"
+        },{
+            where: {
+                AppointmentID: appointmentID
+            }
+        })
+        req.flash("success","Lịch hẹn đã  xóa thành công!");
+        return res.redirect("back");
+    }else{
+        await Appointment.update({
+            Process: "Cancelled"
+        },{
+            where: {
+                AppointmentID: appointmentID
+            }
+        })
+        req.flash("success","Lịch hẹn đã  xóa thành công!");
+        return res.redirect("back");
+    }
+    } catch (error) {
+        req.flash("success","Có lỗi khi xóa lịch hẹn!");
+        return res.redirect("back");
+    }
+    
+
   }
 
 
