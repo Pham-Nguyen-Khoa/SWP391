@@ -62,7 +62,7 @@ module.exports.index = async (req, res) => {
     queryConditions.push(`Process = ?`);
     queryParams.push(req.query.statusFilter);
   }
-  const query = `SELECT * FROM appointment WHERE ${queryConditions.join(' AND ')}`;
+  const query = `SELECT * FROM appointment WHERE ${queryConditions.join(' AND ')} ORDER BY Date DESC`;
   let listAppointment = await Sequelize.query(query, {
     replacements: queryParams,
     type: Sequelize.QueryTypes.SELECT
@@ -103,9 +103,24 @@ module.exports.index = async (req, res) => {
   // [GET] localhost:/koi/my-appointment/detail/:AppointmentID
 module.exports.detail = async (req, res) => {
         const appointmentID = req.params.AppointmentID;
-        const queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
+        const appoinmentInformation = await Appointment.findOne({
+          raw: true,
+          where: {
+            AppointmentID: appointmentID
+          }
+        })
+        console.log(appoinmentInformation)
+        let queryAppointmentInfo ;
+        if(appoinmentInformation.VetID != null){
+          queryAppointmentInfo = `SELECT a.*,v.*,s.*,c.* , a.Name AS CustomerFullName, v.FullName AS VetFullName ,v.Avatar As VetAvatar, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID JOIN vet v ON v.VetID = a.VetID WHERE a.AppointmentID = '${appointmentID}'`;
+        }else{
+          queryAppointmentInfo = `SELECT a.*,s.*,c.* , a.Name AS CustomerFullName, a.Address AS AddressAppointment FROM appointment a JOIN service s ON s.ServiceID = a.ServiceID JOIN customer c ON c.CustomerID = a.CustomerID WHERE a.AppointmentID = '${appointmentID}'`;
+        }
+       
         const appoinmentInfo = (await Sequelize.query(queryAppointmentInfo))[0][0];
-        
+        console.log("--------")
+        console.log(appoinmentInfo)
+        console.log("--------")
         if(appoinmentInfo == null){
           res.redirect("/koi/my-appointment");
           return;
@@ -563,5 +578,52 @@ module.exports.feedBack = async (req, res) => {
 
   
     
+}
+
+
+// [POST] koi/my-appointment/cancel/:AppointmentID
+module.exports.cancel = async (req, res) => {
+  try {
+    const appointmentID = req.params.AppointmentID  ;
+const appointmentInfo = await Appointment.findOne({
+    raw: true,
+    where: {
+        appointmentID: appointmentID
+    }
+})
+console.log(appointmentInfo)
+if(appointmentInfo.VetID != null){
+    await ShiftDetail.update({
+        AppointmentID: null
+    },{
+        where: {
+            AppointmentID: appointmentID
+        }
+    })
+    await Appointment.update({
+        Process: "Cancelled"
+    },{
+        where: {
+            AppointmentID: appointmentID
+        }
+    })
+    req.flash("success","Lịch hẹn đã  xóa thành công!");
+    return res.redirect("/koi/my-appointment");
+}else{
+    await Appointment.update({
+        Process: "Cancelled"
+    },{
+        where: {
+            AppointmentID: appointmentID
+        }
+    })
+    req.flash("success","Lịch hẹn đã  xóa thành công!");
+    return res.redirect("/koi/my-appointment");
+}
+} catch (error) {
+    req.flash("success","Có lỗi khi xóa lịch hẹn!");
+    return res.redirect("back");
+}
+
 }
 

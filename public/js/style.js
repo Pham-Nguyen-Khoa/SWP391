@@ -759,7 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const intervalId = setInterval(() => {
             checkPaid(priceService, generateRandomText, intervalId);
           }, 1000);    
-        }, 15000);
+        }, 10000);
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
       } else {

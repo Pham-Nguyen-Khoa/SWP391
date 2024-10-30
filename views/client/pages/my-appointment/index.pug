@@ -33,7 +33,7 @@ block main
                                 option(value="Ready" selected=statusFilter == "Ready") Sẵn sàng
                                 option(value="Process" selected=statusFilter == "Process") Đang thực hiện
                                 option(value="Successed" selected=statusFilter == "Successed") Đã hoàn thành
-                                option(value="Cancle" selected=statusFilter == "Cancle") Bị Hủy
+                                option(value="Cancelled" selected=statusFilter == "Cancelled") Bị Hủy
                     .col-md-3.col-sm-6
                         .form-group
                             label &nbsp;
@@ -83,22 +83,28 @@ block main
                                     td Lịch hẹn
                                 if(item.Process =="Pending")
                                     td 
-                                        p.process Chờ duyệt
+                                        p.payment-btn.process(style="background: linear-gradient(#a6c116e6, #899436d9); min-width: 200px;")  
+                                            span  Chờ duyệt
                                 if(item.Process =="Accepted")
                                     td 
-                                        p.process Đã tiếp nhận
+                                        p.payment-btn.process(style="background: linear-gradient(#0e32c5e6, #2d21a4d9); min-width: 200px;")  
+                                            span  Đã tiếp nhận
                                 if(item.Process =="Ready")
                                     td 
-                                        p.process Sẵn sàng
+                                        p.payment-btn.process(style="background: linear-gradient(#0e32c5e6, #2d21a4d9); min-width: 200px;") 
+                                            span Sẵn sàng
                                 if(item.Process =="Process")
                                     td 
-                                        p.process Đang thực hiện
+                                        p.payment-btn.process(style="background: linear-gradient(#1b1d1c, #161816d9); min-width: 200px;")  
+                                            span Đang thực hiện
                                 if(item.Process =="Successed")
                                     td
-                                        p.process Đã hoàn thành
-                                if(item.Process =="Cancle")
+                                        p.payment-btn.process(style="background: linear-gradient(#11a21d, #159021d9); min-width: 200px;") 
+                                            span Đã hoàn thành
+                                if(item.Process =="Cancelled")
                                     td 
-                                        p.process Bị Hủy 
+                                        p.payment-btn.process(style="background: linear-gradient(135deg, #ca1124, #e01246d9);     min-width: 200px;") 
+                                            span Bị Hủy 
                                 td 
                                     a.payment-btn(href=`/koi/my-appointment/detail/${item.AppointmentID}` value=`/koi/my-appointment/detail/${item.AppointmentID}` button-delete class="btn btn-info" style="width: 150px;height: 40px; background: linear-gradient(to bottom, #8dd8d7, #007bff);") 
                                         i.fas.fa-info-circle.mr-2
