@@ -14,7 +14,7 @@ const Appointment_PondRecord = require("../../models/appointment_pondrecord.mode
 const KoiRecord = require("../../models/koiRecord.model");
 const KoiProfile = require("../../models/koiProfile.model");
 const Bill = require("../../models/bill.model");
-
+const Notification = require("../../models/notification.model");
 
 const generateUserId = async (table, id, rolePrefix) => {
   const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
@@ -34,6 +34,9 @@ function formatDate(dateString) {
     const year = date.getFullYear();
     return `${day}-${month}-${year}`; 
   }
+
+
+
 module.exports.index = async(req, res) => {
     const currentAppointment = await Appointment.findOne({
         raw: true,
@@ -160,7 +163,7 @@ module.exports.index = async(req, res) => {
         Status: "Đã thanh toán"
       })
 
-      const appointment = await Appointment.findOne({
+      let appointment = await Appointment.findOne({
         where: {
             VetID: res.locals.user.VetID,
             Process: "Process"
@@ -195,6 +198,26 @@ module.exports.index = async(req, res) => {
     //           Process: "Process"
     //       }
     //   })
+    try {
+      const notificationID = await generateUserId("notification","notificationID","NO");
+     
+      let serviceNotification ;
+      if(appointment.ServiceID =="DV0001"){
+          serviceNotification = "Khám sức khỏe";
+      }else if(appointment.ServiceID =="DV0002"){
+          serviceNotification = "Cải thiện môi trường hồ";
+      }
+      appointment.DateFormat = formatDate(appointment.Date)
+      console.log(appointment.DateFormat)
+      await Notification.create({
+          notificationID: notificationID,
+          CustomerID: appointment.CustomerID,
+          AppointmentID: appointment.AppointmentID, // Fixed: appointmentID -> appointment.AppointmentID
+          Message: `Lịch hẹn ${serviceNotification} ngày ${appointment.DateFormat} của bạn đã hoàn tất`,
+      });
+    } catch (error) {
+      console.log("Lỗi khi tạo thông báo:", error);
+    }
       req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
       res.redirect("/doctor/appointment")
     } catch (error) {
@@ -575,7 +598,7 @@ module.exports.healthyFishPost = async(req, res) => {
       Total: req.body.totalFee,
       Status: "Đã thanh toán"
     })
-    const appointment = await Appointment.findOne({
+    let appointment = await Appointment.findOne({
       where: {
           VetID: res.locals.user.VetID,
           Process: "Process"
@@ -610,6 +633,27 @@ await Appointment.update({
   //           Process: "Process"
   //       }
   //   })
+  try {
+    const notificationID = await generateUserId("notification","notificationID","NO");
+   
+    let serviceNotification ;
+    if(appointment.ServiceID =="DV0001"){
+        serviceNotification = "Khám sức khỏe";
+    }else if(appointment.ServiceID =="DV0002"){
+        serviceNotification = "Cải thiện môi trường hồ";
+    }
+    appointment.DateFormat = formatDate(appointment.Date)
+    console.log(appointment.DateFormat)
+    await Notification.create({
+        notificationID: notificationID,
+        CustomerID: appointment.CustomerID,
+        AppointmentID: appointment.AppointmentID, // Fixed: appointmentID -> appointment.AppointmentID
+        Message: `Lịch hẹn ${serviceNotification} ngày ${appointment.DateFormat} của bạn đã hoàn tất`,
+    });
+  } catch (error) {
+    console.log("Lỗi khi tạo thông báo:", error);
+  }
+
     req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
     res.redirect("/doctor/appointment")
   } catch (error) {

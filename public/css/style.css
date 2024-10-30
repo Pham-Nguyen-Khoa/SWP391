@@ -3006,8 +3006,246 @@ header {
     background-color: #f5f5f5;
 }
 
+.notification-container {
+    position: relative;
+    margin-left: 20px;
+}
 
-<<<<<<< HEAD
+.notification-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: #F1F1F1;
+    transition: color 0.3s ease;
+}
 
-=======
->>>>>>> 6c255d8d80848adaf0a05743afafda7bc30abe37
+.notification-icon:hover {
+    color: #FFD700;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #cf3636;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    animation: pulse 1.5s infinite;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 250%;
+    right: -110px;
+    width: 350px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.notification-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+}
+
+.notification-header span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+.notification-header a {
+    color: #1a73e8;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.notification-header a:hover {
+    text-decoration: underline;
+}
+
+.notification-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.notification-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notification-item:hover {
+    background-color: #f5f5f5;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
+    position: relative;
+}
+
+.notification-item.unread::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #1a73e8;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.notification-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.notification-icon-type {
+    font-size: 16px;
+    color: #1a73e8;
+}
+
+.notification-icon-type-finish {
+    font-size: 16px;
+    color: #00d36f;
+}
+
+.notification-item.unread .notification-message {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+.notification-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.notification-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.notification-footer {
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+}
+
+.notification-footer a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.notification-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Thêm mũi tên chỉ lên */
+.notification-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 110px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+/* Thêm bóng cho mũi tên */
+.notification-dropdown::after {
+    content: '';
+    position: absolute;
+    top: -11px;
+    right: 110px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgba(0,0,0,0.1);
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-item.unread {
+    animation: slideIn 0.3s ease-out;
+}
+
+
+.no-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.no-notification .notification-message {
+    width: 100%;
+    text-align: center;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.empty-notification-icon {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 8px;
+}

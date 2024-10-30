@@ -269,7 +269,7 @@ block main
         +alert-success("5000")
         .profile-container
             .profile-header
-                form.form-avatar(action="/profile/save-avatar", method="post",  enctype="multipart/form-data")
+                form.form-avatar(action="/koi/profile/save-avatar", method="post",  enctype="multipart/form-data")
                     .avatar-container
                         if userInfo.Avatar
                             img.avatar(src=userInfo.Avatar, alt="Avatar")
