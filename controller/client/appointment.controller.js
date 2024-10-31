@@ -8,6 +8,10 @@ const Appointment = require("../../models/appointment.model");
 const Bill = require("../../models/bill.model");
 const Customer = require("../../models/customer.model");
 const NodeMailer = require("../../helpers/nodemailer");
+const Notification = require("../../models/notification.model");
+
+
+
 const generateUserId = async (rolePrefix, table, id) => {
   const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
   const [results] = await db.query(query);
@@ -15,6 +19,10 @@ const generateUserId = async (rolePrefix, table, id) => {
   const newId = maxId + 1;
   return `${rolePrefix}${String(newId).padStart(4, "0")}`;
 };
+
+
+
+
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -153,17 +161,24 @@ module.exports.indexPost = async (req, res) => {
       BillID: BillID,
     });
 
-    // const queryDoctorAvailable = `
-    // SELECT sc.VetID
-    // FROM schedule sc
-    // JOIN shiftdetail sd ON sc.ScheduleID = sd.ScheduleID
-    // WHERE sc.Time = '${req.body.select_date}'
-    // AND sd.Shift = '${req.body.shift}'
-    // AND sd.AppointmentID IS NULL;
-    //   `
-    // const DoctorAvailable = (await Sequelize.query(queryDoctorAvailable));
-    // const vetIDs = [...new Set(DoctorAvailable.flat().map(doctor => doctor.VetID))];
-    // console.log(vetIDs);
+    try {
+      const notificationID = await generateUserId("NO","notification","notificationID");
+      const appointmentData = await Appointment.findOne({
+        raw: true,
+        where: {
+          AppointmentID:  AppointmentID
+        }
+      })
+      appointmentData.DateFormat = formatDate(appointmentData.Date)
+      await Notification.create({
+          notificationID: notificationID,
+          CustomerID: appointmentData.CustomerID,
+          AppointmentID: appointmentData.AppointmentID, 
+          Message: `Lịch hẹn Tư Vấn Online ngày ${appointmentData.DateFormat} của bạn đã được tiếp nhận`,
+      });
+    } catch (error) {
+      console.log("Lỗi khi tạo thông báo:", error);
+    }
 
   } else if(req.body.service == "Tư Vấn Online" && req.body.doctor !== "Tự chọn") {
     const AppointmentID = await generateUserId(
@@ -223,7 +238,26 @@ module.exports.indexPost = async (req, res) => {
         StatusPaid: "Đã thanh toán",
         BillID: BillID,
       });
-  
+
+
+      try {
+        const notificationID = await generateUserId("NO","notification","notificationID");
+        const appointmentData = await Appointment.findOne({
+          raw: true,
+          where: {
+            AppointmentID:  AppointmentID
+          }
+        })
+        appointmentData.DateFormat = formatDate(appointmentData.Date)
+        await Notification.create({
+            notificationID: notificationID,
+            CustomerID: appointmentData.CustomerID,
+            AppointmentID: appointmentData.AppointmentID, 
+            Message: `Lịch hẹn Tư Vấn Online ngày ${appointmentData.DateFormat} của bạn đã được tiếp nhận`,
+        });
+      } catch (error) {
+        console.log("Lỗi khi tạo thông báo:", error);
+      }
       //Update lại lịch của ông bác sĩ
       const queryUpdate = `
   UPDATE shiftdetail sd
