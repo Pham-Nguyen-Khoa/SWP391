@@ -946,10 +946,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const messagesContainer = document.querySelector('.ai-chatbox-messages');
 
   chatButton.addEventListener('click', function() {
-    const messageElement = document.createElement('div');
-    messageElement.setAttribute('data-sender', 'AI');
-    messageElement.textContent = 'Xin chào, tôi là trợ lý AI của Healthy Koi. Tôi có thể giúp gì cho bạn hôm nay?';
-    messagesContainer.appendChild(messageElement);
+    const fisrtMessage = chatbox.querySelector("#fisrtMessage");
+    if(!fisrtMessage){
+      const messageElement = document.createElement('div');
+      messageElement.id ="fisrtMessage";
+      messageElement.setAttribute('data-sender', 'AI');
+      messageElement.textContent = 'Xin chào, tôi là trợ lý AI của Healthy Koi. Tôi có thể giúp gì cho bạn hôm nay?';
+      messagesContainer.appendChild(messageElement);
+    }
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     chatbox.style.display = 'block';
   });
