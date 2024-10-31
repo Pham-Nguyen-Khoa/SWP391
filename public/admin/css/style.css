@@ -1,3 +1,7 @@
+.body{
+    overflow: hidden;
+}
+
 .header{
     background: #202020;
     padding: 10px;

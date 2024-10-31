@@ -1,43 +1,46 @@
 footer.footer.sticky-bottom 
     .footer-container(style="margin: 0 5px; overflow: hidden;")
-        .footer-content.mt-5(style="display: flex; justify-content: space-between; align-items: flex-start;")
-            .map.mr-5.ml-5
-                #mapEmbed
-                    != SettingGeneral.MapEmbed  
-            .service-footer(style="max-width: 300px;").mr-5
-                h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;") Dịch vụ
-                ul.services-list(style="font-size: 18px;")
-                    li.services-item 
-                        a(class = "services-item-link" href = '/koi/envConsult') ◉ Tư vấn và cải thiện hồ 
-                    li.services-item 
-                        a(class = "services-item-link" href = '/koi/checkUp') ◉ Khám bệnh 
-                    li.services-item 
-                        a(class = "services-item-link" href = '/koi/onlConsult') ◉ Tư vấn online
-            .about-footer(style="max-width: 300px;").mr-5
-                h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Thông tin
-                ul.about-us-list(style="font-size: 18px;")
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href = '/koi/aboutUs') ◉ Về chúng tôi
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href = '/koi/community') ◉ Cộng đồng
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href = '/koi/news') ◉ Tin tức 
-            .contact-footer(style="max-width: 300px;").mr-5
-                h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Liên hệ
-                ul.info-list(style="font-size: 18px;")   
-                    li.info-item 📧 #{SettingGeneral.Email}
-                    li.info-item 📞 #{SettingGeneral.PhoneNumber}
-                    li.info-item 🕒 #{SettingGeneral.TimeOpen} 
-            .address-footer(style="max-width: 300px;").mr-3
-                h2(style=" margin-bottom: 20px;color: #ffcc00;")  Địa chỉ
-                p.adress 🏠 #{SettingGeneral.Address}
-            .about-footer(style="max-width: 300px;")
-                h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Mạng xã hội
-                ul.about-us-list(style="font-size: 18px;")
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href =  SettingGeneral.Instagram target="_blank") <i class="fa-brands fa-instagram"></i> Instagram
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href =  SettingGeneral.Facebook target="_blank") <i class="fa-brands fa-facebook"></i> Facebook
-                    li.about-us-item 
-                        a(class = "about-us-item-link" href =  SettingGeneral.Messenger target="_blank") <i class="fa-brands fa-facebook-messenger"></i> Messager 
+        .footer-content.mt-5
+            .row(style="display: flex; justify-content: space-between; align-items: flex-start;")
+                .col-md-3
+                    .map.mr-5.ml-5
+                        #mapEmbed
+                            != SettingGeneral.MapEmbed  
+                .col-md-9(style="display: flex; justify-content: space-between; align-items: flex-start;")
+                    .service-footer(style="max-width: 300px;").mr-5
+                        h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;") Dịch vụ
+                        ul.services-list(style="font-size: 18px;")
+                            li.services-item 
+                                a(class = "services-item-link" href = '/koi/envConsult') ◉ Tư vấn và cải thiện hồ 
+                            li.services-item 
+                                a(class = "services-item-link" href = '/koi/checkUp') ◉ Khám bệnh 
+                            li.services-item 
+                                a(class = "services-item-link" href = '/koi/onlConsult') ◉ Tư vấn online
+                    .about-footer(style="max-width: 300px;").mr-5
+                        h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Thông tin
+                        ul.about-us-list(style="font-size: 18px;")
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href = '/koi/aboutUs') ◉ Về chúng tôi
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href = '/koi/community') ◉ Cộng đồng
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href = '/koi/news') ◉ Tin tức 
+                    .contact-footer(style="max-width: 300px;").mr-5
+                        h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Liên hệ
+                        ul.info-list(style="font-size: 18px;")   
+                            li.info-item 📧 #{SettingGeneral.Email}
+                            li.info-item 📞 #{SettingGeneral.PhoneNumber}
+                            li.info-item 🕒 #{SettingGeneral.TimeOpen} 
+                    .address-footer(style="max-width: 300px;").mr-3
+                        h2(style=" margin-bottom: 20px;color: #ffcc00;")  Địa chỉ
+                        p.adress 🏠 #{SettingGeneral.Address}
+                    .about-footer(style="max-width: 300px;")
+                        h2(style="margin-left: 37px;margin-bottom: 20px;color: #ffcc00;")  Mạng xã hội
+                        ul.about-us-list(style="font-size: 18px;")
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href =  SettingGeneral.Instagram target="_blank") <i class="fa-brands fa-instagram"></i> Instagram
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href =  SettingGeneral.Facebook target="_blank") <i class="fa-brands fa-facebook"></i> Facebook
+                            li.about-us-item 
+                                a(class = "about-us-item-link" href =  SettingGeneral.Messenger target="_blank") <i class="fa-brands fa-facebook-messenger"></i> Messager 
     .copyright #{SettingGeneral.Copyright}

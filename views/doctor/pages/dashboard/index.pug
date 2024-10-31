@@ -51,47 +51,47 @@ block main
                 //-                 h2 Cuộc hẹn hôm nay
                 //-                 p 085
 
-            .dashboard-doctor-chart
-                .dashboard-doctor-chart-content.row
-                    .chart.col-md-4.appointment-content.px-2.appointment-today
-                        .card(style=(listFeedback.length > 0) ? "height: auto;" : "height: auto;")
-                            strong Feedback
-                            .feedback-chart(style="height: 250px;")
-                                canvas#chartContainer2(style="position: relative; height:400px; width:100%")
-                            if(listFeedback.length > 0)
-                                table#feedback-table
-                                    thead
-                                        tr
-                                            th Khách hàng
-                                            th Nội dung
-                                            th Số sao
-                                            th Chi tiết
-                                    tbody
-                                        each feedback,index in listFeedback
-                                            tr 
-                                                td #{feedback.FullName}
-                                                td #{feedback.Content}
-                                                td 
-                                                    .star-rating
-                                                        - for (var i = 0; i < feedback.Star; i++)
-                                                            span.star.filled ★
-                                                        - for (var i = 0; i < 5 - feedback.Star; i++)
-                                                            span.star ★
-                                                td 
-                                                    a(href=`/doctor/appointment/detail/${feedback.AppointmentID}`) Xem chi tiết
-                            else 
-                                p.no-feedback Không có feedback nào
-                            if(allFeedback.length > limit)
-                                button.btn.btn-primary#openFeedbackModal Xem tất cả feedback
-                    .chart.col-md-8.appointment-content.appointment-today.px-2
-                        .card(style="height: 586px;")
-                            .filter-appointment-chart.d-flex.justify-content-between
-                                strong Biểu đồ lịch hẹn theo thời gian
-                                div.button-group
-                                    button.btn.btn-outline-primary(type="button" id="filterByDay") Theo Ngày
-                                    button.btn.btn-outline-primary.m-2.active(type="button" id="filterByMonth") Theo Tháng
-                                    button.btn.btn-outline-primary(type="button" id="filterByYear") Theo Năm
-                            canvas#appointmentLineChart(style="height: 300px; width: 100%;")
+        .dashboard-doctor-chart
+            .dashboard-doctor-chart-content.row
+                .chart.col-md-4.appointment-content.px-2.appointment-today
+                    .card(style=(listFeedback.length > 0) ? "height: auto;" : "height: auto;")
+                        strong Feedback
+                        .feedback-chart(style="height: 250px;")
+                            canvas#chartContainer2(style="position: relative; height:400px; width:100%")
+                        if(listFeedback.length > 0)
+                            table#feedback-table
+                                thead
+                                    tr
+                                        th Khách hàng
+                                        th Nội dung
+                                        th Số sao
+                                        th Chi tiết
+                                tbody
+                                    each feedback,index in listFeedback
+                                        tr 
+                                            td #{feedback.FullName}
+                                            td #{feedback.Content}
+                                            td 
+                                                .star-rating
+                                                    - for (var i = 0; i < feedback.Star; i++)
+                                                        span.star.filled ★
+                                                    - for (var i = 0; i < 5 - feedback.Star; i++)
+                                                        span.star ★
+                                            td 
+                                                a(href=`/doctor/appointment/detail/${feedback.AppointmentID}`) Xem chi tiết
+                        else 
+                            p.no-feedback Không có feedback nào
+                        if(allFeedback.length > limit)
+                            button.btn.btn-primary#openFeedbackModal Xem tất cả feedback
+                .chart.col-md-8.appointment-content.appointment-today.px-2
+                    .card(style="height: 586px;")
+                        .filter-appointment-chart.d-flex.justify-content-between
+                            strong Biểu đồ lịch hẹn theo thời gian
+                            div.button-group
+                                button.btn.btn-outline-primary(type="button" id="filterByDay") Theo Ngày
+                                button.btn.btn-outline-primary.m-2.active(type="button" id="filterByMonth") Theo Tháng
+                                button.btn.btn-outline-primary(type="button" id="filterByYear") Theo Năm
+                        canvas#appointmentLineChart(style="height: 300px; width: 100%;")
     
         #feedbackModal.modal.fade
             .modal-dialog.modal-lg

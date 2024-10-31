@@ -76,12 +76,10 @@ ul.dropdown-menu {
     z-index: 1;
   }
   
-  /* Khi hover vào .nav-item, hiển thị dropdown-menu */
   li.nav-item.dropdown:hover ul.dropdown-menu {
     display: block;
   }
   
-  /* Cấu hình thêm cho các item bên trong dropdown */
   ul.dropdown-menu li a {
     padding: 10px 20px;
     text-decoration: none;
@@ -250,15 +248,11 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     width: 100%;
     height: 550px;
     object-fit: unset;
+
 }
 .banner{
-<<<<<<< HEAD
     /* border-bottom-left-radius: 40px;
     border-bottom-right-radius: 40px; */
-=======
-    /* border-bottom-left-radius: 180px;
-    border-bottom-right-radius: 180px; */
->>>>>>> 778d6763a8aa39694748eae81fc8201899b83210
     border: 2px solid #000000;
     background-image: url('/images/KoiBanner.jpg');
     background-position: center;
@@ -3012,7 +3006,3 @@ header {
 }
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c255d8d80848adaf0a05743afafda7bc30abe37
