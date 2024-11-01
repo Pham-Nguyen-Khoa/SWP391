@@ -1088,3 +1088,29 @@
 .modal-footer-confirm{
     margin: 0 auto;
 }
+
+
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.pagination .btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.pagination .btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+
+.pagination .btn-primary {
+    background-color: #3498db;
+    color: white;
+}

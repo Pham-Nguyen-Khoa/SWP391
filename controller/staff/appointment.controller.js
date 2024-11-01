@@ -17,6 +17,16 @@ const Notification = require("../../models/notification.model");
 
 // [Get] /staff/appointment
 module.exports.index =  async (req, res) => {
+        //Pagination
+    const page = req.query.page || 1;
+    const limit = 10;
+    if(page < 1){
+        req.flash("error", "Trang không tồn tại");
+        res.redirect("/staff/feedback");
+        return;
+    }
+    let skip = (page-1)*limit;
+    //End Pagination
     let queryListAppointment ;
     if(req.query.process == "pending"){
         queryListAppointment = `SELECT a.*, s.*, c.*, a.Name AS NameCustomer, v.FullName AS NameVet ,a.Address As AdressAppointment
@@ -102,13 +112,33 @@ if (req.query.date) {
   }
   
 
+
   if (req.query.sort) {
-    queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+    queryListAppointment += ` ORDER BY   a.AppointmentID ${req.query.sort}`;
+  }else{
+    queryListAppointment += ` ORDER BY AppointmentID DESC`
   }
+   
+      queryListAppointment += ` LIMIT ${limit} OFFSET ${skip}`
     
-  
     const [listAppointment] = await Sequelize.query(queryListAppointment);
-    const [listAppointmentOrigin] = await Sequelize.query(`SELECT a.*, s.*, c.*, a.Name As NameCustomer,a.Address As AdressAppointment FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`);
+    let  queryListAppointmentOrigin = `SELECT a.*, s.*, c.*, a.Name As NameCustomer,a.Address As AdressAppointment FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`;
+    const [listAppointmentOrigin] = await Sequelize.query(queryListAppointmentOrigin);
+    
+    //Pagination
+    let  queryTotalsAppointment = `SELECT COUNT(*) as total FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID`;
+    if(conditions.length > 0){
+        queryTotalsAppointment += ` WHERE ` + conditions.join(' AND ');
+    }
+    if(req.query.process){
+        queryTotalsAppointment += ` WHERE Process = '${req.query.process}'`;
+    }
+
+
+    const [totalsAppointment] = await Sequelize.query(queryTotalsAppointment);
+    let   totalAppointment = totalsAppointment[0].total;
+    const totalPages = Math.ceil(totalAppointment / limit);
+    //End Pagination
     listAppointment.forEach(appointment => {
         appointment.DateFormat = formatDate(appointment.Date);
       });
@@ -135,7 +165,10 @@ if (req.query.date) {
         sort: req.query.sort,
         filterType: filterType,
         searchName: req.query.searchName,
-        processFilter: req.query.process
+        processFilter: req.query.process,     
+        totalPages: totalPages,
+        currentPage: page,
+        services: req.query.services
     })
   }
     

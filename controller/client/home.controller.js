@@ -11,6 +11,8 @@ const axios = require('axios');
 const { GoogleGenerativeAI } = require("@google/generative-ai")
 const checkEmailHelper = require("../../helpers/checkMail");
 const Notification = require("../../models/notification.model");
+const { raw } = require("body-parser");
+const Service = require("../../models/service.model");
 
 
 // [GET] localhost:/koi
@@ -99,11 +101,30 @@ module.exports.editProfilePost = async (req, res) => {
   res.redirect("back")
 }
 
-
+ function formatPrice(price) {
+  const [integerPart, decimalPart] = price.toString().split('.');
+  const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  const formattedPrice = decimalPart
+    ? `${formattedInteger},${decimalPart}`
+    : formattedInteger;
+  return `${formattedPrice}`;
+}
 // [GET] localhost:/koi/contact
 module.exports.contact = async (req, res) => {
+  const services = await Service.findAll({
+    raw: true
+  })
+  services.forEach(service => {
+    service.Price = formatPrice(service.Price)
+    if(service.Name == "Cải Thiện Môi Trường") {
+      service.AddMore = formatPrice(service.AddMore)
+    }else if(service.Name == "Khám Sức Khỏe") {
+      service.AddMore = formatPrice(service.AddMore)
+    }
+  })
   res.render("client/pages/home/contact.pug", {
     pageTitle: "Trang liên hệ",
+    services: services
   });
 };
 
