@@ -10,31 +10,40 @@ block main
             a.community-title(href='/koi' style="font-size: 1.5rem; color: white; border-radius: 5px; ") Trang chủ
             p.community-title(style="font-size: 1.5rem; border-radius: 5px; padding-left:10px; color: #b9daf8;") / Các dịch vụ tại Koi Healthy
         .container-fluid
-            .row(style="padding: 40px;")    
-                .col-md-4
-                    .card.contact-card
-                        .card-body-contact
-                            img(src="/images/contact1.jpg", alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; min-height:5rem;")
-                            h3.card-contact-title Tư vấn về sức khỏe của cá Koi
-                            p.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn cho các khách hàng đang tìm kiếm hướng dẫn và hỗ trợ trong các trường hợp liên quan đến cá Koi.
-                            h5.card-contact-price Giá : 500.000 VNĐ
-                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
-                .col-md-4
-                    .card.contact-card
-                        .card-body-contact
-                            img(src="/images/contact2.jpg", alt="Contact 2" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
-                            h3.card-contact-title Cải thiện môi trường hồ cá
-                            p.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn trực tiếp về cải thiện môi trường sống cho tất cả các chủ nuôi cá cảnh.
-                            h5.card-contact-price Giá : 1.000.000 VNĐ phí dịch vụ + 200.000 VNĐ/Hồ 
-                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn  
-                .col-md-4
-                    .card.contact-card
-                        .card-body-contact
-                            img(src="/images/contact3.jpg", alt="Contact 3" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
-                            h3.card-contact-title Khám sức khỏe cho cá Koi
-                            p.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn.
-                            h5.card-contact-price Giá : 1.500.000 VNĐ phí dịch vụ + 200.000 VNĐ/Cá 
-                            button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
+            .row(style="padding: 40px;")  
+                each service in services
+                    .col-md-4
+                        .card.contact-card
+                            .card-body-contact
+                                img(src=service.Thumbnail, alt="Contact 1" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px; min-height:5rem;")
+                                if(service.Name === "Cải Thiện Môi Trường")
+                                    h3.card-contact-title Tư vấn #{service.Name} của hồ cá
+                                else
+                                    h3.card-contact-title Tư vấn #{service.Name} của cá Koi
+                                p.card-contact-content #{service.Description}
+                                if(service.Name === "Tư Vấn Online")
+                                    h5.card-contact-price Giá : #{service.Price} VNĐ phí dịch vụ 
+                                else if(service.Name === "Cải Thiện Môi Trường")
+                                    h5.card-contact-price Giá : #{service.Price} VNĐ phí dịch vụ + #{service.AddMore} VNĐ/Hồ 
+                                else if(service.Name === "Khám Sức Khỏe")
+                                    h5.card-contact-price Giá : #{service.Price} VNĐ phí dịch vụ + #{service.AddMore} VNĐ/Cá 
+                                button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
+                //- .col-md-4
+                //-     .card.contact-card
+                //-         .card-body-contact
+                //-             img(src="/images/contact2.jpg", alt="Contact 2" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
+                //-             h3.card-contact-title Cải thiện môi trường hồ cá
+                //-             p.card-contact-content Chúng tôi cung cấp dịch vụ tư vấn trực tiếp về cải thiện môi trường sống cho tất cả các chủ nuôi cá cảnh.
+                //-             h5.card-contact-price Giá : 1.000.000 VNĐ phí dịch vụ + 200.000 VNĐ/Hồ 
+                //-             button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn  
+                //- .col-md-4
+                //-     .card.contact-card
+                //-         .card-body-contact
+                //-             img(src="/images/contact3.jpg", alt="Contact 3" style="height: 200px; object-fit: cover; width: 100%; border-radius: 20px;")
+                //-             h3.card-contact-title Khám sức khỏe cho cá Koi
+                //-             p.card-contact-content Chúng tôi cung cấp dịch vụ khám ngoại cho cá nhằm đảm bảo sức khỏe tối ưu cho vật nuôi của bạn.
+                //-             h5.card-contact-price Giá : 1.500.000 VNĐ phí dịch vụ + 200.000 VNĐ/Cá 
+                //-             button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
         .container-fluid(style="padding: 40px;")
                 h2(style="text-align: center; font-family: 'Oswald', sans-serif; font-size: 2.5rem; margin-bottom: 50px;") Hướng dẫn dùng dịch vụ của chúng tôi
                 .row
