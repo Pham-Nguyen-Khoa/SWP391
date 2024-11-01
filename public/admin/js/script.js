@@ -194,7 +194,8 @@ function showInfoModal(id) {
         margin: 0 auto;
         background: #ffffff;
         border-radius: 12px;
-        box-shadow: 0 -5px 20px rgba(0, 50, 100, 0.08);
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 -10px 15px rgba(0, 50, 100, 0.08);
       }
 
       .info-row {
