@@ -100,11 +100,11 @@ block main
         }
         }
         .dashboard-card-content .revenue {
-        color: #28a745;  /* màu xanh lá cho doanh thu */
+        color: #28a745;  
         }
 
         .dashboard-card-content .orders {
-        color: #007bff;  /* màu xanh dương cho số đơn */
+        color: #007bff;
         }
 
         /* CSS mới cho phần dịch vụ */
@@ -167,11 +167,10 @@ block main
 
     +alert-success("5000")
     +alert-error('5000')
-    
     .dashboard-block-sider(style="margin-left:180px;")
         .dashboard-vet
             .dashboard-vet-header.row.mb-5
-                .col-md-6
+                .col-md-4
                     .dashboard-card
                         .dashboard-card-body.d-flex.align-items-center
                             i.fas.fa-users.text-4xl.text-blue-500.mr-4
@@ -179,13 +178,20 @@ block main
                                 h2 Tổng số doanh thu 
                                 p#totalAmount
                             
-                .col-md-6
+                .col-md-4
                     .dashboard-card
                         .dashboard-card-body.d-flex.align-items-center
                             i.fas.fa-user-plus.text-4xl.text-blue-500.mr-4
                             .dashboard-card-content   
                                 h2 Tổng số đơn
                                 p#totalOrders
+                .col-md-4
+                    .dashboard-card
+                        .dashboard-card-body.d-flex.align-items-center
+                            #productivityIcon.text-4xl.mr-4
+                            .dashboard-card-content
+                                h2 Hiệu suất
+                                p#productivity
                 .col-md-3
                     .dashboard-radio-group
                         label Thời gian:
@@ -250,11 +256,9 @@ block main
         const data = !{JSON.stringify(data)};
         const currentMonth = new Date().getMonth();
 
-        // Tổng số doanh thu và đơn hàng
-        const totalAmount = data.totalByMonth.totalAmount[currentMonth];
-        const totalOrders = data.totalByMonth.totalOrders[currentMonth];
-        document.getElementById('totalAmount').textContent = formatCurrency(totalAmount);
-        document.getElementById('totalOrders').textContent = totalOrders;
+        document.getElementById('totalAmount').textContent = formatCurrency(data.total.totalAmount);
+        document.getElementById('totalOrders').textContent = data.total.totalOrders;
+
 
         // Thông tin cho từng dịch vụ
         const services = ['DV0001', 'DV0002', 'DV0003'];
@@ -267,11 +271,49 @@ block main
         services.forEach(service => {
             const revenue = data.servicesByMonth[service].totalAmount[currentMonth];
             const orders = data.servicesByMonth[service].totalOrders[currentMonth];
-            console.log(revenue);
-            console.log(revenue);
 
             const serviceName = serviceNames[service];
             document.getElementById(`${serviceName}Revenue`).textContent = `${formatCurrency(revenue)}`;
             document.getElementById(`${serviceName}Orders`).textContent = `${orders}`;
         });
+        console.log(currentMonth)
+        console.log(data.totalByMonth.totalAmount[currentMonth]);
+
+        const calculateProductivity = () => {
+            const currentMonth = new Date().getMonth();
+            const currentMonthAmount = data.totalByMonth.totalAmount[currentMonth] || 0;
+            const lastMonthAmount = data.totalByMonth.totalAmount[currentMonth - 1] || 0;
+
+            if (lastMonthAmount === 0) {
+                return currentMonthAmount > 0 ? 1 : 0; 
+            }
+            return ((currentMonthAmount - lastMonthAmount) / lastMonthAmount);
+        };
+
+        const productivityElement = document.getElementById('productivity');
+        const productivityIcon = document.getElementById('productivityIcon');
+        const productivity = calculateProductivity();
+        const formattedProductivity = (productivity * 100).toFixed(2);
+
+        if (productivity > 0) {
+            productivityIcon.innerHTML = '<i class="fas fa-arrow-up" style="color: #22c55e; font-size: 24px;"></i>';
+            productivityElement.innerHTML = `
+                <span style="color: #22c55e; font-weight: bold;">
+                    ${formattedProductivity}%
+                </span>`;
+        } else if (productivity < 0) {
+            productivityIcon.innerHTML = '<i class="fas fa-arrow-down" style="color: #ef4444; font-size: 24px;"></i>';
+            productivityElement.innerHTML = `
+                <span style="color: #ef4444; font-weight: bold;">
+                    -${Math.abs(formattedProductivity)}%
+                </span>`;
+        } else {
+            productivityIcon.innerHTML = '<i class="fas fa-minus" style="color: #6b7280; font-size: 24px;"></i>';
+            productivityElement.innerHTML = `
+                <span style="color: #6b7280; font-weight: bold;">
+                    0%
+                </span>`;
+        }
+
+
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
