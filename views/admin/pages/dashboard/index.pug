@@ -2,6 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug  
 
 block main
+    
     style.
         .dashboard-block-sider {
         background-color: #f8f9fa;
@@ -169,6 +170,8 @@ block main
     +alert-error('5000')
     
     .dashboard-block-sider(style="margin-left:180px;")
+        //- pre 
+        //-     code=JSON.stringify(data, null, 2)
         .dashboard-vet
             .dashboard-vet-header.row.mb-5
                 .col-md-6

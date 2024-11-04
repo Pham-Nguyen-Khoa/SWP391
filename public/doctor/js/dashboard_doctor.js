@@ -1,4 +1,5 @@
 const ctx2 = document.getElementById("chartContainer2").getContext("2d");
+console.log(star);
 if (ctx2) {
   new Chart(ctx2, {
     type: "bar",
@@ -73,6 +74,7 @@ if (modalFeedBack) {
     $("#feedbackModal").modal("show");
   });
 }
+
 const monthArray = [];
 for (let i = 1; i <= 12; i++) {
   monthArray.push(i.toString()); // Chuyển số thành chuỗi và thêm vào mảng
@@ -147,14 +149,17 @@ if (filterByDay) {
   for (let i = 1; i <= 31; i++) {
     dayArray.push(i.toString());
   }
-
   let appointmentDataDayCount = new Array(31).fill(0);
   appointmentData.forEach((appointment) => {
-    const date = new Date(appointment.Date);
-    const day = date.getDate() - 1;
+    const MonthAppointment = appointment.Date.split("-")[1];
+    const MonthCurrent = new Date().getMonth() + 1;
+    if(MonthAppointment === MonthCurrent){
+      const date = new Date(appointment.Date);
+      const day = date.getDate() - 1;
 
-    if (day >= 0 && day < 31) {
-      appointmentDataDayCount[day] += 1;
+      if (day >= 0 && day < 31) {
+        appointmentDataDayCount[day] += 1;
+      }
     }
   });
   console.log(appointmentDataDayCount);

@@ -26,9 +26,12 @@
     margin: 15px;
     position: relative;
     /* left: 150px; */
-    left: 8%;
+    left: 7%;
     width: calc(100% - 180px);
+   overflow-x: hidden;
 }
+
+
 
 
 .sider .inner-menu ul {
@@ -1242,10 +1245,73 @@ label[for^="medicationSelect"]:hover {
   }
 
 /* Dashboard Doctor */
+@media screen and (max-width: 1200px) {
+    .dashboard-doctor {
+        margin: 3% 2% 0 0;
+        height: auto; /* Thay đổi height thành auto */
+    }
 
+    .dashboard-doctor-chart-content {
+        margin-top: 10px; /* Giảm margin */
+    }
+
+    /* Điều chỉnh bảng để fit màn hình */
+    .dashboard-doctor-chart-content .appointment-today table {
+        width: 100%;
+        display: block;
+        overflow-x: auto; /* Cho phép scroll ngang nếu cần */
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .dashboard-doctor {
+        margin: 3% 1% 0 0;
+    }
+    
+    .dashboard-doctor-chart .card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Thêm media query cho màn hình vừa */
+@media screen and (max-width: 800px) {
+    .dashboard-doctor {
+        margin: 3% 0;
+    }
+    
+    .dashboard-doctor-chart-content {
+        padding: 0 10px;
+    }
+    
+    .dashboard-doctor-chart .card {
+        min-height: auto;
+    }
+}
+  
+  /* Add responsive styles for the table scrolling on mobile */
+  @media screen and (max-width: 480px) {
+    .dashboard-doctor-chart-content .appointment-today {
+      overflow-x: auto;
+    }
+  
+    .dashboard-doctor-chart-content .appointment-today table {
+      min-width: 400px; /* Ensure minimum width for scrolling */
+    }
+  
+    .dashboard-doctor .card-content p:first-of-type {
+      font-size: 24px;
+    }
+  
+    .dashboard-doctor i {
+      font-size: 40px;
+    }
+  }
 .dashboard-doctor{
     margin: 3% 3% 0 0;
     font-family: 'Times New Roman', Times, serif;
+    height: 100vh;
+    overflow-x: hidden;
 }
 
 .dashboard-doctor .card{
@@ -1468,7 +1534,8 @@ label[for^="medicationSelect"]:hover {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
     border: none;
-    overflow: hidden;
+    overflow: hidden;   
+    width: 900px;
 }
 
 #feedbackModal .modal-header {
@@ -1670,4 +1737,31 @@ label[for^="medicationSelect"]:hover {
     font-weight: bold; /* Chữ đậm cho tiêu đề */
     text-align: center; /* Căn giữa cho tiêu đề */
     padding: 15px; /* Khoảng cách cho tiêu đề */
+}
+
+
+
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.pagination .btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.pagination .btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+
+.pagination .btn-primary {
+    background-color: #3498db;
+    color: white;
 }
