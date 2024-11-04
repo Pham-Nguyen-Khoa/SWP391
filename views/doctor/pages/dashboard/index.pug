@@ -3,7 +3,10 @@ include ../../mixins/alert.pug
 block main
     +alert-success("5000")
     +alert-error('5000')
+    
     .block-sider(style="width:90%;margin-left:180px;")
+        //- pre 
+        //-     code=JSON.stringify(listFeedback, null, 2)
         .dashboard-doctor
             .dashboard-doctor-header.row.mb-5
                 .col-md-4

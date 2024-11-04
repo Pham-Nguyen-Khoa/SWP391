@@ -50,6 +50,16 @@ function formatPrice(amount) {
 
 // [Get] /doctor/appointment
 module.exports.index = async (req, res) => {
+   //Pagination
+   const page = req.query.page || 1;
+   const limit = 5;
+   if(page < 1){
+       req.flash("error", "Trang không tồn tại");
+       res.redirect("/staff/feedback");
+       return;
+   }
+   let skip = (page-1)*limit;
+   //End Pagination
   let queryListAppointment;
   const VetID = res.locals.user.VetID;
   if (req.query.process == "cancelled") {
@@ -72,11 +82,29 @@ module.exports.index = async (req, res) => {
   }
   if(req.query.sort){
     queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+  }else{
+    queryListAppointment += ` ORDER BY AppointmentID DESC`
   }
+  queryListAppointment += ` LIMIT ${limit} OFFSET ${skip}`
   const [listAppointment] = await Sequelize.query(queryListAppointment);
   const [listAppointmentOrigin] = await Sequelize.query(
     `SELECT a.*, s.*, c.*, a.Name As NameCustomer FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID Where a.VetID = '${VetID}'  And a.Process !='Pending' And a.Process !='Accepted' `
   );
+  
+  //Pagination
+  let  queryTotalsAppointment = `SELECT COUNT(*) as total FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID Where a.VetID = '${VetID}' `;
+
+  
+  if(req.query.process){
+      queryTotalsAppointment += ` And Process = '${req.query.process}'`;
+  }
+
+
+  const [totalsAppointment] = await Sequelize.query(queryTotalsAppointment);
+  let   totalAppointment = totalsAppointment[0].total;
+  const totalPages = Math.ceil(totalAppointment / limit);
+  //End Pagination
+
   listAppointment.forEach(appointment => {
     appointment.DateFormat = formatDate(appointment.Date);
   });
@@ -98,7 +126,9 @@ module.exports.index = async (req, res) => {
     sort: req.query.sort,
     dateFormat: dateFormat,
     filterType: filterType,
-    processFilter: req.query.process
+    processFilter: req.query.process,
+    totalPages: totalPages,
+    currentPage: page,
   });
 };
 

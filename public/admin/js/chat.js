@@ -103,6 +103,7 @@ socket.on("SERVER-RETURN-MESSAGE", (data) => {
 
 // SCROLL TO BOTTOM
 const chatBody = document.querySelector(".inner-body");
+console.log(chatBody)
 if(chatBody) {  
     chatBody.scrollTop = chatBody.scrollHeight;
 }

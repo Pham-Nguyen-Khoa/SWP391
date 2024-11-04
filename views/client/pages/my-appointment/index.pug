@@ -8,6 +8,8 @@ block main
         +title("Lịch Hẹn Của Bạn")
         +alert-success("5000")
         +alert-error("5000")
+        //- pre 
+        //-     code=JSON.stringify(serviceFilter, null, 2)
         .filter-section
             form#filterForm(action="/koi/my-appointment" method="GET")
                 .row

@@ -10,7 +10,9 @@ const settingMiddleware = require("../../middleware/client/setting.middleware");
 const controller = require("../../controller/client/home.controller");
 module.exports = (app) => {
   app.use(settingMiddleware.SettingMiddleware);
-  
+  app.get("/", (req, res) => {
+    res.redirect("/koi");
+  });
   app.use("/koi",middleware.userInfo , homeRoute);
   app.use("/auth", userRoute);
   app.use("/auth/password/", forgotpPasswordRoute);
