@@ -232,7 +232,7 @@ block main
                       span Xác nhận
       +pagination(totalPages,currentPage)
     script.
-        
+        const totalPages = JSON.stringify(#{totalPages});
         const buttonPagination = document.querySelectorAll('.btn-secondary');
         buttonPagination.forEach(button => {
             button.addEventListener('click', function() {
@@ -276,6 +276,9 @@ block main
 
         const listButtonsDelete = document.querySelectorAll(".button-delete");
         const modalDelete = document.getElementById("modalDistance");
+        console.log("----------------")
+        console.log(listButtonsDelete)
+        console.log("----------------")
        
         listButtonsDelete.forEach(button => {
           button.addEventListener("click",(e) => {
