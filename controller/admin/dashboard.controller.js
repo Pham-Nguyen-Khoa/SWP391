@@ -1,4 +1,3 @@
-
 const Sequelize = require("../../config/database");
 const db = require("../../config/database");
 const Bill = require("../../models/bill.model");
@@ -16,55 +15,59 @@ FROM
 JOIN 
     appointment ON bill.BillID = appointment.BillID  
 WHERE
-    YEAR(appointment.Date) = YEAR(CURDATE()) AND
-    MONTH(appointment.Date) = MONTH(CURDATE()) AND
     bill.Status = 'Đã thanh toán'
 ORDER BY
     date ASC, appointment.ServiceID;`;
 
 
 
-    const listBill = await Sequelize.query(queryFinance);
+    const listBills = await Sequelize.query(queryFinance);
 
     const ListServiceDate = (listBills, ServiceID) => {
         const currentDate = new Date();
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     
-        let totalAmount = new Array(31).fill(0); // Tổng doanh thu mỗi ngày
-        let totalOrders = new Array(31).fill(0); // Tổng đơn hàng mỗi ngày
+        let totalAmount = new Array(31).fill(0);
+        let totalOrders = new Array(31).fill(0);
     
         listBills.forEach(bill => {
             if (bill.ServiceID === ServiceID) {
                 const billDate = new Date(bill.date);
-                if (billDate <= currentDate) {
+                if (billDate.getFullYear() === currentYear && 
+                    billDate.getMonth() === currentMonth) {
                     const dayOfMonth = billDate.getDate() - 1;
                     totalAmount[dayOfMonth] += bill.Total;
-                    totalOrders[dayOfMonth] += 1; // Đếm số đơn hàng
+                    totalOrders[dayOfMonth] += 1;
                 }
             }
         });
-        totalAmount = totalAmount.slice(0, new Date().getDate());
-        totalOrders = totalOrders.slice(0, new Date().getDate());
+        totalAmount = totalAmount.slice(0, daysInMonth);
+        totalOrders = totalOrders.slice(0, daysInMonth);
         return { totalAmount, totalOrders };
     };
     
     
     const ListServiceMonth = (listBills, ServiceID) => {
-        const currentMonth = new Date().getMonth() + 1; // Tháng hiện tại
-        let totalAmount = new Array(12).fill(0); // Tổng doanh thu mỗi tháng
-        let totalOrders = new Array(12).fill(0); // Tổng đơn hàng mỗi tháng
-    
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+        let totalAmount = new Array(12).fill(0);
+        let totalOrders = new Array(12).fill(0);
+
         listBills.forEach(bill => {
             if (bill.ServiceID === ServiceID) {
-                const billMonth = new Date(bill.date).getMonth();
-                if (billMonth <= currentMonth) {
+                const billDate = new Date(bill.date);
+                const billMonth = billDate.getMonth();
+                if (billDate.getFullYear() === currentYear && billMonth <= currentMonth) {
                     totalAmount[billMonth] += bill.Total;
-                    totalOrders[billMonth] += 1; // Đếm số đơn hàng
+                    totalOrders[billMonth] += 1;
                 }
             }
         });
-        totalAmount = totalAmount.slice(0,currentMonth);
-        totalOrders = totalOrders.slice(0,currentMonth);
-
+        totalAmount = totalAmount.slice(0, currentMonth + 1);
+        totalOrders = totalOrders.slice(0, currentMonth + 1);
         return { totalAmount, totalOrders };
     };
     
@@ -81,73 +84,95 @@ ORDER BY
     
         listBills.forEach(bill => {
             const billDate = new Date(bill.date);
-            if (billDate.getFullYear() === currentYear && billDate.getMonth() === currentMonth) {
+            if (billDate.getFullYear() === currentYear && 
+                billDate.getMonth() === currentMonth) {
                 const dayOfMonth = billDate.getDate() - 1;
                 totalAmount[dayOfMonth] += bill.Total;
                 totalOrders[dayOfMonth] += 1;
             }
         });
-        totalAmount = totalAmount.slice(0, new Date().getDate());
-        totalOrders = totalOrders.slice(0, new Date().getDate());
+        totalAmount = totalAmount.slice(0, daysInMonth);
+        totalOrders = totalOrders.slice(0, daysInMonth);
         return { totalAmount, totalOrders };
     };
     
     
     const TotalMonth = (listBills) => {
-        const currentMonth = new Date().getMonth() + 1;
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
         let totalAmount = new Array(12).fill(0);
         let totalOrders = new Array(12).fill(0);
-    
+
         listBills.forEach(bill => {
-            const billMonth = new Date(bill.date).getMonth();
-            if (billMonth <= currentMonth) {
+            const billDate = new Date(bill.date);
+            const billMonth = billDate.getMonth();
+            if (billDate.getFullYear() === currentYear && billMonth <= currentMonth) {
                 totalAmount[billMonth] += bill.Total;
                 totalOrders[billMonth] += 1;
             }
         });
-        totalAmount = totalAmount.slice(0,currentMonth);
-        totalOrders = totalOrders.slice(0,currentMonth);
+        totalAmount = totalAmount.slice(0, currentMonth + 1);
+        totalOrders = totalOrders.slice(0, currentMonth + 1);
         return { totalAmount, totalOrders };
     };
-    
+
+    const Total = (listBills) => {
+        let totalAmount = 0;
+        let totalOrders = 0;
+
+        listBills.forEach(bill => {
+            totalAmount += bill.Total;
+            totalOrders += 1;
+        });
+
+        return { totalAmount, totalOrders };
+    };
+
     const data = {
         servicesByDay: {
             DV0001: {
-                totalAmount: ListServiceDate(listBill[0], 'DV0001').totalAmount,
-                totalOrders: ListServiceDate(listBill[0], 'DV0001').totalOrders
+                totalAmount: ListServiceDate(listBills[0], 'DV0001').totalAmount,
+                totalOrders: ListServiceDate(listBills[0], 'DV0001').totalOrders
             },
             DV0002: {
-                totalAmount: ListServiceDate(listBill[0], 'DV0002').totalAmount,
-                totalOrders: ListServiceDate(listBill[0], 'DV0002').totalOrders
+                totalAmount: ListServiceDate(listBills[0], 'DV0002').totalAmount,
+                totalOrders: ListServiceDate(listBills[0], 'DV0002').totalOrders
             },
             DV0003: {
-                totalAmount: ListServiceDate(listBill[0], 'DV0003').totalAmount,
-                totalOrders: ListServiceDate(listBill[0], 'DV0003').totalOrders
+                totalAmount: ListServiceDate(listBills[0], 'DV0003').totalAmount,
+                totalOrders: ListServiceDate(listBills[0], 'DV0003').totalOrders
             }
         },
         servicesByMonth: {
             DV0001: {
-                totalAmount: ListServiceMonth(listBill[0], 'DV0001').totalAmount,
-                totalOrders: ListServiceMonth(listBill[0], 'DV0001').totalOrders
+                totalAmount: ListServiceMonth(listBills[0], 'DV0001').totalAmount,
+                totalOrders: ListServiceMonth(listBills[0], 'DV0001').totalOrders
             },
             DV0002: {
-                totalAmount: ListServiceMonth(listBill[0], 'DV0002').totalAmount,
-                totalOrders: ListServiceMonth(listBill[0], 'DV0002').totalOrders
+                totalAmount: ListServiceMonth(listBills[0], 'DV0002').totalAmount,
+                totalOrders: ListServiceMonth(listBills[0], 'DV0002').totalOrders
             },
             DV0003: {
-                totalAmount: ListServiceMonth(listBill[0], 'DV0003').totalAmount,
-                totalOrders: ListServiceMonth(listBill[0], 'DV0003').totalOrders
+                totalAmount: ListServiceMonth(listBills[0], 'DV0003').totalAmount,
+                totalOrders: ListServiceMonth(listBills[0], 'DV0003').totalOrders
             }
         },
         totalByDay: {
-            totalAmount: TotalDate(listBill[0]).totalAmount,
-            totalOrders: TotalDate(listBill[0]).totalOrders
+            totalAmount: TotalDate(listBills[0]).totalAmount,
+            totalOrders: TotalDate(listBills[0]).totalOrders
         },
         totalByMonth: {
-            totalAmount: TotalMonth(listBill[0]).totalAmount,
-            totalOrders: TotalMonth(listBill[0]).totalOrders
+            totalAmount: TotalMonth(listBills[0]).totalAmount,
+            totalOrders: TotalMonth(listBills[0]).totalOrders
+        },
+        total: {
+            totalAmount: Total(listBills[0]).totalAmount,
+            totalOrders: Total(listBills[0]).totalOrders
         }
     };
+
+
     res.render("admin/pages/dashboard/index",{
         pageTitle: "Trang tổng quan ",
         data: data 

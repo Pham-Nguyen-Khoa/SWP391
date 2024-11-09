@@ -5,7 +5,7 @@
 //     const { servicesByDay, servicesByMonth, totalByDay, totalByMonth } = data;
 
     let chart;
-    const currentMonthValue = new Date().getMonth() + 1;
+    // const currentMonthValue = new Date().getMonth() + 1;
 
     const months = [
       "Tháng 1",

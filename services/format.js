@@ -52,8 +52,8 @@ function formatDate(dateString) {
     const startOfWeek = new Date();
     startOfWeek.setDate(
       startOfWeek.getDate() - startOfWeek.getDay() + 1 + offset * 7
-    ); 
-  }
+    )}; 
+
 
   module.exports = { formatDate, formatPrice , formatCurrency , generateUserId,shiftToNumber,getDaysOfWeek};
 
