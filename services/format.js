@@ -1,10 +1,11 @@
 function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`; 
-  } 
+  const date = new Date(dateString);
+  const localDate = new Date(date.getTime() + (7 * 60 * 60 * 1000)); // UTC+7
+  const day = String(localDate.getDate()).padStart(2, '0');
+  const month = String(localDate.getMonth() + 1).padStart(2, '0');
+  const year = localDate.getFullYear();
+  return `${day}-${month}-${year}`; 
+}
 
 
 
@@ -55,6 +56,4 @@ function formatDate(dateString) {
 
 
   module.exports = { formatDate, formatPrice , formatCurrency , generateUserId,shiftToNumber,getDaysOfWeek};
-
-
 

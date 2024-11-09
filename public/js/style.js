@@ -759,7 +759,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const intervalId = setInterval(() => {
             checkPaid(priceService, generateRandomText, intervalId);
           }, 1000);    
-        }, 15000);
+        }, 10000);
         // const formAppointment = document.querySelector(".form_appointment");
         // formAppointment.submit();
       } else {
@@ -897,36 +897,35 @@ async function checkPaid(priceService, generateRandomText, intervalId) {
 
 
 
-const marquee = document.querySelector('.marquee');
-let index = 0;
+if (window.location.pathname === '/koi') {
+  const marquee = document.querySelector('.marquee');
+  let index = 0;
 
-function scrollText() {
-  const lines = marquee.querySelectorAll('p');
-  lines.forEach((line, i) => {
-    line.style.display = i === index ? 'block' : 'none';
-  });
-  index = (index + 1) % lines.length;
-}
+  function scrollText() {
+    const lines = marquee.querySelectorAll('p');
+    lines.forEach((line, i) => {
+      line.style.display = i === index ? 'block' : 'none';
+    });
+    index = (index + 1) % lines.length;
+  }
 
-setInterval(scrollText, 5000); 
+  setInterval(scrollText, 5000);
 
-console.log("Neronmen")
-function initializeSlider() {
-  const slide = document.querySelector('.review-slide');
-  const groups = document.querySelectorAll('.review-group');
-  if(slide && groups){
+  function initializeSlider() {
+    const slide = document.querySelector('.review-slide');
+    const groups = document.querySelectorAll('.review-group');
+    if (slide && groups) {
       let currentIndex = 0;
       function nextSlide() {
         currentIndex = (currentIndex + 1) % groups.length;
         slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+      setInterval(nextSlide, 4000);
     }
-  
-    setInterval(nextSlide,4000);
-  
   }
-}
 
-document.addEventListener('DOMContentLoaded', initializeSlider);
+  document.addEventListener('DOMContentLoaded', initializeSlider);
+}
 
 
 
@@ -947,10 +946,14 @@ document.addEventListener('DOMContentLoaded', function() {
   const messagesContainer = document.querySelector('.ai-chatbox-messages');
 
   chatButton.addEventListener('click', function() {
-    const messageElement = document.createElement('div');
-    messageElement.setAttribute('data-sender', 'AI');
-    messageElement.textContent = 'Xin chào, tôi là trợ lý AI của Healthy Koi. Tôi có thể giúp gì cho bạn hôm nay?';
-    messagesContainer.appendChild(messageElement);
+    const fisrtMessage = chatbox.querySelector("#fisrtMessage");
+    if(!fisrtMessage){
+      const messageElement = document.createElement('div');
+      messageElement.id ="fisrtMessage";
+      messageElement.setAttribute('data-sender', 'AI');
+      messageElement.textContent = 'Xin chào, tôi là trợ lý AI của Healthy Koi. Tôi có thể giúp gì cho bạn hôm nay?';
+      messagesContainer.appendChild(messageElement);
+    }
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
     chatbox.style.display = 'block';
   });
@@ -1139,23 +1142,72 @@ if(backToTopBtn) {
   })
 }
 
-// const backToTopBtn = document.getElementById('backToTop');
-// if(backToTopBtn) {
-//   const rollToTop = () => {
-//     if(document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-//       backToTopBtn.style.display = "block";
-//     } else {
-//       backToTopBtn.style.display = "none";
-//     }
-//   }
-  
-//   // Gán hàm cho sự kiện scroll
-//   window.onscroll = rollToTop;
-  
-//   // Xử lý khi nhấn vào nút back-to-top
-//   backToTopBtn.addEventListener("click", () => {
-//     window.scrollTo({top: 0, behavior: "smooth"});
-//   });
+
+// const editAvatar = document.querySelector(".edit-avatar")
+// if(editAvatar) {
+//   editAvatar.addEventListener("click",() => {
+    
+//   })
 // }
 
+function previewImage(event) {
+  const file = event.target.files[0];
+  if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+          document.querySelector('.avatar').src = e.target.result;
+          const saveAvatar = document.querySelector('.save-avatar');
+          saveAvatar.classList.remove('d-none');
 
+      }
+      reader.readAsDataURL(file);
+  }
+}
+
+
+
+
+
+
+
+const notifications =   document.querySelectorAll('.notification-item');
+console.log(notifications)
+if(notifications){
+  notifications.forEach(item => {
+    item.addEventListener("click",() => {
+        const appointmentID = item.querySelector("#notification-id").value;
+        const notificationID = item.querySelector("#notification-url").value;
+        fetch(`/koi/api/update-notification`, {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ notificationID: notificationID })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if(data.success) {
+            window.location.href = `/koi/my-appointment/detail/${appointmentID}`;
+          }
+        })
+    })
+  })
+}
+
+const markAllRead = document.querySelector(".mark-all-read");
+if(markAllRead) {
+  markAllRead.addEventListener("click",() => {
+      fetch(`/koi/api/mark-all-read`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if(data.success) {
+          window.location.reload();
+        }
+      })
+  })
+}

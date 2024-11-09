@@ -15,7 +15,9 @@ body {
     padding: 0;
     font-family: Arial, sans-serif; /* Default font family */
     color: #333; /* Default text color */
-    height: 100%;
+    
+    height: 100vh;
+    
 }
 .footer {
     background: linear-gradient(#333738, #303535cf);
@@ -144,25 +146,21 @@ ul.dropdown-menu {
     margin-left: 1rem;
     font-size: 0.8rem;
     font-size: 20px;
-    /* Slightly smaller font for login/register */
 }
 
 ul.dropdown-menu a.dropdown-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #000;
    font-size: 1.25rem;
 }
 
 ul.dropdown-menu a.dropdown-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
     color: #4475B9  ;
-    /* Change color on hover if needed */
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-    background-color: transparent; /* Hoặc màu bạn muốn */
+    background-color: transparent;
 }
 
 .services-list {
@@ -179,7 +177,7 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 .services-item-link:hover {
     text-decoration: none !important;
     /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .about-us-list {
@@ -188,15 +186,12 @@ ul.dropdown-menu a.dropdown-item-link:hover {
 
 .about-us-item-link {
     text-decoration: none !important;
-    /* Ensure no underline */
     color: #fff;
-    /* Ensure proper text color */
 }
 
 .about-us-item-link:hover {
     text-decoration: none !important;
-    /* Ensure no underline on hover */
-    color: #d75858;
+    color: #9AD1E0 ;
 }
 
 .info-list {
@@ -257,11 +252,10 @@ ul.dropdown-menu a.dropdown-item-link:hover {
     width: 100%;
     height: 550px;
     object-fit: unset;
-
 }
 .banner{
-    border-bottom-left-radius: 180px;
-    border-bottom-right-radius: 180px;
+    /* border-bottom-left-radius: 180px;
+    border-bottom-right-radius: 180px; */
     border: 2px solid #000000;
     background-image: url('/images/KoiBanner.jpg');
     background-position: center;
@@ -591,9 +585,9 @@ background-color: #cac0c05c; */
 
 .box_appointment {
     background-color: #b2d9e6ba;
-    padding: 80px 100px 50px 100px;
+    padding: 30px 100px 50px 100px;
     border: 5px solid #96b6c5;
-    border-radius: 80px;
+    border-radius: 40px;
     font-size: 20px;
     margin: 60px 200px;
     box-shadow: 0px 0px 17px 12px #8cb3cecf;
@@ -844,7 +838,7 @@ select {
     border-radius: 30px;
     box-sizing: border-box;
     margin-top: 10px;
-    background-color: #1879971a;
+    /* background-color: #1879971a; */
 }
 
 
@@ -1802,8 +1796,7 @@ header {
   .card.contact-card{
     border-radius: 15px;
     background-color: #c2dfe594;
-    height: 900px;
-    border: 3px solid #6ea6ca;
+    height: 700px;
     border-radius: 30px;
   }
 
@@ -1831,6 +1824,7 @@ header {
     font-size: 20px;
     color: #333;
     padding: 10px;
+    min-height: 6rem;
 }
 
 .btn-contact-price {
@@ -1847,6 +1841,7 @@ header {
     text-transform: uppercase;
     margin-top: 6px;
     height: 56px;
+    
 }
 
 .btn-contact-price:hover {
@@ -1860,7 +1855,6 @@ header {
 }
 
  /* Css about us */
-
  @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
@@ -1879,6 +1873,7 @@ header {
     animation: bounce 0.5s ease infinite;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
+ 
  .scroll-container::-webkit-scrollbar {
     display: none;
 }
@@ -1917,9 +1912,10 @@ header {
     z-index: 1001;
 }
 /* CSS NEWS */
+/* CSS NEWS */
 .news-title {
-    font-family: 'Dancing Script', cursive; /* Thêm font chữ Dancing Script */
-    font-size: 2.5rem; /* Kích thước chữ có thể điều chỉnh */
+    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
+    font-size: 3rem; /* Kích thước chữ có thể điều chỉnh */
     color: #333; /* Màu chữ có thể điều chỉnh */
     text-align: center; /* Căn giữa tiêu đề */
     margin: 50px 0; /* Khoảng cách trên và dưới tiêu đề */
@@ -1927,7 +1923,7 @@ header {
 
 .news-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between ;
     align-items: center;
     margin: 20px 40px;
 }
@@ -1942,17 +1938,24 @@ header {
 .card-news {
     flex: 1; /* Mỗi thẻ sẽ chiếm không gian bằng nhau */
     margin: 15px; /* Khoảng cách giữa các thẻ */
-    max-width: 30%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
+    max-width: 100%; /* Giới hạn chiều rộng tối đa của mỗi thẻ */
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Thêm bóng cho thẻ */
     border-radius: 10px; /* Bo góc cho thẻ */
     background-color: #e7e7e7; /* Màu nền cho thẻ */
     padding: 20px; /* Khoảng cách bên trong thẻ */
+    
+}
+
+.card-news:hover{
+    background-color: #79b0e4bd;
+    transition: 1s;
+    box-shadow: 0 5px 10px rgb(0, 0, 0);
 }
 
 
 .card-news h3 {
-    font-family: 'Oswald', sans-serif; /* Thêm font chữ Dancing Script */
-    color: #234d7d; /* Màu chữ cho tiêu đề tin tức */
+    font-family: 'Oswald', sans-serif; 
+    color: #234d7d; 
     min-height: 4rem;
     font-size: 1.5rem;
 }
@@ -1960,17 +1963,7 @@ header {
 .card-news p {
     color: #666; /* Màu chữ cho nội dung */
     padding: 10px;
-    
-}
-
-.card-news a {
-    color: #065cb8; /* Màu chữ cho liên kết */
-    text-decoration: none; /* Bỏ gạch chân */   
-    
-}
-
-.card-news a:hover {
-    text-decoration: underline; /* Gạch chân khi hover */
+    min-height: 5rem;
 }
 
 .card-news{
@@ -2610,7 +2603,7 @@ header {
     width: 260px;
     padding: 20px; 
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); 
-    height:400px;
+    max-height:100%;
 }
 
 .checkup-service{
@@ -2628,7 +2621,8 @@ header {
     font-family: 'Oswald', sans-serif;
     display: block;
     text-decoration: none;
-    padding: 15px 0;
+    padding: 10px 0;
+    margin-bottom: 5px;
     transition: 0.5s;
 }
 
@@ -2636,7 +2630,7 @@ header {
     text-decoration: none;
     color: white;
     background-color: #bd2222;
-    border-radius: 15px;
+    border-radius: 10px;
 }
 
 .banner-checkup h3{
@@ -2656,8 +2650,8 @@ header {
 
 
 
-.body-checkup h1 {
-    font-size: 2.5em; 
+.body-checkup p {
+    font-size: 1.5em; 
     color: #333; 
     font-weight: 700; 
     margin-bottom: 20px;
@@ -2913,7 +2907,6 @@ header {
     transform: scale(0.95);
   }
   
-  /* From Uiverse.io by vinodjangid07 */ 
 .back-to-top {
     width: 50px;
     height: 50px;
@@ -2946,4 +2939,315 @@ header {
   
   .cta:focus, .cta:active {
     outline: none;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+
+.login-element {
+    padding-left: 35px;
+}
+
+.register-element {
+    padding-left: 35px;
+}
+
+.otp-element {
+    padding-left: 35px;
+}
+
+
+
+
+
+
+
+/* user-menu */
+.user-menu-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; 
+}
+
+/* CSS cho menu dropdown */
+.user-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 8px 0;
+    min-width: 150px;
+}
+
+/* Hiển thị menu khi hover vào container */
+.user-menu-container:hover .user-menu {
+    display: block;
+}
+
+/* CSS cho các link trong menu */
+.user-menu a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+}
+
+.user-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.notification-container {
+    position: relative;
+    margin-left: 20px;
+}
+
+.notification-icon {
+    font-size: 20px;
+    cursor: pointer;
+    color: #F1F1F1;
+    transition: color 0.3s ease;
+}
+
+.notification-icon:hover {
+    color: #FFD700;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #cf3636;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    animation: pulse 1.5s infinite;
+}
+
+.notification-dropdown {
+    display: none;
+    position: absolute;
+    top: 250%;
+    right: -110px;
+    width: 350px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.notification-dropdown.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+}
+
+.notification-header span {
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+.notification-header a {
+    color: #1a73e8;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.notification-header a:hover {
+    text-decoration: underline;
+}
+
+.notification-content {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.notification-item {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.notification-item:hover {
+    background-color: #f5f5f5;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
+    position: relative;
+}
+
+.notification-item.unread::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #1a73e8;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.notification-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.notification-icon-type {
+    font-size: 16px;
+    color: #1a73e8;
+}
+
+.notification-icon-type-finish {
+    font-size: 16px;
+    color: #00d36f;
+}
+
+.notification-item.unread .notification-message {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+.notification-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.notification-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.notification-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.notification-footer {
+    padding: 12px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    background: #f8f9fa;
+    border-radius: 0 0 12px 12px;
+}
+
+.notification-footer a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.notification-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Thêm mũi tên chỉ lên */
+.notification-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    right: 110px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+/* Thêm bóng cho mũi tên */
+.notification-dropdown::after {
+    content: '';
+    position: absolute;
+    top: -11px;
+    right: 110px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgba(0,0,0,0.1);
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.notification-item.unread {
+    animation: slideIn 0.3s ease-out;
+}
+
+
+.no-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.no-notification .notification-message {
+    width: 100%;
+    text-align: center;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.empty-notification-icon {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 8px;
 }

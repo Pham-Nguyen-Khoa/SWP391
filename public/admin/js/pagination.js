@@ -87,7 +87,7 @@ if (currentPageButton) {
             labels: ['5 sao', '4 sao', '3 sao', '2 sao', '1 sao'],
             datasets: [{
                 label: 'Phân bố Feedback',
-                data: [data.star5, data.star4, data.star3, data.star2, data.star1],
+                data: [data.star5Count, data.star4Count, data.star3Count, data.star2Count, data.star1Count],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.8)',
                     'rgba(54, 162, 235, 0.8)',

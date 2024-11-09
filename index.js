@@ -14,6 +14,7 @@ const route = require("./router/client/index.route")
 const routeAdmin = require("./router/admin/index.route")
 const routeDoctor = require("./router/doctor/index.route")
 const routeStaff = require("./router/staff/index.route")
+const routeApi = require("./router/api/index.route")
 
 // Cấu hình body-parser với giới hạn lớn
 app.use(bodyParser.json({ limit: '50mb' })); // Giới hạn cho JSON
@@ -43,13 +44,19 @@ require('dotenv').config();
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 //Flash
 app.use(cookieParser('keyboard cat'));
-app.use(session({ cookie: { maxAge: 60000 }}));
+// app.use(session({ cookie: { maxAge: 60000 }}));
+app.use(session({
+  secret: 'your-secret-key', // Thay 'your-secret-key' bằng một chuỗi bí mật của bạn
+  resave: false, // Không lưu lại phiên phiên làm việc nếu không có sự thay đổi
+  saveUninitialized: false, // Không lưu phiên chưa khởi tạo
+  cookie: { maxAge: 60000 } // Thời gian sống của cookie
+}));
 app.use(flash()); 
 
-app.set('views', './views')
+app.set('views', `${__dirname}/views`)
 app.set('view engine', 'pug')
 
-app.use(express.static(`public`));
+app.use(express.static(`${__dirname}/public`));
 
 // Socket.io
 const server = http.createServer(app);
@@ -60,11 +67,12 @@ global.io = io;
 
 
 // Router
-
+routeApi(app);
 route(app);
 routeAdmin(app);
 routeDoctor(app); 
 routeStaff(app);
+
 app.get("*" ,  (req, res) => {
   res.render("client/pages/errors/404",{
     pageTitle: "Trang không tồn tại",

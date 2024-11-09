@@ -12,116 +12,152 @@ block main
                 }
 
                 .gradient-text {
-                    font-size: 2.5rem;
-                    font-weight: 700;
-                    background: linear-gradient(45deg, #00B4DB, #0083B0);
+                    font-size: 4rem;
+                    font-weight: 800;
+                    background: linear-gradient(45deg, #2193b0, #6dd5ed);
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: transparent;
                     text-transform: uppercase;
-                    letter-spacing: 2px;
-                    margin-bottom: 30px;
-                    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+                    letter-spacing: 4px;
+                    margin-bottom: 50px;
+                    text-shadow: 4px 4px 8px rgba(0,0,0,0.2);
                 }
 
                 .edit-service-form {
-                    max-width: 80%;
-                    margin: 0 auto;
-                    padding: 30px;
-                        background: linear-gradient(to bottom right, #acc5e6, #91bfeb);
-                    border-radius: 15px;
-                    box-shadow: 0 10px 20px rgba(0,0,0,0.1);    
+                    max-width: 1200px;
+                    margin: 0px 115px 0px 115px;
+                    padding: 60px 70px;
+                    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+                    border-radius: 30px;
+                    box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+                    border: 1px solid rgba(255,255,255,0.8);
                 }
 
                 .form-group {
-                    margin-bottom: 25px;
+                    margin-bottom: 45px;
+                    position: relative;
+                    transition: all 0.3s ease;
+                }
+
+                .form-group:hover {
+                    transform: translateY(-2px);
+                }
+
+                .descriptionText {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    color: #2c3e50;
                 }
 
                 .form-group label {
                     display: flex;
                     align-items: center;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                     font-weight: 600;
-                    color: #2c3e50;
-                    font-size: 1.1rem;
+                    color: #34495e;
+                    font-size: 1.3rem;
                 }
 
                 .form-group label i {
-                    margin-right: 10px;
-                    color: #00B4DB;
+                    margin-right: 15px;
+                    color: #2193b0;
+                    font-size: 1.5rem;
                 }
 
-                .form-group input,
-                .form-group textarea {
-                    width: 100%;
-                    padding: 12px 15px;
-                    border: 2px solid #e0e0e0;
-                    border-radius: 8px;
-                    font-size: 1rem;
+                .custom-input {
+                    border: 3px solid #e0e0e0;
+                    border-radius: 20px 0 0 20px;
+                    font-size: 1.3rem;
+                    padding: 20px 25px;
                     transition: all 0.3s ease;
-                    background: white;
+                    background: #fff;
                 }
 
-                .form-group input:focus,
-                .form-group textarea:focus {
-                    border-color: #00B4DB;
-                    box-shadow: 0 0 10px rgba(0,180,219,0.2);
-                    transform: translateY(-2px);
+                .custom-input:focus {
+                    border-color: #2193b0;
+                    box-shadow: 0 0 15px rgba(33, 147, 176, 0.2);
                 }
 
-                .form-group textarea {
-                    resize: vertical;
-                    min-height: 120px;
+                .input-group-text {
+                    border-radius: 0 20px 20px 0;
+                    border: none;
+                    padding: 0 40px;
+                    font-size: 1.3rem;
+                    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%) !important;
+                    color: white;
+                    font-weight: 600;
                 }
 
-                .form-actions {
-                    text-align: center;
-                    margin-top: 35px;
+                textarea#service-description {
+                    border-radius: 20px;
+                    padding: 25px;
+                    font-size: 1.3rem;
+                    min-height: 200px;
+                    border: 3px solid #e0e0e0;
+                    transition: all 0.3s ease;
+                    width: 100%;
                 }
 
-            
+                textarea#service-description:focus {
+                    border-color: #2193b0;
+                    box-shadow: 0 0 15px rgba(33, 147, 176, 0.2);
+                }
+
+                .payments-btn {
+                    padding: 20px 50px;
+                    border-radius: 60px;
+                    font-size: 1.3rem;
+                    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%) !important;
+                    border: none;
+                    color: white;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 10px 20px rgba(33, 147, 176, 0.2);
+                }
+
+                .payments-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 15px 30px rgba(33, 147, 176, 0.3);
+                }
+
+                .payments-btn i {
+                    margin-right: 15px;
+                    font-size: 1.4rem;
+                }
 
                 @media (max-width: 768px) {
                     .edit-service-form {
-                        margin: 20px;
-                        padding: 20px;
+                        margin: 25px;
+                        padding: 25px;
                     }
                     
                     .gradient-text {
-                        font-size: 2rem;
+                        font-size: 2.5rem;
                     }
                 }
-                                .input-group-text {
-                    border-radius: 0 10px 10px 0;
-                    border: none;
-                    padding: 0 20px;
-                    font-size: 1.1rem;
-                    background: linear-gradient(135deg, #0396FF, #0D47A1) !important;
-                }
-                .custom-input {
-                    border: 2px solid #e0e0e0;
-                    border-radius: 10px 0 0 10px;
-                    font-size: 1.1rem;
-                    padding: 12px 20px;
-                    transition: all 0.3s ease;
-                }
-                
-                .custom-input:focus {
-                    border-color: #0396FF;
-                    box-shadow: 0 0 0 0.2rem rgba(3, 150, 255, 0.25);
+
+                .form-group label i.fas.fa-coins,
+                .form-group label i.fas.fa-info-circle,
+                .form-group label i.fas.fa-fish {
+                    background: linear-gradient(135deg, #2f9dd6 0%, #3a8cd2 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    font-size: 1.5rem;
                 }
         .block-sider(style="margin-left:180px; margin-right:50px")
             form.edit-service-form(action=`/admin/service/editOnline/${service.ServiceID}` method="post")
                 .form-group
                     label(for="service-price") 
                         i.fas.fa-coins
-                        span Giá tiền dịch vụ:
+                        span.descriptionText Giá tiền dịch vụ:
                     .input-group.input-group-lg.mt-2
                         input#service-price.custom-input.form-control(type="number" placeholder="Nhập giá tiền dịch vụ" min="1" name="Price" value=service.Price required)
                         span.input-group-text.bg-primary.text-white.fw-bold VNĐ
                 .form-group
                     label(for="service-description")
                         i.fas.fa-info-circle
-                        span Mô tả:
+                        span.descriptionText Mô tả:
                     textarea#service-description(placeholder="Nhập mô tả dịch vụ" rows="4" name="Description" required) #{service.Description}
                 .form-actions
                     button.payment-btn(type="submit")

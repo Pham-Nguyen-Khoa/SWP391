@@ -24,11 +24,66 @@ header
           a(class='nav-link hover' href='/koi/aboutUs') Về chúng tôi
         li.nav-item
           button(class="btn btn-appointment payment-btn" onclick="window.location.href='/koi/appointment'" style="background: linear-gradient(214deg, #cf3636, #cf2b31cf);border-radius: 30px;" ) Đặt lịch hẹn
-        if(userInfo)
-            a(class='nav-link' href='/koi/my-appointment') 
-              img(src="/images/logoUser.png" alt="User" style="margin-left: 20px;width: 40px; height: 40px;object-fit: contain;")
-            a(class='nav-link' href='/auth/logout') Đăng xuất
+        if(userInfo )
+            //- a(class='nav-link' href='/koi/my-appointment') 
+            if(userInfo.RoleID === "RL0004")
+              .user-menu-container 
+                if userInfo.Avatar
+                  img(src=userInfo.Avatar, alt="Avatar" style="margin-left: 20px;width: 80px; height: 80px;object-fit: contain; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);")
+                else
+                  img(src="/images/logoUser.png" alt="User" style="margin-left: 20px;width: 40px; height: 40px;object-fit: contain; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);")
+                .user-menu 
+                    a(href="/koi/my-appointment") Hồ sơ lịch hẹn
+                    a(href="/koi/profile") Thông tin cá nhân
+                    a(href="/auth/logout") Đăng xuất
+            
+            if(userInfo && userInfo.RoleID === "RL0004")
+              .user-menu-container 
+                .notification-container
+                  i.fas.fa-bell.notification-icon
+                  if(userInfo.totalNotificationNoRead)
+                    span.notification-badge #{userInfo.totalNotificationNoRead}
+                  .notification-dropdown
+                    .notification-header
+                      span Thông báo
+                      if(userInfo.listNotifcation.length > 0)
+                        a(href="#" class="mark-all-read") Đánh dấu đã đọc tất cả
+                    .notification-content
+                      
+                      
+                      if(userInfo.listNotifcation.length > 0)
+                        each notification in userInfo.listNotifcation
+                          .notification-item(data-notification-id="1" data-appointment-url="/koi/appointment/AP0001" class=(notification.isRead === 0 ? "unread": ""))
+                            input(type="hidden" id="notification-id" value=notification.AppointmentID)
+                            input(type="hidden" id="notification-url" value=notification.notificationID )
+                            .notification-time #{notification.SoSanhTime} trước
+                            .notification-message
+                              if(notification.FinishAppointment)
+                                i.fas.fa-check-circle.notification-icon-type-finish
+                              else
+                                i.fas.fa-calendar-check.notification-icon-type
+                              span #{notification.Message}
+                      else
+                        .notification-item.no-notification
+                          .notification-message.text-center
+                            i.fas.fa-bell-slash.empty-notification-icon
+                            b Không có thông báo nào 
+                      
+                      //- .notification-item.unread(data-notification-id="2" data-appointment-url="/koi/appointment/AP0002")
+                      //-   .notification-time 1 giờ trước
+                      //-   .notification-message
+                      //-     i.fas.fa-clock.notification-icon-type
+                      //-     span Sắp đến giờ hẹn #AP0002 - Khám bệnh cho cá Koi
 
+                      //- // Thông báo đã đọc
+                      //- .notification-item(data-notification-id="3" data-appointment-url="/koi/appointment/AP0003")
+                      //-   .notification-time 1 ngày trước
+                      //-   .notification-message
+                      //-     i.fas.fa-check-circle.notification-icon-type
+                      //-     span Lịch hẹn #AP0003 đã hoàn thành
+                    .notification-footer
+                     
+            a(class='nav-link' href='/auth/logout') Đăng xuất
         else
           li.nav-item
             a(class='nav-link' href='/auth/login') Đăng nhập    
@@ -36,4 +91,16 @@ header
             a(class='nav-link' href='/auth/register') Đăng ký
          
 
+    script. 
+                 
+      document.querySelector('.notification-icon').addEventListener('click', function(e) {
+          e.stopPropagation();
+          document.querySelector('.notification-dropdown').classList.toggle('show');
+      });
 
+      document.addEventListener('click', function(e) {
+          if (!e.target.closest('.notification-container')) {
+              document.querySelector('.notification-dropdown').classList.remove('show');
+          }
+      });
+      

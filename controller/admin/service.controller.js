@@ -177,6 +177,10 @@ module.exports.stop = async (req, res) => {
             ServiceID: serviceID
         }
     })
+    // res.json({
+    //     success: true,
+    //     message: "Ngừng dịch vụ thành công"
+    // });
     req.flash("success", "Ngừng dịch vụ thành công");
     res.redirect("back");
 }

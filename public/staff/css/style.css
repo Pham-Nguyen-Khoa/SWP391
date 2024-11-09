@@ -33,6 +33,7 @@
 }
 
 
+
 .sider .inner-menu ul {
     list-style: none;
     padding: 0;
@@ -1001,3 +1002,116 @@
 
 
 /* End hình thức thanh toán */
+
+
+
+
+.modal-distance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal-distance-content {
+    background: linear-gradient(357deg, #437a90, #58789b);
+    border-radius: 20px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    padding: 35px;
+    max-width: 600px;
+    width: 96%;
+    text-align: center;
+    animation: fadeInUp 0.5s ease-out;
+    margin: 10% 40%;
+    position: relative;
+    overflow: hidden;   
+}
+
+.modal-distance-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 80%);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.modal-icon {
+    font-size: 70px;
+    color: #e74c3c;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(231, 76, 60, 0.3);
+}
+
+.modal-distance h2 {
+    color: #ecf0f1;
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.modal-distance p {
+    font-weight: bold;
+    color: #bdc3c7;
+    font-size: 23px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.modal-footer-confirm{
+    margin: 0 auto;
+}
+
+
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.pagination .btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.pagination .btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+
+.pagination .btn-primary {
+    background-color: #3498db;
+    color: white;
+}

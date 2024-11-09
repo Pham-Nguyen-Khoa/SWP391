@@ -12,6 +12,8 @@ const Bill = require("../../models/bill.model");
 const Appointment_PondRecord = require("../../models/appointment_pondrecord.model");
 const PondRecord = require("../../models/pondRecord.model");
 const PondProfile = require("../../models/pondProfile.model");
+const Notification = require("../../models/notification.model");
+
 function formatDate(dateString) {
   const date = new Date(dateString);
   const day = String(date.getDate()).padStart(2, '0');
@@ -19,8 +21,45 @@ function formatDate(dateString) {
   const year = date.getFullYear();
   return `${day}-${month}-${year}`; 
 }
+
+
+function formatCurrency(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+const generateUserId = async (table, id, rolePrefix) => {
+  const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
+  const [results] = await db.query(query);
+  const maxId = results[0].maxId || 0; 
+  const newId = maxId + 1;
+  return `${rolePrefix}${String(newId).padStart(4, "0")}`;
+}; 
+
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`; 
+}
+function formatPrice(amount) {
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"; 
+}
+
+
+
 // [Get] /doctor/appointment
 module.exports.index = async (req, res) => {
+   //Pagination
+   const page = req.query.page || 1;
+   const limit = 5;
+   if(page < 1){
+       req.flash("error", "Trang không tồn tại");
+       res.redirect("/staff/feedback");
+       return;
+   }
+   let skip = (page-1)*limit;
+   //End Pagination
   let queryListAppointment;
   const VetID = res.locals.user.VetID;
   if (req.query.process == "cancelled") {
@@ -43,11 +82,29 @@ module.exports.index = async (req, res) => {
   }
   if(req.query.sort){
     queryListAppointment += ` ORDER BY a.Date ${req.query.sort}`;
+  }else{
+    queryListAppointment += ` ORDER BY AppointmentID DESC`
   }
+  queryListAppointment += ` LIMIT ${limit} OFFSET ${skip}`
   const [listAppointment] = await Sequelize.query(queryListAppointment);
   const [listAppointmentOrigin] = await Sequelize.query(
     `SELECT a.*, s.*, c.*, a.Name As NameCustomer FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID Where a.VetID = '${VetID}'  And a.Process !='Pending' And a.Process !='Accepted' `
   );
+  
+  //Pagination
+  let  queryTotalsAppointment = `SELECT COUNT(*) as total FROM appointment a join service s on s.ServiceID = a.ServiceID join customer c on c.CustomerID = a.CustomerID Where a.VetID = '${VetID}' `;
+
+  
+  if(req.query.process){
+      queryTotalsAppointment += ` And Process = '${req.query.process}'`;
+  }
+
+
+  const [totalsAppointment] = await Sequelize.query(queryTotalsAppointment);
+  let   totalAppointment = totalsAppointment[0].total;
+  const totalPages = Math.ceil(totalAppointment / limit);
+  //End Pagination
+
   listAppointment.forEach(appointment => {
     appointment.DateFormat = formatDate(appointment.Date);
   });
@@ -69,7 +126,9 @@ module.exports.index = async (req, res) => {
     sort: req.query.sort,
     dateFormat: dateFormat,
     filterType: filterType,
-    processFilter: req.query.process
+    processFilter: req.query.process,
+    totalPages: totalPages,
+    currentPage: page,
   });
 };
 
@@ -110,6 +169,33 @@ module.exports.changeProcess = async (req, res) => {
             },
           }
         );
+
+        try {
+          const notificationID = await generateUserId("notification","notificationID","NO");
+          const appointmentData = await Appointment.findOne({
+            raw: true,
+            where: {
+              AppointmentID:  appointmentID
+            }
+          })
+          appointmentData.DateFormat = formatDate(appointmentData.Date)
+         
+          await Notification.create({
+              notificationID: notificationID,
+              CustomerID: appointmentData.CustomerID,
+              AppointmentID: appointmentData.AppointmentID, 
+              Message: `Lịch hẹn Tư Vấn Online ngày ${appointmentData.DateFormat} của bạn đã hoàn tất`,
+          });
+        } catch (error) {
+          console.log("Lỗi khi tạo thông báo:", error);
+        }
+
+
+
+
+
+
+
         req.flash("success", "♥ ♥ ♥ Chúc mừng bạn đã hoàn thành công việc ♥ ♥ ♥");
       res.redirect("/doctor/appointment");
       }
@@ -216,28 +302,7 @@ function formatPrice(price) {
 //   });
 // };
 
-function formatCurrency(number) {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
 
-const generateUserId = async (table, id, rolePrefix) => {
-  const query = `SELECT MAX(CAST(SUBSTRING(${id}, LENGTH('${rolePrefix}') + 1) AS UNSIGNED)) AS maxId FROM ${table} WHERE ${id} LIKE '${rolePrefix}%'`;
-  const [results] = await db.query(query);
-  const maxId = results[0].maxId || 0; 
-  const newId = maxId + 1;
-  return `${rolePrefix}${String(newId).padStart(4, "0")}`;
-}; 
-
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${day}-${month}-${year}`; 
-}
-function formatPrice(amount) {
-  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "đ"; 
-}
 // [Get] /doctor/appointment/detail/:AppointmentID
 module.exports.detail =  async (req, res) => {
   const appointmentID = req.params.AppointmentID;

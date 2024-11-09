@@ -1,6 +1,7 @@
 extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 include ../../mixins/mixin-title.pug
+include ../../../admin/mixins/pagination.pug
 
 block main
     +alert-success("5000")
@@ -60,8 +61,8 @@ block main
                 .form-group
                   label(for="sortOrder") Sắp xếp theo:
                   select.form-control(id="sortOrder" name="sort" value=sort)
-                    option(value="asc") Tăng dần
-                    option(value="desc") Giảm dần
+                    option(value="asc" selected=sort === "asc") Tăng dần
+                    option(value="desc" selected=sort === "desc") Giảm dần
                 button.btn.payment-btn(type="submit" style="background-color: #21a0b3; color: white; height: 40px;width: 100px;") 
                   span Áp dụng
       if listAppointment.length === 0
@@ -99,20 +100,64 @@ block main
                       td #{appointment.DateFormat}
                       td  
                           if(appointment.Process == "Ready" && appointment.ServiceID == "DV0003")
-                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  Sẵn sàng
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);") 
+                                span  Sẵn sàng
                           if(appointment.Process == "Ready" && appointment.ServiceID != "DV0003")
-                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  Sẵn sàng
+                              a(href=`/doctor/appointment/change-process/${appointment.AppointmentID}/process` class="btn btn-primary payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #252dbf, #2e29d6);")  
+                                span Sẵn sàng
                           else if(appointment.Process == "Process")
-                              span(class="btn btn-dark payment-btn"  style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") Đang thực hiện 
+                              span(class="btn btn-dark payment-btn"  style="min-width: 140px; height: 41px;width: 180px;    background: linear-gradient(135deg, #181819, #2d2d2f);") 
+                                span Đang thực hiện 
                           else if(appointment.Process == "Cancelled")
-                              span(class="btn btn-danger") Hủy bỏ
+                              span(class="btn btn-danger payment-btn" style="min-width: 140px; height: 41px;width: 180px;   background: linear-gradient(135deg, #c71b39, #cb192a);") 
+                                span Hủy bỏ
                           else if(appointment.Process == "Successed")
                               span(class="btn btn-success payment-btn" style="min-width: 140px;height: 41px;width: 180px; background: linear-gradient(135deg, #289b56e0, #1f6d35c9);") Thành công 
                       td 
                           a(href=`/doctor/appointment/detail/${appointment.AppointmentID}` class="btn btn-info payment-btn" style="    padding: 10px 0 10px 10px;    width: 50px;") 
                             i(class="fa-solid fa-receipt")
-                        
+      +pagination(totalPages,currentPage)
     script.
+
+         const buttonPagination = document.querySelectorAll('.btn-secondary');
+        buttonPagination.forEach(button => {
+            button.addEventListener('click', function() {
+                const url = new URL(window.location.href);
+                let currentPage = url.searchParams.get('page') || 1;
+                if(this.id === 'prev-page'){
+                    url.searchParams.set('page', parseInt(currentPage) - 1);
+                }
+                else if(this.id === 'next-page'){
+                    url.searchParams.set('page', parseInt(currentPage) + 1);
+                }
+                else{
+                    url.searchParams.set('page', button.textContent);
+                }
+                currentPage = url.searchParams.get('page') || 1;
+                window.location.href = url.toString();
+            });
+        });
+
+
+
+        
+          const currentPage = new URL(window.location.href).searchParams.get('page') || 1;
+          const pagination = document.querySelector('.pagination');
+        const btnPages = pagination.querySelectorAll('.btnPage');
+        const currentPageButton = btnPages[currentPage - 1]; 
+        if (currentPageButton) {
+            currentPageButton.classList.add('btn-primary');
+            currentPageButton.classList.remove('btn-secondary');
+            if(currentPage === '1'){
+                document.getElementById('prev-page').style.display = 'none'; 
+            }
+            console.log(currentPage);
+            if(parseInt(currentPage) === totalPages){
+                document.getElementById('next-page').style.display = 'none'; 
+            }
+        }
+
+
         document.addEventListener('DOMContentLoaded', function() {
           const filterButtons = document.getElementById('filter-buttons');
           const currentUrl = new URL(window.location.href);
